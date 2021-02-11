@@ -2,9 +2,10 @@
 /**
  * Order Minimum Amount for WooCommerce - User Roles Section Settings
  *
- * @version 3.2.0
+ * @version 4.0.0
  * @since   1.2.0
- * @author  Algoritmika Ltd.
+ *
+ * @author  WPFactory
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
@@ -28,8 +29,9 @@ class Alg_WC_OMA_Settings_User_Roles extends Alg_WC_OMA_Settings_Section {
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.2.0
+	 * @version 4.0.0
 	 * @since   1.2.0
+	 *
 	 * @todo    [maybe] Enabled user roles: default to some roles only, e.g. 'guest', 'administrator', 'customer'?
 	 * @todo    [maybe] Enabled user roles: better desc?
 	 */
@@ -77,8 +79,8 @@ class Alg_WC_OMA_Settings_User_Roles extends Alg_WC_OMA_Settings_Section {
 					'id'       => "alg_wc_oma_by_user_role_{$role_key}",
 				),
 			) );
-			foreach ( alg_wc_oma()->core->get_enabled_limits() as $min_or_max ) {
-				foreach ( alg_wc_oma()->core->get_enabled_types() as $amount_type ) {
+			foreach ( alg_wc_oma()->core->get_enabled_amount_limits() as $min_or_max ) {
+				foreach ( alg_wc_oma()->core->get_enabled_amount_types() as $amount_type ) {
 					$settings = array_merge( $settings, array(
 						array(
 							'title'    => alg_wc_oma()->core->get_title( $min_or_max, $amount_type ),
@@ -99,7 +101,7 @@ class Alg_WC_OMA_Settings_User_Roles extends Alg_WC_OMA_Settings_Section {
 			) );
 		}
 
-		return $settings;
+		return array_merge( $settings, $this->get_priority_options( 'alg_wc_oma_by_user_role_priority', 100 ) );
 	}
 
 }

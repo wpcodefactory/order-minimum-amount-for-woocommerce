@@ -2,9 +2,10 @@
 /**
  * Order Minimum Amount for WooCommerce - Gateways Section Settings
  *
- * @version 3.4.0
+ * @version 4.0.0
  * @since   3.4.0
- * @author  Algoritmika Ltd.
+ *
+ * @author  WPFactory
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
@@ -28,9 +29,10 @@ class Alg_WC_OMA_Settings_Gateways extends Alg_WC_OMA_Settings_Section {
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.4.0
+	 * @version 4.0.0
 	 * @since   3.4.0
-	 * @todo    [next] Notes: better desc?
+	 *
+	 * @todo    [next] (desc) Notes: better desc?
 	 */
 	function get_settings() {
 
@@ -60,6 +62,15 @@ class Alg_WC_OMA_Settings_Gateways extends Alg_WC_OMA_Settings_Section {
 				'type'     => 'checkbox',
 			),
 			array(
+				'title'    => __( 'Hide unavailable', 'order-minimum-amount-for-woocommerce' ),
+				'desc'     => __( 'Hide', 'order-minimum-amount-for-woocommerce' ),
+				'desc_tip' => __( 'Will hide unavailable payment gateways.', 'order-minimum-amount-for-woocommerce' ) . ' ' .
+					__( 'Please note that this option will take into account results from other plugin sections (e.g. "User Roles", etc.) as well.', 'order-minimum-amount-for-woocommerce' ),
+				'id'       => 'alg_wc_oma_by_gateway_hide',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
 				'type'     => 'sectionend',
 				'id'       => 'alg_wc_oma_by_gateway_options',
 			),
@@ -74,8 +85,8 @@ class Alg_WC_OMA_Settings_Gateways extends Alg_WC_OMA_Settings_Section {
 					'id'       => 'alg_wc_oma_by_gateway_' . $key,
 				),
 			) );
-			foreach ( alg_wc_oma()->core->get_enabled_limits() as $min_or_max ) {
-				foreach ( alg_wc_oma()->core->get_enabled_types() as $amount_type ) {
+			foreach ( alg_wc_oma()->core->get_enabled_amount_limits() as $min_or_max ) {
+				foreach ( alg_wc_oma()->core->get_enabled_amount_types() as $amount_type ) {
 					$settings = array_merge( $settings, array(
 						array(
 							'title'    => alg_wc_oma()->core->get_title( $min_or_max, $amount_type ),
@@ -124,7 +135,7 @@ class Alg_WC_OMA_Settings_Gateways extends Alg_WC_OMA_Settings_Section {
 			),
 		);
 
-		return array_merge( $settings, $notes );
+		return array_merge( $settings, $this->get_priority_options( 'alg_wc_oma_by_gateway_priority', 40 ), $notes );
 	}
 
 }

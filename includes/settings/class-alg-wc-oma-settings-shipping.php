@@ -2,9 +2,10 @@
 /**
  * Order Minimum Amount for WooCommerce - Shipping Section Settings
  *
- * @version 3.4.0
+ * @version 4.0.0
  * @since   3.2.0
- * @author  Algoritmika Ltd.
+ *
+ * @author  WPFactory
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
@@ -28,21 +29,19 @@ class Alg_WC_OMA_Settings_Shipping extends Alg_WC_OMA_Settings_Section {
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.4.0
+	 * @version 4.0.0
 	 * @since   3.2.0
-	 * @todo    [later] Shipping messages: better desc?
-	 * @todo    [maybe] Type: better desc?
-	 * @todo    [maybe] Notes: better desc?
-	 * @todo    [maybe] "Save all changes for all methods" button?
-	 * @todo    [maybe] better section desc?
 	 */
 	function get_settings() {
+
+		$shipping_type    = get_option( 'alg_wc_oma_by_shipping_type', 'method' );
+		$shipping_options = alg_wc_oma()->core->get_shipping_options( $shipping_type );
 
 		$settings = array(
 			array(
 				'title'    => __( 'Shipping', 'order-minimum-amount-for-woocommerce' ),
 				'type'     => 'title',
-				'desc'     => __( 'Optional amounts per shipping.', 'order-minimum-amount-for-woocommerce' ) . '<br>' . alg_wc_oma()->core->get_amounts_desc() .
+				'desc'     => __( 'Optional amounts per shipping method/instance/zone.', 'order-minimum-amount-for-woocommerce' ) . '<br>' . alg_wc_oma()->core->get_amounts_desc() .
 					$this->get_pro_msg( 'set amounts per shipping' ),
 				'id'       => 'alg_wc_oma_by_shipping_options',
 			),
@@ -56,7 +55,7 @@ class Alg_WC_OMA_Settings_Shipping extends Alg_WC_OMA_Settings_Section {
 			),
 			array(
 				'title'    => __( 'Type', 'order-minimum-amount-for-woocommerce' ),
-				'desc_tip' => __( '"Save changes" after setting this option.', 'order-minimum-amount-for-woocommerce' ),
+				'desc_tip' => __( 'New settings fields will be displayed if you change this option and "Save changes".', 'order-minimum-amount-for-woocommerce' ),
 				'type'     => 'select',
 				'class'    => 'chosen_select',
 				'id'       => 'alg_wc_oma_by_shipping_type',
@@ -77,13 +76,36 @@ class Alg_WC_OMA_Settings_Shipping extends Alg_WC_OMA_Settings_Section {
 				'type'     => 'checkbox',
 			),
 			array(
+				'title'    => __( 'Hide unavailable', 'order-minimum-amount-for-woocommerce' ),
+				'desc'     => __( 'Hide', 'order-minimum-amount-for-woocommerce' ),
+				'desc_tip' => __( 'Will hide unavailable shipping methods.', 'order-minimum-amount-for-woocommerce' ) . ' ' .
+					__( 'Please note that this option will take into account results from other plugin sections (e.g. "User Roles", etc.) as well.', 'order-minimum-amount-for-woocommerce' ),
+				'id'       => 'alg_wc_oma_by_shipping_hide',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+		);
+		if ( 'zone' != $shipping_type ) {
+			$settings = array_merge( $settings, array(
+				array(
+					'title'    => __( 'Advanced', 'order-minimum-amount-for-woocommerce' ) . ': ' . __( 'Special cases', 'order-minimum-amount-for-woocommerce' ),
+					'desc'     => sprintf( __( 'Set as comma-separated list of shipping method IDs, e.g.: %s', 'order-minimum-amount-for-woocommerce' ),
+						'<code>flexible_shipping,jem_table_rate</code>' ),
+					'desc_tip' => __( 'If you are experiencing issues with some non-standard shipping method, you may need to add its ID here.', 'order-minimum-amount-for-woocommerce' ) . ' ' .
+						__( 'Leave empty if unsure.', 'order-minimum-amount-for-woocommerce' ),
+					'id'       => 'alg_wc_oma_by_shipping_special_cases',
+					'default'  => '',
+					'type'     => 'text',
+				),
+			) );
+		}
+		$settings = array_merge( $settings, array(
+			array(
 				'type'     => 'sectionend',
 				'id'       => 'alg_wc_oma_by_shipping_options',
 			),
-		);
+		) );
 
-		$shipping_type    = get_option( 'alg_wc_oma_by_shipping_type', 'method' );
-		$shipping_options = alg_wc_oma()->core->get_shipping_options( $shipping_type );
 		foreach ( $shipping_options as $id => $title ) {
 			$settings = array_merge( $settings, array(
 				array(
@@ -92,8 +114,8 @@ class Alg_WC_OMA_Settings_Shipping extends Alg_WC_OMA_Settings_Section {
 					'id'       => 'alg_wc_oma_by_shipping_' . $id,
 				),
 			) );
-			foreach ( alg_wc_oma()->core->get_enabled_limits() as $min_or_max ) {
-				foreach ( alg_wc_oma()->core->get_enabled_types() as $amount_type ) {
+			foreach ( alg_wc_oma()->core->get_enabled_amount_limits() as $min_or_max ) {
+				foreach ( alg_wc_oma()->core->get_enabled_amount_types() as $amount_type ) {
 					$settings = array_merge( $settings, array(
 						array(
 							'title'    => alg_wc_oma()->core->get_title( $min_or_max, $amount_type ),
@@ -151,7 +173,7 @@ class Alg_WC_OMA_Settings_Shipping extends Alg_WC_OMA_Settings_Section {
 			),
 		);
 
-		return array_merge( $settings, $notes );
+		return array_merge( $settings, $this->get_priority_options( 'alg_wc_oma_by_shipping_priority', 30 ), $notes );
 	}
 
 }

@@ -2,9 +2,10 @@
 /**
  * Order Minimum Amount for WooCommerce - Core Class
  *
- * @version 3.4.1
+ * @version 4.0.0
  * @since   1.0.0
- * @author  Algoritmika Ltd.
+ *
+ * @author  WPFactory
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
@@ -16,12 +17,15 @@ class Alg_WC_OMA_Core {
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.4.0
+	 * @version 4.0.0
 	 * @since   1.0.0
+	 *
+	 * @todo    [now] [!] `hooks` and `core`?
 	 */
 	function __construct() {
 		$this->amounts = require_once( 'class-alg-wc-oma-amount-types.php' );
 		$this->hooks   = require_once( 'class-alg-wc-oma-hooks.php' );
+		add_filter( 'alg_wc_oma_get_min_max_amount_data', array( $this, 'get_min_max_amount_by_user_role' ), get_option( 'alg_wc_oma_by_user_role_priority', 100 ), 3 );
 		add_shortcode( 'alg_wc_oma_translate', array( $this, 'language_shortcode' ) );
 		do_action( 'alg_wc_oma_core_loaded', $this );
 	}
@@ -43,6 +47,8 @@ class Alg_WC_OMA_Core {
 	/**
 	 * language_shortcode.
 	 *
+	 * for WPML and Polylang plugins.
+	 *
 	 * @version 3.4.0
 	 * @since   1.2.1
 	 */
@@ -60,57 +66,62 @@ class Alg_WC_OMA_Core {
 	}
 
 	/**
-	 * get_min_max_amount.
+	 * get_min_max_amount_data.
 	 *
-	 * @version 3.3.0
+	 * @version 4.0.0
 	 * @since   1.0.0
-	 * @todo    [later] code refactoring: remove `alg_wc_oma_before_get_min_max_amount`
-	 * @todo    [maybe] `alg_wc_oma_after_get_min_max_amount`: `$order_minimum_sum`?
-	 * @todo    [maybe] rename: `alg_wc_oma_get_order_min_max_amount` to `alg_wc_oma_get_min_max_amount`?
-	 * @todo    [maybe] move `$data_version_user_role` etc. to `class-alg-wc-oma-deprecated.php`
 	 */
-	function get_min_max_amount( $min_or_max, $amount_type, $product_id = false, $scope = false ) {
-		if ( $product_id ) {
-			return array( 'amount' => apply_filters( 'alg_wc_oma_before_get_min_max_amount', 0, $min_or_max, $amount_type, $product_id, $scope ), 'source' => 'product' );
+	function get_min_max_amount_data( $min_or_max, $amount_type, $product_id = false, $scope = false ) {
+		$amount_data = false;
+		$amount_data = apply_filters( 'alg_wc_oma_before_get_min_max_amount_data', $amount_data, $min_or_max, $amount_type, $product_id, $scope );
+		if ( false !== $amount_data ) {
+			return $amount_data;
 		}
-		$amount_data = apply_filters( 'alg_wc_oma_get_order_min_max_amount', false, $min_or_max, $amount_type );
+		$amount_data = apply_filters( 'alg_wc_oma_get_min_max_amount_data', $amount_data, $min_or_max, $amount_type, $product_id, $scope );
 		if ( empty( $amount_data['amount'] ) ) {
-			if ( 'yes' === get_option( 'alg_wc_oma_by_user_role_enabled', 'no' ) ) {
-				// User roles
-				$current_user_roles      = $this->get_current_user_roles();
-				$enabled_user_roles_keys = array_keys( $this->get_enabled_user_roles() );
-				$data_version            = get_option( 'alg_wc_oma_data_version', array() );
-				$data_version_user_role  = ( isset( $data_version['user_role'] ) ? $data_version['user_role'] : 0 );
-				foreach ( $current_user_roles as $role_key ) {
-					if ( empty( $role_key ) ) {
-						$role_key = 'guest';
-					}
-					if ( in_array( $role_key, $enabled_user_roles_keys ) ) {
-						if ( 'min' === $min_or_max && 'sum' === $amount_type && version_compare( $data_version_user_role, '2.0.0', '<' ) ) {
-							if ( ( $order_minimum_sum = get_option( 'alg_wc_order_minimum_amount_by_user_role_' . $role_key, 0 ) ) > 0 ) {
-								return array( 'amount' => $order_minimum_sum, 'source' => 'user_role' );
-							}
-						} else {
-							if ( ! isset( $this->amount_by_user_role[ $min_or_max ][ $amount_type ] ) ) {
-								$this->amount_by_user_role[ $min_or_max ][ $amount_type ] = get_option( "alg_wc_oma_{$min_or_max}_{$amount_type}_by_user_role", array() );
-							}
-							$amount_by_user_role = ( isset( $this->amount_by_user_role[ $min_or_max ][ $amount_type ][ $role_key ] ) ?
-								$this->amount_by_user_role[ $min_or_max ][ $amount_type ][ $role_key ] : 0 );
-							if ( 0 != $amount_by_user_role ) {
-								$amount_data = array( 'amount' => $amount_by_user_role, 'source' => 'user_role' );
-								break;
-							}
+			$amount_data = array( 'amount' => get_option( "alg_wc_oma_{$min_or_max}_{$amount_type}", 0 ), 'source' => '' ); // "General" amount
+		}
+		$amount_data = apply_filters( 'alg_wc_oma_after_get_min_max_amount_data', $amount_data, $min_or_max, $amount_type, $product_id, $scope );
+		$amount_data['amount'] = max( $amount_data['amount'], 0 );
+		return $amount_data;
+	}
+
+	/**
+	 * get_min_max_amount_by_user_role.
+	 *
+	 * @version 4.0.0
+	 * @since   4.0.0
+	 *
+	 * @todo    [later] move `$data_version_user_role` etc. to `class-alg-wc-oma-deprecated.php`
+	 */
+	function get_min_max_amount_by_user_role( $amount_data, $min_or_max, $amount_type ) {
+		if ( empty( $amount_data['amount'] ) && 'yes' === get_option( 'alg_wc_oma_by_user_role_enabled', 'no' ) ) {
+			$current_user_roles      = $this->get_current_user_roles();
+			$enabled_user_roles_keys = array_keys( $this->get_enabled_user_roles() );
+			$data_version            = get_option( 'alg_wc_oma_data_version', array() );
+			$data_version_user_role  = ( isset( $data_version['user_role'] ) ? $data_version['user_role'] : 0 );
+			foreach ( $current_user_roles as $role_key ) {
+				if ( empty( $role_key ) ) {
+					$role_key = 'guest';
+				}
+				if ( in_array( $role_key, $enabled_user_roles_keys ) ) {
+					if ( 'min' === $min_or_max && 'sum' === $amount_type && version_compare( $data_version_user_role, '2.0.0', '<' ) ) {
+						if ( ( $order_minimum_sum = get_option( 'alg_wc_order_minimum_amount_by_user_role_' . $role_key, 0 ) ) > 0 ) {
+							return array( 'amount' => $order_minimum_sum, 'source' => 'user_role' );
+						}
+					} else {
+						if ( ! isset( $this->amount_by_user_role[ $min_or_max ][ $amount_type ] ) ) {
+							$this->amount_by_user_role[ $min_or_max ][ $amount_type ] = get_option( "alg_wc_oma_{$min_or_max}_{$amount_type}_by_user_role", array() );
+						}
+						$amount_by_user_role = ( isset( $this->amount_by_user_role[ $min_or_max ][ $amount_type ][ $role_key ] ) ?
+							$this->amount_by_user_role[ $min_or_max ][ $amount_type ][ $role_key ] : 0 );
+						if ( 0 != $amount_by_user_role ) {
+							return array( 'amount' => $amount_by_user_role, 'source' => 'user_role' );
 						}
 					}
 				}
 			}
 		}
-		if ( empty( $amount_data['amount'] ) ) {
-			// General
-			$amount_data = array( 'amount' => get_option( "alg_wc_oma_{$min_or_max}_{$amount_type}", 0 ), 'source' => '' );
-		}
-		$amount_data['amount'] = apply_filters( 'alg_wc_oma_after_get_min_max_amount', $amount_data['amount'], $min_or_max, $amount_type );
-		$amount_data['amount'] = max( $amount_data['amount'], 0 );
 		return $amount_data;
 	}
 
@@ -119,7 +130,8 @@ class Alg_WC_OMA_Core {
 	 *
 	 * @version 3.2.0
 	 * @since   3.2.0
-	 * @todo    [maybe] save it in `$this->current_user_roles`?
+	 *
+	 * @todo    [maybe] cache it in `$this->current_user_roles`?
 	 */
 	function get_current_user_roles() {
 		$current_user = wp_get_current_user();
@@ -137,25 +149,11 @@ class Alg_WC_OMA_Core {
 	}
 
 	/**
-	 * get_cart_total.
-	 *
-	 * @version 3.2.0
-	 * @since   1.0.0
-	 * @todo    [later] recheck if we need `calculate_totals` for `qty` etc.?
-	 */
-	function get_cart_total( $amount_type, $product_id = false, $do_count_by_term = false, $taxonomy = false ) {
-		if ( ! isset( WC()->cart ) ) {
-			return 0;
-		}
-		WC()->cart->calculate_totals();
-		return $this->amounts->get_cart_total( $amount_type, $product_id, $do_count_by_term, $taxonomy );
-	}
-
-	/**
 	 * is_equal.
 	 *
 	 * @version 3.1.1
 	 * @since   3.0.0
+	 *
 	 * @todo    [maybe] better epsilon value, e.g. `defined( 'PHP_FLOAT_EPSILON' ) ? PHP_FLOAT_EPSILON : $this->get_amount_step()`
 	 */
 	function is_equal( $float1, $float2 ) {
@@ -166,17 +164,16 @@ class Alg_WC_OMA_Core {
 	/**
 	 * check_min_max_amount.
 	 *
-	 * @version 3.4.0
+	 * @version 4.0.0
 	 * @since   2.0.0
-	 * @todo    [next] pass `amount_type` (for the filter)?
-	 * @todo    [later] [!] `! $amount`?
+	 *
 	 * @todo    [maybe] when cart total *sum* is zero: check even if we are comparing for e.g. "min qty"; also exclude shipping (i.e. even if the "Exclude shipping" option is disabled)
 	 */
-	function check_min_max_amount( $min_or_max, $amount, $total ) {
+	function check_min_max_amount( $min_or_max, $amount_type, $amount, $total ) {
 		$amount = floatval( $amount );
 		$total  = floatval( $total );
 		$passed = ( ! $amount || $this->is_equal( $amount, $total ) ? true : ( 'min' === $min_or_max ? $total > $amount : $total < $amount ) );
-		return apply_filters( 'alg_wc_oma_check_order_min_max_amount', $passed, $min_or_max, $amount, $total );
+		return apply_filters( 'alg_wc_oma_check_order_min_max_amount', $passed, $min_or_max, $amount_type, $amount, $total );
 	}
 
 	/**
@@ -237,6 +234,7 @@ class Alg_WC_OMA_Core {
 	 *
 	 * @version 3.4.0
 	 * @since   3.0.0
+	 *
 	 * @todo    [later] shipping, per product etc.: move to Pro?
 	 * @todo    [maybe] better default messages for product, product_cat and product_tag?
 	 * @todo    [maybe] use filter instead?
@@ -322,6 +320,7 @@ class Alg_WC_OMA_Core {
 	 *
 	 * @version 3.4.0
 	 * @since   3.0.0
+	 *
 	 * @todo    [maybe] use another glue, e.g. ` / `
 	 */
 	function get_title( $min_or_max, $amount_type, $desc = array(), $do_strip_tags = false ) {
@@ -335,25 +334,24 @@ class Alg_WC_OMA_Core {
 	}
 
 	/**
-	 * get_enabled_limits.
+	 * get_enabled_amount_limits.
 	 *
-	 * @version 3.4.0
+	 * @version 4.0.0
 	 * @since   3.0.0
 	 */
-	function get_enabled_limits( $limits = false ) {
+	function get_enabled_amount_limits( $limits = false ) {
 		$result = get_option( 'alg_wc_oma_amount_limits', array( 'min', 'max' ) );
 		$result = ( empty( $result ) ? array( 'min', 'max' ) : $result );
 		return ( ! $limits ? $result : array_intersect( $result, $limits ) );
 	}
 
 	/**
-	 * get_enabled_types.
+	 * get_enabled_amount_types.
 	 *
-	 * @version 3.4.0
+	 * @version 4.0.0
 	 * @since   3.0.0
-	 * @todo    [maybe] rename to `get_enabled_amount_types()`?
 	 */
-	function get_enabled_types( $types = false ) {
+	function get_enabled_amount_types( $types = false ) {
 		$result = get_option( 'alg_wc_oma_amount_types', array( 'sum', 'qty' ) );
 		$result = ( empty( $result ) ? array_keys( $this->amounts->get_types() ) : $result );
 		return ( ! $types ? $result : array_intersect( $result, $types ) );
@@ -382,13 +380,16 @@ class Alg_WC_OMA_Core {
 	/**
 	 * get_amounts_desc.
 	 *
-	 * @version 3.1.0
+	 * @version 4.0.0
 	 * @since   3.1.0
-	 * @todo    [next] simplify the first part, e.g.: `Ignored if set to zero (%s).`
+	 *
+	 * @todo    [now] (desc) show this in each settings field (instead of in section desc)?
+	 * @todo    [now] (desc) check `<br>`, e.g. in "Currencies" section
+	 * @todo    [maybe] simplify the first part, e.g.: `Ignored if set to zero (%s).`?
 	 * @todo    [later] better desc
 	 */
 	function get_amounts_desc() {
-		return __( 'Ignored if set to zero, i.e. higher level ("general") amount will be applied.', 'order-minimum-amount-for-woocommerce' ) . ' ' .
+		return sprintf( __( 'Ignored if set to %s (zero), i.e. next level (e.g. "General") amount will be applied.', 'order-minimum-amount-for-woocommerce' ), '<code>0</code>' ) . ' ' .
 			sprintf( __( 'No amount will be applied if set to a negative value (e.g. %s).', 'order-minimum-amount-for-woocommerce' ), '<code>-1</code>' );
 	}
 
@@ -478,8 +479,10 @@ class Alg_WC_OMA_Core {
 	 *
 	 * @version 3.4.0
 	 * @since   3.4.0
+	 *
 	 * @see     https://docs.woocommerce.com/document/woocommerce-memberships-function-reference/
 	 * @see     https://docs.memberpress.com/
+	 *
 	 * @todo    [next] `$membership->slug` -> `$membership->ID`?
 	 */
 	function get_memberships() {

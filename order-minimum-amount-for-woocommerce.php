@@ -3,13 +3,13 @@
 Plugin Name: Order Minimum/Maximum Amount for WooCommerce
 Plugin URI: https://wpfactory.com/item/order-minimum-maximum-amount-for-woocommerce/
 Description: Set required minimum and maximum order amounts in WooCommerce.
-Version: 3.4.1
-Author: Algoritmika Ltd
-Author URI: https://algoritmika.com
+Version: 4.0.0-dev
+Author: WPFactory
+Author URI: https://wpfactory.com
 Text Domain: order-minimum-amount-for-woocommerce
 Domain Path: /langs
-Copyright: © 2021 Algoritmika Ltd.
-WC tested up to: 4.9
+Copyright: © 2021 WPFactory
+WC tested up to: 5.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 */
@@ -21,9 +21,10 @@ if ( ! class_exists( 'Alg_WC_OMA' ) ) :
 /**
  * Main Alg_WC_OMA Class.
  *
- * @class   Alg_WC_OMA
- * @version 3.4.1
+ * @version 4.0.0
  * @since   1.0.0
+ *
+ * @class   Alg_WC_OMA
  */
 final class Alg_WC_OMA {
 
@@ -33,7 +34,7 @@ final class Alg_WC_OMA {
 	 * @var   string
 	 * @since 1.0.0
 	 */
-	public $version = '3.4.1';
+	public $version = '4.0.0-dev-20210211-0025';
 
 	/**
 	 * @var   Alg_WC_OMA The single instance of the class
@@ -48,6 +49,7 @@ final class Alg_WC_OMA {
 	 *
 	 * @version 1.0.0
 	 * @since   1.0.0
+	 *
 	 * @static
 	 * @return  Alg_WC_OMA - Main instance
 	 */
@@ -61,10 +63,10 @@ final class Alg_WC_OMA {
 	/**
 	 * Alg_WC_OMA Constructor.
 	 *
-	 * @version 3.4.1
+	 * @version 4.0.0
 	 * @since   1.0.0
+	 *
 	 * @access  public
-	 * @todo    [maybe] call `$this->includes()` before `require_once( 'includes/pro/class-alg-wc-oma-pro.php' )`?
 	 */
 	function __construct() {
 
@@ -79,17 +81,17 @@ final class Alg_WC_OMA {
 		// Set up localisation
 		add_action( 'init', array( $this, 'localize' ) );
 
-		// Pro
-		if ( 'order-minimum-amount-for-woocommerce-pro.php' === basename( __FILE__ ) ) {
-			$this->pro = require_once( 'includes/pro/class-alg-wc-oma-pro.php' );
-		}
-
 		// Include required files
 		$this->includes();
 
 		// Admin
 		if ( is_admin() ) {
 			$this->admin();
+		}
+
+		// Pro
+		if ( 'order-minimum-amount-for-woocommerce-pro.php' === basename( __FILE__ ) ) {
+			$this->pro = require_once( 'includes/pro/class-alg-wc-oma-pro.php' );
 		}
 
 	}
@@ -154,6 +156,7 @@ final class Alg_WC_OMA {
 	 *
 	 * @version 3.0.0
 	 * @since   1.0.0
+	 *
 	 * @param   mixed $links
 	 * @return  array
 	 */
@@ -186,7 +189,6 @@ final class Alg_WC_OMA {
 	 */
 	function version_updated() {
 		do_action( 'alg_wc_oma_version_updated' );
-		// Updating version
 		update_option( 'alg_wc_oma_version', $this->version );
 	}
 
@@ -195,6 +197,7 @@ final class Alg_WC_OMA {
 	 *
 	 * @version 1.0.0
 	 * @since   1.0.0
+	 *
 	 * @return  string
 	 */
 	function plugin_url() {
@@ -206,6 +209,7 @@ final class Alg_WC_OMA {
 	 *
 	 * @version 1.0.0
 	 * @since   1.0.0
+	 *
 	 * @return  string
 	 */
 	function plugin_path() {
@@ -222,8 +226,10 @@ if ( ! function_exists( 'alg_wc_oma' ) ) {
 	 *
 	 * @version 3.0.0
 	 * @since   1.0.0
+	 *
 	 * @return  Alg_WC_OMA
-	 * @todo    [maybe] `plugins_loaded`
+	 *
+	 * @todo    [maybe] call in `plugins_loaded`?
 	 */
 	function alg_wc_oma() {
 		return Alg_WC_OMA::instance();

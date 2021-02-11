@@ -2,9 +2,10 @@
 /**
  * Order Minimum Amount for WooCommerce - Cart Products Section Settings
  *
- * @version 3.4.0
+ * @version 4.0.0
  * @since   3.1.0
- * @author  Algoritmika Ltd.
+ *
+ * @author  WPFactory
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
@@ -28,9 +29,9 @@ class Alg_WC_OMA_Settings_Cart_Products extends Alg_WC_OMA_Settings_Section {
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.3.0
+	 * @version 4.0.0
 	 * @since   3.1.0
-	 * @todo    [later] Validate all: better desc?
+	 *
 	 * @todo    [maybe] Validate all: for each option separately?
 	 */
 	function get_settings() {
@@ -41,12 +42,12 @@ class Alg_WC_OMA_Settings_Cart_Products extends Alg_WC_OMA_Settings_Section {
 				'type'     => 'title',
 				'desc'     => __( 'Skip min/max amount checks if there are selected products in cart.', 'order-minimum-amount-for-woocommerce' ) .
 					$this->get_pro_msg( 'enable this section' ),
-				'id'       => 'alg_wc_oma_products_options',
+				'id'       => 'alg_wc_oma_cart_products_options',
 			),
 			array(
-				'title'    => __( 'Products', 'order-minimum-amount-for-woocommerce' ),
+				'title'    => __( 'Cart products', 'order-minimum-amount-for-woocommerce' ),
 				'desc'     => '<strong>' . __( 'Enable section', 'order-minimum-amount-for-woocommerce' ) . '</strong>',
-				'id'       => 'alg_wc_oma_products_enabled',
+				'id'       => 'alg_wc_oma_products_enabled', // mislabeled, should be `alg_wc_oma_cart_products_enabled`; same for `alg_wc_oma_products_validate_all_products`, etc.
 				'default'  => 'no',
 				'type'     => 'checkbox',
 				'custom_attributes' => apply_filters( 'alg_wc_oma_settings', array( 'disabled' => 'disabled' ) ),
@@ -60,12 +61,21 @@ class Alg_WC_OMA_Settings_Cart_Products extends Alg_WC_OMA_Settings_Section {
 				'type'     => 'checkbox',
 			),
 			array(
+				'title'    => __( 'List variations', 'order-minimum-amount-for-woocommerce' ),
+				'desc'     => __( 'Enable', 'order-minimum-amount-for-woocommerce' ),
+				'desc_tip' => __( 'Will add variable product variations to the products lists.', 'order-minimum-amount-for-woocommerce' ) . ' ' .
+					__( 'Variations will be added to the lists after you "Save changes".', 'order-minimum-amount-for-woocommerce' ),
+				'id'       => 'alg_wc_oma_cart_products_list_variations',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
 				'type'     => 'sectionend',
-				'id'       => 'alg_wc_oma_products_options',
+				'id'       => 'alg_wc_oma_cart_products_options',
 			),
 		);
 
-		$settings = array_merge( $settings, $this->get_products_options() );
+		$settings = array_merge( $settings, $this->get_products_options( '', ( 'yes' === get_option( 'alg_wc_oma_cart_products_list_variations', 'no' ) ) ) );
 
 		return $settings;
 	}

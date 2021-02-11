@@ -2,9 +2,10 @@
 /**
  * Order Minimum Amount for WooCommerce - Messages Section Settings
  *
- * @version 3.4.0
+ * @version 4.0.0
  * @since   1.2.0
- * @author  Algoritmika Ltd.
+ *
+ * @author  WPFactory
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
@@ -30,6 +31,7 @@ class Alg_WC_OMA_Settings_Messages extends Alg_WC_OMA_Settings_Section {
 	 *
 	 * @version 3.2.0
 	 * @since   3.2.0
+	 *
 	 * @todo    [maybe] move this to another class (e.g. `section`, or `core`)?
 	 */
 	function get_scope_title( $scope ) {
@@ -50,6 +52,8 @@ class Alg_WC_OMA_Settings_Messages extends Alg_WC_OMA_Settings_Section {
 	 *
 	 * @version 3.3.0
 	 * @since   3.3.0
+	 *
+	 * @todo    [now] Payment gateway messages!
 	 * @todo    [later] "By/Per shipping"?
 	 * @todo    [maybe] move this to another class (e.g. `section`, or `core`)?
 	 */
@@ -65,21 +69,19 @@ class Alg_WC_OMA_Settings_Messages extends Alg_WC_OMA_Settings_Section {
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.4.0
+	 * @version 4.0.0
 	 * @since   1.2.0
-	 * @todo    [next] [!] Additional Positions: mark positions that are inside the HTML table || automatically wrap it in `<tr><td>...</td></tr>`
-	 * @todo    [next] Checkout notices: add note about payment gateways and shipping
-	 * @todo    [later] Format amounts: better desc?
+	 *
+	 * @todo    [now] (desc) Notes: `alg_wc_oma_progress`: remove? (doesn't work in notices, only "Additional positions"?)
+	 * @todo    [now] (desc) Format amounts: affects ... placeholders?
+	 * @todo    [now] (desc) Notes: desc: `You can also use HTML (tags) in content.`
 	 * @todo    [later] Notes: Shipping/Gateways: show always?
-	 * @todo    [maybe] better desc for "Identical messages will be filtered...", i.e. "... e.g. ..."
-	 * @todo    [maybe] better desc for `%product_title%`, `%term_title%`?
 	 * @todo    [maybe] `%term_title%`: add aliases `%category_title%` and `%tag_title%`?
 	 * @todo    [maybe] one option for all messages, e.g. `alg_wc_oma_message[checkout_min_sum]`, `alg_wc_oma_message[checkout_min_sum_product_tag]` etc.
-	 * @todo    [maybe] restyle the Pro message
 	 * @todo    [maybe] add optional "Message on requirements met"
 	 * @todo    [maybe] Additional Positions: priorities
 	 * @todo    [maybe] Additional Positions: Cart: `woocommerce_cart_is_empty`
-	 * @todo    [maybe] Notes: desc: `You can also use HTML (tags) in content.`
+	 * @todo    [maybe] Checkout: deprecate different messages, i.e. use "Cart" messages everywhere?
 	 */
 	function get_settings() {
 
@@ -98,7 +100,7 @@ class Alg_WC_OMA_Settings_Messages extends Alg_WC_OMA_Settings_Section {
 
 		$cart_and_checkout_settings = array();
 		foreach ( array( 'cart', 'checkout' ) as $cart_or_checkout ) {
-			$title    = ( 'checkout' === $cart_or_checkout ? __( 'Checkout', 'order-minimum-amount-for-woocommerce' ) : __( 'Cart', 'order-minimum-amount-for-woocommerce' ) );
+			$title = ( 'checkout' === $cart_or_checkout ? __( 'Checkout', 'order-minimum-amount-for-woocommerce' ) : __( 'Cart', 'order-minimum-amount-for-woocommerce' ) );
 			$cart_and_checkout_settings = array_merge( $cart_and_checkout_settings, array(
 				array(
 					'title'    => $title,
@@ -167,8 +169,8 @@ class Alg_WC_OMA_Settings_Messages extends Alg_WC_OMA_Settings_Section {
 					),
 				),
 			) );
-			foreach ( alg_wc_oma()->core->get_enabled_limits() as $min_or_max ) {
-				foreach ( alg_wc_oma()->core->get_enabled_types() as $amount_type ) {
+			foreach ( alg_wc_oma()->core->get_enabled_amount_limits() as $min_or_max ) {
+				foreach ( alg_wc_oma()->core->get_enabled_amount_types() as $amount_type ) {
 					foreach ( apply_filters( 'alg_wc_oma_enabled_scopes', array( '' ) ) as $scope ) {
 						foreach ( apply_filters( 'alg_wc_oma_enabled_message_sources', array( '' ) ) as $source ) {
 							$id = alg_wc_oma()->core->get_message_option_id( $cart_or_checkout, $scope, $source );
@@ -217,6 +219,19 @@ class Alg_WC_OMA_Settings_Messages extends Alg_WC_OMA_Settings_Section {
 				'default'  => array(),
 			),
 			array(
+				'title'    => __( 'Remove old notices', 'order-minimum-amount-for-woocommerce' ),
+				'desc_tip' => __( 'Will remove old WooCommerce notices on AJAX add to cart.', 'order-minimum-amount-for-woocommerce' ) . ' ' .
+					sprintf( __( 'This is useful if you have checked "%s" option in %s and there are cross-sells products available on the cart page.', 'order-minimum-amount-for-woocommerce' ),
+						__( 'Enable AJAX add to cart buttons on archives', 'order-minimum-amount-for-woocommerce' ),
+						'<a target="_blank" href="' . admin_url( 'admin.php?page=wc-settings&tab=products' ) . '">' .
+							__( 'WooCommerce > Settings > Products', 'order-minimum-amount-for-woocommerce' ) .
+						'</a>' ),
+				'desc'     => __( 'Remove', 'order-minimum-amount-for-woocommerce' ),
+				'type'     => 'checkbox',
+				'id'       => 'alg_wc_oma_remove_notices_on_added_to_cart',
+				'default'  => 'no',
+			),
+			array(
 				'type'     => 'sectionend',
 				'id'       => 'alg_wc_oma_message_advanced_options',
 			),
@@ -247,6 +262,12 @@ class Alg_WC_OMA_Settings_Messages extends Alg_WC_OMA_Settings_Section {
 					'<code>' . implode( '</code>, <code>', array( '%payment_gateway%' ) ) . '</code>' .
 				'</div>' );
 		}
+
+		$notes[] = sprintf( __( 'You can style it as a progress bar, e.g.: %s', 'order-minimum-amount-for-woocommerce' ),
+			'<br><pre style="background-color: #E0E0E0; padding: 15px;">' .
+				sprintf( __( 'Minimum amount: %s', 'order-minimum-amount-for-woocommerce' ),
+					esc_html( '<progress id="alg_wc_oma_progress" value="%total_raw%" max="%amount_raw%">%total% / %amount%</progress>' ) ) .
+			'</pre>' );
 
 		$notes[] = sprintf( __( 'You can also use shortcodes in the messages, for example, for WPML/Polylang translations: %s', 'order-minimum-amount-for-woocommerce' ),
 			'<br><pre style="background-color: #E0E0E0; padding: 15px;">' .

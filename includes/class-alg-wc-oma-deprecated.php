@@ -1,12 +1,13 @@
 <?php
 /**
- * Order Minimum/Maximum Amount for WooCommerce - Deprecated Options Class
+ * Order Minimum/Maximum Amount for WooCommerce - Deprecated Class
  *
- * Handles deprecated options etc.
+ * Handles deprecated options, placeholders, etc.
  *
  * @version 3.3.0
  * @since   3.0.0
- * @author  Algoritmika Ltd.
+ *
+ * @author  WPFactory
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
@@ -71,6 +72,7 @@ class Alg_WC_OMA_Deprecated {
 	 *
 	 * @version 3.2.0
 	 * @since   2.0.0
+	 *
 	 * @todo    [maybe] `get_enabled_user_roles()` (instead of `get_all_user_roles()`)?
 	 * @todo    [maybe] remove this (or move it to `alg_wc_oma_version_updated`)
 	 */
@@ -109,7 +111,6 @@ class Alg_WC_OMA_Deprecated {
 	 *
 	 * @version 3.3.0
 	 * @since   3.0.0
-	 * @todo    [maybe] simplify this?
 	 */
 	function notice_placeholders( $placeholders, $min_or_max, $amount_type, $amount_data, $total, $diff ) {
 		switch ( $amount_type ) {
@@ -118,8 +119,8 @@ class Alg_WC_OMA_Deprecated {
 					"%{$min_or_max}_order_sum%"      => wc_price( $amount_data['amount'] ),
 					"%cart_total_sum%"               => wc_price( $total ),
 					"%{$min_or_max}_order_sum_diff%" => wc_price( $diff ),
-					"%minimum_order_amount%"         => wc_price( $amount_data['amount'] ), // deprecated earlier
-					"%cart_total%"                   => wc_price( $total ),                 // deprecated earlier
+					"%minimum_order_amount%"         => wc_price( $amount_data['amount'] ), // deprecated since v2.0.0
+					"%cart_total%"                   => wc_price( $total ),                 // deprecated since v2.0.0
 				) );
 				break;
 			case 'qty':

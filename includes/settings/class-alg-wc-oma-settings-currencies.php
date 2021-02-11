@@ -2,9 +2,10 @@
 /**
  * Order Minimum Amount for WooCommerce - Currencies Section Settings
  *
- * @version 3.2.0
+ * @version 4.0.0
  * @since   3.1.0
- * @author  Algoritmika Ltd.
+ *
+ * @author  WPFactory
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
@@ -28,9 +29,9 @@ class Alg_WC_OMA_Settings_Currencies extends Alg_WC_OMA_Settings_Section {
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.2.0
+	 * @version 4.0.0
 	 * @since   3.1.0
-	 * @todo    [later] multiplier
+	 *
 	 * @todo    [later] per user role, user etc.
 	 * @todo    [maybe] `strtolower( $currency )`?
 	 */
@@ -81,8 +82,8 @@ class Alg_WC_OMA_Settings_Currencies extends Alg_WC_OMA_Settings_Section {
 					'id'       => "alg_wc_oma_by_currency_{$currency}",
 				),
 			) );
-			foreach ( alg_wc_oma()->core->get_enabled_limits() as $min_or_max ) {
-				foreach ( alg_wc_oma()->core->get_enabled_types() as $amount_type ) {
+			foreach ( alg_wc_oma()->core->get_enabled_amount_limits() as $min_or_max ) {
+				foreach ( alg_wc_oma()->core->get_enabled_amount_types() as $amount_type ) {
 					$settings = array_merge( $settings, array(
 						array(
 							'title'    => alg_wc_oma()->core->get_title( $min_or_max, $amount_type ),

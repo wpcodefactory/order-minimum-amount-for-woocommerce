@@ -2,9 +2,10 @@
 /**
  * Order Minimum Amount for WooCommerce - Products Section Settings
  *
- * @version 3.4.0
+ * @version 4.0.0
  * @since   3.4.0
- * @author  Algoritmika Ltd.
+ *
+ * @author  WPFactory
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
@@ -28,9 +29,8 @@ class Alg_WC_OMA_Settings_Products extends Alg_WC_OMA_Settings_Section {
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.4.0
+	 * @version 4.0.0
 	 * @since   3.4.0
-	 * @todo    [maybe] better desc for checkboxes?
 	 */
 	function get_settings() {
 		return array(
@@ -43,17 +43,28 @@ class Alg_WC_OMA_Settings_Products extends Alg_WC_OMA_Settings_Section {
 			),
 			array(
 				'title'    => __( 'Per product', 'order-minimum-amount-for-woocommerce' ),
-				'desc'     => __( 'Enable', 'order-minimum-amount-for-woocommerce' ),
-				'desc_tip' => __( 'This will add new meta box to each product edit page.', 'order-minimum-amount-for-woocommerce' ),
+				'desc'     => '<strong>' . __( 'Enable', 'order-minimum-amount-for-woocommerce' ) . '</strong>',
+				'desc_tip' => sprintf( __( 'This will add new meta box to each %s edit page.', 'order-minimum-amount-for-woocommerce' ),
+					'<a target="_blank" href="' . admin_url( 'edit.php?post_type=product' ) . '">' . __( 'product', 'order-minimum-amount-for-woocommerce' ) . '</a>' ),
 				'id'       => 'alg_wc_oma_per_product_enabled',
 				'default'  => 'no',
 				'type'     => 'checkbox',
+				'checkboxgroup' => 'start',
 				'custom_attributes' => apply_filters( 'alg_wc_oma_settings', array( 'disabled' => 'disabled' ) ),
 			),
 			array(
+				'desc'     => __( 'List variations', 'order-minimum-amount-for-woocommerce' ),
+				'desc_tip' => __( 'Will add variable product variations to the options lists in product meta box.', 'order-minimum-amount-for-woocommerce' ),
+				'id'       => 'alg_wc_oma_per_product_list_variations',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+				'checkboxgroup' => 'end',
+			),
+			array(
 				'title'    => __( 'Per product category', 'order-minimum-amount-for-woocommerce' ),
-				'desc'     => __( 'Enable', 'order-minimum-amount-for-woocommerce' ),
-				'desc_tip' => __( 'This will add new settings fields to each product category edit page.', 'order-minimum-amount-for-woocommerce' ),
+				'desc'     => '<strong>' . __( 'Enable', 'order-minimum-amount-for-woocommerce' ) . '</strong>',
+				'desc_tip' => sprintf( __( 'This will add new settings fields to each %s edit page.', 'order-minimum-amount-for-woocommerce' ),
+					'<a target="_blank" href="' . admin_url( 'edit-tags.php?taxonomy=product_cat&post_type=product' ) . '">' . __( 'product category', 'order-minimum-amount-for-woocommerce' ) . '</a>' ),
 				'id'       => 'alg_wc_oma_per_product_cat_enabled',
 				'default'  => 'no',
 				'type'     => 'checkbox',
@@ -61,8 +72,9 @@ class Alg_WC_OMA_Settings_Products extends Alg_WC_OMA_Settings_Section {
 			),
 			array(
 				'title'    => __( 'Per product tag', 'order-minimum-amount-for-woocommerce' ),
-				'desc'     => __( 'Enable', 'order-minimum-amount-for-woocommerce' ),
-				'desc_tip' => __( 'This will add new settings fields to each product tag edit page.', 'order-minimum-amount-for-woocommerce' ),
+				'desc'     => '<strong>' . __( 'Enable', 'order-minimum-amount-for-woocommerce' ) . '</strong>',
+				'desc_tip' => sprintf( __( 'This will add new settings fields to each %s edit page.', 'order-minimum-amount-for-woocommerce' ),
+					'<a target="_blank" href="' . admin_url( 'edit-tags.php?taxonomy=product_tag&post_type=product' ) . '">' . __( 'product tag', 'order-minimum-amount-for-woocommerce' ) . '</a>' ),
 				'id'       => 'alg_wc_oma_per_product_tag_enabled',
 				'default'  => 'no',
 				'type'     => 'checkbox',
