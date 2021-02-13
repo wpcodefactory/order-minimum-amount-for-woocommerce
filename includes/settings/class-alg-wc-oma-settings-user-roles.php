@@ -31,20 +31,16 @@ class Alg_WC_OMA_Settings_User_Roles extends Alg_WC_OMA_Settings_Section {
 	 *
 	 * @version 4.0.0
 	 * @since   1.2.0
-	 *
-	 * @todo    [maybe] Enabled user roles: default to some roles only, e.g. 'guest', 'administrator', 'customer'?
-	 * @todo    [maybe] Enabled user roles: better desc?
 	 */
 	function get_settings() {
 
-		do_action( 'alg_wc_oma_settings_user_roles' );
+		do_action( 'alg_wc_oma_before_settings_user_roles' );
 
 		$settings = array(
 			array(
 				'title'    => __( 'User Roles', 'order-minimum-amount-for-woocommerce' ),
 				'type'     => 'title',
-				'desc'     => __( 'Optional amounts per user role.', 'order-minimum-amount-for-woocommerce' ) . ' ' .
-					alg_wc_oma()->core->get_amounts_desc(),
+				'desc'     => __( 'Optional amounts per user role.', 'order-minimum-amount-for-woocommerce' ),
 				'id'       => 'alg_wc_oma_by_user_role_options',
 			),
 			array(
@@ -57,8 +53,8 @@ class Alg_WC_OMA_Settings_User_Roles extends Alg_WC_OMA_Settings_Section {
 			array(
 				'title'    => __( 'Enabled user roles', 'order-minimum-amount-for-woocommerce' ),
 				'desc_tip' => __( 'Select user roles you want to set different amounts for.', 'order-minimum-amount-for-woocommerce' ) . ' ' .
-					__( 'If empty - settings for all user roles will be displayed.', 'order-minimum-amount-for-woocommerce' ) . ' ' .
-					__( '"Save changes" after you update this option.', 'order-minimum-amount-for-woocommerce' ),
+					__( 'If empty, then settings for all user roles will be displayed.', 'order-minimum-amount-for-woocommerce' ) . ' ' .
+					$this->get_save_changes_desc(),
 				'id'       => 'alg_wc_oma_enabled_user_roles',
 				'default'  => array(),
 				'type'     => 'multiselect',
@@ -101,7 +97,20 @@ class Alg_WC_OMA_Settings_User_Roles extends Alg_WC_OMA_Settings_Section {
 			) );
 		}
 
-		return array_merge( $settings, $this->get_priority_options( 'alg_wc_oma_by_user_role_priority', 100 ) );
+		$notes = array(
+			array(
+				'title'    => __( 'Notes', 'order-minimum-amount-for-woocommerce' ),
+				'desc'     => $this->format_notes( array( alg_wc_oma()->core->get_amounts_desc() ) ),
+				'type'     => 'title',
+				'id'       => "alg_wc_oma_{$this->id}_notes",
+			),
+			array(
+				'type'     => 'sectionend',
+				'id'       => "alg_wc_oma_{$this->id}_notes",
+			),
+		);
+
+		return array_merge( $settings, $this->get_priority_options( 'alg_wc_oma_by_user_role_priority', 100 ), $notes );
 	}
 
 }

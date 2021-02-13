@@ -31,8 +31,6 @@ class Alg_WC_OMA_Settings_Messages extends Alg_WC_OMA_Settings_Section {
 	 *
 	 * @version 3.2.0
 	 * @since   3.2.0
-	 *
-	 * @todo    [maybe] move this to another class (e.g. `section`, or `core`)?
 	 */
 	function get_scope_title( $scope ) {
 		switch ( $scope ) {
@@ -50,17 +48,15 @@ class Alg_WC_OMA_Settings_Messages extends Alg_WC_OMA_Settings_Section {
 	/**
 	 * get_source_title.
 	 *
-	 * @version 3.3.0
+	 * @version 4.0.0
 	 * @since   3.3.0
-	 *
-	 * @todo    [now] Payment gateway messages!
-	 * @todo    [later] "By/Per shipping"?
-	 * @todo    [maybe] move this to another class (e.g. `section`, or `core`)?
 	 */
 	function get_source_title( $source ) {
 		switch ( $source ) {
 			case 'shipping':
 				return __( 'Shipping', 'order-minimum-amount-for-woocommerce' );
+			case 'gateway':
+				return __( 'Payment Gateways', 'order-minimum-amount-for-woocommerce' );
 			default:
 				return '';
 		}
@@ -72,16 +68,8 @@ class Alg_WC_OMA_Settings_Messages extends Alg_WC_OMA_Settings_Section {
 	 * @version 4.0.0
 	 * @since   1.2.0
 	 *
-	 * @todo    [now] (desc) Notes: `alg_wc_oma_progress`: remove? (doesn't work in notices, only "Additional positions"?)
-	 * @todo    [now] (desc) Format amounts: affects ... placeholders?
-	 * @todo    [now] (desc) Notes: desc: `You can also use HTML (tags) in content.`
-	 * @todo    [later] Notes: Shipping/Gateways: show always?
-	 * @todo    [maybe] `%term_title%`: add aliases `%category_title%` and `%tag_title%`?
-	 * @todo    [maybe] one option for all messages, e.g. `alg_wc_oma_message[checkout_min_sum]`, `alg_wc_oma_message[checkout_min_sum_product_tag]` etc.
-	 * @todo    [maybe] add optional "Message on requirements met"
-	 * @todo    [maybe] Additional Positions: priorities
-	 * @todo    [maybe] Additional Positions: Cart: `woocommerce_cart_is_empty`
-	 * @todo    [maybe] Checkout: deprecate different messages, i.e. use "Cart" messages everywhere?
+	 * @todo    add optional "Message on requirements met"
+	 * @todo    deprecate "Checkout" messages, i.e. use "Cart" messages everywhere?
 	 */
 	function get_settings() {
 
@@ -173,6 +161,9 @@ class Alg_WC_OMA_Settings_Messages extends Alg_WC_OMA_Settings_Section {
 				foreach ( alg_wc_oma()->core->get_enabled_amount_types() as $amount_type ) {
 					foreach ( apply_filters( 'alg_wc_oma_enabled_scopes', array( '' ) ) as $scope ) {
 						foreach ( apply_filters( 'alg_wc_oma_enabled_message_sources', array( '' ) ) as $source ) {
+							if ( '' != $scope && '' != $source ) {
+								continue;
+							}
 							$id = alg_wc_oma()->core->get_message_option_id( $cart_or_checkout, $scope, $source );
 							$cart_and_checkout_settings = array_merge( $cart_and_checkout_settings, array(
 								array(
@@ -205,6 +196,8 @@ class Alg_WC_OMA_Settings_Messages extends Alg_WC_OMA_Settings_Section {
 			array(
 				'title'    => __( 'Format amounts', 'order-minimum-amount-for-woocommerce' ),
 				'desc'     => __( 'Enable', 'order-minimum-amount-for-woocommerce' ),
+				'desc_tip' => sprintf( __( 'Affects %s placeholders.', 'order-minimum-amount-for-woocommerce' ),
+					'<code>' . implode( '</code>, <code>', array( '%amount%', '%total%', '%diff%' ) ) . '</code>' ),
 				'type'     => 'checkbox',
 				'id'       => 'alg_wc_oma_message_format_types_enabled',
 				'default'  => 'yes',
@@ -244,30 +237,30 @@ class Alg_WC_OMA_Settings_Messages extends Alg_WC_OMA_Settings_Section {
 				'<code>' . implode( '</code>, <code>', array( '%amount%', '%total%', '%diff%', '%amount_raw%', '%total_raw%', '%diff_raw%' ) ) . '</code>' .
 			'</div>' );
 
-		$notes[] = sprintf( __( 'For "Per product", "Per product category" and "Per product tag" messages you can also use these additional placeholders: %s', 'order-minimum-amount-for-woocommerce' ),
-			'<div style="padding: 15px 0px;">' .
-				'<code>' . implode( '</code>, <code>', array( '%product_title%', '%term_title%' ) ) . '</code>' .
-			'</div>' );
+		if ( array() != apply_filters( 'alg_wc_oma_enabled_scopes', array() ) ) {
+			$notes[] = sprintf( __( 'For "Per product", "Per product category" and "Per product tag" messages you can also use these additional placeholders: %s', 'order-minimum-amount-for-woocommerce' ),
+				'<div style="padding: 15px 0px;">' .
+					'<code>' . implode( '</code>, <code>', array( '%product_title%', '%term_title%' ) ) . '</code>' .
+				'</div>' );
+		}
 
-		if ( 'yes' === get_option( 'alg_wc_oma_by_shipping_messages_enabled', 'no' ) ) {
+		if ( 'yes' === get_option( 'alg_wc_oma_by_shipping_enabled', 'no' ) && 'yes' === get_option( 'alg_wc_oma_by_shipping_messages_enabled', 'no' ) ) {
 			$notes[] = sprintf( __( 'For "Shipping" messages you can also use these additional placeholders: %s', 'order-minimum-amount-for-woocommerce' ),
 				'<div style="padding: 15px 0px;">' .
 					'<code>' . implode( '</code>, <code>', array( '%shipping_method%', '%shipping_zone%', '%shipping_zone_locations%' ) ) . '</code>' .
 				'</div>' );
 		}
 
-		if ( 'yes' === get_option( 'alg_wc_oma_by_gateway_messages_enabled', 'no' ) ) {
+		if ( 'yes' === get_option( 'alg_wc_oma_by_gateway_enabled', 'no' ) && 'yes' === get_option( 'alg_wc_oma_by_gateway_messages_enabled', 'no' ) ) {
 			$notes[] = sprintf( __( 'For "Payment Gateways" messages you can also use this additional placeholder: %s', 'order-minimum-amount-for-woocommerce' ),
 				'<div style="padding: 15px 0px;">' .
 					'<code>' . implode( '</code>, <code>', array( '%payment_gateway%' ) ) . '</code>' .
 				'</div>' );
 		}
 
-		$notes[] = sprintf( __( 'You can style it as a progress bar, e.g.: %s', 'order-minimum-amount-for-woocommerce' ),
-			'<br><pre style="background-color: #E0E0E0; padding: 15px;">' .
-				sprintf( __( 'Minimum amount: %s', 'order-minimum-amount-for-woocommerce' ),
-					esc_html( '<progress id="alg_wc_oma_progress" value="%total_raw%" max="%amount_raw%">%total% / %amount%</progress>' ) ) .
-			'</pre>' );
+		$notes[] = __( 'Identical messages will be filtered, i.e. only one of them will be shown on the frontend.', 'order-minimum-amount-for-woocommerce' );
+
+		$notes[] = __( 'You can use HTML in the messages.', 'order-minimum-amount-for-woocommerce' );
 
 		$notes[] = sprintf( __( 'You can also use shortcodes in the messages, for example, for WPML/Polylang translations: %s', 'order-minimum-amount-for-woocommerce' ),
 			'<br><pre style="background-color: #E0E0E0; padding: 15px;">' .
@@ -275,8 +268,6 @@ class Alg_WC_OMA_Settings_Messages extends Alg_WC_OMA_Settings_Section {
 				'[alg_wc_oma_translate lang="NL"]Text for NL[/alg_wc_oma_translate]' .
 				'[alg_wc_oma_translate not_lang="DE,NL"]Text for other languages[/alg_wc_oma_translate]' .
 			'</pre>' );
-
-		$notes[] = __( 'Identical messages will be filtered, i.e. only one of them will be shown on the frontend.', 'order-minimum-amount-for-woocommerce' );
 
 		$notes_settings = array(
 			array(

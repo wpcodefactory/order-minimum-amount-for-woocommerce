@@ -31,9 +31,6 @@ class Alg_WC_OMA_Settings_Memberships extends Alg_WC_OMA_Settings_Section {
 	 *
 	 * @version 4.0.0
 	 * @since   3.4.0
-	 *
-	 * @todo    [next] add notes?
-	 * @todo    [next] merge with `class-alg-wc-oma-settings-gateways.php`?
 	 */
 	function get_settings() {
 
@@ -47,7 +44,7 @@ class Alg_WC_OMA_Settings_Memberships extends Alg_WC_OMA_Settings_Section {
 							__( 'WooCommerce Memberships', 'order-minimum-amount-for-woocommerce' ) . '</a>',
 						'<a href="https://memberpress.com/" target="_blank">' .
 							__( 'MemberPress', 'order-minimum-amount-for-woocommerce' ) . '</a>' ) .
-					'<br>' . alg_wc_oma()->core->get_amounts_desc() . $this->get_pro_msg( 'set amounts per membership' ),
+					$this->get_pro_msg( 'set amounts per membership' ),
 				'id'       => 'alg_wc_oma_by_membership_options',
 			),
 			array(
@@ -97,7 +94,20 @@ class Alg_WC_OMA_Settings_Memberships extends Alg_WC_OMA_Settings_Section {
 			}
 		}
 
-		return array_merge( $settings, $this->get_priority_options( 'alg_wc_oma_by_membership_priority', 50 ) );
+		$notes = array(
+			array(
+				'title'    => __( 'Notes', 'order-minimum-amount-for-woocommerce' ),
+				'desc'     => $this->format_notes( array( alg_wc_oma()->core->get_amounts_desc() ) ),
+				'type'     => 'title',
+				'id'       => "alg_wc_oma_{$this->id}_notes",
+			),
+			array(
+				'type'     => 'sectionend',
+				'id'       => "alg_wc_oma_{$this->id}_notes",
+			),
+		);
+
+		return array_merge( $settings, $this->get_priority_options( 'alg_wc_oma_by_membership_priority', 50 ), $notes );
 	}
 
 }

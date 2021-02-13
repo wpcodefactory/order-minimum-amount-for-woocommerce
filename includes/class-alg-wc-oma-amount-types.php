@@ -21,10 +21,6 @@ class Alg_WC_OMA_Amount_Types {
 	 *
 	 * @version 3.0.0
 	 * @since   3.0.0
-	 *
-	 * @todo    [maybe] `weight`, `volume`, `length`, `width`, `height`, `area`: optional unit conversions
-	 * @todo    [maybe] add new types: `length x height`, `width x height`
-	 * @todo    [maybe] add `custom` type
 	 */
 	function __construct() {
 		return true;
@@ -40,15 +36,15 @@ class Alg_WC_OMA_Amount_Types {
 		return apply_filters( 'alg_wc_oma_amount_types', array(
 			'sum'         => __( 'Sum', 'order-minimum-amount-for-woocommerce' ),
 			'qty'         => __( 'Quantity', 'order-minimum-amount-for-woocommerce' ),
-			'product'     => __( 'Products', 'order-minimum-amount-for-woocommerce' ),
-			'product_cat' => __( 'Product categories', 'order-minimum-amount-for-woocommerce' ),
-			'product_tag' => __( 'Product tags', 'order-minimum-amount-for-woocommerce' ),
 			'weight'      => __( 'Weight', 'order-minimum-amount-for-woocommerce' ),
 			'volume'      => __( 'Volume', 'order-minimum-amount-for-woocommerce' ),
 			'length'      => __( 'Length', 'order-minimum-amount-for-woocommerce' ),
 			'width'       => __( 'Width', 'order-minimum-amount-for-woocommerce' ),
 			'height'      => __( 'Height', 'order-minimum-amount-for-woocommerce' ),
-			'area'        => __( 'Area', 'order-minimum-amount-for-woocommerce' ), // length x width
+			'area'        => __( 'Area (i.e. length x width)', 'order-minimum-amount-for-woocommerce' ),
+			'product'     => __( 'Products (i.e. number of different products)', 'order-minimum-amount-for-woocommerce' ),
+			'product_cat' => __( 'Product categories (i.e. number of different product categories)', 'order-minimum-amount-for-woocommerce' ),
+			'product_tag' => __( 'Product tags (i.e. number of different product tags)', 'order-minimum-amount-for-woocommerce' ),
 		) );
 	}
 
@@ -67,13 +63,13 @@ class Alg_WC_OMA_Amount_Types {
 				$result = __( 'quantity', 'order-minimum-amount-for-woocommerce' );
 				break;
 			case 'product':
-				$result = __( 'product(s)', 'order-minimum-amount-for-woocommerce' );
+				$result = __( 'products', 'order-minimum-amount-for-woocommerce' );
 				break;
 			case 'product_cat':
-				$result = __( 'product category(-ies)', 'order-minimum-amount-for-woocommerce' );
+				$result = __( 'product categories', 'order-minimum-amount-for-woocommerce' );
 				break;
 			case 'product_tag':
-				$result = __( 'product tag(s)', 'order-minimum-amount-for-woocommerce' );
+				$result = __( 'product tags', 'order-minimum-amount-for-woocommerce' );
 				break;
 			case 'weight':
 				$result = __( 'weight', 'order-minimum-amount-for-woocommerce' );
@@ -112,13 +108,13 @@ class Alg_WC_OMA_Amount_Types {
 				$result = __( 'pcs', 'order-minimum-amount-for-woocommerce' );
 				break;
 			case 'product':
-				$result = __( 'product(s)', 'order-minimum-amount-for-woocommerce' );
+				$result = __( 'number of different products', 'order-minimum-amount-for-woocommerce' );
 				break;
 			case 'product_cat':
-				$result = __( 'product category(-ies)', 'order-minimum-amount-for-woocommerce' );
+				$result = __( 'number of different product categories', 'order-minimum-amount-for-woocommerce' );
 				break;
 			case 'product_tag':
-				$result = __( 'product tag(s)', 'order-minimum-amount-for-woocommerce' );
+				$result = __( 'number of different product tags', 'order-minimum-amount-for-woocommerce' );
 				break;
 			case 'weight':
 				$result = get_option( 'woocommerce_weight_unit' );
@@ -144,8 +140,8 @@ class Alg_WC_OMA_Amount_Types {
 	 * @version 4.0.0
 	 * @since   3.0.0
 	 *
-	 * @todo    [maybe] add `$this->format_types` to `alg_wc_oma_amount_format` filter?
-	 * @todo    [maybe] `&nbsp;` instead of "simple" space (including in `wc_format_weight()`)?
+	 * @todo    `weight`, `volume`, `length`, `width`, `height`, `area`: use `&nbsp;` instead of "simple" space (including in `wc_format_weight()`)?
+	 * @todo    `weight`, `volume`, `length`, `width`, `height`, `area`: optional unit conversions, e.g. `cm` to `m`, etc.?
 	 */
 	function format( $value, $type ) {
 		if ( ! isset( $this->format_types ) ) {
@@ -195,31 +191,33 @@ class Alg_WC_OMA_Amount_Types {
 	}
 
 	/**
-	 * do_exclude_taxes.
+	 * get_order_sum_option.
 	 *
 	 * @version 4.0.0
 	 * @since   4.0.0
 	 */
-	function do_exclude_taxes() {
-		if ( ! isset( $this->do_exclude_taxes ) ) {
-			$this->do_exclude_taxes = ( 'yes' === get_option( 'alg_wc_oma_exclude_taxes', 'no' ) );
+	function get_order_sum_option( $option ) {
+		if ( ! isset( $this->is_order_sum_options[ $option ] ) ) {
+			switch ( $option ) {
+				case 'is_subtotal':
+					$value = ( 'subtotal' === get_option( 'alg_wc_oma_order_sum', 'total' ) );
+					break;
+				case 'do_exclude_taxes':
+					$value = ( 'yes' === get_option( 'alg_wc_oma_exclude_taxes', 'no' ) );
+					break;
+				case 'do_exclude_shipping':
+					$value = ( 'yes' === get_option( 'alg_wc_oma_exclude_shipping', 'no' ) );
+					break;
+				case 'do_exclude_discounts':
+					$value = ( 'yes' === get_option( 'alg_wc_oma_exclude_discounts', 'no' ) );
+					break;
+				case 'do_exclude_fees':
+					$value = ( 'yes' === get_option( 'alg_wc_oma_exclude_fees', 'no' ) );
+					break;
+			}
+			$this->is_order_sum_options[ $option ] = $value;
 		}
-		return $this->do_exclude_taxes;
-	}
-
-	/**
-	 * is_order_sum_subtotal.
-	 *
-	 * @version 4.0.0
-	 * @since   4.0.0
-	 *
-	 * @todo    [maybe] `alg_wc_oma_order_sum`: default to `subtotal`
-	 */
-	function is_order_sum_subtotal() {
-		if ( ! isset( $this->is_order_sum_subtotal ) ) {
-			$this->is_order_sum_subtotal = ( 'subtotal' === get_option( 'alg_wc_oma_order_sum', 'total' ) );
-		}
-		return $this->is_order_sum_subtotal;
+		return $this->is_order_sum_options[ $option ];
 	}
 
 	/**
@@ -239,16 +237,13 @@ class Alg_WC_OMA_Amount_Types {
 				$result = $this->get_cart_value( $result, $type, $cart_item_values, $cart_terms );
 			}
 		}
-		if ( 'sum' === $type && ! $product_id && ! $this->is_order_sum_subtotal() ) {
+		if ( 'sum' === $type && ! $product_id && ! $this->get_order_sum_option( 'is_subtotal' ) ) {
 			WC()->cart->calculate_totals();
-			if ( 'no' === get_option( 'alg_wc_oma_exclude_shipping', 'no' ) ) {
-				$result += ( WC()->cart->get_shipping_total() + ( $this->do_exclude_taxes() ? 0 : WC()->cart->get_shipping_tax() ) );
+			if ( ! $this->get_order_sum_option( 'do_exclude_shipping' ) ) {
+				$result += ( WC()->cart->get_shipping_total() + ( $this->get_order_sum_option( 'do_exclude_taxes' ) ? 0 : WC()->cart->get_shipping_tax() ) );
 			}
-			if ( 'yes' === get_option( 'alg_wc_oma_exclude_discounts', 'no' ) ) {
-				$result += ( WC()->cart->get_discount_total() + ( $this->do_exclude_taxes() ? 0 : WC()->cart->get_discount_tax() ) );
-			}
-			if ( 'no' === get_option( 'alg_wc_oma_exclude_fees', 'no' ) ) {
-				$result += ( WC()->cart->get_fee_total()      + ( $this->do_exclude_taxes() ? 0 : WC()->cart->get_fee_tax() ) );
+			if ( ! $this->get_order_sum_option( 'do_exclude_fees' ) ) {
+				$result += ( WC()->cart->get_fee_total()      + ( $this->get_order_sum_option( 'do_exclude_taxes' ) ? 0 : WC()->cart->get_fee_tax() ) );
 			}
 		}
 		return apply_filters( 'alg_wc_oma_amount_cart_total', $result, $type );
@@ -263,9 +258,9 @@ class Alg_WC_OMA_Amount_Types {
 	function get_cart_value( $result, $type, $cart_item_values, $cart_terms ) {
 		switch ( $type ) {
 			case 'sum':
-				$value = ( $this->is_order_sum_subtotal() ?
-					$cart_item_values['line_subtotal'] + ( $this->do_exclude_taxes() ? 0 : $cart_item_values['line_subtotal_tax'] ) :
-					$cart_item_values['line_total']    + ( $this->do_exclude_taxes() ? 0 : $cart_item_values['line_tax'] )
+				$value = ( $this->get_order_sum_option( 'is_subtotal' ) || $this->get_order_sum_option( 'do_exclude_discounts' ) ?
+					$cart_item_values['line_subtotal'] + ( $this->get_order_sum_option( 'do_exclude_taxes' ) ? 0 : $cart_item_values['line_subtotal_tax'] ) :
+					$cart_item_values['line_total']    + ( $this->get_order_sum_option( 'do_exclude_taxes' ) ? 0 : $cart_item_values['line_tax'] )
 				);
 				return ( $result + $value );
 			case 'qty':
@@ -328,7 +323,7 @@ class Alg_WC_OMA_Amount_Types {
 	 * @version 4.0.0
 	 * @since   4.0.0
 	 *
-	 * @todo    [maybe] add option to count product's *first* term only
+	 * @todo    add option to count product's *first* term only?
 	 */
 	function add_product_terms( $product_id, $taxonomy, $terms = array() ) {
 		$product_terms = get_the_terms( $product_id, $taxonomy );

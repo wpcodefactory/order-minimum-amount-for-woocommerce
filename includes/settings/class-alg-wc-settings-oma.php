@@ -20,7 +20,7 @@ class Alg_WC_Settings_OMA extends WC_Settings_Page {
 	 * @version 4.0.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [maybe] `memberships`: move to right after `users` || `user-roles`?
+	 * @todo    rearrange sections by `$section_priority`?
 	 */
 	function __construct() {
 		$this->id    = 'alg_wc_oma';
@@ -50,7 +50,7 @@ class Alg_WC_Settings_OMA extends WC_Settings_Page {
 	 * @version 1.2.0
 	 * @since   1.2.0
 	 *
-	 * @todo    [later] find better solution
+	 * @todo    find better solution!
 	 */
 	function maybe_unsanitize_option( $value, $option, $raw_value ) {
 		return ( ! empty( $option['alg_wc_oma_raw'] ) ? $raw_value : $value );

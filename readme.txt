@@ -3,7 +3,7 @@ Contributors: wpcodefactory
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 4.4
 Tested up to: 5.6
-Stable tag: 3.4.1
+Stable tag: 4.0.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -11,18 +11,23 @@ Set required minimum and maximum order amounts in WooCommerce.
 
 == Description ==
 
-**Order Minimum/Maximum Amount for WooCommerce** plugin lets you set required minimum/maximum sum/quantity/weight/volume for orders in WooCommerce.
+**Order Minimum/Maximum Amount for WooCommerce** plugin lets you set required minimum and/or maximum amounts (e.g. sum, quantity, weight, volume, etc.) for orders in WooCommerce.
 
 = Main Features =
 
-* Set order **minimum sum**.
-* Set order **minimum quantity**.
-* Set order **minimum weight**.
-* Set order **minimum volume**.
-* Set order **maximum sum**.
-* Set order **maximum quantity**.
-* Set order **maximum weight**.
-* Set order **maximum volume**.
+With our plugin you can set these **minimum** and/or **maximum** order amounts (you can enable multiple amount types at once):
+
+* order **sum**,
+* order **quantity**,
+* order **weight**,
+* order **volume**,
+* order **length**,
+* order **width**,
+* order **height**,
+* order **area** (i.e. length x width),
+* order **products** (i.e. number of different products),
+* order **product categories** (i.e. number of different product categories),
+* order **product tags** (i.e. number of different product tags).
 
 = More Features =
 
@@ -38,14 +43,14 @@ Set required minimum and maximum order amounts in WooCommerce.
 With [premium version](https://wpfactory.com/item/order-minimum-maximum-amount-for-woocommerce/) you can additionally:
 
 * Set different order amounts on **per user** basis.
-* Set amounts **per product**, **per product category** and/or **per product tag**.
+* Set amounts **per product** (including variations), **per product category** and/or **per product tag**.
 * Set amounts **per shipping method** or **per shipping zone**.
 * Set amounts **per payment gateway**.
 * Set amounts **per membership**.
 * Set amounts **by currency**.
 * **Skip** min/max amount checks if **selected coupons** were applied.
-* **Skip** min/max amount checks if there are **selected products** in cart.
-* Include/exclude selected products when calculating **cart total** for the amount checks.
+* **Skip** min/max amount checks if there are **selected products** (including variations) in cart.
+* Include/exclude selected products (including variations) when calculating **cart total** for the amount checks.
 * Display messages anywhere on your site with a **shortcode**.
 
 = Feedback =
@@ -59,35 +64,40 @@ With [premium version](https://wpfactory.com/item/order-minimum-maximum-amount-f
 2. Activate the plugin through the "Plugins" menu in WordPress.
 3. Start by visiting plugin settings at "WooCommerce > Settings > Order Min/Max Amount".
 
+== Screenshots ==
+
+1. Frontend example – Cart notice.
+
 == Changelog ==
 
-= 4.0.0 - 11/02/2021 =
-~	* Dev - Shipping - "Advanced: Special cases" option added.
-!	* Dev - Now loading shipping script (i.e. update cart on updated shipping method) for "sum + cart notices + no exclude shipping" condition.
-!	* Fix - Cart Total - Sum - Was incorrectly calculating total instead of subtotal when "Order Sum Options > Order sum" option was set to "Order subtotal". This is fixed now.
--	* Fix - Cart Total - Sum - Was ignoring "Order Sum Options > Exclude" options. This is fixed now.
-!D	* Dev - General - Amount types - "Products", "Product categories" and "Product tags" options added.
-!D	* Dev - General - Amount types - "Length", "Width", "Height" and "Area" options added.
-!	* Dev - Messages - Payment gateways placeholders are now loaded only if "Payment Gateways" section is enabled.
-!	* Dev - Messages - Shipping placeholders are now loaded only if "Shipping" section is enabled.
-	* Dev - Messages - Advanced Options - "Remove old notices" option added.
-!D	* Dev - Products - Per product - "List variations" option added.
-!	* Dev - Shipping - "Hide unavailable" option added.
-	* Dev - Shipping - "Woocommerce Table Rate Shipping" (by "JEM Plugins") plugin compatibility added.
-~	* Dev - Shipping - "WooCommerce Table Rate Shipping" (by "wpWax") plugin compatibility added.
-!	* Dev - Payment Gateways - "Hide unavailable" option added.
-D	* Dev - "Coupons" section added.
-	* Dev - Cart Products - "List variations" option added.
-	* Dev - Cart Total - "List variations" option added.
-~	* Dev - "Advanced: Priority Options" subsections added to the "User Roles", "Users", "Shipping", "Payment Gateways" and "Memberships" sections.
-	* Dev - Shortcodes - `[alg_wc_order_min_max_amount]` - Checking if `scope` is enabled (in case if there is `scope` shortcode attribute set).
-~	* Dev - Settings - `get_products_options()` - Current option values are now added to the list. Used in "Cart Products" and "Cart Total" sections.
-	* Dev - Settings - Restyled and descriptions updated.
-	* Dev - Major code refactoring.
--	* Requires PHP: 7.0.
--	* Requires at least: 5.4.
-	* WC tested up to: 5.0.
-	* Plugin author updated.
+= 4.0.0 - 13/02/2021 =
+* Fix - Messages - "Per product / category / tag > Payment Gateways / Shipping" messages removed.
+* Fix - Messages - "Payment Gateways" messages are now properly marked in admin settings.
+* Fix - Cart Total - Sum - Was incorrectly calculating total instead of subtotal when "Order Sum Options > Order sum" option was set to "Order subtotal". This is fixed now.
+* Fix - Cart Total - Sum - Was ignoring "Order Sum Options > Exclude" options. This is fixed now.
+* Dev - General - Amount types - "Products", "Product categories" and "Product tags" options added.
+* Dev - General - Amount types - "Length", "Width", "Height" and "Area" options added.
+* Dev - Messages - Payment gateways placeholders are now loaded only if "Payment Gateways" section is enabled.
+* Dev - Messages - Shipping placeholders are now loaded only if "Shipping" section is enabled.
+* Dev - Messages - Advanced Options - "Remove old notices" option added.
+* Dev - Products - Per product - "List variations" option added.
+* Dev - Shipping - "Hide unavailable" option added.
+* Dev - Shipping - "WooCommerce Table Rate Shipping" (by "JEM Plugins") plugin compatibility added.
+* Dev - Shipping - "WooCommerce Table Rate Shipping" (by "wpWax") plugin compatibility added.
+* Dev - Shipping - "Advanced: Special cases" option added.
+* Dev - Payment Gateways - "Hide unavailable" option added.
+* Dev - "Coupons" section added.
+* Dev - Cart Products - "List variations" option added.
+* Dev - Cart Total - "List variations" option added.
+* Dev - "Advanced: Priority Options" subsections added to the "User Roles", "Users", "Shipping", "Payment Gateways" and "Memberships" sections.
+* Dev - Sum - Changed the way order sum (total and subtotal) is calculated: manually summing line values now (instead of using `WC()->cart->get_subtotal()`, `WC()->cart->get_total( 'edit' )`, etc.).
+* Dev - Sum - Now loading shipping script (i.e. update cart on updated shipping method) for "sum + cart notices + include shipping" condition.
+* Dev - Shortcodes - `[alg_wc_order_min_max_amount]` - Checking if `scope` is enabled (in case if there is `scope` shortcode attribute set).
+* Dev - Settings - `get_products_options()` - Current option values are now added to the list. Used in "Cart Products" and "Cart Total" sections.
+* Dev - Settings - Restyled and descriptions updated.
+* Dev - Major code refactoring.
+* WC tested up to: 5.0.
+* Plugin author updated.
 
 = 3.4.1 - 12/01/2021 =
 * Dev - Memberships - `get_user_memberships()` function updated (now checking for the `plan` slug as well).

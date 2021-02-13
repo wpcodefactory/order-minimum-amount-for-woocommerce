@@ -1,10 +1,10 @@
 <?php
 /**
- * Order Minimum/Maximum Amount for WooCommerce - Deprecated Class
+ * Order Minimum/Maximum Amount for WooCommerce - Deprecated Options Class
  *
  * Handles deprecated options, placeholders, etc.
  *
- * @version 3.3.0
+ * @version 4.0.0
  * @since   3.0.0
  *
  * @author  WPFactory
@@ -19,12 +19,12 @@ class Alg_WC_OMA_Deprecated {
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.0.0
+	 * @version 4.0.0
 	 * @since   3.0.0
 	 */
 	function __construct() {
 		add_action( 'alg_wc_oma_version_updated',                 array( $this, 'version_updated' ) );
-		add_action( 'alg_wc_oma_settings_user_roles',             array( $this, 'settings_user_roles' ) );
+		add_action( 'alg_wc_oma_before_settings_user_roles',      array( $this, 'settings_user_roles' ) );
 		add_filter( 'shortcode_atts_alg_wc_order_min_max_amount', array( $this, 'shortcode_atts' ), 10, 3 );
 		add_filter( 'alg_wc_oma_placeholders',                    array( $this, 'notice_placeholders' ), 10, 6 );
 	}
@@ -72,9 +72,6 @@ class Alg_WC_OMA_Deprecated {
 	 *
 	 * @version 3.2.0
 	 * @since   2.0.0
-	 *
-	 * @todo    [maybe] `get_enabled_user_roles()` (instead of `get_all_user_roles()`)?
-	 * @todo    [maybe] remove this (or move it to `alg_wc_oma_version_updated`)
 	 */
 	function settings_user_roles() {
 		$data_version           = get_option( 'alg_wc_oma_data_version', array() );

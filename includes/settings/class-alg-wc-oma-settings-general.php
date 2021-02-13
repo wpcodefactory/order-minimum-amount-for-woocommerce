@@ -31,9 +31,6 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 	 *
 	 * @version 4.0.0
 	 * @since   1.0.0
-	 *
-	 * @todo    [now] `type_product_cat` and `type_product_tag`: generate settings via loop
-	 * @todo    [now] (desc) `type_product_cat` and `type_product_tag`: `include` and `exclude`: better desc (same for tags)
 	 */
 	function get_settings() {
 
@@ -136,7 +133,8 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 		if ( in_array( 'sum', $enabled_types ) ) {
 			$type_sum_settings = array(
 				array(
-					'title'    => __( 'Order "Sum" Options', 'order-minimum-amount-for-woocommerce' ),
+					'title'    => sprintf( __( '"%s" Amount Type Options', 'order-minimum-amount-for-woocommerce' ),
+						__( 'Sum', 'order-minimum-amount-for-woocommerce' ) ),
 					'desc'     => sprintf( __( 'Extra settings for min/max "%s" options.', 'order-minimum-amount-for-woocommerce' ),
 						__( 'Sum', 'order-minimum-amount-for-woocommerce' ) ),
 					'type'     => 'title',
@@ -195,7 +193,8 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 		if ( in_array( 'product_cat', $enabled_types ) ) {
 			$type_product_cat_settings = array(
 				array(
-					'title'    => __( 'Order "Product Categories" Options', 'order-minimum-amount-for-woocommerce' ),
+					'title'    => sprintf( __( '"%s" Amount Type Options', 'order-minimum-amount-for-woocommerce' ),
+						__( 'Product categories', 'order-minimum-amount-for-woocommerce' ) ),
 					'desc'     => sprintf( __( 'Extra settings for min/max "%s" options.', 'order-minimum-amount-for-woocommerce' ),
 						__( 'Product categories', 'order-minimum-amount-for-woocommerce' ) ),
 					'type'     => 'title',
@@ -203,21 +202,22 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 				),
 				array(
 					'title'    => __( 'Product categories to include', 'order-minimum-amount-for-woocommerce' ),
-					'desc_tip' => __( 'If empty, then all product categories will be included.', 'order-minimum-amount-for-woocommerce' ),
+					'desc_tip' => __( 'If set, then only selected product categories will be counted (and all other categories will be ignored).', 'order-minimum-amount-for-woocommerce' ) . ' ' .
+						__( 'If empty, then all product categories will be counted.', 'order-minimum-amount-for-woocommerce' ),
 					'id'       => 'alg_wc_oma_type_product_cat_terms_to_include',
 					'default'  => array(),
 					'type'     => 'multiselect',
 					'class'    => 'chosen_select',
-					'options'  => $this->get_terms( 'product_cat' ),
+					'options'  => $this->add_current_values( $this->get_terms( 'product_cat' ), 'alg_wc_oma_type_product_cat_terms_to_include', 'product_cat' ),
 				),
 				array(
 					'title'    => __( 'Product categories to exclude', 'order-minimum-amount-for-woocommerce' ),
-					'desc_tip' => __( 'If empty, then all product categories will be included.', 'order-minimum-amount-for-woocommerce' ),
+					'desc_tip' => __( 'If set, then selected product categories will be ignored when counting categories for the product.', 'order-minimum-amount-for-woocommerce' ),
 					'id'       => 'alg_wc_oma_type_product_cat_terms_to_exclude',
 					'default'  => array(),
 					'type'     => 'multiselect',
 					'class'    => 'chosen_select',
-					'options'  => $this->get_terms( 'product_cat' ),
+					'options'  => $this->add_current_values( $this->get_terms( 'product_cat' ), 'alg_wc_oma_type_product_cat_terms_to_exclude', 'product_cat' ),
 				),
 				array(
 					'type'     => 'sectionend',
@@ -230,7 +230,8 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 		if ( in_array( 'product_tag', $enabled_types ) ) {
 			$type_product_tag_settings = array(
 				array(
-					'title'    => __( 'Order "Product Tags" Options', 'order-minimum-amount-for-woocommerce' ),
+					'title'    => sprintf( __( '"%s" Amount Type Options', 'order-minimum-amount-for-woocommerce' ),
+						__( 'Product tags', 'order-minimum-amount-for-woocommerce' ) ),
 					'desc'     => sprintf( __( 'Extra settings for min/max "%s" options.', 'order-minimum-amount-for-woocommerce' ),
 						__( 'Product tags', 'order-minimum-amount-for-woocommerce' ) ),
 					'type'     => 'title',
@@ -238,21 +239,22 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 				),
 				array(
 					'title'    => __( 'Product tags to include', 'order-minimum-amount-for-woocommerce' ),
-					'desc_tip' => __( 'If empty, then all product tags will be included.', 'order-minimum-amount-for-woocommerce' ),
+					'desc_tip' => __( 'If set, then only selected product tags will be counted (and all other tags will be ignored).', 'order-minimum-amount-for-woocommerce' ) . ' ' .
+						__( 'If empty, then all product tags will be counted.', 'order-minimum-amount-for-woocommerce' ),
 					'id'       => 'alg_wc_oma_type_product_tag_terms_to_include',
 					'default'  => array(),
 					'type'     => 'multiselect',
 					'class'    => 'chosen_select',
-					'options'  => $this->get_terms( 'product_tag' ),
+					'options'  => $this->add_current_values( $this->get_terms( 'product_tag' ), 'alg_wc_oma_type_product_tag_terms_to_include', 'product_tag' ),
 				),
 				array(
 					'title'    => __( 'Product tags to exclude', 'order-minimum-amount-for-woocommerce' ),
-					'desc_tip' => __( 'If empty, then all product tags will be included.', 'order-minimum-amount-for-woocommerce' ),
+					'desc_tip' => __( 'If set, then selected product tags will be ignored when counting tags for the product.', 'order-minimum-amount-for-woocommerce' ),
 					'id'       => 'alg_wc_oma_type_product_tag_terms_to_exclude',
 					'default'  => array(),
 					'type'     => 'multiselect',
 					'class'    => 'chosen_select',
-					'options'  => $this->get_terms( 'product_tag' ),
+					'options'  => $this->add_current_values( $this->get_terms( 'product_tag' ), 'alg_wc_oma_type_product_tag_terms_to_exclude', 'product_tag' ),
 				),
 				array(
 					'type'     => 'sectionend',
@@ -265,7 +267,7 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 		if ( in_array( 'max', $enabled_limits ) ) {
 			$max_limit_settings = array(
 				array(
-					'title'    => __( '"Maximum" Limit Options', 'order-minimum-amount-for-woocommerce' ),
+					'title'    => __( '"Maximum" Amount Limit Options', 'order-minimum-amount-for-woocommerce' ),
 					'desc'     => sprintf( __( 'Extra settings for "%s" limit options.', 'order-minimum-amount-for-woocommerce' ),
 						__( 'Maximum', 'order-minimum-amount-for-woocommerce' ) ),
 					'type'     => 'title',

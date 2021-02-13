@@ -31,8 +31,6 @@ class Alg_WC_OMA_Settings_Gateways extends Alg_WC_OMA_Settings_Section {
 	 *
 	 * @version 4.0.0
 	 * @since   3.4.0
-	 *
-	 * @todo    [next] (desc) Notes: better desc?
 	 */
 	function get_settings() {
 
@@ -40,7 +38,7 @@ class Alg_WC_OMA_Settings_Gateways extends Alg_WC_OMA_Settings_Section {
 			array(
 				'title'    => __( 'Payment Gateways', 'order-minimum-amount-for-woocommerce' ),
 				'type'     => 'title',
-				'desc'     => __( 'Optional amounts per payment gateway.', 'order-minimum-amount-for-woocommerce' ) . '<br>' . alg_wc_oma()->core->get_amounts_desc() .
+				'desc'     => __( 'Optional amounts per payment gateway.', 'order-minimum-amount-for-woocommerce' ) .
 					$this->get_pro_msg( 'set amounts per payment gateway' ),
 				'id'       => 'alg_wc_oma_by_gateway_options',
 			),
@@ -111,7 +109,8 @@ class Alg_WC_OMA_Settings_Gateways extends Alg_WC_OMA_Settings_Section {
 			array(
 				'title'    => __( 'Notes', 'order-minimum-amount-for-woocommerce' ),
 				'desc'     => $this->format_notes( array(
-					__( 'When user changes payment gateway on the checkout page, notices are not updated automatically, unless user reloads the page.', 'order-minimum-amount-for-woocommerce' ) . ' ' .
+					alg_wc_oma()->core->get_amounts_desc(),
+					__( 'When user changes payment gateway on the <strong>checkout page</strong>, notices are not updated automatically, unless user reloads the page.', 'order-minimum-amount-for-woocommerce' ) . ' ' .
 						sprintf( __( 'To solve this, currently, we suggest disabling "%s" option in %s section.', 'order-minimum-amount-for-woocommerce' ),
 							__( 'Checkout notices', 'order-minimum-amount-for-woocommerce' ), $this->get_section_link( 'messages' ) ) . ' ' .
 						__( 'This way, if order amount will be wrong, the customer will see the correct notice when he will click "Place order" button.', 'order-minimum-amount-for-woocommerce' ) . ' ' .

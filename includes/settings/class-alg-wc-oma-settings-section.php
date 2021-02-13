@@ -42,7 +42,7 @@ class Alg_WC_OMA_Settings_Section {
 	 * @version 4.0.0
 	 * @since   3.4.0
 	 *
-	 * @todo    [next] generate links automatically (if possible)
+	 * @todo    generate links automatically (if possible)?
 	 */
 	function get_section_link( $section = 'general' ) {
 		$titles = array(
@@ -61,6 +61,16 @@ class Alg_WC_OMA_Settings_Section {
 			'products_cart_total' => __( 'Cart Total', 'order-minimum-amount-for-woocommerce' ),
 		);
 		return '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_oma&section=' . ( 'general' === $section ? '' : $section ) ) . '">' . $titles[ $section ] . '</a>';
+	}
+
+	/**
+	 * get_save_changes_desc.
+	 *
+	 * @version 4.0.0
+	 * @since   4.0.0
+	 */
+	function get_save_changes_desc() {
+		return __( 'New settings fields will be displayed if you change this option and "Save changes".', 'order-minimum-amount-for-woocommerce' );
 	}
 
 	/**
@@ -173,8 +183,6 @@ class Alg_WC_OMA_Settings_Section {
 	 *
 	 * @version 4.0.0
 	 * @since   3.3.0
-	 *
-	 * @todo    [maybe] set products and terms as comma separated list of IDs (e.g. for WPML/Polylang)
 	 */
 	function get_products_options( $type = '', $do_list_variations = false ) {
 		$settings = array();
@@ -237,8 +245,6 @@ class Alg_WC_OMA_Settings_Section {
 	 *
 	 * @version 4.0.0
 	 * @since   4.0.0
-	 *
-	 * @todo    [maybe] move this to new "Advanced" section, or to "General > Advanced" subsection?
 	 */
 	function get_priority_options( $id, $default ) {
 		return array(

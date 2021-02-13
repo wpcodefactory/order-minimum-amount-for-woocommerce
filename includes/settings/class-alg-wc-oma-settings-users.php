@@ -60,8 +60,7 @@ class Alg_WC_OMA_Settings_Users extends Alg_WC_OMA_Settings_Section {
 		$guest_fallback_settings = array(
 			array(
 				'title'    => __( 'Guest Fallback', 'order-minimum-amount-for-woocommerce' ),
-				'desc'     => __( 'This is used for non-registered users (i.e. guests) as a fallback.', 'order-minimum-amount-for-woocommerce' ) . ' ' .
-					alg_wc_oma()->core->get_amounts_desc(),
+				'desc'     => __( 'This is used for non-registered users (i.e. guests) as a fallback.', 'order-minimum-amount-for-woocommerce' ),
 				'type'     => 'title',
 				'id'       => 'alg_wc_oma_by_user_guest_options',
 			),
@@ -87,7 +86,20 @@ class Alg_WC_OMA_Settings_Users extends Alg_WC_OMA_Settings_Section {
 			),
 		) );
 
-		return array_merge( $settings, $guest_fallback_settings, $this->get_priority_options( 'alg_wc_oma_by_user_priority', 20 ) );
+		$notes = array(
+			array(
+				'title'    => __( 'Notes', 'order-minimum-amount-for-woocommerce' ),
+				'desc'     => $this->format_notes( array( alg_wc_oma()->core->get_amounts_desc() ) ),
+				'type'     => 'title',
+				'id'       => "alg_wc_oma_{$this->id}_notes",
+			),
+			array(
+				'type'     => 'sectionend',
+				'id'       => "alg_wc_oma_{$this->id}_notes",
+			),
+		);
+
+		return array_merge( $settings, $guest_fallback_settings, $this->get_priority_options( 'alg_wc_oma_by_user_priority', 20 ), $notes );
 	}
 
 }

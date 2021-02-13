@@ -41,7 +41,7 @@ class Alg_WC_OMA_Settings_Shipping extends Alg_WC_OMA_Settings_Section {
 			array(
 				'title'    => __( 'Shipping', 'order-minimum-amount-for-woocommerce' ),
 				'type'     => 'title',
-				'desc'     => __( 'Optional amounts per shipping method/instance/zone.', 'order-minimum-amount-for-woocommerce' ) . '<br>' . alg_wc_oma()->core->get_amounts_desc() .
+				'desc'     => __( 'Optional amounts per shipping method/instance/zone.', 'order-minimum-amount-for-woocommerce' ) .
 					$this->get_pro_msg( 'set amounts per shipping' ),
 				'id'       => 'alg_wc_oma_by_shipping_options',
 			),
@@ -55,7 +55,7 @@ class Alg_WC_OMA_Settings_Shipping extends Alg_WC_OMA_Settings_Section {
 			),
 			array(
 				'title'    => __( 'Type', 'order-minimum-amount-for-woocommerce' ),
-				'desc_tip' => __( 'New settings fields will be displayed if you change this option and "Save changes".', 'order-minimum-amount-for-woocommerce' ),
+				'desc_tip' => $this->get_save_changes_desc(),
 				'type'     => 'select',
 				'class'    => 'chosen_select',
 				'id'       => 'alg_wc_oma_by_shipping_type',
@@ -140,6 +140,7 @@ class Alg_WC_OMA_Settings_Shipping extends Alg_WC_OMA_Settings_Section {
 			array(
 				'title'    => __( 'Notes', 'order-minimum-amount-for-woocommerce' ),
 				'desc'     => $this->format_notes( array(
+					alg_wc_oma()->core->get_amounts_desc(),
 					__( 'While on the cart page notices will be updated automatically when user changes shipping method or zone, the <strong>checkout page</strong> behaves differently and notices are not updated automatically.', 'order-minimum-amount-for-woocommerce' ) . ' ' .
 						__( 'Currently, you can use these solutions to this problem:', 'order-minimum-amount-for-woocommerce' ) . ' ' .
 						'<ol>' .

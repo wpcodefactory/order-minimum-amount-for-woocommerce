@@ -31,9 +31,6 @@ class Alg_WC_OMA_Settings_Currencies extends Alg_WC_OMA_Settings_Section {
 	 *
 	 * @version 4.0.0
 	 * @since   3.1.0
-	 *
-	 * @todo    [later] per user role, user etc.
-	 * @todo    [maybe] `strtolower( $currency )`?
 	 */
 	function get_settings() {
 
@@ -45,7 +42,6 @@ class Alg_WC_OMA_Settings_Currencies extends Alg_WC_OMA_Settings_Section {
 				'title'    => __( 'Currencies', 'order-minimum-amount-for-woocommerce' ),
 				'type'     => 'title',
 				'desc'     => __( 'Set different amounts for different currencies (i.e. multi-currency).', 'order-minimum-amount-for-woocommerce' ) . ' ' .
-					alg_wc_oma()->core->get_amounts_desc() . ' ' .
 					__( 'For example, this is useful if you are using some currency switcher plugin on your site.', 'order-minimum-amount-for-woocommerce' ) . ' ' .
 					__( 'Usually this is used for min/max "sum" amounts, however, you can set other amounts (e.g. "quantity") by currency as well.', 'order-minimum-amount-for-woocommerce' ) .
 					$this->get_pro_msg( 'set amounts per currency' ),
@@ -104,7 +100,20 @@ class Alg_WC_OMA_Settings_Currencies extends Alg_WC_OMA_Settings_Section {
 			) );
 		}
 
-		return $settings;
+		$notes = array(
+			array(
+				'title'    => __( 'Notes', 'order-minimum-amount-for-woocommerce' ),
+				'desc'     => $this->format_notes( array( alg_wc_oma()->core->get_amounts_desc() ) ),
+				'type'     => 'title',
+				'id'       => "alg_wc_oma_{$this->id}_notes",
+			),
+			array(
+				'type'     => 'sectionend',
+				'id'       => "alg_wc_oma_{$this->id}_notes",
+			),
+		);
+
+		return array_merge( $settings, $notes );
 	}
 
 }

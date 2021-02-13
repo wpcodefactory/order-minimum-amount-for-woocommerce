@@ -31,8 +31,6 @@ class Alg_WC_OMA_Settings_Cart_Products extends Alg_WC_OMA_Settings_Section {
 	 *
 	 * @version 4.0.0
 	 * @since   3.1.0
-	 *
-	 * @todo    [maybe] Validate all: for each option separately?
 	 */
 	function get_settings() {
 
