@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Settings
  *
- * @version 4.0.0
+ * @version 4.0.1
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -17,7 +17,7 @@ class Alg_WC_Settings_OMA extends WC_Settings_Page {
 	/**
 	 * Constructor.
 	 *
-	 * @version 4.0.0
+	 * @version 4.0.1
 	 * @since   1.0.0
 	 *
 	 * @todo    rearrange sections by `$section_priority`?
@@ -27,6 +27,7 @@ class Alg_WC_Settings_OMA extends WC_Settings_Page {
 		$this->label = __( 'Order Min/Max Amount', 'order-minimum-amount-for-woocommerce' );
 		parent::__construct();
 		add_filter( 'woocommerce_admin_settings_sanitize_option', array( $this, 'maybe_unsanitize_option' ), PHP_INT_MAX, 3 );
+		add_action( 'admin_head-' . 'woocommerce_page_wc-settings', array( $this, 'admin_style' ) );
 		// Sections
 		require_once( 'class-alg-wc-oma-settings-section.php' );
 		require_once( 'class-alg-wc-oma-settings-general.php' );
@@ -42,6 +43,39 @@ class Alg_WC_Settings_OMA extends WC_Settings_Page {
 		require_once( 'class-alg-wc-oma-settings-coupons.php' );
 		require_once( 'class-alg-wc-oma-settings-cart-products.php' );
 		require_once( 'class-alg-wc-oma-settings-products-cart-total.php' );
+	}
+
+	/**
+	 * admin_style.
+	 *
+	 * @version 4.0.1
+	 * @since   4.0.1
+	 */
+	function admin_style() {
+		if (
+			! isset( $_GET['tab'] )
+			|| 'alg_wc_oma' != $_GET['tab']
+		) {
+			return;
+		}
+		?>
+		<style>
+			.alg-wc-oma-notes-wrapper pre{
+				white-space: pre-wrap;
+			}
+			.alg-wc-oma-notes-wrapper {
+				background: #fff;
+				padding: 15px 15px 15px;
+				border:1px solid #ccd0d4;
+			}
+			.alg-wc-oma-note {
+				margin-bottom: 12px;
+			}
+			.alg-wc-oma-note:last-child, .alg-wc-oma-notes-wrapper > *:last-child {
+				margin-bottom: 0;
+			}
+		</style>
+		<?php
 	}
 
 	/**

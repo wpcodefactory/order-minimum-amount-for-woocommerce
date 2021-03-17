@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Section Settings
  *
- * @version 4.0.0
+ * @version 4.0.1
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -100,11 +100,11 @@ class Alg_WC_OMA_Settings_Section {
 	/**
 	 * format_notes.
 	 *
-	 * @version 3.2.0
+	 * @version 4.0.1
 	 * @since   3.2.0
 	 */
 	function format_notes( $notes ) {
-		return '<p>' . $this->get_info_icon() . implode( '</p><p>' . $this->get_info_icon(), $notes ) . '</p>';
+		return '<div class="alg-wc-oma-notes-wrapper"><div class="alg-wc-oma-note">' . $this->get_info_icon() . implode( '</div><div class="alg-wc-oma-note">' . $this->get_info_icon(), $notes ) . '</div></div>';
 	}
 
 	/**
@@ -181,16 +181,16 @@ class Alg_WC_OMA_Settings_Section {
 	/**
 	 * get_products_options.
 	 *
-	 * @version 4.0.0
+	 * @version 4.0.1
 	 * @since   3.3.0
 	 */
 	function get_products_options( $type = '', $do_list_variations = false ) {
 		$settings = array();
 		$desc_include = ( '' === $type ?
-			__( 'Only check min/max amounts if there is at least one selected product(s) in cart.', 'order-minimum-amount-for-woocommerce' ) :
+			__( 'Only check min/max amounts if there are selected product(s) in cart.', 'order-minimum-amount-for-woocommerce' ) :
 			__( 'Include in cart total.', 'order-minimum-amount-for-woocommerce' ) );
 		$desc_exclude = ( '' === $type ?
-			__( 'Do not check min/max amounts if there is at least one selected product(s) in cart.', 'order-minimum-amount-for-woocommerce' ) :
+			__( 'Do not check min/max amounts if there are selected product(s) in cart.', 'order-minimum-amount-for-woocommerce'  ) :
 			__( 'Exclude from cart total.', 'order-minimum-amount-for-woocommerce' ) );
 		$options_data = array(
 			'product' => array(

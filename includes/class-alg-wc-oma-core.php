@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Core Class
  *
- * @version 4.0.0
+ * @version 4.0.1
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -46,7 +46,7 @@ class Alg_WC_OMA_Core {
 	/**
 	 * add_hooks.
 	 *
-	 * @version 4.0.0
+	 * @version 4.0.1
 	 * @since   1.0.0
 	 */
 	function add_hooks() {
@@ -68,12 +68,14 @@ class Alg_WC_OMA_Core {
 		if ( 'yes' === get_option( 'alg_wc_oma_cart_notice_enabled', 'no' ) ) {
 			add_action( 'woocommerce_before_cart', array( $this, 'cart_notices' ) );
 		}
+		// Product page: Notices
+		add_action( 'woocommerce_before_single_product_summary', array( $this, 'product_page_notices' ) );
 		// Additional positions
-		foreach ( array( 'cart', 'checkout' ) as $cart_or_checkout ) {
-			$positions = get_option( 'alg_wc_oma_message_positions_' . $cart_or_checkout, array() );
+		foreach ( array( 'cart', 'checkout', 'product_page' ) as $area ) {
+			$positions = get_option( 'alg_wc_oma_message_positions_' . $area, array() );
 			if ( ! empty( $positions ) ) {
 				foreach ( $positions as $position ) {
-					add_action( $position, array( $this, $cart_or_checkout . '_text' ) );
+					add_action( $position, array( $this, $area . '_text' ) );
 				}
 			}
 		}
@@ -327,25 +329,38 @@ class Alg_WC_OMA_Core {
 	/**
 	 * get_notices.
 	 *
-	 * @version 4.0.0
+	 * @version 4.0.1
 	 * @since   3.2.0
+	 *
+	 * @param string $area 'cart' | 'checkout' | 'product_page'
+	 * @param bool $limits
+	 * @param bool $types
+	 *
+	 * @return mixed|void
 	 */
-	function get_notices( $cart_or_checkout = 'cart', $limits = false, $types = false ) {
+	function get_notices( $area = 'cart', $limits = false, $types = false ) {
 		$result = array();
 		// Check amounts
 		foreach ( $this->get_enabled_amount_limits( $limits ) as $min_or_max ) {
 			foreach ( $this->get_enabled_amount_types( $types ) as $amount_type ) {
 				$amount_data = $this->get_min_max_amount_data( $min_or_max, $amount_type );
-				if ( ! empty( $amount_data['amount'] ) && ! $this->is_cart_empty() ) {
+				if (
+					! empty( $amount_data['amount'] )
+					&&
+					(
+						( 'no' === ( $display_on_empty_cart = get_option( 'alg_wc_oma_display_messages_on_empty_cart', 'no' ) ) && ! $this->is_cart_empty() ) ||
+						( 'yes' === $display_on_empty_cart )
+					)
+				) {
 					$total = $this->amounts->get_cart_total( $amount_type );
 					$result[ $min_or_max ][ $amount_type ][''] = ( ! $this->check_min_max_amount( $min_or_max, $amount_type, $amount_data['amount'], $total ) ?
-						$this->get_notice_content( $min_or_max, $amount_type, $amount_data, $total, $cart_or_checkout ) :
+						$this->get_notice_content( $min_or_max, $amount_type, $amount_data, $total, $area ) :
 						true );
 				}
 			}
 		}
 		// Filter
-		$result = apply_filters( 'alg_wc_oma_after_get_notices', $result, $cart_or_checkout, $limits, $types );
+		$result = apply_filters( 'alg_wc_oma_after_get_notices', $result, $area, $limits, $types );
 		// "Require all"
 		$result = $this->process_require_all_option( $result );
 		// Preparing notices
@@ -355,17 +370,23 @@ class Alg_WC_OMA_Core {
 			$result = array_unique( $result );
 			$result = array_values( $result );
 		}
-		return apply_filters( 'alg_wc_oma_get_notices', $result, $cart_or_checkout, $limits, $types );
+		return apply_filters( 'alg_wc_oma_get_notices', $result, $area, $limits, $types );
 	}
 
 	/**
 	 * output_notices.
 	 *
-	 * @version 3.2.0
+	 * @version 4.0.1
 	 * @since   1.0.0
+	 *
+	 * @param $area 'cart' | 'checkout' | 'product_page'
+	 * @param bool $func
+	 * @param bool $notice_type
+	 *
+	 * @return string
 	 */
-	function output_notices( $cart_or_checkout, $func = false, $notice_type = false ) {
-		$result = $this->get_notices( $cart_or_checkout );
+	function output_notices( $area, $func = false, $notice_type = false ) {
+		$result = $this->get_notices( $area );
 		if ( ! $func ) {
 			return implode( '<br>', $result );
 		} else {
@@ -396,6 +417,16 @@ class Alg_WC_OMA_Core {
 	}
 
 	/**
+	 * product_page_notices.
+	 *
+	 * @version 4.0.1
+	 * @since   4.0.1
+	 */
+	function product_page_notices(){
+		$this->output_notices( 'product_page', 'wc_print_notice', get_option( 'alg_wc_oma_product_page_notice_type', 'notice' ) );
+	}
+
+	/**
 	 * checkout_notices.
 	 *
 	 * @version 3.2.0
@@ -423,6 +454,16 @@ class Alg_WC_OMA_Core {
 	 */
 	function checkout_text() {
 		echo $this->output_notices( 'checkout' );
+	}
+
+	/**
+	 * checkout_text.
+	 *
+	 * @version 4.0.1
+	 * @since   4.0.1
+	 */
+	function product_page_text() {
+		echo $this->output_notices( 'product_page' );
 	}
 
 	/**

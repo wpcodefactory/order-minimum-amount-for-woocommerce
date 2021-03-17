@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Messages Section Settings
  *
- * @version 4.0.0
+ * @version 4.0.1
  * @since   1.2.0
  *
  * @author  WPFactory
@@ -63,9 +63,76 @@ class Alg_WC_OMA_Settings_Messages extends Alg_WC_OMA_Settings_Section {
 	}
 
 	/**
+	 * get_dynamic_settings_info.
+	 *
+	 * @version 4.0.1
+	 * @since   4.0.1
+	 *
+	 * @return array
+	 */
+	function get_dynamic_settings_info(){
+		$dynamic_settings_info = array(
+			'cart' => array(
+				'title'                => __( 'Cart', 'order-minimum-amount-for-woocommerce' ),
+				'default_notice_type'  => 'notice',
+				'additional_positions' => array(
+					'woocommerce_before_cart_table'              => __( 'Before cart table', 'order-minimum-amount-for-woocommerce' ),
+					'woocommerce_before_cart_contents'           => __( 'Before cart contents', 'order-minimum-amount-for-woocommerce' ),
+					'woocommerce_cart_contents'                  => __( 'Cart contents', 'order-minimum-amount-for-woocommerce' ),
+					'woocommerce_cart_coupon'                    => __( 'Cart coupon', 'order-minimum-amount-for-woocommerce' ),
+					'woocommerce_cart_actions'                   => __( 'Cart actions', 'order-minimum-amount-for-woocommerce' ),
+					'woocommerce_after_cart_contents'            => __( 'After cart contents', 'order-minimum-amount-for-woocommerce' ),
+					'woocommerce_after_cart_table'               => __( 'After cart table', 'order-minimum-amount-for-woocommerce' ),
+					'woocommerce_before_cart_totals'             => __( 'Before cart totals', 'order-minimum-amount-for-woocommerce' ),
+					'woocommerce_cart_totals_before_shipping'    => __( 'Cart totals: Before shipping', 'order-minimum-amount-for-woocommerce' ),
+					'woocommerce_cart_totals_after_shipping'     => __( 'Cart totals: After shipping', 'order-minimum-amount-for-woocommerce' ),
+					'woocommerce_cart_totals_before_order_total' => __( 'Cart totals: Before order total', 'order-minimum-amount-for-woocommerce' ),
+					'woocommerce_cart_totals_after_order_total'  => __( 'Cart totals: After order total', 'order-minimum-amount-for-woocommerce' ),
+					'woocommerce_proceed_to_checkout'            => __( 'Proceed to checkout', 'order-minimum-amount-for-woocommerce' ),
+					'woocommerce_after_cart_totals'              => __( 'After cart totals', 'order-minimum-amount-for-woocommerce' ),
+					'woocommerce_before_shipping_calculator'     => __( 'Before shipping calculator', 'order-minimum-amount-for-woocommerce' ),
+					'woocommerce_after_shipping_calculator'      => __( 'After shipping calculator', 'order-minimum-amount-for-woocommerce' ),
+				)
+			),
+			'checkout' => array(
+				'title'                => __( 'Checkout', 'order-minimum-amount-for-woocommerce' ),
+				'default_notice_type'  => 'error',
+				'additional_positions' => array(
+					'woocommerce_before_checkout_form'             => __( 'Before checkout form', 'order-minimum-amount-for-woocommerce' ),
+					'woocommerce_checkout_before_customer_details' => __( 'Before customer details', 'order-minimum-amount-for-woocommerce' ),
+					'woocommerce_checkout_billing'                 => __( 'Billing', 'order-minimum-amount-for-woocommerce' ),
+					'woocommerce_checkout_shipping'                => __( 'Shipping', 'order-minimum-amount-for-woocommerce' ),
+					'woocommerce_checkout_after_customer_details'  => __( 'After customer details', 'order-minimum-amount-for-woocommerce' ),
+					'woocommerce_checkout_before_order_review'     => __( 'Before order review', 'order-minimum-amount-for-woocommerce' ),
+					'woocommerce_checkout_order_review'            => __( 'Order review', 'order-minimum-amount-for-woocommerce' ),
+					'woocommerce_review_order_before_shipping'     => __( 'Order review: Before shipping', 'order-minimum-amount-for-woocommerce' ),
+					'woocommerce_review_order_after_shipping'      => __( 'Order review: After shipping', 'order-minimum-amount-for-woocommerce' ),
+					'woocommerce_review_order_before_submit'       => __( 'Order review: Payment: Before submit button', 'order-minimum-amount-for-woocommerce' ),
+					'woocommerce_review_order_after_submit'        => __( 'Order review: Payment: After submit button', 'order-minimum-amount-for-woocommerce' ),
+					'woocommerce_checkout_after_order_review'      => __( 'After order review', 'order-minimum-amount-for-woocommerce' ),
+					'woocommerce_after_checkout_form'              => __( 'After checkout form', 'order-minimum-amount-for-woocommerce' ),
+				)
+			),
+			'product_page' => array(
+				'title'                => __( 'Product page', 'order-minimum-amount-for-woocommerce' ),
+				'default_notice_type'  => 'notice',
+				'additional_positions' => array(
+					'woocommerce_before_add_to_cart_form'      => __( 'Before add to cart form', 'order-minimum-amount-for-woocommerce' ),
+					'woocommerce_before_add_to_cart_button'    => __( 'Before add to cart button', 'order-minimum-amount-for-woocommerce' ),
+					'woocommerce_after_add_to_cart_button'     => __( 'After add to cart button', 'order-minimum-amount-for-woocommerce' ),
+					'woocommerce_before_add_to_cart_quantity'  => __( 'Before add to cart quantity', 'order-minimum-amount-for-woocommerce' ),
+					'woocommerce_after_add_to_cart_quantity'   => __( 'After add to cart quantity', 'order-minimum-amount-for-woocommerce' ),
+					'woocommerce_after_single_product_summary' => __( 'After single product summary', 'order-minimum-amount-for-woocommerce' ),
+				)
+			),
+		);
+		return $dynamic_settings_info;
+	}
+
+	/**
 	 * get_settings.
 	 *
-	 * @version 4.0.0
+	 * @version 4.0.1
 	 * @since   1.2.0
 	 *
 	 * @todo    add optional "Message on requirements met"
@@ -81,32 +148,41 @@ class Alg_WC_OMA_Settings_Messages extends Alg_WC_OMA_Settings_Section {
 				'id'       => 'alg_wc_oma_message_header',
 			),
 			array(
+				'title'    => __( 'Display on empty cart', 'order-minimum-amount-for-woocommerce' ),
+				'desc'     => __( 'Display messages even if cart is empty', 'order-minimum-amount-for-woocommerce' ),
+				'desc_tip' => __( 'This option will probably make more sense if the product page notice is enabled.', 'order-minimum-amount-for-woocommerce' ),
+				'type'     => 'checkbox',
+				'default'  => 'no',
+				'id'       => 'alg_wc_oma_display_messages_on_empty_cart',
+			),
+			array(
 				'type'     => 'sectionend',
 				'id'       => 'alg_wc_oma_message_header',
 			),
 		);
 
-		$cart_and_checkout_settings = array();
-		foreach ( array( 'cart', 'checkout' ) as $cart_or_checkout ) {
-			$title = ( 'checkout' === $cart_or_checkout ? __( 'Checkout', 'order-minimum-amount-for-woocommerce' ) : __( 'Cart', 'order-minimum-amount-for-woocommerce' ) );
-			$cart_and_checkout_settings = array_merge( $cart_and_checkout_settings, array(
+		$dynamic_settings      = array();
+		$dynamic_settings_info = $this->get_dynamic_settings_info();
+		foreach ( $dynamic_settings_info as $setting_key => $info ) {
+			$title            = $info['title'];
+			$dynamic_settings = array_merge( $dynamic_settings, array(
 				array(
-					'title'    => $title,
-					'type'     => 'title',
-					'id'       => "alg_wc_oma_message_content_{$cart_or_checkout}_options",
+					'title' => $title,
+					'type'  => 'title',
+					'id'    => "alg_wc_oma_message_content_{$setting_key}_options",
 				),
 				array(
-					'title'    => sprintf( __( '%s notices', 'order-minimum-amount-for-woocommerce' ), $title ),
-					'desc'     => '<strong>' . __( 'Enable', 'order-minimum-amount-for-woocommerce' ) . '</strong>',
-					'id'       => "alg_wc_oma_{$cart_or_checkout}_notice_enabled",
-					'default'  => 'no',
-					'type'     => 'checkbox',
+					'title'   => sprintf( __( '%s notices', 'order-minimum-amount-for-woocommerce' ), $title ),
+					'desc'    => '<strong>' . __( 'Enable', 'order-minimum-amount-for-woocommerce' ) . '</strong>',
+					'id'      => "alg_wc_oma_{$setting_key}_notice_enabled",
+					'default' => 'no',
+					'type'    => 'checkbox',
 				),
 				array(
 					'title'    => __( 'Notice type', 'order-minimum-amount-for-woocommerce' ),
 					'desc_tip' => __( 'Styling.', 'order-minimum-amount-for-woocommerce' ),
-					'id'       => "alg_wc_oma_{$cart_or_checkout}_notice_type",
-					'default'  => ( 'cart' === $cart_or_checkout ? 'notice' : 'error' ),
+					'id'       => "alg_wc_oma_{$setting_key}_notice_type",
+					'default'  => $info['default_notice_type'],
 					'type'     => 'select',
 					'class'    => 'wc-enhanced-select',
 					'options'  => array(
@@ -115,46 +191,12 @@ class Alg_WC_OMA_Settings_Messages extends Alg_WC_OMA_Settings_Section {
 					),
 				),
 				array(
-					'title'    => __( 'Additional positions', 'order-minimum-amount-for-woocommerce' ),
-					'id'       => "alg_wc_oma_message_positions_{$cart_or_checkout}",
-					'default'  => array(),
-					'type'     => 'multiselect',
-					'class'    => 'chosen_select',
-					'options'  => ( 'cart' === $cart_or_checkout ?
-						array(
-							'woocommerce_before_cart_table'                 => __( 'Before cart table', 'order-minimum-amount-for-woocommerce' ),
-							'woocommerce_before_cart_contents'              => __( 'Before cart contents', 'order-minimum-amount-for-woocommerce' ),
-							'woocommerce_cart_contents'                     => __( 'Cart contents', 'order-minimum-amount-for-woocommerce' ),
-							'woocommerce_cart_coupon'                       => __( 'Cart coupon', 'order-minimum-amount-for-woocommerce' ),
-							'woocommerce_cart_actions'                      => __( 'Cart actions', 'order-minimum-amount-for-woocommerce' ),
-							'woocommerce_after_cart_contents'               => __( 'After cart contents', 'order-minimum-amount-for-woocommerce' ),
-							'woocommerce_after_cart_table'                  => __( 'After cart table', 'order-minimum-amount-for-woocommerce' ),
-							'woocommerce_before_cart_totals'                => __( 'Before cart totals', 'order-minimum-amount-for-woocommerce' ),
-							'woocommerce_cart_totals_before_shipping'       => __( 'Cart totals: Before shipping', 'order-minimum-amount-for-woocommerce' ),
-							'woocommerce_cart_totals_after_shipping'        => __( 'Cart totals: After shipping', 'order-minimum-amount-for-woocommerce' ),
-							'woocommerce_cart_totals_before_order_total'    => __( 'Cart totals: Before order total', 'order-minimum-amount-for-woocommerce' ),
-							'woocommerce_cart_totals_after_order_total'     => __( 'Cart totals: After order total', 'order-minimum-amount-for-woocommerce' ),
-							'woocommerce_proceed_to_checkout'               => __( 'Proceed to checkout', 'order-minimum-amount-for-woocommerce' ),
-							'woocommerce_after_cart_totals'                 => __( 'After cart totals', 'order-minimum-amount-for-woocommerce' ),
-							'woocommerce_before_shipping_calculator'        => __( 'Before shipping calculator', 'order-minimum-amount-for-woocommerce' ),
-							'woocommerce_after_shipping_calculator'         => __( 'After shipping calculator', 'order-minimum-amount-for-woocommerce' ),
-						) :
-						array(
-							'woocommerce_before_checkout_form'              => __( 'Before checkout form', 'order-minimum-amount-for-woocommerce' ),
-							'woocommerce_checkout_before_customer_details'  => __( 'Before customer details', 'order-minimum-amount-for-woocommerce' ),
-							'woocommerce_checkout_billing'                  => __( 'Billing', 'order-minimum-amount-for-woocommerce' ),
-							'woocommerce_checkout_shipping'                 => __( 'Shipping', 'order-minimum-amount-for-woocommerce' ),
-							'woocommerce_checkout_after_customer_details'   => __( 'After customer details', 'order-minimum-amount-for-woocommerce' ),
-							'woocommerce_checkout_before_order_review'      => __( 'Before order review', 'order-minimum-amount-for-woocommerce' ),
-							'woocommerce_checkout_order_review'             => __( 'Order review', 'order-minimum-amount-for-woocommerce' ),
-							'woocommerce_review_order_before_shipping'      => __( 'Order review: Before shipping', 'order-minimum-amount-for-woocommerce' ),
-							'woocommerce_review_order_after_shipping'       => __( 'Order review: After shipping', 'order-minimum-amount-for-woocommerce' ),
-							'woocommerce_review_order_before_submit'        => __( 'Order review: Payment: Before submit button', 'order-minimum-amount-for-woocommerce' ),
-							'woocommerce_review_order_after_submit'         => __( 'Order review: Payment: After submit button', 'order-minimum-amount-for-woocommerce' ),
-							'woocommerce_checkout_after_order_review'       => __( 'After order review', 'order-minimum-amount-for-woocommerce' ),
-							'woocommerce_after_checkout_form'               => __( 'After checkout form', 'order-minimum-amount-for-woocommerce' ),
-						)
-					),
+					'title'   => __( 'Additional positions', 'order-minimum-amount-for-woocommerce' ),
+					'id'      => "alg_wc_oma_message_positions_{$setting_key}",
+					'default' => array(),
+					'type'    => 'multiselect',
+					'class'   => 'chosen_select',
+					'options' => $info['additional_positions']
 				),
 			) );
 			foreach ( alg_wc_oma()->core->get_enabled_amount_limits() as $min_or_max ) {
@@ -164,8 +206,8 @@ class Alg_WC_OMA_Settings_Messages extends Alg_WC_OMA_Settings_Section {
 							if ( '' != $scope && '' != $source ) {
 								continue;
 							}
-							$id = alg_wc_oma()->core->get_message_option_id( $cart_or_checkout, $scope, $source );
-							$cart_and_checkout_settings = array_merge( $cart_and_checkout_settings, array(
+							$id = alg_wc_oma()->core->get_message_option_id( $setting_key, $scope, $source );
+							$dynamic_settings = array_merge( $dynamic_settings, array(
 								array(
 									'title'    => alg_wc_oma()->core->get_title( $min_or_max, $amount_type, array( $this->get_scope_title( $scope ), $this->get_source_title( $source ) ), true ),
 									'id'       => "alg_wc_oma_{$min_or_max}_{$amount_type}_message[{$id}]",
@@ -179,10 +221,10 @@ class Alg_WC_OMA_Settings_Messages extends Alg_WC_OMA_Settings_Section {
 					}
 				}
 			}
-			$cart_and_checkout_settings = array_merge( $cart_and_checkout_settings, array(
+			$dynamic_settings = array_merge( $dynamic_settings, array(
 				array(
 					'type'     => 'sectionend',
-					'id'       => "alg_wc_oma_message_content_{$cart_or_checkout}_options",
+					'id'       => "alg_wc_oma_message_content_{$setting_key}_options",
 				),
 			) );
 		}
@@ -233,27 +275,27 @@ class Alg_WC_OMA_Settings_Messages extends Alg_WC_OMA_Settings_Section {
 		$notes = array();
 
 		$notes[] = sprintf( __( 'Available placeholders: %s', 'order-minimum-amount-for-woocommerce' ),
-			'<div style="padding: 15px 0px;">' .
+			'<div style="padding: 0px 0px 15px;">' .
 				'<code>' . implode( '</code>, <code>', array( '%amount%', '%total%', '%diff%', '%amount_raw%', '%total_raw%', '%diff_raw%' ) ) . '</code>' .
 			'</div>' );
 
 		if ( array() != apply_filters( 'alg_wc_oma_enabled_scopes', array() ) ) {
 			$notes[] = sprintf( __( 'For "Per product", "Per product category" and "Per product tag" messages you can also use these additional placeholders: %s', 'order-minimum-amount-for-woocommerce' ),
-				'<div style="padding: 15px 0px;">' .
+				'<div style="padding: 0 0 15px;">' .
 					'<code>' . implode( '</code>, <code>', array( '%product_title%', '%term_title%' ) ) . '</code>' .
 				'</div>' );
 		}
 
 		if ( 'yes' === get_option( 'alg_wc_oma_by_shipping_enabled', 'no' ) && 'yes' === get_option( 'alg_wc_oma_by_shipping_messages_enabled', 'no' ) ) {
 			$notes[] = sprintf( __( 'For "Shipping" messages you can also use these additional placeholders: %s', 'order-minimum-amount-for-woocommerce' ),
-				'<div style="padding: 15px 0px;">' .
+				'<div style="padding: 0 0 15px;">' .
 					'<code>' . implode( '</code>, <code>', array( '%shipping_method%', '%shipping_zone%', '%shipping_zone_locations%' ) ) . '</code>' .
 				'</div>' );
 		}
 
 		if ( 'yes' === get_option( 'alg_wc_oma_by_gateway_enabled', 'no' ) && 'yes' === get_option( 'alg_wc_oma_by_gateway_messages_enabled', 'no' ) ) {
 			$notes[] = sprintf( __( 'For "Payment Gateways" messages you can also use this additional placeholder: %s', 'order-minimum-amount-for-woocommerce' ),
-				'<div style="padding: 15px 0px;">' .
+				'<div style="padding: 0 0 15px;">' .
 					'<code>' . implode( '</code>, <code>', array( '%payment_gateway%' ) ) . '</code>' .
 				'</div>' );
 		}
@@ -263,7 +305,7 @@ class Alg_WC_OMA_Settings_Messages extends Alg_WC_OMA_Settings_Section {
 		$notes[] = __( 'You can use HTML in the messages.', 'order-minimum-amount-for-woocommerce' );
 
 		$notes[] = sprintf( __( 'You can also use shortcodes in the messages, for example, for WPML/Polylang translations: %s', 'order-minimum-amount-for-woocommerce' ),
-			'<br><pre style="background-color: #E0E0E0; padding: 15px;">' .
+			'<br><pre style="background-color: #E0E0E0; padding: 15px; margin-bottom:0">' .
 				'[alg_wc_oma_translate lang="DE"]Text for DE[/alg_wc_oma_translate]' .
 				'[alg_wc_oma_translate lang="NL"]Text for NL[/alg_wc_oma_translate]' .
 				'[alg_wc_oma_translate not_lang="DE,NL"]Text for other languages[/alg_wc_oma_translate]' .
@@ -282,7 +324,7 @@ class Alg_WC_OMA_Settings_Messages extends Alg_WC_OMA_Settings_Section {
 			),
 		);
 
-		return array_merge( $header, $cart_and_checkout_settings, $advanced_settings, $notes_settings );
+		return array_merge( $header, $dynamic_settings, $advanced_settings, $notes_settings );
 	}
 
 }

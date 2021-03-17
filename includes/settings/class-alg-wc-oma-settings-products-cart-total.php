@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Products Cart Total Section Settings
  *
- * @version 4.0.0
+ * @version 4.0.1
  * @since   3.3.0
  *
  * @author  WPFactory
@@ -29,7 +29,7 @@ class Alg_WC_OMA_Settings_Products_Cart_Total extends Alg_WC_OMA_Settings_Sectio
 	/**
 	 * get_settings.
 	 *
-	 * @version 4.0.0
+	 * @version 4.0.1
 	 * @since   3.3.0
 	 */
 	function get_settings() {
@@ -84,7 +84,8 @@ class Alg_WC_OMA_Settings_Products_Cart_Total extends Alg_WC_OMA_Settings_Sectio
 				array(
 					'title'    => __( 'Notes', 'order-minimum-amount-for-woocommerce' ),
 					'desc'     => $this->format_notes( array(
-							sprintf( __( 'Please note that final order sum value will also be affected by the %s settings in %s section.', 'order-minimum-amount-for-woocommerce' ),
+							sprintf( __( 'Please note that final order %s value will also be affected by the %s settings in %s section.', 'order-minimum-amount-for-woocommerce' ),
+								'<strong>' . __( 'sum', 'order-minimum-amount-for-woocommerce' ) . '</strong>',
 								'<strong>' . sprintf( __( '"%s" Amount Type Options', 'order-minimum-amount-for-woocommerce' ),
 									__( 'Sum', 'order-minimum-amount-for-woocommerce' ) ) . '</strong>',
 								$this->get_section_link( 'general' ) ),

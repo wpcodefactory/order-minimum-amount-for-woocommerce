@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - General Section Settings
  *
- * @version 4.0.0
+ * @version 4.0.1
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -29,7 +29,7 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 	/**
 	 * get_settings.
 	 *
-	 * @version 4.0.0
+	 * @version 4.0.1
 	 * @since   1.0.0
 	 */
 	function get_settings() {
@@ -321,6 +321,28 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 			);
 		}
 
+		$rest_api_settings = array(
+			array(
+				'title'    => __( 'REST API', 'order-minimum-amount-for-woocommerce' ),
+				'type'     => 'title',
+				'id'       => 'alg_wc_oma_rest_api_options',
+			),
+			array(
+				'title'             => __( 'User metas', 'order-minimum-amount-for-woocommerce' ),
+				'desc'              => __( 'Add user metas to the REST API', 'order-minimum-amount-for-woocommerce' ),
+				'desc_tip'          => sprintf( __( 'It will be possible to use the %s route to read and update user metas like %s for example.', 'order-minimum-amount-for-woocommerce' ), '<code>' . '/wp/v2/users/1/' . '</code>', '<code>' . '_alg_wc_oma_min_sum' . '</code>' ) . '<br />' .
+				                       __( 'For now only administrators can update user metas.', 'order-minimum-amount-for-woocommerce' ),
+				'id'                => 'alg_wc_oma_rest_api_user_metas',
+				'default'           => 'no',
+				'type'              => 'checkbox',
+				'custom_attributes' => apply_filters( 'alg_wc_oma_settings', array( 'disabled' => 'disabled' ) ),
+			),
+			array(
+				'type'     => 'sectionend',
+				'id'       => 'alg_wc_oma_rest_api_options',
+			),
+		);
+
 		return array_merge(
 			$plugin_settings,
 			$general_settings,
@@ -328,7 +350,8 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 			$type_sum_settings,
 			$type_product_cat_settings,
 			$type_product_tag_settings,
-			$max_limit_settings
+			$max_limit_settings,
+			$rest_api_settings
 		);
 	}
 
