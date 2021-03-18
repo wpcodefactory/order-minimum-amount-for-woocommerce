@@ -3,7 +3,7 @@ Contributors: wpcodefactory
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 4.4
 Tested up to: 5.7
-Stable tag: 4.0.1
+Stable tag: 4.0.2
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -69,6 +69,9 @@ With [premium version](https://wpfactory.com/item/order-minimum-maximum-amount-f
 1. Frontend example – Cart notice.
 
 == Changelog ==
+
+= 4.0.2 - 18/03/2021 =
+* Fix - Messages - Product page notice gets displayed even when it's disabled.
 
 = 4.0.1 - 17/03/2021 =
 * Dev - Settings - Descriptions updated.

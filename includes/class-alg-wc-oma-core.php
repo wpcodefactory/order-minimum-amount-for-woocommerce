@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Core Class
  *
- * @version 4.0.1
+ * @version 4.0.2
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -419,11 +419,13 @@ class Alg_WC_OMA_Core {
 	/**
 	 * product_page_notices.
 	 *
-	 * @version 4.0.1
+	 * @version 4.0.2
 	 * @since   4.0.1
 	 */
-	function product_page_notices(){
-		$this->output_notices( 'product_page', 'wc_print_notice', get_option( 'alg_wc_oma_product_page_notice_type', 'notice' ) );
+	function product_page_notices() {
+		if ( 'yes' === get_option( 'alg_wc_oma_product_page_notice_enabled', 'no' ) ) {
+			$this->output_notices( 'product_page', 'wc_print_notice', get_option( 'alg_wc_oma_product_page_notice_type', 'notice' ) );
+		}
 	}
 
 	/**
