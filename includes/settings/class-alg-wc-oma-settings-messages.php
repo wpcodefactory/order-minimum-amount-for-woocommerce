@@ -199,6 +199,7 @@ class Alg_WC_OMA_Settings_Messages extends Alg_WC_OMA_Settings_Section {
 					'options' => $info['additional_positions']
 				),
 			) );
+
 			foreach ( alg_wc_oma()->core->get_enabled_amount_limits() as $min_or_max ) {
 				foreach ( alg_wc_oma()->core->get_enabled_amount_types() as $amount_type ) {
 					foreach ( apply_filters( 'alg_wc_oma_enabled_scopes', array( '' ) ) as $scope ) {
@@ -220,6 +221,18 @@ class Alg_WC_OMA_Settings_Messages extends Alg_WC_OMA_Settings_Section {
 						}
 					}
 				}
+			}
+			if ( 'product_page' == $setting_key ) {
+				$dynamic_settings = array_merge( $dynamic_settings, array(
+					array(
+						'title'   => __( 'Smart product scope', 'order-minimum-amount-for-woocommerce' ),
+						'desc'    => __( 'Show only product scope messages relevant to the current product', 'order-minimum-amount-for-woocommerce' ),
+						'id'      => "alg_wc_oma_{$setting_key}_notice_smart_product_scope",
+						'default' => 'no',
+						'type'    => 'checkbox',
+						'custom_attributes' => apply_filters( 'alg_wc_oma_settings', array( 'disabled' => 'disabled' ) ),
+					),
+				) );
 			}
 			$dynamic_settings = array_merge( $dynamic_settings, array(
 				array(

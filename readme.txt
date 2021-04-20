@@ -3,7 +3,7 @@ Contributors: wpcodefactory
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 4.4
 Tested up to: 5.7
-Stable tag: 4.0.2
+Stable tag: 4.0.3
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -69,6 +69,12 @@ With [premium version](https://wpfactory.com/item/order-minimum-maximum-amount-f
 1. Frontend example – Cart notice.
 
 == Changelog ==
+
+= 4.0.3 - 20/04/2021 =
+* Fix - Messages - Show product page messages from "Display on empty cart" option.
+* Dev - Coupons - Add "Exclude all" option allowing to not check min/max amounts if any coupons have been applied.
+* Dev - Messages - Add "Smart product scope" option allowing to Show only product scope messages relevant to the current product.
+* WC tested up to: 5.2.
 
 = 4.0.2 - 18/03/2021 =
 * Fix - Messages - Product page notice gets displayed even when it's disabled.

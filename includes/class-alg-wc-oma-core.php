@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Core Class
  *
- * @version 4.0.2
+ * @version 4.0.3
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -329,7 +329,7 @@ class Alg_WC_OMA_Core {
 	/**
 	 * get_notices.
 	 *
-	 * @version 4.0.1
+	 * @version 4.0.3
 	 * @since   3.2.0
 	 *
 	 * @param string $area 'cart' | 'checkout' | 'product_page'
@@ -344,13 +344,11 @@ class Alg_WC_OMA_Core {
 		foreach ( $this->get_enabled_amount_limits( $limits ) as $min_or_max ) {
 			foreach ( $this->get_enabled_amount_types( $types ) as $amount_type ) {
 				$amount_data = $this->get_min_max_amount_data( $min_or_max, $amount_type );
-				if (
-					! empty( $amount_data['amount'] )
-					&&
-					(
-						( 'no' === ( $display_on_empty_cart = get_option( 'alg_wc_oma_display_messages_on_empty_cart', 'no' ) ) && ! $this->is_cart_empty() ) ||
-						( 'yes' === $display_on_empty_cart )
-					)
+				if ( ! empty( $amount_data['amount'] )
+				     && (
+					     ( 'no' === ( $display_on_empty_cart = get_option( 'alg_wc_oma_display_messages_on_empty_cart', 'no' ) ) && ! $this->is_cart_empty() ) ||
+					     ( 'yes' === $display_on_empty_cart )
+				     )
 				) {
 					$total = $this->amounts->get_cart_total( $amount_type );
 					$result[ $min_or_max ][ $amount_type ][''] = ( ! $this->check_min_max_amount( $min_or_max, $amount_type, $amount_data['amount'], $total ) ?

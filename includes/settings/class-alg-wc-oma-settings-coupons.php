@@ -79,8 +79,7 @@ class Alg_WC_OMA_Settings_Coupons extends Alg_WC_OMA_Settings_Section {
 			),
 			array(
 				'title'    => __( 'Validate all coupons', 'order-minimum-amount-for-woocommerce' ),
-				'desc'     => __( 'Enable', 'order-minimum-amount-for-woocommerce' ),
-				'desc_tip' => __( 'Choose if you want to validate all applied coupons, or at least one coupon.', 'order-minimum-amount-for-woocommerce' ),
+				'desc'     => __( 'Validate all applied coupons, or at least one coupon', 'order-minimum-amount-for-woocommerce' ),
 				'id'       => 'alg_wc_oma_coupons_validate_all',
 				'default'  => 'yes',
 				'type'     => 'checkbox',
@@ -102,6 +101,14 @@ class Alg_WC_OMA_Settings_Coupons extends Alg_WC_OMA_Settings_Section {
 				'type'     => 'multiselect',
 				'class'    => 'chosen_select',
 				'options'  => $coupons,
+			),
+			array(
+				'title'    => __( 'Exclude all', 'order-minimum-amount-for-woocommerce' ),
+				'desc'     => __( 'Do not check min/max amounts if any coupons have been applied', 'order-minimum-amount-for-woocommerce' ),
+				'desc_tip' => sprintf( __( 'The %s option will overwrite this option.', 'order-minimum-amount-for-woocommerce' ), __( 'Require', 'order-minimum-amount-for-woocommerce' ) ),
+				'id'       => 'alg_wc_oma_coupons_exclude_all',
+				'default'  => 'no',
+				'type'     => 'checkbox',
 			),
 			array(
 				'type'     => 'sectionend',
