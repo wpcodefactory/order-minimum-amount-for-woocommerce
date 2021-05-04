@@ -3,7 +3,7 @@ Contributors: wpcodefactory
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 4.4
 Tested up to: 5.7
-Stable tag: 4.0.3
+Stable tag: 4.0.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -69,6 +69,12 @@ With [premium version](https://wpfactory.com/item/order-minimum-maximum-amount-f
 1. Frontend example – Cart notice.
 
 == Changelog ==
+
+= 4.0.4 - 04/05/2021 =
+* Fix - General - "Maximum" Amount Limit - Hide "add to cart" button - PHP Notice: Undefined index on shop pages.
+* Dev - Messages - Add mini-cart notices option.
+* Dev - Messages - Replace additional positions by positions.
+* Dev - Refactor code creating a new class only for messages.
 
 = 4.0.3 - 20/04/2021 =
 * Fix - Messages - Show product page messages from "Display on empty cart" option.

@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Core Class
  *
- * @version 4.0.3
+ * @version 4.0.4
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -17,10 +17,11 @@ class Alg_WC_OMA_Core {
 	/**
 	 * Constructor.
 	 *
-	 * @version 4.0.0
+	 * @version 4.0.4
 	 * @since   1.0.0
 	 */
 	function __construct() {
+		$this->messages   = require_once( 'class-alg-wc-oma-messages.php' );
 		$this->shortcodes = require_once( 'class-alg-wc-oma-shortcodes.php' );
 		$this->amounts    = require_once( 'class-alg-wc-oma-amount-types.php' );
 		if ( 'yes' === get_option( 'alg_wc_oma_plugin_enabled', 'yes' ) ) {
@@ -46,7 +47,7 @@ class Alg_WC_OMA_Core {
 	/**
 	 * add_hooks.
 	 *
-	 * @version 4.0.1
+	 * @version 4.0.4
 	 * @since   1.0.0
 	 */
 	function add_hooks() {
@@ -59,25 +60,6 @@ class Alg_WC_OMA_Core {
 		// Checkout: Block page
 		if ( 'yes' === get_option( 'alg_wc_oma_block_checkout', 'no' ) ) {
 			add_action( 'wp', array( $this, 'block_checkout' ), PHP_INT_MAX );
-		}
-		// Checkout: Notices
-		if ( 'yes' === get_option( 'alg_wc_oma_checkout_notice_enabled', 'no' ) ) {
-			add_action( 'woocommerce_before_checkout_form', array( $this, 'checkout_notices' ) );
-		}
-		// Cart: Notices
-		if ( 'yes' === get_option( 'alg_wc_oma_cart_notice_enabled', 'no' ) ) {
-			add_action( 'woocommerce_before_cart', array( $this, 'cart_notices' ) );
-		}
-		// Product page: Notices
-		add_action( 'woocommerce_before_single_product_summary', array( $this, 'product_page_notices' ) );
-		// Additional positions
-		foreach ( array( 'cart', 'checkout', 'product_page' ) as $area ) {
-			$positions = get_option( 'alg_wc_oma_message_positions_' . $area, array() );
-			if ( ! empty( $positions ) ) {
-				foreach ( $positions as $position ) {
-					add_action( $position, array( $this, $area . '_text' ) );
-				}
-			}
 		}
 		// Remove old notices
 		if ( 'yes' === get_option( 'alg_wc_oma_remove_notices_on_added_to_cart', 'no' ) ) {
@@ -197,7 +179,7 @@ class Alg_WC_OMA_Core {
 	/**
 	 * check_product_max_amount.
 	 *
-	 * @version 3.4.0
+	 * @version 4.0.4
 	 * @since   3.4.0
 	 *
 	 * @see     https://woocommerce.github.io/code-reference/classes/WC-Cart.html#method_add_to_cart
@@ -212,8 +194,8 @@ class Alg_WC_OMA_Core {
 			$this->add_to_cart_simplified( $product_id, ( $product ? $product : wc_get_product( $product_id ) ), $quantity ) :
 			WC()->cart->add_to_cart( $product_id, $quantity, $variation_id ) );
 		if ( $cart_item_key ) {
-			$notices = $this->get_notices( 'cart', array( 'max' ) );
 			WC()->cart->set_quantity( $cart_item_key, ( WC()->cart->cart_contents[ $cart_item_key ]['quantity'] - $quantity ) );
+			$notices = $this->messages->get_notices( 'cart', array( 'max' ) );
 			if ( ! empty( $notices ) ) {
 				if ( $show_notices ) {
 					foreach ( $notices as $notice ) {
@@ -327,156 +309,26 @@ class Alg_WC_OMA_Core {
 	}
 
 	/**
-	 * get_notices.
-	 *
-	 * @version 4.0.3
-	 * @since   3.2.0
-	 *
-	 * @param string $area 'cart' | 'checkout' | 'product_page'
-	 * @param bool $limits
-	 * @param bool $types
-	 *
-	 * @return mixed|void
-	 */
-	function get_notices( $area = 'cart', $limits = false, $types = false ) {
-		$result = array();
-		// Check amounts
-		foreach ( $this->get_enabled_amount_limits( $limits ) as $min_or_max ) {
-			foreach ( $this->get_enabled_amount_types( $types ) as $amount_type ) {
-				$amount_data = $this->get_min_max_amount_data( $min_or_max, $amount_type );
-				if ( ! empty( $amount_data['amount'] )
-				     && (
-					     ( 'no' === ( $display_on_empty_cart = get_option( 'alg_wc_oma_display_messages_on_empty_cart', 'no' ) ) && ! $this->is_cart_empty() ) ||
-					     ( 'yes' === $display_on_empty_cart )
-				     )
-				) {
-					$total = $this->amounts->get_cart_total( $amount_type );
-					$result[ $min_or_max ][ $amount_type ][''] = ( ! $this->check_min_max_amount( $min_or_max, $amount_type, $amount_data['amount'], $total ) ?
-						$this->get_notice_content( $min_or_max, $amount_type, $amount_data, $total, $area ) :
-						true );
-				}
-			}
-		}
-		// Filter
-		$result = apply_filters( 'alg_wc_oma_after_get_notices', $result, $area, $limits, $types );
-		// "Require all"
-		$result = $this->process_require_all_option( $result );
-		// Preparing notices
-		if ( ! empty( $result ) ) {
-			$result = $this->array_flatten( $result );
-			$result = array_filter( $result, array( $this, 'array_filter_true' ) );
-			$result = array_unique( $result );
-			$result = array_values( $result );
-		}
-		return apply_filters( 'alg_wc_oma_get_notices', $result, $area, $limits, $types );
-	}
-
-	/**
-	 * output_notices.
-	 *
-	 * @version 4.0.1
-	 * @since   1.0.0
-	 *
-	 * @param $area 'cart' | 'checkout' | 'product_page'
-	 * @param bool $func
-	 * @param bool $notice_type
-	 *
-	 * @return string
-	 */
-	function output_notices( $area, $func = false, $notice_type = false ) {
-		$result = $this->get_notices( $area );
-		if ( ! $func ) {
-			return implode( '<br>', $result );
-		} else {
-			foreach ( $result as $content ) {
-				$func( $content, $notice_type );
-			}
-		}
-	}
-
-	/**
 	 * checkout_process_notices.
 	 *
-	 * @version 3.2.0
+	 * @version 4.0.4
 	 * @since   2.2.0
 	 */
 	function checkout_process_notices() {
-		$this->output_notices( 'checkout', 'wc_add_notice', 'error' );
-	}
-
-	/**
-	 * cart_notices.
-	 *
-	 * @version 3.2.0
-	 * @since   2.2.0
-	 */
-	function cart_notices() {
-		$this->output_notices( 'cart', 'wc_print_notice', get_option( 'alg_wc_oma_cart_notice_type', 'notice' ) );
-	}
-
-	/**
-	 * product_page_notices.
-	 *
-	 * @version 4.0.2
-	 * @since   4.0.1
-	 */
-	function product_page_notices() {
-		if ( 'yes' === get_option( 'alg_wc_oma_product_page_notice_enabled', 'no' ) ) {
-			$this->output_notices( 'product_page', 'wc_print_notice', get_option( 'alg_wc_oma_product_page_notice_type', 'notice' ) );
-		}
-	}
-
-	/**
-	 * checkout_notices.
-	 *
-	 * @version 3.2.0
-	 * @since   2.2.0
-	 */
-	function checkout_notices() {
-		$this->output_notices( 'checkout', 'wc_print_notice', get_option( 'alg_wc_oma_checkout_notice_type', 'error' ) );
-	}
-
-	/**
-	 * cart_text.
-	 *
-	 * @version 3.2.0
-	 * @since   2.2.0
-	 */
-	function cart_text() {
-		echo $this->output_notices( 'cart' );
-	}
-
-	/**
-	 * checkout_text.
-	 *
-	 * @version 3.2.0
-	 * @since   2.2.0
-	 */
-	function checkout_text() {
-		echo $this->output_notices( 'checkout' );
-	}
-
-	/**
-	 * checkout_text.
-	 *
-	 * @version 4.0.1
-	 * @since   4.0.1
-	 */
-	function product_page_text() {
-		echo $this->output_notices( 'product_page' );
+		$this->messages->output_notices( 'checkout', 'wc_add_notice', 'error' );
 	}
 
 	/**
 	 * block_checkout.
 	 *
-	 * @version 3.2.0
+	 * @version 4.0.4
 	 * @since   1.0.0
 	 */
 	function block_checkout( $wp ) {
 		if ( ! is_checkout() || ! apply_filters( 'alg_wc_oma_block_checkout', true ) ) {
 			return;
 		}
-		$result = $this->get_notices( 'cart' );
+		$result = $this->messages->get_notices( 'cart' );
 		if ( ! empty( $result ) ) {
 			wp_safe_redirect( version_compare( get_option( 'woocommerce_version', null ), '2.5.0', '<' ) ? WC()->cart->get_cart_url() : wc_get_cart_url() );
 			exit;
@@ -593,33 +445,6 @@ class Alg_WC_OMA_Core {
 	}
 
 	/**
-	 * get_placeholders.
-	 *
-	 * @version 4.0.0
-	 * @since   2.2.0
-	 *
-	 * @todo    `%term_title%`: add aliases `%category_title%` and `%tag_title%`?
-	 */
-	function get_placeholders( $min_or_max, $amount_type, $amount_data, $total, $product_id = false, $term_id = false ) {
-		$diff = ( 'min' === $min_or_max ? ( $amount_data['amount'] - $total ) : ( $total - $amount_data['amount'] ) );
-		$placeholders = array(
-			'%amount_type%'   => $amount_type,           // for debugging
-			'%amount_source%' => $amount_data['source'], // for debugging
-			'%product_id%'    => $product_id,            // for debugging
-			'%term_id%'       => $term_id,               // for debugging
-			'%amount%'        => $this->amounts->format( $amount_data['amount'], $amount_type ),
-			'%total%'         => $this->amounts->format( $total,                 $amount_type ),
-			'%diff%'          => $this->amounts->format( $diff,                  $amount_type ),
-			'%amount_raw%'    => $amount_data['amount'],
-			'%total_raw%'     => $total,
-			'%diff_raw%'      => $diff,
-			'%product_title%' => ( $product_id ? get_the_title( $product_id ) : '' ),
-			'%term_title%'    => ( $term_id    ? ( ( $term = get_term( $term_id ) ) && ! is_wp_error( $term ) ? $term->name : '' ) : '' ),
-		);
-		return apply_filters( 'alg_wc_oma_placeholders', $placeholders, $min_or_max, $amount_type, $amount_data, $total, $diff, $product_id, $term_id );
-	}
-
-	/**
 	 * get_all_user_roles.
 	 *
 	 * @version 3.2.0
@@ -648,56 +473,6 @@ class Alg_WC_OMA_Core {
 		$enabled_user_roles = get_option( 'alg_wc_oma_enabled_user_roles', array() );
 		$all_user_roles     = $this->get_all_user_roles( $do_rearrange );
 		return ( empty( $enabled_user_roles ) ? $all_user_roles : array_intersect_key( $all_user_roles, array_flip( $enabled_user_roles ) ) );
-	}
-
-	/**
-	 * get_default_message.
-	 *
-	 * @version 4.0.0
-	 * @since   3.0.0
-	 *
-	 * @todo    add more sources: `user`, `user_role`, `membership`?
-	 */
-	function get_default_message( $min_or_max, $scope = '', $source = '' ) {
-		return apply_filters( 'alg_wc_oma_get_default_message',
-			sprintf( __( 'You must have an order with a %s of %%amount%% to place your order, your current order total is %%total%%.', 'order-minimum-amount-for-woocommerce' ),
-				( 'min' === $min_or_max ? __( 'minimum', 'order-minimum-amount-for-woocommerce' ) : __( 'maximum', 'order-minimum-amount-for-woocommerce' ) ) ),
-			$min_or_max,
-			$scope,
-			$source
-		);
-	}
-
-	/**
-	 * get_message_option_id.
-	 *
-	 * @version 4.0.0
-	 * @since   3.3.0
-	 */
-	function get_message_option_id( $cart_or_checkout, $scope, $source ) {
-		$id = $cart_or_checkout;
-		if ( '' != $scope ) {
-			$id .= '_' . $scope;
-		}
-		if ( '' != $source && apply_filters( 'alg_wc_oma_is_source_message', false, $source ) ) {
-			$id .= '_' . $source;
-		}
-		return $id;
-	}
-
-	/**
-	 * get_notice_content.
-	 *
-	 * @version 3.3.0
-	 * @since   2.2.0
-	 */
-	function get_notice_content( $min_or_max, $amount_type, $amount_data, $total, $cart_or_checkout, $scope = '', $product_id = false, $term_id = false ) {
-		$id           = $this->get_message_option_id( $cart_or_checkout, $scope, $amount_data['source'] );
-		$content      = get_option( "alg_wc_oma_{$min_or_max}_{$amount_type}_message", array() );
-		$content      = ( isset( $content[ $id ] ) ? $content[ $id ] : $this->get_default_message( $min_or_max, $scope, $amount_data['source'] ) );
-		$content      = do_shortcode( $content );
-		$placeholders = $this->get_placeholders( $min_or_max, $amount_type, $amount_data, $total, $product_id, $term_id );
-		return str_replace( array_keys( $placeholders ), $placeholders, $content );
 	}
 
 	/**
