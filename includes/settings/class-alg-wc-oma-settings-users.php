@@ -38,8 +38,7 @@ class Alg_WC_OMA_Settings_Users extends Alg_WC_OMA_Settings_Section {
 			array(
 				'title'    => __( 'Users', 'order-minimum-amount-for-woocommerce' ),
 				'type'     => 'title',
-				'desc'     => __( 'Optional amounts per user.', 'order-minimum-amount-for-woocommerce' ) .
-					$this->get_pro_msg( 'set amounts per user' ),
+				'desc'     => __( 'Optional amounts per user.', 'order-minimum-amount-for-woocommerce' ),
 				'id'       => 'alg_wc_oma_by_user_options',
 			),
 			array(

@@ -3,18 +3,35 @@
 Plugin Name: Order Minimum/Maximum Amount for WooCommerce
 Plugin URI: https://wpfactory.com/item/order-minimum-maximum-amount-for-woocommerce/
 Description: Set required minimum and/or maximum order amounts (e.g. sum, quantity, weight, volume, etc.) in WooCommerce.
-Version: 4.0.4
+Version: 4.0.5
 Author: WPFactory
 Author URI: https://wpfactory.com
 Text Domain: order-minimum-amount-for-woocommerce
 Domain Path: /langs
 Copyright: © 2021 WPFactory
-WC tested up to: 5.2
+WC tested up to: 5.5
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
+// Handle is_plugin_active function
+if ( ! function_exists( 'is_plugin_active' ) ) {
+	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+}
+
+// Check for active plugins
+if (
+	! is_plugin_active( 'woocommerce/woocommerce.php' ) ||
+	( 'order-minimum-amount-for-woocommerce.php' === basename( __FILE__ ) && is_plugin_active( 'order-minimum-amount-for-woocommerce-pro/order-minimum-amount-for-woocommerce-pro.php' ) )
+) {
+	return;
+}
+
+if ( ! class_exists( 'Alg_WC_OMA' ) ) :
+	require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
+endif;
 
 if ( ! class_exists( 'Alg_WC_OMA' ) ) :
 
@@ -34,7 +51,7 @@ final class Alg_WC_OMA {
 	 * @var   string
 	 * @since 1.0.0
 	 */
-	public $version = '4.0.4';
+	public $version = '4.0.5';
 
 	/**
 	 * @var   Alg_WC_OMA The single instance of the class
@@ -63,21 +80,12 @@ final class Alg_WC_OMA {
 	/**
 	 * Alg_WC_OMA Constructor.
 	 *
-	 * @version 3.4.1
+	 * @version 4.0.5
 	 * @since   1.0.0
 	 *
 	 * @access  public
 	 */
 	function __construct() {
-
-		// Check for active plugins
-		if (
-			! $this->is_plugin_active( 'woocommerce/woocommerce.php' ) ||
-			( 'order-minimum-amount-for-woocommerce.php' === basename( __FILE__ ) && $this->is_plugin_active( 'order-minimum-amount-for-woocommerce-pro/order-minimum-amount-for-woocommerce-pro.php' ) )
-		) {
-			return;
-		}
-
 		// Set up localisation
 		add_action( 'init', array( $this, 'localize' ) );
 
@@ -93,22 +101,6 @@ final class Alg_WC_OMA {
 		if ( is_admin() ) {
 			$this->admin();
 		}
-
-	}
-
-	/**
-	 * is_plugin_active.
-	 *
-	 * @version 2.2.0
-	 * @since   2.2.0
-	 */
-	function is_plugin_active( $plugin ) {
-		return ( function_exists( 'is_plugin_active' ) ? is_plugin_active( $plugin ) :
-			(
-				in_array( $plugin, apply_filters( 'active_plugins', ( array ) get_option( 'active_plugins', array() ) ) ) ||
-				( is_multisite() && array_key_exists( $plugin, ( array ) get_site_option( 'active_sitewide_plugins', array() ) ) )
-			)
-		);
 	}
 
 	/**

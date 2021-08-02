@@ -40,8 +40,7 @@ class Alg_WC_OMA_Settings_Products_Cart_Total extends Alg_WC_OMA_Settings_Sectio
 			array(
 				'title'    => __( 'Cart Total', 'order-minimum-amount-for-woocommerce' ),
 				'type'     => 'title',
-				'desc'     => __( 'Calculate cart total by selected products only.', 'order-minimum-amount-for-woocommerce' ) .
-					$this->get_pro_msg( 'enable this section' ),
+				'desc'     => __( 'Calculate cart total by selected products only.', 'order-minimum-amount-for-woocommerce' ),
 				'id'       => 'alg_wc_oma_products_cart_total_options',
 			),
 			array(

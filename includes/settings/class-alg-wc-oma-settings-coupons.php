@@ -65,8 +65,7 @@ class Alg_WC_OMA_Settings_Coupons extends Alg_WC_OMA_Settings_Section {
 			array(
 				'title'    => __( 'Coupons', 'order-minimum-amount-for-woocommerce' ),
 				'type'     => 'title',
-				'desc'     => __( 'Skip min/max amount checks if selected coupons were applied.', 'order-minimum-amount-for-woocommerce' ) .
-					$this->get_pro_msg( 'enable this section' ),
+				'desc'     => __( 'Skip min/max amount checks if selected coupons were applied.', 'order-minimum-amount-for-woocommerce' ),
 				'id'       => 'alg_wc_oma_coupons_options',
 			),
 			array(

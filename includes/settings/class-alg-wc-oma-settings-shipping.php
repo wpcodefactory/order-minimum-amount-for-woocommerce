@@ -41,8 +41,7 @@ class Alg_WC_OMA_Settings_Shipping extends Alg_WC_OMA_Settings_Section {
 			array(
 				'title'    => __( 'Shipping', 'order-minimum-amount-for-woocommerce' ),
 				'type'     => 'title',
-				'desc'     => __( 'Optional amounts per shipping method/instance/zone.', 'order-minimum-amount-for-woocommerce' ) .
-					$this->get_pro_msg( 'set amounts per shipping' ),
+				'desc'     => __( 'Optional amounts per shipping method/instance/zone.', 'order-minimum-amount-for-woocommerce' ),
 				'id'       => 'alg_wc_oma_by_shipping_options',
 			),
 			array(

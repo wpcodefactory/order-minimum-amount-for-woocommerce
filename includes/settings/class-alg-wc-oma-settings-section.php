@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Section Settings
  *
- * @version 4.0.1
+ * @version 4.0.5
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -71,18 +71,6 @@ class Alg_WC_OMA_Settings_Section {
 	 */
 	function get_save_changes_desc() {
 		return __( 'New settings fields will be displayed if you change this option and "Save changes".', 'order-minimum-amount-for-woocommerce' );
-	}
-
-	/**
-	 * get_pro_msg.
-	 *
-	 * @version 3.1.0
-	 * @since   3.1.0
-	 */
-	function get_pro_msg( $msg ) {
-		return apply_filters( 'alg_wc_oma_settings', '<p style="background-color: #cccccc; padding: 15px;">' .
-			sprintf( 'You will need <a target="_blank" href="%s">Order Minimum/Maximum Amount for WooCommerce Pro</a> plugin to %s.',
-				'https://wpfactory.com/item/order-minimum-maximum-amount-for-woocommerce/', $msg ) . '</p>' );
 	}
 
 	/**

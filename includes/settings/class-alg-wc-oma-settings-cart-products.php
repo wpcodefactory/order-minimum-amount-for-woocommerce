@@ -38,8 +38,7 @@ class Alg_WC_OMA_Settings_Cart_Products extends Alg_WC_OMA_Settings_Section {
 			array(
 				'title'    => __( 'Cart Products', 'order-minimum-amount-for-woocommerce' ),
 				'type'     => 'title',
-				'desc'     => __( 'Skip min/max amount checks if there are selected products in cart.', 'order-minimum-amount-for-woocommerce' ) .
-					$this->get_pro_msg( 'enable this section' ),
+				'desc'     => __( 'Skip min/max amount checks if there are selected products in cart.', 'order-minimum-amount-for-woocommerce' ),
 				'id'       => 'alg_wc_oma_cart_products_options',
 			),
 			array(

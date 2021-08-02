@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Messages
  *
- * @version 4.0.4
+ * @version 4.0.5
  * @since   4.0.4
  *
  * @author  WPFactory
@@ -17,7 +17,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * Constructor.
 		 *
-		 * @version 4.0.4
+		 * @version 4.0.5
 		 * @since   4.0.4
 		 */
 		function __construct() {
@@ -32,6 +32,28 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 						add_action( $position, array( $this, 'display_dynamic_message' ) );
 					}
 				}
+			}
+			// Force checkout notice refresh
+			add_action( 'woocommerce_review_order_after_order_total', array( $this, 'force_checkout_notice_refresh' ), 10, 2 );
+		}
+
+		/**
+		 * Force checkout notice refresh.
+		 *
+		 * @version 4.0.5
+		 * @since   4.0.5
+		 *
+		 */
+		function force_checkout_notice_refresh() {
+			if (
+				'yes' === get_option( 'alg_wc_oma_checkout_force_refresh', 'no' )
+				&& isset( $_REQUEST['wc-ajax'] )
+				&& 'update_order_review' == $_REQUEST['wc-ajax']
+			) {
+				$this->display_dynamic_message( array(
+					'area' => 'checkout',
+					'func' => 'wc_add_notice'
+				) );
 			}
 		}
 
@@ -54,19 +76,26 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * display_dynamic_message.
 		 *
-		 * @version 4.0.4
+		 * @version 4.0.5
 		 * @since   4.0.4
+		 *
+		 * @param null $args
 		 */
-		function display_dynamic_message() {
-			$position      = current_filter();
-			$messages_info = $this->get_messages_info();
-			$func          = false;
-			$area          = $this->get_area_from_position( $position );
-			$notice_type   = isset( $messages_info[ $area ]['default_notice_type'] ) ? get_option( "alg_wc_oma_{$area}_notice_type", $messages_info[ $area ]['default_notice_type'] ) : false;
-			$params        = $this->get_output_notices_params_from_position( $position );
-			if ( false !== $params ) {
-				$func        = isset( $params['func'] ) ? $params['func'] : $func;
-				$notice_type = isset( $params['notice_type'] ) ? $params['notice_type'] : $notice_type;
+		function display_dynamic_message( $args = null ) {
+			$args = wp_parse_args( $args, array(
+				'position' => current_filter(),
+				'func'     => false,
+				'area'     => $this->get_area_from_position( current_filter() )
+			) );
+			$messages_info         = $this->get_messages_info();
+			$position              = $args['position'];
+			$func                  = $args['func'];
+			$area                  = $args['area'];
+			$notice_type           = isset( $messages_info[ $area ]['default_notice_type'] ) ? get_option( "alg_wc_oma_{$area}_notice_type", $messages_info[ $area ]['default_notice_type'] ) : false;
+			$output_notices_params = $this->get_output_notices_params_from_position( $position );
+			if ( false !== $output_notices_params ) {
+				$func        = ! $func ? ( isset( $output_notices_params['func'] ) ? $output_notices_params['func'] : $func ) : $func;
+				$notice_type = isset( $output_notices_params['notice_type'] ) ? $output_notices_params['notice_type'] : $notice_type;
 			}
 			$output = $this->output_notices( $area, $func, $notice_type );
 			if ( false === $func ) {

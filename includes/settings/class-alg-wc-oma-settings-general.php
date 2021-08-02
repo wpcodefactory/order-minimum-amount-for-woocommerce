@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - General Section Settings
  *
- * @version 4.0.1
+ * @version 4.0.5
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -29,7 +29,7 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 	/**
 	 * get_settings.
 	 *
-	 * @version 4.0.1
+	 * @version 4.0.5
 	 * @since   1.0.0
 	 */
 	function get_settings() {
@@ -267,7 +267,7 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 		if ( in_array( 'max', $enabled_limits ) ) {
 			$max_limit_settings = array(
 				array(
-					'title'    => __( '"Maximum" Amount Limit Options', 'order-minimum-amount-for-woocommerce' ),
+					'title'    => __( '"Maximum" amount limit options', 'order-minimum-amount-for-woocommerce' ),
 					'desc'     => sprintf( __( 'Extra settings for "%s" limit options.', 'order-minimum-amount-for-woocommerce' ),
 						__( 'Maximum', 'order-minimum-amount-for-woocommerce' ) ),
 					'type'     => 'title',
@@ -321,6 +321,56 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 			);
 		}
 
+		$qty_type_settings = array();
+		if ( in_array( 'qty', $enabled_types ) ) {
+			$qty_type_settings = array(
+				array(
+					'title' => __( '"Quantity" amount type options', 'order-minimum-amount-for-woocommerce' ),
+					'desc'  => sprintf( __( 'Extra settings for "%s" amount type options.', 'order-minimum-amount-for-woocommerce' ),
+						__( 'Quantity', 'order-minimum-amount-for-woocommerce' ) ),
+					'type'  => 'title',
+					'id'    => 'alg_wc_oma_qty_limit_options',
+				),
+				array(
+					'title'         => __( 'Quantity input', 'order-minimum-amount-for-woocommerce' ),
+					'desc'          => sprintf( __( 'Set default quantity based on %s minimum limits', 'order-minimum-amount-for-woocommerce' ), '"' . __( 'Per product', 'order-minimum-amount-for-woocommerce' ) . '"' ),
+					'id'            => 'alg_wc_oma_default_qty_input_based_on_per_product_min',
+					'default'       => 'no',
+					'type'          => 'checkbox',
+					'checkboxgroup' => 'start'
+				),
+				array(
+					'desc'              => sprintf( __( 'Set minimum parameter based on %s minimum limits', 'order-minimum-amount-for-woocommerce' ), '"' . __( 'Per product', 'order-minimum-amount-for-woocommerce' ) . '"' ),
+					'id'                => 'alg_wc_oma_min_qty_input_based_on_per_product_min',
+					'default'           => 'no',
+					'type'              => 'checkbox',
+					'checkboxgroup'     => '',
+					'custom_attributes' => apply_filters( 'alg_wc_oma_settings', array( 'disabled' => 'disabled' ) ),
+				),
+				array(
+					'desc'              => sprintf( __( 'Set maximum parameter based on %s maximum limits', 'order-minimum-amount-for-woocommerce' ), '"' . __( 'Per product', 'order-minimum-amount-for-woocommerce' ) . '"' ),
+					'id'                => 'alg_wc_oma_max_qty_input_based_on_per_product_max',
+					'default'           => 'no',
+					'type'              => 'checkbox',
+					'checkboxgroup'     => 'end',
+					'custom_attributes' => apply_filters( 'alg_wc_oma_settings', array( 'disabled' => 'disabled' ) ),
+				),
+				array(
+					'title'             => __( 'Add to cart button', 'order-minimum-amount-for-woocommerce' ),
+					'desc'              => sprintf( __( 'Set quantity on loop pages based on %s minimum limits', 'order-minimum-amount-for-woocommerce' ), '"' . __( 'Per product', 'order-minimum-amount-for-woocommerce' ) . '"' ),
+					'id'                => 'alg_wc_oma_loop_add_to_cart_set_qty_from_min',
+					'default'           => 'no',
+					'type'              => 'checkbox',
+					'checkboxgroup'     => 'start',
+					'custom_attributes' => apply_filters( 'alg_wc_oma_settings', array( 'disabled' => 'disabled' ) ),
+				),
+				array(
+					'type' => 'sectionend',
+					'id'   => 'alg_wc_oma_qty_limit_options',
+				),
+			);
+		}
+
 		$rest_api_settings = array(
 			array(
 				'title'    => __( 'REST API', 'order-minimum-amount-for-woocommerce' ),
@@ -351,6 +401,7 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 			$type_product_cat_settings,
 			$type_product_tag_settings,
 			$max_limit_settings,
+			$qty_type_settings,
 			$rest_api_settings
 		);
 	}

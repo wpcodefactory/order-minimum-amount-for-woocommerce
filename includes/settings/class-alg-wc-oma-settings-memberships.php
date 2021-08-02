@@ -43,8 +43,7 @@ class Alg_WC_OMA_Settings_Memberships extends Alg_WC_OMA_Settings_Section {
 						'<a href="https://woocommerce.com/products/woocommerce-memberships/" target="_blank">' .
 							__( 'WooCommerce Memberships', 'order-minimum-amount-for-woocommerce' ) . '</a>',
 						'<a href="https://memberpress.com/" target="_blank">' .
-							__( 'MemberPress', 'order-minimum-amount-for-woocommerce' ) . '</a>' ) .
-					$this->get_pro_msg( 'set amounts per membership' ),
+							__( 'MemberPress', 'order-minimum-amount-for-woocommerce' ) . '</a>' ),
 				'id'       => 'alg_wc_oma_by_membership_options',
 			),
 			array(

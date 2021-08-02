@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Messages Section Settings
  *
- * @version 4.0.4
+ * @version 4.0.5
  * @since   1.2.0
  *
  * @author  WPFactory
@@ -93,9 +93,47 @@ class Alg_WC_OMA_Settings_Messages extends Alg_WC_OMA_Settings_Section {
 	}
 
 	/**
+	 * add_unique_settings.
+	 *
+	 * @version 4.0.5
+	 * @since   4.0.5
+	 *
+	 * @param $area
+	 * @param $dynamic_settings
+	 *
+	 * @return array
+	 */
+	function add_unique_settings( $area, $dynamic_settings ) {
+		if ( 'product_page' == $area ) {
+			$dynamic_settings = array_merge( $dynamic_settings, array(
+				array(
+					'title'             => __( 'Smart product scope', 'order-minimum-amount-for-woocommerce' ),
+					'desc'              => __( 'Show only product scope messages relevant to the current product', 'order-minimum-amount-for-woocommerce' ),
+					'id'                => "alg_wc_oma_{$area}_notice_smart_product_scope",
+					'default'           => 'no',
+					'type'              => 'checkbox',
+					'custom_attributes' => apply_filters( 'alg_wc_oma_settings', array( 'disabled' => 'disabled' ) ),
+				),
+			) );
+		} elseif ( 'checkout' == $area ) {
+			$dynamic_settings = array_merge( $dynamic_settings, array(
+				array(
+					'title'    => __( 'Force refresh', 'order-minimum-amount-for-woocommerce' ),
+					'desc'     => __( 'Refresh the notice if something changes at checkout form', 'order-minimum-amount-for-woocommerce' ),
+					'desc_tip' => __( 'Enable if the notice is not getting updated, for example after shipping changes.', 'order-minimum-amount-for-woocommerce' ),
+					'id'       => "alg_wc_oma_{$area}_force_refresh",
+					'default'  => 'no',
+					'type'     => 'checkbox',
+				),
+			) );
+		}
+		return $dynamic_settings;
+	}
+
+	/**
 	 * get_settings.
 	 *
-	 * @version 4.0.4
+	 * @version 4.0.5
 	 * @since   1.2.0
 	 *
 	 * @todo    add optional "Message on requirements met"
@@ -175,18 +213,7 @@ class Alg_WC_OMA_Settings_Messages extends Alg_WC_OMA_Settings_Section {
 					}
 				}
 			}
-			if ( 'product_page' == $area ) {
-				$dynamic_settings = array_merge( $dynamic_settings, array(
-					array(
-						'title'   => __( 'Smart product scope', 'order-minimum-amount-for-woocommerce' ),
-						'desc'    => __( 'Show only product scope messages relevant to the current product', 'order-minimum-amount-for-woocommerce' ),
-						'id'      => "alg_wc_oma_{$area}_notice_smart_product_scope",
-						'default' => 'no',
-						'type'    => 'checkbox',
-						'custom_attributes' => apply_filters( 'alg_wc_oma_settings', array( 'disabled' => 'disabled' ) ),
-					),
-				) );
-			}
+			$dynamic_settings = $this->add_unique_settings( $area, $dynamic_settings );
 			$dynamic_settings = array_merge( $dynamic_settings, array(
 				array(
 					'type'     => 'sectionend',

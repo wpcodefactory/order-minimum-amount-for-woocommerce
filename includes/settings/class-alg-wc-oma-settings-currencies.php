@@ -43,8 +43,7 @@ class Alg_WC_OMA_Settings_Currencies extends Alg_WC_OMA_Settings_Section {
 				'type'     => 'title',
 				'desc'     => __( 'Set different amounts for different currencies (i.e. multi-currency).', 'order-minimum-amount-for-woocommerce' ) . ' ' .
 					__( 'For example, this is useful if you are using some currency switcher plugin on your site.', 'order-minimum-amount-for-woocommerce' ) . ' ' .
-					__( 'Usually this is used for min/max "sum" amounts, however, you can set other amounts (e.g. "quantity") by currency as well.', 'order-minimum-amount-for-woocommerce' ) .
-					$this->get_pro_msg( 'set amounts per currency' ),
+					__( 'Usually this is used for min/max "sum" amounts, however, you can set other amounts (e.g. "quantity") by currency as well.', 'order-minimum-amount-for-woocommerce' ),
 				'id'       => 'alg_wc_oma_by_currency_options',
 			),
 			array(

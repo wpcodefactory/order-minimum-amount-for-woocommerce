@@ -2,8 +2,8 @@
 Contributors: wpcodefactory
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 4.4
-Tested up to: 5.7
-Stable tag: 4.0.4
+Tested up to: 5.8
+Stable tag: 4.0.5
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -69,6 +69,18 @@ With [premium version](https://wpfactory.com/item/order-minimum-maximum-amount-f
 1. Frontend example – Cart notice.
 
 == Changelog ==
+
+= 4.0.5 - 02/08/2021 =
+* Fix - Free and pro plugins can't be active at the same time.
+* Dev - General - Quantity - Add quantity input option to set default quantity based on "Per product" minimum limits.
+* Dev - General - Quantity - Add quantity input option to set minimum parameter based on "Per product" minimum limits.
+* Dev - General - Quantity - Add quantity input option to set maximum parameter based on "Per product" maximum limits.
+* Dev - General - Quantity - Add add to cart button option to set quantity on loop pages based on "Per product" minimum limits.
+* Dev - Messages - Checkout - Add "Force refresh" option.
+* Dev - Add promoting notice.
+* WC tested up to: 5.5.
+* Tested up to: 5.8.
+* Add github deploy setup.
 
 = 4.0.4 - 04/05/2021 =
 * Fix - General - "Maximum" Amount Limit - Hide "add to cart" button - PHP Notice: Undefined index on shop pages.

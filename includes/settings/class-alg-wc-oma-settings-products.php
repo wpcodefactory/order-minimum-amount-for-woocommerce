@@ -37,8 +37,7 @@ class Alg_WC_OMA_Settings_Products extends Alg_WC_OMA_Settings_Section {
 			array(
 				'title'    => __( 'Products Options', 'order-minimum-amount-for-woocommerce' ),
 				'type'     => 'title',
-				'desc'     => __( 'Set different amounts per product, product category and/or product tag.', 'order-minimum-amount-for-woocommerce' ) .
-					$this->get_pro_msg( 'set amounts per products' ),
+				'desc'     => __( 'Set different amounts per product, product category and/or product tag.', 'order-minimum-amount-for-woocommerce' ),
 				'id'       => 'alg_wc_oma_scope_options',
 			),
 			array(

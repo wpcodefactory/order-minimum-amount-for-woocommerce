@@ -1,8 +1,8 @@
 <?php
 /**
- * Order Minimum Amount for WooCommerce - Settings
+ * Order Minimum Amount for WooCommerce - Settings.
  *
- * @version 4.0.1
+ * @version 4.0.5
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -17,7 +17,7 @@ class Alg_WC_Settings_OMA extends WC_Settings_Page {
 	/**
 	 * Constructor.
 	 *
-	 * @version 4.0.1
+	 * @version 4.0.5
 	 * @since   1.0.0
 	 *
 	 * @todo    rearrange sections by `$section_priority`?
@@ -43,6 +43,35 @@ class Alg_WC_Settings_OMA extends WC_Settings_Page {
 		require_once( 'class-alg-wc-oma-settings-coupons.php' );
 		require_once( 'class-alg-wc-oma-settings-cart-products.php' );
 		require_once( 'class-alg-wc-oma-settings-products-cart-total.php' );
+		// Create notice about pro
+		add_action( 'admin_init', array( $this, 'add_promoting_notice' ) );
+	}
+
+	/**
+	 * add_promoting_notice.
+	 *
+	 * @version 4.0.5
+	 * @since   4.0.5
+	 */
+	function add_promoting_notice() {
+		$promoting_notice = wpfactory_promoting_notice();
+		$promoting_notice->set_args( array(
+			'url_requirements'              => array(
+				'page_filename' => 'admin.php',
+				'params'        => array( 'page' => 'wc-settings', 'tab' => $this->id ),
+			),
+			'enable'                        => true === apply_filters( 'alg_wc_oma_settings', true ),
+			'optimize_plugin_icon_contrast' => true,
+			'template_variables'            => array(
+				'%pro_version_url%'    => 'https://wpfactory.com/item/order-minimum-maximum-amount-for-woocommerce/',
+				'%plugin_icon_url%'    => 'https://ps.w.org/order-minimum-amount-for-woocommerce/assets/icon-128x128.png',
+				'%pro_version_title%'  => __( 'Order Minimum/Maximum Amount for WooCommerce Pro', 'maximum-products-per-user-for-woocommerce' ),
+				'%main_text%'          => __( 'Disabled options can be unlocked using <a href="%pro_version_url%" target="_blank"><strong>%pro_version_title%</strong></a>', 'maximum-products-per-user-for-woocommerce' ),
+				'%btn_call_to_action%' => __( 'Upgrade to Pro version', 'maximum-products-per-user-for-woocommerce' ),
+				//'%plugin_icon_style%' => 'width:41px;margin-right:10px;vertical-align:middle'
+			),
+		) );
+		$promoting_notice->init();
 	}
 
 	/**
