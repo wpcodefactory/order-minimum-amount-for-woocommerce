@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Core Class
  *
- * @version 4.0.5
+ * @version 4.0.6
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -47,7 +47,7 @@ class Alg_WC_OMA_Core {
 	/**
 	 * add_hooks.
 	 *
-	 * @version 4.0.5
+	 * @version 4.0.6
 	 * @since   1.0.0
 	 */
 	function add_hooks() {
@@ -82,30 +82,6 @@ class Alg_WC_OMA_Core {
 				add_action( 'woocommerce_single_product_summary', array( $this, 'hide_add_to_cart_single' ), 29, 3 );
 			}
 		}
-		// Sets default quantity based on "Per product" minimum limits
-		add_filter( 'woocommerce_quantity_input_args', array( $this, 'set_default_qty_based_on_min' ), 10, 2 );
-	}
-
-	/**
-	 * set_default_qty_based_on_min.
-	 *
-	 * @version 4.0.5
-	 * @since   4.0.5
-	 *
-	 * @param $args
-	 * @param $product
-	 *
-	 * @return mixed
-	 */
-	function set_default_qty_based_on_min( $args, $product ) {
-		if (
-			'yes' === get_option( 'alg_wc_oma_default_qty_input_based_on_per_product_min', 'no' )
-			&& is_array( $amount_data = alg_wc_oma()->core->get_min_max_amount_data( 'min', 'qty', $product->get_id(), 'product' ) )
-			&& $amount_data['amount'] > 1
-		) {
-			$args['input_value'] = isset( $_POST['quantity'] ) ? wc_stock_amount( wp_unslash( $_POST['quantity'] ) ) : $amount_data['amount'];
-		}
-		return $args;
 	}
 
 	/**

@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Order Minimum/Maximum Amount for WooCommerce 4.0.5\n"
+"Project-Id-Version: Order Minimum/Maximum Amount for WooCommerce 4.0.6\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/order-minimum-amount-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-08-03T00:02:52+02:00\n"
+"POT-Creation-Date: 2021-09-02T03:35:46+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: order-minimum-amount-for-woocommerce\n"
@@ -159,32 +159,32 @@ msgstr ""
 msgid "%s product tag(s)"
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:481
+#: includes/class-alg-wc-oma-core.php:457
 msgid "Guest"
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:509
+#: includes/class-alg-wc-oma-core.php:485
 msgid "Min %s"
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:509
+#: includes/class-alg-wc-oma-core.php:485
 msgid "Max %s"
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:569
+#: includes/class-alg-wc-oma-core.php:545
 msgid "Amount is <strong>ignored</strong> if set to zero (%s), i.e. next level (e.g. \"General\") amount will be applied."
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:570
+#: includes/class-alg-wc-oma-core.php:546
 msgid "<strong>No amount</strong> (i.e. no limit) will be applied if set to a negative value (e.g. %s)."
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:669
+#: includes/class-alg-wc-oma-core.php:645
 #: includes/settings/class-alg-wc-oma-settings-memberships.php:44
 msgid "WooCommerce Memberships"
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:687
+#: includes/class-alg-wc-oma-core.php:663
 #: includes/settings/class-alg-wc-oma-settings-memberships.php:46
 msgid "MemberPress"
 msgstr ""
@@ -904,9 +904,9 @@ msgid "Set default quantity based on %s minimum limits"
 msgstr ""
 
 #: includes/settings/class-alg-wc-oma-settings-general.php:336
-#: includes/settings/class-alg-wc-oma-settings-general.php:343
-#: includes/settings/class-alg-wc-oma-settings-general.php:351
-#: includes/settings/class-alg-wc-oma-settings-general.php:360
+#: includes/settings/class-alg-wc-oma-settings-general.php:344
+#: includes/settings/class-alg-wc-oma-settings-general.php:352
+#: includes/settings/class-alg-wc-oma-settings-general.php:361
 #: includes/settings/class-alg-wc-oma-settings-messages.php:38
 #: includes/settings/class-alg-wc-oma-settings-products-cart-total.php:55
 #: includes/settings/class-alg-wc-oma-settings-products-cart-total.php:59
@@ -914,39 +914,39 @@ msgstr ""
 msgid "Per product"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:343
+#: includes/settings/class-alg-wc-oma-settings-general.php:344
 msgid "Set minimum parameter based on %s minimum limits"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:351
+#: includes/settings/class-alg-wc-oma-settings-general.php:352
 msgid "Set maximum parameter based on %s maximum limits"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:359
+#: includes/settings/class-alg-wc-oma-settings-general.php:360
 msgid "Add to cart button"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:360
+#: includes/settings/class-alg-wc-oma-settings-general.php:361
 msgid "Set quantity on loop pages based on %s minimum limits"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:376
+#: includes/settings/class-alg-wc-oma-settings-general.php:377
 msgid "REST API"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:381
+#: includes/settings/class-alg-wc-oma-settings-general.php:382
 msgid "User metas"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:382
+#: includes/settings/class-alg-wc-oma-settings-general.php:383
 msgid "Add user metas to the REST API"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:383
+#: includes/settings/class-alg-wc-oma-settings-general.php:384
 msgid "It will be possible to use the %s route to read and update user metas like %s for example."
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:384
+#: includes/settings/class-alg-wc-oma-settings-general.php:385
 msgid "For now only administrators can update user metas."
 msgstr ""
 

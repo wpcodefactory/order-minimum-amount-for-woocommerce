@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - General Section Settings
  *
- * @version 4.0.5
+ * @version 4.0.6
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -29,7 +29,7 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 	/**
 	 * get_settings.
 	 *
-	 * @version 4.0.5
+	 * @version 4.0.6
 	 * @since   1.0.0
 	 */
 	function get_settings() {
@@ -337,7 +337,8 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 					'id'            => 'alg_wc_oma_default_qty_input_based_on_per_product_min',
 					'default'       => 'no',
 					'type'          => 'checkbox',
-					'checkboxgroup' => 'start'
+					'checkboxgroup' => 'start',
+					'custom_attributes' => apply_filters( 'alg_wc_oma_settings', array( 'disabled' => 'disabled' ) ),
 				),
 				array(
 					'desc'              => sprintf( __( 'Set minimum parameter based on %s minimum limits', 'order-minimum-amount-for-woocommerce' ), '"' . __( 'Per product', 'order-minimum-amount-for-woocommerce' ) . '"' ),

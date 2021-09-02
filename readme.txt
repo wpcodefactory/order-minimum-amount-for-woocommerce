@@ -3,7 +3,7 @@ Contributors: wpcodefactory
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 4.4
 Tested up to: 5.8
-Stable tag: 4.0.5
+Stable tag: 4.0.6
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -69,6 +69,13 @@ With [premium version](https://wpfactory.com/item/order-minimum-maximum-amount-f
 1. Frontend example – Cart notice.
 
 == Changelog ==
+
+= 4.0.6 - 01/09/2021 =
+* Fix - General - REST API - Check user metas option.
+* Fix - General - Quantity - Default quantity based on "Per product" minimum limits doesn't work correctly on cart.
+* Fix - General - Quantity - Fix possible PHP Warning if default quantity is enabled and "Per product" option is disabled.
+* Fix - General - Quantity - Min and Max parameters don't work on cart.
+* WC tested up to: 5.6.
 
 = 4.0.5 - 02/08/2021 =
 * Fix - Free and pro plugins can't be active at the same time.
