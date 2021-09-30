@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Messages
  *
- * @version 4.0.5
+ * @version 4.0.7
  * @since   4.0.4
  *
  * @author  WPFactory
@@ -106,7 +106,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * get_output_notices_params_from_position.
 		 *
-		 * @version 4.0.4
+		 * @version 4.0.7
 		 * @since   4.0.4
 		 *
 		 * @param $position
@@ -117,6 +117,9 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 			$params = array(
 				'woocommerce_before_checkout_form' => array(
 					'func' => 'wc_print_notice',
+				),
+				'woocommerce_before_single_product'=>array(
+					'func' => 'wc_add_notice',
 				),
 				'woocommerce_before_single_product_summary'=>array(
 					'func' => 'wc_print_notice',
@@ -274,7 +277,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * get_messages_info.
 		 *
-		 * @version 4.0.4
+		 * @version 4.0.7
 		 * @since   4.0.4
 		 *
 		 * @return array
@@ -350,6 +353,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 					'title'                => __( 'Product page', 'order-minimum-amount-for-woocommerce' ),
 					'default_notice_type'  => 'notice',
 					'positions' => array(
+						'woocommerce_before_single_product'         => __( 'Before single product (Notice)', 'order-minimum-amount-for-woocommerce' ),
 						'woocommerce_before_single_product_summary' => __( 'Before single product summary (Notice)', 'order-minimum-amount-for-woocommerce' ),
 						'woocommerce_after_single_product_summary'  => __( 'After single product summary', 'order-minimum-amount-for-woocommerce' ),
 						'woocommerce_before_add_to_cart_form'       => __( 'Before add to cart form', 'order-minimum-amount-for-woocommerce' ),

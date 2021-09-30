@@ -3,7 +3,7 @@ Contributors: wpcodefactory
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 4.4
 Tested up to: 5.8
-Stable tag: 4.0.6
+Stable tag: 4.0.7
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -13,7 +13,7 @@ Set required minimum and maximum order amounts in WooCommerce.
 
 **Order Minimum/Maximum Amount for WooCommerce** plugin lets you set required minimum and/or maximum amounts (e.g. sum, quantity, weight, volume, etc.) for orders in WooCommerce.
 
-= Main Features =
+### &#9989; Main Features ###
 
 With our plugin you can set these **minimum** and/or **maximum** order amounts (you can enable multiple amount types at once):
 
@@ -29,7 +29,7 @@ With our plugin you can set these **minimum** and/or **maximum** order amounts (
 * order **product categories** (i.e. number of different product categories),
 * order **product tags** (i.e. number of different product tags).
 
-= More Features =
+### More Features ###
 
 * Optionally set different order amounts on **per user role** basis.
 * Display (and customize) customer **messages** on **cart** and **checkout** pages.
@@ -38,7 +38,7 @@ With our plugin you can set these **minimum** and/or **maximum** order amounts (
 * For maximum amounts: optionally **validate** amounts immediately on **add to cart**, or completely **hide "add to cart" button** for products with exceeded amounts.
 * And more...
 
-= Premium Version =
+### &#127942; Premium Version ###
 
 With [premium version](https://wpfactory.com/item/order-minimum-maximum-amount-for-woocommerce/) you can additionally:
 
@@ -52,6 +52,7 @@ With [premium version](https://wpfactory.com/item/order-minimum-maximum-amount-f
 * **Skip** min/max amount checks if there are **selected products** (including variations) in cart.
 * Include/exclude selected products (including variations) when calculating **cart total** for the amount checks.
 * Display messages anywhere on your site with a **shortcode**.
+* Set a default/minimum/maximum parameter from the **quantity input** based on the quantity amount type.
 
 = Feedback =
 
@@ -69,6 +70,12 @@ With [premium version](https://wpfactory.com/item/order-minimum-maximum-amount-f
 1. Frontend example – Cart notice.
 
 == Changelog ==
+
+= 4.0.7 - 30/09/2021 =
+* Dev - Messages - Product page - Add `woocommerce_before_single_product` position.
+* Dev - Improve `is_plugin_active` function.
+* Improve readme.
+* WC tested up to: 5.7.
 
 = 4.0.6 - 01/09/2021 =
 * Fix - General - REST API - Check user metas option.
