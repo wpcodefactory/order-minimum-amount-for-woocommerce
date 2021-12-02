@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Core Class
  *
- * @version 4.0.6
+ * @version 4.0.8
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -211,14 +211,17 @@ class Alg_WC_OMA_Core {
 	/**
 	 * add_to_cart_simplified.
 	 *
-	 * @version 3.4.0
+	 * @version 4.0.8
 	 * @since   3.4.0
 	 *
 	 * @todo    `set_quantity()`: `$refresh_totals`?
 	 * @todo    `WC()->cart->get_cart()`: call only once?
 	 */
 	function add_to_cart_simplified( $product_id, $product, $quantity ) {
-		if ( '' === $product->get_price() ) {
+		if (
+			'' === $product->get_price() ||
+			empty( WC()->cart )
+		) {
 			return false;
 		}
 		WC()->cart->get_cart();
@@ -228,7 +231,7 @@ class Alg_WC_OMA_Core {
 			$new_quantity = $quantity + WC()->cart->cart_contents[ $cart_item_key ]['quantity'];
 			WC()->cart->set_quantity( $cart_item_key, $new_quantity, false );
 		} else {
-			$cart_item_key = $cart_id;
+			$cart_item_key                              = $cart_id;
 			WC()->cart->cart_contents[ $cart_item_key ] = array(
 				'key'          => $cart_item_key,
 				'product_id'   => $product_id,

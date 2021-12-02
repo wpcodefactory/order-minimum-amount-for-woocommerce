@@ -3,7 +3,7 @@ Contributors: wpcodefactory
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 4.4
 Tested up to: 5.8
-Stable tag: 4.0.7
+Stable tag: 4.0.8
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -70,6 +70,15 @@ With [premium version](https://wpfactory.com/item/order-minimum-maximum-amount-f
 1. Frontend example – Cart notice.
 
 == Changelog ==
+
+= 4.0.8 - 02/12/2021 =
+* Dev - Add `alg_wc_oma_get_cart_value` filter.
+* Dev - Compatibility - Product Bundles - Add option to include bundled cart item on cart total calculation.
+* Dev - Compatibility - Product Bundles - Add option to create a "bundle price" amount type.
+* Dev - Create compatibility section.
+* Dev - `alg_wc_oma_get_cart_total_do_count_product` now passes cart item as second parameter.
+* Fix - Call to a member function get_cart () on null in `Alg_WC_OMA_Core`.
+* WC tested up to: 5.9.
 
 = 4.0.7 - 30/09/2021 =
 * Dev - Messages - Product page - Add `woocommerce_before_single_product` position.

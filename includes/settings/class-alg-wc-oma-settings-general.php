@@ -381,7 +381,7 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 			array(
 				'title'             => __( 'User metas', 'order-minimum-amount-for-woocommerce' ),
 				'desc'              => __( 'Add user metas to the REST API', 'order-minimum-amount-for-woocommerce' ),
-				'desc_tip'          => sprintf( __( 'It will be possible to use the %s route to read and update user metas like %s for example.', 'order-minimum-amount-for-woocommerce' ), '<code>' . '/wp/v2/users/1/' . '</code>', '<code>' . '_alg_wc_oma_min_sum' . '</code>' ) . '<br />' .
+				'desc_tip'          => sprintf( __( 'It will be possible to use the %s route to read and update user metas like %s for example.', 'order-minimum-amount-for-woocommerce' ), '<code>' . '/wp-json/wp/v2/users/$user_id/' . '</code>', '<code>' . '_alg_wc_oma_min_sum' . '</code>' ) . '<br />' .
 				                       __( 'For now only administrators can update user metas.', 'order-minimum-amount-for-woocommerce' ),
 				'id'                => 'alg_wc_oma_rest_api_user_metas',
 				'default'           => 'no',

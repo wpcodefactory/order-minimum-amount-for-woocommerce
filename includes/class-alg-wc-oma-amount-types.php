@@ -4,7 +4,7 @@
  *
  * This class includes everything needed to add a new "amount type".
  *
- * @version 4.0.0
+ * @version 4.0.8
  * @since   3.0.0
  *
  * @author  WPFactory
@@ -51,10 +51,11 @@ class Alg_WC_OMA_Amount_Types {
 	/**
 	 * get_title.
 	 *
-	 * @version 4.0.0
+	 * @version 4.0.8
 	 * @since   3.0.0
 	 */
 	function get_title( $type ) {
+		$result = '';
 		switch ( $type ) {
 			case 'sum':
 				$result = __( 'sum', 'order-minimum-amount-for-woocommerce' );
@@ -96,10 +97,11 @@ class Alg_WC_OMA_Amount_Types {
 	/**
 	 * get_unit.
 	 *
-	 * @version 4.0.0
+	 * @version 4.0.8
 	 * @since   3.0.0
 	 */
 	function get_unit( $type, $currency = '' ) {
+		$result = '';
 		switch ( $type ) {
 			case 'sum':
 				$result = ( '' === $currency ? get_woocommerce_currency() : $currency );
@@ -131,19 +133,20 @@ class Alg_WC_OMA_Amount_Types {
 				$result = get_option( 'woocommerce_dimension_unit' ) . '<sup>2</sup>';
 				break;
 		}
-		return apply_filters( 'alg_wc_oma_amount_unit', $result, $type );
+		return apply_filters( 'alg_wc_oma_amount_unit', $result, $type, $currency );
 	}
 
 	/**
 	 * format.
 	 *
-	 * @version 4.0.0
+	 * @version 4.0.8
 	 * @since   3.0.0
 	 *
 	 * @todo    `weight`, `volume`, `length`, `width`, `height`, `area`: use `&nbsp;` instead of "simple" space (including in `wc_format_weight()`)?
 	 * @todo    `weight`, `volume`, `length`, `width`, `height`, `area`: optional unit conversions, e.g. `cm` to `m`, etc.?
 	 */
 	function format( $value, $type ) {
+		$result = '';
 		if ( ! isset( $this->format_types ) ) {
 			$this->format_types = array();
 			if ( 'yes' === get_option( 'alg_wc_oma_message_format_types_enabled', 'yes' ) ) {
@@ -223,18 +226,40 @@ class Alg_WC_OMA_Amount_Types {
 	/**
 	 * get_cart_total.
 	 *
-	 * @version 4.0.0
+	 * @version 4.0.8
 	 * @since   3.0.0
+	 *
+	 * @param null $args
+	 *
+	 * @return int|mixed
 	 */
-	function get_cart_total( $type, $product_id = false, $do_count_by_term = false, $taxonomy = false ) {
+	function get_cart_total( $args = null ) {
+		$args = wp_parse_args( $args, array(
+			'type'             => '',
+			'product_id'       => false,
+			'do_count_by_term' => false,
+			'taxonomy'         => false,
+			'limit_type'       => ''
+		) );
+		$type = $args['type'];
+		$product_id = $args['product_id'];
+		$do_count_by_term = $args['do_count_by_term'];
+		$taxonomy = $args['taxonomy'];
+		$limit_type = $args['limit_type'];
 		if ( ! isset( WC()->cart ) ) {
 			return 0;
 		}
 		$cart_terms = array();
 		$result     = 0;
-		foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item_values ) {
-			if ( apply_filters( 'alg_wc_oma_get_cart_total_do_count_product', true, $cart_item_values['data'], $type, $product_id, $do_count_by_term, $taxonomy ) ) {
-				$result = $this->get_cart_value( $result, $type, $cart_item_values, $cart_terms );
+		foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
+			if ( apply_filters( 'alg_wc_oma_get_cart_total_do_count_product', true, $cart_item, $type, $product_id, $do_count_by_term, $taxonomy ) ) {
+				$result = $this->get_cart_value( array(
+					'result'     => $result,
+					'type'       => $type,
+					'cart_item'  => $cart_item,
+					'cart_terms' => $cart_terms,
+					'limit_type' => $limit_type
+				) );
 			}
 		}
 		if ( 'sum' === $type && ! $product_id && ! $this->get_order_sum_option( 'is_subtotal' ) ) {
@@ -246,75 +271,102 @@ class Alg_WC_OMA_Amount_Types {
 				$result += ( WC()->cart->get_fee_total()      + ( $this->get_order_sum_option( 'do_exclude_taxes' ) ? 0 : WC()->cart->get_fee_tax() ) );
 			}
 		}
-		return apply_filters( 'alg_wc_oma_amount_cart_total', $result, $type );
+		return apply_filters( 'alg_wc_oma_amount_cart_total', $result, $type, $product_id, $do_count_by_term, $taxonomy );
 	}
 
 	/**
 	 * get_cart_value.
 	 *
-	 * @version 4.0.0
+	 * @version 4.0.8
 	 * @since   4.0.0
 	 */
-	function get_cart_value( $result, $type, $cart_item_values, $cart_terms ) {
+	function get_cart_value( $args = null ) {
+		$args = wp_parse_args( $args, array(
+			'result'     => '',
+			'type'       => '',
+			'cart_item'  => '',
+			'cart_terms' => '',
+			'limit_type' => '',
+		) );
+		$result = $args['result'];
+		$type = $args['type'];
+		$cart_item = $args['cart_item'];
+		$cart_terms = $args['cart_terms'];
+		$limit_type = $args['limit_type'];
+		$final_result = false;
 		switch ( $type ) {
 			case 'sum':
-				$value = ( $this->get_order_sum_option( 'is_subtotal' ) || $this->get_order_sum_option( 'do_exclude_discounts' ) ?
-					$cart_item_values['line_subtotal'] + ( $this->get_order_sum_option( 'do_exclude_taxes' ) ? 0 : $cart_item_values['line_subtotal_tax'] ) :
-					$cart_item_values['line_total']    + ( $this->get_order_sum_option( 'do_exclude_taxes' ) ? 0 : $cart_item_values['line_tax'] )
+				$value  = ( $this->get_order_sum_option( 'is_subtotal' ) || $this->get_order_sum_option( 'do_exclude_discounts' ) ?
+					$cart_item['line_subtotal'] + ( $this->get_order_sum_option( 'do_exclude_taxes' ) ? 0 : $cart_item['line_subtotal_tax'] ) :
+					$cart_item['line_total'] + ( $this->get_order_sum_option( 'do_exclude_taxes' ) ? 0 : $cart_item['line_tax'] )
 				);
-				return ( $result + $value );
+				$final_result = ( $result + $value );
+				break;
 			case 'qty':
-				return ( $result + $cart_item_values['quantity'] );
+				$final_result = ( $result + $cart_item['quantity'] );
+				break;
 			case 'product':
-				return ( $result + 1 );
+				$final_result = ( $result + 1 );
+				break;
 			case 'product_cat':
 			case 'product_tag':
-				$cart_terms = alg_wc_oma()->core->amounts->add_product_terms( $cart_item_values['product_id'], $type, $cart_terms );
-				return ( isset( $cart_terms[ $type ] ) ? count( $cart_terms[ $type ] ) : 0 );
+				$cart_terms = alg_wc_oma()->core->amounts->add_product_terms( $cart_item['product_id'], $type, $cart_terms );
+			$final_result     = ( isset( $cart_terms[ $type ] ) ? count( $cart_terms[ $type ] ) : 0 );
+				break;
 			case 'weight':
-				$product = $cart_item_values['data'];
+				$product = $cart_item['data'];
 				if ( $product->has_weight() ) {
-					$result += ( float ) $product->get_weight() * $cart_item_values['quantity'];
+					$result += ( float ) $product->get_weight() * $cart_item['quantity'];
 				}
-				return $result;
+				$final_result = $result;
+				break;
 			case 'volume':
-				$product = $cart_item_values['data'];
+				$product = $cart_item['data'];
 				if ( ! $product->get_virtual() ) {
 					if ( 0 != ( $l = $product->get_length() ) && 0 != ( $w = $product->get_width() ) && 0 != ( $h = $product->get_height() ) ) {
-						$result += ( float ) $l * ( float ) $w * ( float ) $h * $cart_item_values['quantity'];
+						$result += ( float ) $l * ( float ) $w * ( float ) $h * $cart_item['quantity'];
 					}
 				}
+				$final_result = $result;
+				break;
 			case 'length':
-				$product = $cart_item_values['data'];
+				$product = $cart_item['data'];
 				if ( ! $product->get_virtual() ) {
 					if ( 0 != ( $l = $product->get_length() ) ) {
-						$result += ( float ) $l * $cart_item_values['quantity'];
+						$result += ( float ) $l * $cart_item['quantity'];
 					}
 				}
+				$final_result = $result;
+				break;
 			case 'width':
-				$product = $cart_item_values['data'];
+				$product = $cart_item['data'];
 				if ( ! $product->get_virtual() ) {
 					if ( 0 != ( $w = $product->get_width() ) ) {
-						$result += ( float ) $w * $cart_item_values['quantity'];
+						$result += ( float ) $w * $cart_item['quantity'];
 					}
 				}
+				$final_result = $result;
+				break;
 			case 'height':
-				$product = $cart_item_values['data'];
+				$product = $cart_item['data'];
 				if ( ! $product->get_virtual() ) {
 					if ( 0 != ( $h = $product->get_height() ) ) {
-						$result += ( float ) $h * $cart_item_values['quantity'];
+						$result += ( float ) $h * $cart_item['quantity'];
 					}
 				}
-				return $result;
+				$final_result = $result;
+				break;
 			case 'area':
-				$product = $cart_item_values['data'];
+				$product = $cart_item['data'];
 				if ( ! $product->get_virtual() ) {
 					if ( 0 != ( $l = $product->get_length() ) && 0 != ( $w = $product->get_width() ) ) {
-						$result += ( float ) $l * ( float ) $w * $cart_item_values['quantity'];
+						$result += ( float ) $l * ( float ) $w * $cart_item['quantity'];
 					}
 				}
-				return $result;
+				$final_result = $result;
+				break;
 		}
+		return apply_filters( 'alg_wc_oma_get_cart_value', $final_result, $args );
 	}
 
 	/**

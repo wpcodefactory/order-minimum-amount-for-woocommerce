@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Messages
  *
- * @version 4.0.7
+ * @version 4.0.8
  * @since   4.0.4
  *
  * @author  WPFactory
@@ -159,14 +159,14 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * get_notices.
 		 *
-		 * @version 4.0.4
+		 * @version 4.0.8
 		 * @since   3.2.0
 		 *
 		 * @param string $area 'cart' | 'checkout' | 'product_page'
 		 * @param bool $limits
 		 * @param bool $types
 		 *
-		 * @return mixed|void
+		 * @return mixed
 		 */
 		function get_notices( $area = 'cart', $limits = false, $types = false ) {
 			$result = array();
@@ -180,7 +180,10 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 						     ( 'yes' === $display_on_empty_cart )
 					     )
 					) {
-						$total = alg_wc_oma()->core->amounts->get_cart_total( $amount_type );
+						$total = alg_wc_oma()->core->amounts->get_cart_total( array(
+							'type'       => $amount_type,
+							'limit_type' => $min_or_max
+						) );
 						$result[ $min_or_max ][ $amount_type ][''] = ( ! alg_wc_oma()->core->check_min_max_amount( $min_or_max, $amount_type, $amount_data['amount'], $total ) ?
 							$this->get_notice_content( $min_or_max, $amount_type, $amount_data, $total, $area ) :
 							true );
@@ -227,13 +230,13 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * get_notice_content.
 		 *
-		 * @version 3.3.0
+		 * @version 4.0.8
 		 * @since   2.2.0
 		 */
 		function get_notice_content( $min_or_max, $amount_type, $amount_data, $total, $cart_or_checkout, $scope = '', $product_id = false, $term_id = false ) {
 			$id           = $this->get_message_option_id( $cart_or_checkout, $scope, $amount_data['source'] );
 			$content      = get_option( "alg_wc_oma_{$min_or_max}_{$amount_type}_message", array() );
-			$content      = ( isset( $content[ $id ] ) ? $content[ $id ] : $this->get_default_message( $min_or_max, $scope, $amount_data['source'] ) );
+			$content      = ( isset( $content[ $id ] ) ? $content[ $id ] : $this->get_default_message( $min_or_max, $scope, $amount_data['source'], $amount_type ) );
 			$content      = do_shortcode( $content );
 			$placeholders = $this->get_placeholders( $min_or_max, $amount_type, $amount_data, $total, $product_id, $term_id );
 			return str_replace( array_keys( $placeholders ), $placeholders, $content );
@@ -259,18 +262,19 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * get_default_message.
 		 *
-		 * @version 4.0.0
+		 * @version 4.0.8
 		 * @since   3.0.0
 		 *
 		 * @todo    add more sources: `user`, `user_role`, `membership`?
 		 */
-		function get_default_message( $min_or_max, $scope = '', $source = '' ) {
+		function get_default_message( $min_or_max, $scope = '', $source = '', $amount_type = '' ) {
 			return apply_filters( 'alg_wc_oma_get_default_message',
 				sprintf( __( 'You must have an order with a %s of %%amount%% to place your order, your current order total is %%total%%.', 'order-minimum-amount-for-woocommerce' ),
 					( 'min' === $min_or_max ? __( 'minimum', 'order-minimum-amount-for-woocommerce' ) : __( 'maximum', 'order-minimum-amount-for-woocommerce' ) ) ),
 				$min_or_max,
 				$scope,
-				$source
+				$source,
+				$amount_type
 			);
 		}
 

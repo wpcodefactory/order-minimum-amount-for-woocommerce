@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Settings.
  *
- * @version 4.0.5
+ * @version 4.0.8
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -17,7 +17,7 @@ class Alg_WC_Settings_OMA extends WC_Settings_Page {
 	/**
 	 * Constructor.
 	 *
-	 * @version 4.0.5
+	 * @version 4.0.8
 	 * @since   1.0.0
 	 *
 	 * @todo    rearrange sections by `$section_priority`?
@@ -43,6 +43,7 @@ class Alg_WC_Settings_OMA extends WC_Settings_Page {
 		require_once( 'class-alg-wc-oma-settings-coupons.php' );
 		require_once( 'class-alg-wc-oma-settings-cart-products.php' );
 		require_once( 'class-alg-wc-oma-settings-products-cart-total.php' );
+		require_once( 'class-alg-wc-oma-settings-compatibility.php' );
 		// Create notice about pro
 		add_action( 'admin_init', array( $this, 'add_promoting_notice' ) );
 	}

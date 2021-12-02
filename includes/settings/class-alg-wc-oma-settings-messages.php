@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Messages Section Settings
  *
- * @version 4.0.5
+ * @version 4.0.8
  * @since   1.2.0
  *
  * @author  WPFactory
@@ -133,7 +133,7 @@ class Alg_WC_OMA_Settings_Messages extends Alg_WC_OMA_Settings_Section {
 	/**
 	 * get_settings.
 	 *
-	 * @version 4.0.5
+	 * @version 4.0.8
 	 * @since   1.2.0
 	 *
 	 * @todo    add optional "Message on requirements met"
@@ -203,7 +203,7 @@ class Alg_WC_OMA_Settings_Messages extends Alg_WC_OMA_Settings_Section {
 								array(
 									'title'    => alg_wc_oma()->core->get_title( $min_or_max, $amount_type, array( $this->get_scope_title( $scope ), $this->get_source_title( $source ) ), true ),
 									'id'       => "alg_wc_oma_{$min_or_max}_{$amount_type}_message[{$id}]",
-									'default'  => alg_wc_oma()->core->messages->get_default_message( $min_or_max, $scope, $source ),
+									'default'  => alg_wc_oma()->core->messages->get_default_message( $min_or_max, $scope, $source, $amount_type ),
 									'type'     => 'textarea',
 									'css'      => 'width:100%;',
 									'alg_wc_oma_raw' => true,
