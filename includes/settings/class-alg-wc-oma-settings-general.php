@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - General Section Settings
  *
- * @version 4.0.6
+ * @version 4.0.9
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -29,7 +29,7 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 	/**
 	 * get_settings.
 	 *
-	 * @version 4.0.6
+	 * @version 4.0.9
 	 * @since   1.0.0
 	 */
 	function get_settings() {
@@ -58,7 +58,7 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 
 		$general_settings = array(
 			array(
-				'title'    => __( 'General Options', 'order-minimum-amount-for-woocommerce' ),
+				'title'    => __( 'General options', 'order-minimum-amount-for-woocommerce' ),
 				'type'     => 'title',
 				'id'       => 'alg_wc_oma_general_options',
 			),
@@ -99,9 +99,65 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 			),
 		);
 
+		$login_requirement_settings = array(
+			array(
+				'title'    => __( 'Login requirement', 'order-minimum-amount-for-woocommerce' ),
+				'desc'     => 'Demand users to be logged in order to display the min/max requirements.',
+				'type'     => 'title',
+				'id'       => 'alg_wc_oma_login_requirement_options',
+			),
+			array(
+				'title'    => __( 'Login requirement', 'order-minimum-amount-for-woocommerce' ),
+				'desc'     => __( 'Enable login requirement', 'order-minimum-amount-for-woocommerce' ),
+				'id'       => 'alg_wc_oma_login_requirement_enabled',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'title'   => __( 'Notice', 'order-minimum-amount-for-woocommerce' ),
+				'id'      => 'alg_wc_oma_login_requirement_notice_msg',
+				'default' => __( 'Please login to access the min/max requirements for your order.', 'order-minimum-amount-for-woocommerce' ),
+				'type'    => 'text',
+			),
+			array(
+				'title'   => __( 'Notice type', 'order-minimum-amount-for-woocommerce' ),
+				'id'      => 'alg_wc_oma_login_requirement_notice_type',
+				'default' => 'error',
+				'type'     => 'select',
+				'class'    => 'wc-enhanced-select',
+				'options'  => array(
+					'error'  => __( 'Error', 'order-minimum-amount-for-woocommerce' ),
+					'notice' => __( 'Notice', 'order-minimum-amount-for-woocommerce' ),
+				),
+			),
+			array(
+				'title'   => __( 'Display condition', 'order-minimum-amount-for-woocommerce' ),
+				'id'      => 'alg_wc_oma_login_requirement_display_condition',
+				'default' => array( 'is_cart', 'is_checkout' ),
+				'type'    => 'multiselect',
+				'class'   => 'wc-enhanced-select',
+				'options' => array(
+					'is_woocommerce'      => __( 'Is WooCommerce', 'popup-notices-for-woocommerce' ),
+					'is_shop'             => __( 'Is Shop', 'popup-notices-for-woocommerce' ),
+					'is_product_category' => __( 'Is Product Category', 'popup-notices-for-woocommerce' ),
+					'is_product_tag'      => __( 'Is Product Tag', 'popup-notices-for-woocommerce' ),
+					'is_product'          => __( 'Is Product', 'popup-notices-for-woocommerce' ),
+					'is_cart'             => __( 'Is Cart', 'popup-notices-for-woocommerce' ),
+					'is_checkout'         => __( 'Is Checkout', 'popup-notices-for-woocommerce' ),
+					'is_account_page'     => __( 'Is Account Page', 'popup-notices-for-woocommerce' ),
+					'is_wc_endpoint_url'  => __( 'Is WC Endpoint URL', 'popup-notices-for-woocommerce' )
+				),
+				'custom_attributes' => apply_filters( 'alg_wc_oma_settings', array( 'disabled' => 'disabled' ) ),
+			),
+			array(
+				'type'     => 'sectionend',
+				'id'       => 'alg_wc_oma_login_requirement_options',
+			),
+		);
+
 		$checkout_settings = array(
 			array(
-				'title'    => __( 'Checkout Options', 'order-minimum-amount-for-woocommerce' ),
+				'title'    => __( 'Checkout options', 'order-minimum-amount-for-woocommerce' ),
 				'type'     => 'title',
 				'id'       => 'alg_wc_oma_checkout_options',
 			),
@@ -133,7 +189,7 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 		if ( in_array( 'sum', $enabled_types ) ) {
 			$type_sum_settings = array(
 				array(
-					'title'    => sprintf( __( '"%s" Amount Type Options', 'order-minimum-amount-for-woocommerce' ),
+					'title'    => sprintf( __( '"%s" Amount Type options', 'order-minimum-amount-for-woocommerce' ),
 						__( 'Sum', 'order-minimum-amount-for-woocommerce' ) ),
 					'desc'     => sprintf( __( 'Extra settings for min/max "%s" options.', 'order-minimum-amount-for-woocommerce' ),
 						__( 'Sum', 'order-minimum-amount-for-woocommerce' ) ),
@@ -193,7 +249,7 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 		if ( in_array( 'product_cat', $enabled_types ) ) {
 			$type_product_cat_settings = array(
 				array(
-					'title'    => sprintf( __( '"%s" Amount Type Options', 'order-minimum-amount-for-woocommerce' ),
+					'title'    => sprintf( __( '"%s" Amount Type options', 'order-minimum-amount-for-woocommerce' ),
 						__( 'Product categories', 'order-minimum-amount-for-woocommerce' ) ),
 					'desc'     => sprintf( __( 'Extra settings for min/max "%s" options.', 'order-minimum-amount-for-woocommerce' ),
 						__( 'Product categories', 'order-minimum-amount-for-woocommerce' ) ),
@@ -230,7 +286,7 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 		if ( in_array( 'product_tag', $enabled_types ) ) {
 			$type_product_tag_settings = array(
 				array(
-					'title'    => sprintf( __( '"%s" Amount Type Options', 'order-minimum-amount-for-woocommerce' ),
+					'title'    => sprintf( __( '"%s" Amount Type options', 'order-minimum-amount-for-woocommerce' ),
 						__( 'Product tags', 'order-minimum-amount-for-woocommerce' ) ),
 					'desc'     => sprintf( __( 'Extra settings for min/max "%s" options.', 'order-minimum-amount-for-woocommerce' ),
 						__( 'Product tags', 'order-minimum-amount-for-woocommerce' ) ),
@@ -397,6 +453,7 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 		return array_merge(
 			$plugin_settings,
 			$general_settings,
+			$login_requirement_settings,
 			$checkout_settings,
 			$type_sum_settings,
 			$type_product_cat_settings,

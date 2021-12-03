@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Core Class
  *
- * @version 4.0.8
+ * @version 4.0.9
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -47,7 +47,7 @@ class Alg_WC_OMA_Core {
 	/**
 	 * add_hooks.
 	 *
-	 * @version 4.0.6
+	 * @version 4.0.9
 	 * @since   1.0.0
 	 */
 	function add_hooks() {
@@ -82,6 +82,53 @@ class Alg_WC_OMA_Core {
 				add_action( 'woocommerce_single_product_summary', array( $this, 'hide_add_to_cart_single' ), 29, 3 );
 			}
 		}
+		// Login requirement.
+		add_filter( 'alg_wc_oma_get_notices', array( $this, 'wipe_notices_if_login_requirement_is_enabled' ), 10, 4 );
+		add_filter( 'wp', array( $this, 'display_login_requirement_notice' ), 10, 4 );
+	}
+
+	/**
+	 * display_login_requirement_notice.
+	 *
+	 * @version 4.0.9
+	 * @since   4.0.9
+	 */
+	function display_login_requirement_notice() {
+		if (
+			'yes' === get_option( 'alg_wc_oma_login_requirement_enabled', 'no' ) &&
+			! is_user_logged_in() &&
+			! empty( $conditions = apply_filters( 'alg_wc_oma_login_requirement_display_conditions', array( 'is_cart', 'is_checkout' ) ) ) &&
+			in_array( true, array_map( function ( $condition ) {
+				return function_exists( $condition ) && call_user_func( $condition );
+			}, $conditions ) )
+		) {
+			$notice_content = get_option( 'alg_wc_oma_login_requirement_notice_msg', __( 'Please login to access the min/max requirements for your order.', 'order-minimum-amount-for-woocommerce' ) );
+			$notice_type    = get_option( 'alg_wc_oma_login_requirement_notice_type', 'error' );
+			wc_add_notice( $notice_content, $notice_type );
+		}
+	}
+
+	/**
+	 * wipe_notices_if_login_requirement_is_enabled.
+	 *
+	 * @version 4.0.9
+	 * @since   4.0.9
+	 *
+	 * @param $result
+	 * @param $area
+	 * @param $limits
+	 * @param $types
+	 *
+	 * @return array
+	 */
+	function wipe_notices_if_login_requirement_is_enabled( $result, $area, $limits, $types ) {
+		if (
+			'yes' === get_option( 'alg_wc_oma_login_requirement_enabled', 'no' ) &&
+			! is_user_logged_in()
+		) {
+			$result = array();
+		}
+		return $result;
 	}
 
 	/**
