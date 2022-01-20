@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - General Section Settings
  *
- * @version 4.0.9
+ * @version 4.1.0
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -29,7 +29,7 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 	/**
 	 * get_settings.
 	 *
-	 * @version 4.0.9
+	 * @version 4.1.0
 	 * @since   1.0.0
 	 */
 	function get_settings() {
@@ -206,6 +206,26 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 						'total'    => __( 'Order total', 'order-minimum-amount-for-woocommerce' ),
 						'subtotal' => __( 'Order subtotal', 'order-minimum-amount-for-woocommerce' ),
 					),
+				),
+				array(
+					'title'    => __( 'Cart total rounding', 'order-minimum-amount-for-woocommerce' ),
+					'desc_tip' => __( 'If the limit messages are still getting displayed even if the cart amount matches the limit, it\'s because the cart total amount being compared behind the scenes is raw. Here is how you can round it.', 'order-minimum-amount-for-woocommerce' ),
+					'id'       => 'alg_wc_oma_type_sum_cart_total_rounding',
+					'default'  => 'total',
+					'type'     => 'select',
+					'class'    => 'chosen_select',
+					'options' => array(
+						'none'  => __( 'None', 'order-minimum-amount-for-woocommerce' ),
+						'round' => __( 'Round', 'order-minimum-amount-for-woocommerce' ),
+						'ceil'  => __( 'Ceil', 'order-minimum-amount-for-woocommerce' ),
+						'floor' => __( 'Floor', 'order-minimum-amount-for-woocommerce' ),
+					),
+				),
+				array(
+					'desc'     => __( 'Precision', 'order-minimum-amount-for-woocommerce' ),
+					'id'       => 'alg_wc_oma_type_sum_cart_total_rounding_precision',
+					'default'  => wc_get_price_decimals(),
+					'type'     => 'number',
 				),
 				array(
 					'title'    => __( 'Exclude taxes', 'order-minimum-amount-for-woocommerce' ),

@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Shipping Section Settings
  *
- * @version 4.0.0
+ * @version 4.1.0
  * @since   3.2.0
  *
  * @author  WPFactory
@@ -29,7 +29,7 @@ class Alg_WC_OMA_Settings_Shipping extends Alg_WC_OMA_Settings_Section {
 	/**
 	 * get_settings.
 	 *
-	 * @version 4.0.0
+	 * @version 4.1.0
 	 * @since   3.2.0
 	 */
 	function get_settings() {
@@ -84,26 +84,62 @@ class Alg_WC_OMA_Settings_Shipping extends Alg_WC_OMA_Settings_Section {
 				'type'     => 'checkbox',
 			),
 		);
-		if ( 'zone' != $shipping_type ) {
-			$settings = array_merge( $settings, array(
-				array(
-					'title'    => __( 'Advanced', 'order-minimum-amount-for-woocommerce' ) . ': ' . __( 'Special cases', 'order-minimum-amount-for-woocommerce' ),
-					'desc'     => sprintf( __( 'Set as comma-separated list of shipping method IDs, e.g.: %s', 'order-minimum-amount-for-woocommerce' ),
-						'<code>flexible_shipping,jem_table_rate</code>' ),
-					'desc_tip' => __( 'If you are experiencing issues with some non-standard shipping method, you may need to add its ID here.', 'order-minimum-amount-for-woocommerce' ) . ' ' .
-						__( 'Leave empty if unsure.', 'order-minimum-amount-for-woocommerce' ),
-					'id'       => 'alg_wc_oma_by_shipping_special_cases',
-					'default'  => '',
-					'type'     => 'text',
-				),
-			) );
-		}
 		$settings = array_merge( $settings, array(
 			array(
 				'type'     => 'sectionend',
 				'id'       => 'alg_wc_oma_by_shipping_options',
 			),
 		) );
+
+		if ( 'zone' != $shipping_type ) {
+			$settings = array_merge( $settings, array(
+				array(
+					'title'    => __( 'Special cases', 'order-minimum-amount-for-woocommerce' ),
+					'type'     => 'title',
+					'desc'     => __( 'If you are experiencing issues with some non-standard shipping method, you may need to set it up here.', 'order-minimum-amount-for-woocommerce' ),
+					'id'       => 'alg_wc_oma_by_shipping_advanced',
+				),
+				array(
+					'title'    => __( 'Identification', 'order-minimum-amount-for-woocommerce' ),
+					'desc'     => sprintf(__( 'Find special cases by splitting current method until the %s character', 'order-minimum-amount-for-woocommerce' ),'<code>:</code>'),
+					'desc_tip' => __( 'Methods splitted in parts different than 2 will be considered special cases.', 'order-minimum-amount-for-woocommerce' ),
+					'id'       => 'alg_wc_oma_by_shipping_sc_find_by_colon_splitting',
+					'default'  => 'yes',
+					'type'     => 'checkbox',
+				),
+				array(
+					'title'    => __( 'Comparison method', 'order-minimum-amount-for-woocommerce' ),
+					'id'       => 'alg_wc_oma_by_shipping_sc_comparison_method',
+					'options'  => array(
+						'comp_method_1' => __( 'Method 1: Compares special case ID with the selected method rate ID until the "_" character.', 'order-minimum-amount-for-woocommerce' ),
+						'comp_method_2' => __( 'Method 2: Checks if selected method rate ID contains the special case ID.', 'order-minimum-amount-for-woocommerce' ),
+					),
+					'default'  => 'comp_method_1',
+					'type'     => 'radio',
+				),
+				array(
+					'title'    => __( 'Shipping IDs', 'order-minimum-amount-for-woocommerce' ),
+					'desc'     => sprintf( __( 'Set as comma-separated list of shipping method IDs, e.g.: %s', 'order-minimum-amount-for-woocommerce' ),
+						'<code>flexible_shipping,jem_table_rate</code>' ),
+					'desc_tip' => __( 'Shipping IDs from special cases.', 'order-minimum-amount-for-woocommerce' ). ' ' .
+					              __( 'Leave empty if unsure.', 'order-minimum-amount-for-woocommerce' ),
+					'id'       => 'alg_wc_oma_by_shipping_special_cases',
+					'default'  => '',
+					'type'     => 'text',
+				),
+				array(
+					'desc'     => sprintf( __( 'Try to autodetect Shipping IDs from %s', 'order-minimum-amount-for-woocommerce' ),
+						'<code>WC_Shipping::load_shipping_methods()</code>' ),
+					'id'       => 'alg_wc_oma_by_shipping_sc_auto_detect',
+					'default'  => 'no',
+					'type'     => 'checkbox',
+				),
+				array(
+					'type'     => 'sectionend',
+					'id'       => 'alg_wc_oma_by_shipping_advanced',
+				),
+			) );
+		}
 
 		foreach ( $shipping_options as $id => $title ) {
 			$settings = array_merge( $settings, array(

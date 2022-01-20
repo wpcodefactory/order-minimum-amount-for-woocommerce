@@ -4,7 +4,7 @@
  *
  * This class includes everything needed to add a new "amount type".
  *
- * @version 4.0.8
+ * @version 4.1.0
  * @since   3.0.0
  *
  * @author  WPFactory
@@ -226,7 +226,7 @@ class Alg_WC_OMA_Amount_Types {
 	/**
 	 * get_cart_total.
 	 *
-	 * @version 4.0.8
+	 * @version 4.1.0
 	 * @since   3.0.0
 	 *
 	 * @param null $args
@@ -269,6 +269,20 @@ class Alg_WC_OMA_Amount_Types {
 			}
 			if ( ! $this->get_order_sum_option( 'do_exclude_fees' ) ) {
 				$result += ( WC()->cart->get_fee_total()      + ( $this->get_order_sum_option( 'do_exclude_taxes' ) ? 0 : WC()->cart->get_fee_tax() ) );
+			}
+		}
+		// Rounding.
+		if (
+			'sum' === $type &&
+			'none' !== ( $rounding = get_option( 'alg_wc_oma_type_sum_cart_total_rounding', 'none' ) )
+		) {
+			$precision = get_option( 'alg_wc_oma_type_sum_cart_total_rounding_precision', wc_get_price_decimals() );
+			if ( 'round' === $rounding ) {
+				$result = round( $result, $precision );
+			} elseif ( 'ceil' === $rounding ) {
+				$result = ceil( $result );
+			} elseif ( 'floor' === $rounding ) {
+				$result = floor( $result );
 			}
 		}
 		return apply_filters( 'alg_wc_oma_amount_cart_total', $result, $type, $product_id, $do_count_by_term, $taxonomy );

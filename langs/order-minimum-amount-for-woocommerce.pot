@@ -1,15 +1,15 @@
-# Copyright (C) 2021 WPFactory
+# Copyright (C) 2022 WPFactory
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Order Minimum/Maximum Amount for WooCommerce 4.0.9\n"
+"Project-Id-Version: Order Minimum/Maximum Amount for WooCommerce 4.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/order-minimum-amount-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-12-03T21:32:11+01:00\n"
+"POT-Creation-Date: 2022-01-20T14:05:48+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: order-minimum-amount-for-woocommerce\n"
@@ -42,7 +42,7 @@ msgid "Sum"
 msgstr ""
 
 #: includes/class-alg-wc-oma-amount-types.php:38
-#: includes/settings/class-alg-wc-oma-settings-general.php:386
+#: includes/settings/class-alg-wc-oma-settings-general.php:406
 msgid "Quantity"
 msgstr ""
 
@@ -360,7 +360,7 @@ msgstr ""
 
 #: includes/class-alg-wc-oma-messages.php:347
 #: includes/settings/class-alg-wc-oma-settings-gateways.php:118
-#: includes/settings/class-alg-wc-oma-settings-shipping.php:157
+#: includes/settings/class-alg-wc-oma-settings-shipping.php:193
 msgid "Order review: Payment: Before submit button"
 msgstr ""
 
@@ -458,7 +458,7 @@ msgstr ""
 #: includes/settings/class-alg-wc-oma-settings-general.php:90
 #: includes/settings/class-alg-wc-oma-settings-general.php:168
 #: includes/settings/class-alg-wc-oma-settings-general.php:177
-#: includes/settings/class-alg-wc-oma-settings-general.php:335
+#: includes/settings/class-alg-wc-oma-settings-general.php:355
 #: includes/settings/class-alg-wc-oma-settings-messages.php:177
 #: includes/settings/class-alg-wc-oma-settings-messages.php:233
 #: includes/settings/class-alg-wc-oma-settings-products-cart-total.php:56
@@ -558,7 +558,7 @@ msgid "Only check min/max amounts if selected coupon(s) were applied."
 msgstr ""
 
 #: includes/settings/class-alg-wc-oma-settings-coupons.php:96
-#: includes/settings/class-alg-wc-oma-settings-general.php:213
+#: includes/settings/class-alg-wc-oma-settings-general.php:233
 #: includes/settings/class-alg-wc-oma-settings-section.php:214
 msgid "Exclude"
 msgstr ""
@@ -611,7 +611,7 @@ msgstr ""
 #: includes/settings/class-alg-wc-oma-settings-memberships.php:98
 #: includes/settings/class-alg-wc-oma-settings-messages.php:309
 #: includes/settings/class-alg-wc-oma-settings-products-cart-total.php:84
-#: includes/settings/class-alg-wc-oma-settings-shipping.php:140
+#: includes/settings/class-alg-wc-oma-settings-shipping.php:176
 #: includes/settings/class-alg-wc-oma-settings-user-roles.php:102
 #: includes/settings/class-alg-wc-oma-settings-users.php:90
 msgid "Notes"
@@ -668,12 +668,12 @@ msgid "To solve this, currently, we suggest disabling \"%s\" option in %s sectio
 msgstr ""
 
 #: includes/settings/class-alg-wc-oma-settings-gateways.php:114
-#: includes/settings/class-alg-wc-oma-settings-shipping.php:153
+#: includes/settings/class-alg-wc-oma-settings-shipping.php:189
 msgid "Checkout notices"
 msgstr ""
 
 #: includes/settings/class-alg-wc-oma-settings-gateways.php:115
-#: includes/settings/class-alg-wc-oma-settings-shipping.php:154
+#: includes/settings/class-alg-wc-oma-settings-shipping.php:190
 msgid "This way, if order amount will be wrong, the customer will see the correct notice when he will click \"Place order\" button."
 msgstr ""
 
@@ -682,7 +682,7 @@ msgid "You can also optionally set \"%s\" option there to e.g. \"%s\" or any oth
 msgstr ""
 
 #: includes/settings/class-alg-wc-oma-settings-gateways.php:117
-#: includes/settings/class-alg-wc-oma-settings-shipping.php:156
+#: includes/settings/class-alg-wc-oma-settings-shipping.php:192
 msgid "Additional positions"
 msgstr ""
 
@@ -692,19 +692,19 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-oma-settings-gateways.php:121
 #: includes/settings/class-alg-wc-oma-settings-general.php:174
-#: includes/settings/class-alg-wc-oma-settings-shipping.php:148
+#: includes/settings/class-alg-wc-oma-settings-shipping.php:184
 msgid "Block checkout page"
 msgstr ""
 
 #: includes/settings/class-alg-wc-oma-settings-gateways.php:122
-#: includes/settings/class-alg-wc-oma-settings-general.php:333
-#: includes/settings/class-alg-wc-oma-settings-shipping.php:162
+#: includes/settings/class-alg-wc-oma-settings-general.php:353
+#: includes/settings/class-alg-wc-oma-settings-shipping.php:198
 msgid "Validate on add to cart"
 msgstr ""
 
 #: includes/settings/class-alg-wc-oma-settings-gateways.php:123
-#: includes/settings/class-alg-wc-oma-settings-general.php:341
-#: includes/settings/class-alg-wc-oma-settings-shipping.php:163
+#: includes/settings/class-alg-wc-oma-settings-general.php:361
+#: includes/settings/class-alg-wc-oma-settings-shipping.php:199
 msgid "Hide \"add to cart\" button"
 msgstr ""
 
@@ -744,7 +744,7 @@ msgid "Minimum"
 msgstr ""
 
 #: includes/settings/class-alg-wc-oma-settings-general.php:75
-#: includes/settings/class-alg-wc-oma-settings-general.php:328
+#: includes/settings/class-alg-wc-oma-settings-general.php:348
 msgid "Maximum"
 msgstr ""
 
@@ -818,24 +818,24 @@ msgid "Customer is redirected back to the cart page."
 msgstr ""
 
 #: includes/settings/class-alg-wc-oma-settings-general.php:192
-#: includes/settings/class-alg-wc-oma-settings-general.php:252
-#: includes/settings/class-alg-wc-oma-settings-general.php:289
+#: includes/settings/class-alg-wc-oma-settings-general.php:272
+#: includes/settings/class-alg-wc-oma-settings-general.php:309
 msgid "\"%s\" Amount Type options"
 msgstr ""
 
 #: includes/settings/class-alg-wc-oma-settings-general.php:194
-#: includes/settings/class-alg-wc-oma-settings-general.php:254
-#: includes/settings/class-alg-wc-oma-settings-general.php:291
+#: includes/settings/class-alg-wc-oma-settings-general.php:274
+#: includes/settings/class-alg-wc-oma-settings-general.php:311
 msgid "Extra settings for min/max \"%s\" options."
 msgstr ""
 
 #: includes/settings/class-alg-wc-oma-settings-general.php:200
-#: includes/settings/class-alg-wc-oma-settings-general.php:220
+#: includes/settings/class-alg-wc-oma-settings-general.php:240
 msgid "Order sum"
 msgstr ""
 
 #: includes/settings/class-alg-wc-oma-settings-general.php:206
-#: includes/settings/class-alg-wc-oma-settings-general.php:220
+#: includes/settings/class-alg-wc-oma-settings-general.php:240
 msgid "Order total"
 msgstr ""
 
@@ -844,140 +844,168 @@ msgid "Order subtotal"
 msgstr ""
 
 #: includes/settings/class-alg-wc-oma-settings-general.php:211
-msgid "Exclude taxes"
+msgid "Cart total rounding"
 msgstr ""
 
 #: includes/settings/class-alg-wc-oma-settings-general.php:212
-msgid "Excludes taxes from order total/subtotal."
+msgid "If the limit messages are still getting displayed even if the cart amount matches the limit, it's because the cart total amount being compared behind the scenes is raw. Here is how you can round it."
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-general.php:218
+msgid "None"
 msgstr ""
 
 #: includes/settings/class-alg-wc-oma-settings-general.php:219
-msgid "Exclude (ignored unless \"%s\" is set to \"%s\")"
+msgid "Round"
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-general.php:220
+msgid "Ceil"
 msgstr ""
 
 #: includes/settings/class-alg-wc-oma-settings-general.php:221
+msgid "Floor"
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-general.php:225
+msgid "Precision"
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-general.php:231
+msgid "Exclude taxes"
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-general.php:232
+msgid "Excludes taxes from order total/subtotal."
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-general.php:239
+msgid "Exclude (ignored unless \"%s\" is set to \"%s\")"
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-general.php:241
 msgid "Exclude shipping"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:228
+#: includes/settings/class-alg-wc-oma-settings-general.php:248
 msgid "Exclude discounts"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:235
+#: includes/settings/class-alg-wc-oma-settings-general.php:255
 msgid "Exclude fees"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:253
-#: includes/settings/class-alg-wc-oma-settings-general.php:255
+#: includes/settings/class-alg-wc-oma-settings-general.php:273
+#: includes/settings/class-alg-wc-oma-settings-general.php:275
 msgid "Product categories"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:260
+#: includes/settings/class-alg-wc-oma-settings-general.php:280
 msgid "Product categories to include"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:261
+#: includes/settings/class-alg-wc-oma-settings-general.php:281
 msgid "If set, then only selected product categories will be counted (and all other categories will be ignored)."
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:262
+#: includes/settings/class-alg-wc-oma-settings-general.php:282
 msgid "If empty, then all product categories will be counted."
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:270
+#: includes/settings/class-alg-wc-oma-settings-general.php:290
 msgid "Product categories to exclude"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:271
+#: includes/settings/class-alg-wc-oma-settings-general.php:291
 msgid "If set, then selected product categories will be ignored when counting categories for the product."
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:290
-#: includes/settings/class-alg-wc-oma-settings-general.php:292
+#: includes/settings/class-alg-wc-oma-settings-general.php:310
+#: includes/settings/class-alg-wc-oma-settings-general.php:312
 msgid "Product tags"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:297
+#: includes/settings/class-alg-wc-oma-settings-general.php:317
 msgid "Product tags to include"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:298
+#: includes/settings/class-alg-wc-oma-settings-general.php:318
 msgid "If set, then only selected product tags will be counted (and all other tags will be ignored)."
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:299
+#: includes/settings/class-alg-wc-oma-settings-general.php:319
 msgid "If empty, then all product tags will be counted."
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:307
+#: includes/settings/class-alg-wc-oma-settings-general.php:327
 msgid "Product tags to exclude"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:308
+#: includes/settings/class-alg-wc-oma-settings-general.php:328
 msgid "If set, then selected product tags will be ignored when counting tags for the product."
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:326
+#: includes/settings/class-alg-wc-oma-settings-general.php:346
 msgid "\"Maximum\" amount limit options"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:327
+#: includes/settings/class-alg-wc-oma-settings-general.php:347
 msgid "Extra settings for \"%s\" limit options."
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:334
+#: includes/settings/class-alg-wc-oma-settings-general.php:354
 msgid "Validates maximum limits when customer clicks \"add to cart\" button."
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:342
+#: includes/settings/class-alg-wc-oma-settings-general.php:362
 msgid "Hides \"add to cart\" button for the product on shop pages if maximum limits are reached."
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:343
+#: includes/settings/class-alg-wc-oma-settings-general.php:363
 msgid "Shop"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:349
+#: includes/settings/class-alg-wc-oma-settings-general.php:369
 msgid "Shop content"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:350
-#: includes/settings/class-alg-wc-oma-settings-general.php:366
+#: includes/settings/class-alg-wc-oma-settings-general.php:370
+#: includes/settings/class-alg-wc-oma-settings-general.php:386
 msgid "You can optionally output something else if \"add to cart\" button is hidden for the product."
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:358
+#: includes/settings/class-alg-wc-oma-settings-general.php:378
 msgid "Hides \"add to cart\" button for the product on single product pages if maximum limits are reached."
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:359
+#: includes/settings/class-alg-wc-oma-settings-general.php:379
 msgid "Single product"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:365
+#: includes/settings/class-alg-wc-oma-settings-general.php:385
 msgid "Single product content"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:384
+#: includes/settings/class-alg-wc-oma-settings-general.php:404
 msgid "\"Quantity\" amount type options"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:385
+#: includes/settings/class-alg-wc-oma-settings-general.php:405
 msgid "Extra settings for \"%s\" amount type options."
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:391
+#: includes/settings/class-alg-wc-oma-settings-general.php:411
 msgid "Quantity input"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:392
+#: includes/settings/class-alg-wc-oma-settings-general.php:412
 msgid "Set default quantity based on %s minimum limits"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:392
-#: includes/settings/class-alg-wc-oma-settings-general.php:400
-#: includes/settings/class-alg-wc-oma-settings-general.php:408
-#: includes/settings/class-alg-wc-oma-settings-general.php:417
+#: includes/settings/class-alg-wc-oma-settings-general.php:412
+#: includes/settings/class-alg-wc-oma-settings-general.php:420
+#: includes/settings/class-alg-wc-oma-settings-general.php:428
+#: includes/settings/class-alg-wc-oma-settings-general.php:437
 #: includes/settings/class-alg-wc-oma-settings-messages.php:38
 #: includes/settings/class-alg-wc-oma-settings-products-cart-total.php:55
 #: includes/settings/class-alg-wc-oma-settings-products-cart-total.php:59
@@ -985,39 +1013,39 @@ msgstr ""
 msgid "Per product"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:400
+#: includes/settings/class-alg-wc-oma-settings-general.php:420
 msgid "Set minimum parameter based on %s minimum limits"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:408
+#: includes/settings/class-alg-wc-oma-settings-general.php:428
 msgid "Set maximum parameter based on %s maximum limits"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:416
+#: includes/settings/class-alg-wc-oma-settings-general.php:436
 msgid "Add to cart button"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:417
+#: includes/settings/class-alg-wc-oma-settings-general.php:437
 msgid "Set quantity on loop pages based on %s minimum limits"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:433
+#: includes/settings/class-alg-wc-oma-settings-general.php:453
 msgid "REST API"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:438
+#: includes/settings/class-alg-wc-oma-settings-general.php:458
 msgid "User metas"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:439
+#: includes/settings/class-alg-wc-oma-settings-general.php:459
 msgid "Add user metas to the REST API"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:440
+#: includes/settings/class-alg-wc-oma-settings-general.php:460
 msgid "It will be possible to use the %s route to read and update user metas like %s for example."
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:441
+#: includes/settings/class-alg-wc-oma-settings-general.php:461
 msgid "For now only administrators can update user metas."
 msgstr ""
 
@@ -1357,51 +1385,83 @@ msgstr ""
 msgid "Will hide unavailable shipping methods."
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-shipping.php:90
-msgid "Advanced"
-msgstr ""
-
-#: includes/settings/class-alg-wc-oma-settings-shipping.php:90
+#: includes/settings/class-alg-wc-oma-settings-shipping.php:97
 msgid "Special cases"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-shipping.php:91
+#: includes/settings/class-alg-wc-oma-settings-shipping.php:99
+msgid "If you are experiencing issues with some non-standard shipping method, you may need to set it up here."
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-shipping.php:103
+msgid "Identification"
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-shipping.php:104
+msgid "Find special cases by splitting current method until the %s character"
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-shipping.php:105
+msgid "Methods splitted in parts different than 2 will be considered special cases."
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-shipping.php:111
+msgid "Comparison method"
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-shipping.php:114
+msgid "Method 1: Compares special case ID with the selected method rate ID until the \"_\" character."
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-shipping.php:115
+msgid "Method 2: Checks if selected method rate ID contains the special case ID."
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-shipping.php:121
+msgid "Shipping IDs"
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-shipping.php:122
 msgid "Set as comma-separated list of shipping method IDs, e.g.: %s"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-shipping.php:93
-msgid "If you are experiencing issues with some non-standard shipping method, you may need to add its ID here."
+#: includes/settings/class-alg-wc-oma-settings-shipping.php:124
+msgid "Shipping IDs from special cases."
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-shipping.php:94
+#: includes/settings/class-alg-wc-oma-settings-shipping.php:125
 msgid "Leave empty if unsure."
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-shipping.php:143
+#: includes/settings/class-alg-wc-oma-settings-shipping.php:131
+msgid "Try to autodetect Shipping IDs from %s"
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-shipping.php:179
 msgid "While on the cart page notices will be updated automatically when user changes shipping method or zone, the <strong>checkout page</strong> behaves differently and notices are not updated automatically."
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-shipping.php:144
+#: includes/settings/class-alg-wc-oma-settings-shipping.php:180
 msgid "Currently, you can use these solutions to this problem:"
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-shipping.php:147
+#: includes/settings/class-alg-wc-oma-settings-shipping.php:183
 msgid "Enable \"%s\" option in %s section."
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-shipping.php:149
+#: includes/settings/class-alg-wc-oma-settings-shipping.php:185
 msgid "This way, the customer will never reach the checkout page, and instead he will be seeing the notices on the cart page (which are working normally)."
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-shipping.php:152
+#: includes/settings/class-alg-wc-oma-settings-shipping.php:188
 msgid "Disable \"%s\" option in %s section."
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-shipping.php:155
+#: includes/settings/class-alg-wc-oma-settings-shipping.php:191
 msgid "You can also optionally set \"%s\" option there to e.g. \"%s\" or any other position that is updated automatically when user changes shipping method or zone."
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-shipping.php:160
+#: includes/settings/class-alg-wc-oma-settings-shipping.php:196
 msgid "You'll probably want to keep %s options (in %s section) disabled, so your customer would have a chance to change shipping method on exceeded amounts."
 msgstr ""
 
