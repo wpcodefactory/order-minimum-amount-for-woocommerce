@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - General Section Settings
  *
- * @version 4.1.0
+ * @version 4.1.1
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -29,7 +29,7 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 	/**
 	 * get_settings.
 	 *
-	 * @version 4.1.0
+	 * @version 4.1.1
 	 * @since   1.0.0
 	 */
 	function get_settings() {
@@ -155,6 +155,29 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 			),
 		);
 
+		$cart_settings = array(
+			array(
+				'title'    => __( 'Cart options', 'order-minimum-amount-for-woocommerce' ),
+				'type'     => 'title',
+				'id'       => 'alg_wc_oma_checkout_options',
+			),
+			array(
+				'title'    => __( 'Proceed to checkout button', 'order-minimum-amount-for-woocommerce' ),
+				'desc'     => __( '"Proceed to checkout" button behaviour when limits are not respected.', 'order-minimum-amount-for-woocommerce' ),
+				'id'       => 'alg_wc_oma_disable_block_checkout_btn',
+				'default'  => 'do_not_disable',
+				'type'     => 'select',
+				'options'  => array(
+					'do_not_disable' => __( 'Leave it enabled', 'order-minimum-amount-for-woocommerce' ),
+					'disable' => __( 'Disable checkout button', 'order-minimum-amount-for-woocommerce' ),
+				),
+			),
+			array(
+				'type'     => 'sectionend',
+				'id'       => 'alg_wc_oma_login_requirement_options',
+			),
+		);
+
 		$checkout_settings = array(
 			array(
 				'title'    => __( 'Checkout options', 'order-minimum-amount-for-woocommerce' ),
@@ -165,16 +188,15 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 				'title'    => __( 'Block checkout process', 'order-minimum-amount-for-woocommerce' ),
 				'desc_tip' => __( 'When disabled, will allow customer to finish the order even with wrong min/max amount.', 'order-minimum-amount-for-woocommerce' ) . ' ' .
 					__( 'Most of our plugin users will keep this option enabled.', 'order-minimum-amount-for-woocommerce' ),
-				'desc'     => __( 'Enable', 'order-minimum-amount-for-woocommerce' ),
+				'desc'     => __( 'Prevent users from placing the order with wrong amounts', 'order-minimum-amount-for-woocommerce' ),
 				'id'       => 'alg_wc_oma_block_checkout_process',
 				'default'  => 'yes',
 				'type'     => 'checkbox',
 			),
 			array(
 				'title'    => __( 'Block checkout page', 'order-minimum-amount-for-woocommerce' ),
-				'desc_tip' => __( 'Stops customer from reaching the checkout page on wrong min/max amount.', 'order-minimum-amount-for-woocommerce' ) . ' ' .
-					__( 'Customer is redirected back to the cart page.', 'order-minimum-amount-for-woocommerce' ),
-				'desc'     => __( 'Enable', 'order-minimum-amount-for-woocommerce' ),
+				'desc_tip' => __( 'Customer is redirected back to the cart page.', 'order-minimum-amount-for-woocommerce' ),
+				'desc'     => __( 'Prevent users from reaching the checkout page on wrong min/max amount', 'order-minimum-amount-for-woocommerce' ),
 				'id'       => 'alg_wc_oma_block_checkout',
 				'default'  => 'no',
 				'type'     => 'checkbox',
@@ -229,8 +251,7 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 				),
 				array(
 					'title'    => __( 'Exclude taxes', 'order-minimum-amount-for-woocommerce' ),
-					'desc_tip' => __( 'Excludes taxes from order total/subtotal.', 'order-minimum-amount-for-woocommerce' ),
-					'desc'     => __( 'Exclude', 'order-minimum-amount-for-woocommerce' ),
+					'desc'     => __( 'Exclude taxes from order total/subtotal', 'order-minimum-amount-for-woocommerce' ),
 					'id'       => 'alg_wc_oma_exclude_taxes',
 					'default'  => 'no',
 					'type'     => 'checkbox',
@@ -351,8 +372,7 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 				),
 				array(
 					'title'    => __( 'Validate on add to cart', 'order-minimum-amount-for-woocommerce' ),
-					'desc_tip' => __( 'Validates maximum limits when customer clicks "add to cart" button.', 'order-minimum-amount-for-woocommerce' ),
-					'desc'     => __( 'Enable', 'order-minimum-amount-for-woocommerce' ),
+					'desc'     => __( 'Validate maximum limits when customer clicks "add to cart" button', 'order-minimum-amount-for-woocommerce' ),
 					'id'       => 'alg_wc_oma_max_validate_on_add_to_cart',
 					'default'  => 'no',
 					'type'     => 'checkbox',
@@ -474,6 +494,7 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 			$plugin_settings,
 			$general_settings,
 			$login_requirement_settings,
+			$cart_settings,
 			$checkout_settings,
 			$type_sum_settings,
 			$type_product_cat_settings,

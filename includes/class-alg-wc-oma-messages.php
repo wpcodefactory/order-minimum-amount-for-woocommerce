@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Messages
  *
- * @version 4.0.8
+ * @version 4.1.1
  * @since   4.0.4
  *
  * @author  WPFactory
@@ -118,13 +118,13 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 				'woocommerce_before_checkout_form' => array(
 					'func' => 'wc_print_notice',
 				),
-				'woocommerce_before_single_product'=>array(
+				'woocommerce_before_single_product' => array(
 					'func' => 'wc_add_notice',
 				),
-				'woocommerce_before_single_product_summary'=>array(
+				'woocommerce_before_single_product_summary' => array(
 					'func' => 'wc_print_notice',
 				),
-				'woocommerce_before_cart'=>array(
+				'woocommerce_before_cart' => array(
 					'func' => 'wc_print_notice',
 				)
 			);
@@ -159,17 +159,23 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * get_notices.
 		 *
-		 * @version 4.0.8
+		 * @version 4.1.1
 		 * @since   3.2.0
 		 *
-		 * @param string $area 'cart' | 'checkout' | 'product_page'
-		 * @param bool $limits
-		 * @param bool $types
+		 * @param null $args
 		 *
 		 * @return mixed
 		 */
-		function get_notices( $area = 'cart', $limits = false, $types = false ) {
-			$result = array();
+		function get_notices( $args = null ) {
+			$args          = wp_parse_args( $args, array(
+				'area'          => 'cart',
+				'limits'        => false,
+				'types'         => false,
+			) );
+			$area          = $args['area'];
+			$limits        = $args['limits'];
+			$types         = $args['types'];
+			$result        = array();
 			// Check amounts
 			foreach ( alg_wc_oma()->core->get_enabled_amount_limits( $limits ) as $min_or_max ) {
 				foreach ( alg_wc_oma()->core->get_enabled_amount_types( $types ) as $amount_type ) {
@@ -193,7 +199,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 			// Filter
 			$result = apply_filters( 'alg_wc_oma_after_get_notices', $result, $area, $limits, $types );
 			// "Require all"
-			$result = alg_wc_oma()->core->process_require_all_option( $result );
+			$result = $raw_result = alg_wc_oma()->core->process_require_all_option( $result );
 			// Preparing notices
 			if ( ! empty( $result ) ) {
 				$result = alg_wc_oma()->core->array_flatten( $result );
@@ -201,13 +207,20 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 				$result = array_unique( $result );
 				$result = array_values( $result );
 			}
-			return apply_filters( 'alg_wc_oma_get_notices', $result, $area, $limits, $types );
+			return apply_filters( 'alg_wc_oma_get_notices', array(
+					'flat_notices' => $result,
+					'raw_notices'  => $raw_result,
+					'area'         => $area,
+					'limits'       => $limits,
+					'types'        => $types
+				)
+			);
 		}
 
 		/**
 		 * output_notices.
 		 *
-		 * @version 4.0.4
+		 * @version 4.1.1
 		 * @since   1.0.0
 		 *
 		 * @param $area 'cart' | 'checkout' | 'product_page'
@@ -217,7 +230,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		 * @return string
 		 */
 		function output_notices( $area, $func = false, $notice_type = false ) {
-			$result = $this->get_notices( $area );
+			$result = $this->get_notices( array( 'area' => $area ) )['flat_notices'];
 			if ( ! $func ) {
 				return implode( '<br>', $result );
 			} else {

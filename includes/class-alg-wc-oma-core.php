@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Core Class
  *
- * @version 4.0.9
+ * @version 4.1.1
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -47,7 +47,7 @@ class Alg_WC_OMA_Core {
 	/**
 	 * add_hooks.
 	 *
-	 * @version 4.0.9
+	 * @version 4.1.1
 	 * @since   1.0.0
 	 */
 	function add_hooks() {
@@ -58,9 +58,7 @@ class Alg_WC_OMA_Core {
 			add_action( 'woocommerce_checkout_process', array( $this, 'checkout_process_notices' ) );
 		}
 		// Checkout: Block page
-		if ( 'yes' === get_option( 'alg_wc_oma_block_checkout', 'no' ) ) {
-			add_action( 'wp', array( $this, 'block_checkout' ), PHP_INT_MAX );
-		}
+		add_action( 'wp', array( $this, 'block_checkout' ), PHP_INT_MAX );
 		// Remove old notices
 		if ( 'yes' === get_option( 'alg_wc_oma_remove_notices_on_added_to_cart', 'no' ) ) {
 			add_action( 'wp_footer', array( $this, 'remove_notices_on_added_to_cart' ) );
@@ -83,8 +81,22 @@ class Alg_WC_OMA_Core {
 			}
 		}
 		// Login requirement.
-		add_filter( 'alg_wc_oma_get_notices', array( $this, 'wipe_notices_if_login_requirement_is_enabled' ), 10, 4 );
+		add_filter( 'alg_wc_oma_get_notices', array( $this, 'wipe_notices_if_login_requirement_is_enabled' ), 10 );
 		add_filter( 'wp', array( $this, 'display_login_requirement_notice' ), 10, 4 );
+		// Disable checkout btn.
+		add_action( 'woocommerce_proceed_to_checkout', array( $this, 'disable_checkout_button_css' ), 25 );
+	}
+
+	/**
+	 * update css for checkout button when disabled.
+	 *
+	 * @version 4.1.1
+	 * @since   4.1.1
+	 */
+	function disable_checkout_button_css() {
+		if ( ! empty( $this->messages->get_notices( 'cart' )['flat_notices'] ) && 'disable' === get_option( 'alg_wc_oma_disable_block_checkout_btn', 'do_not_disable' ) ) {
+			printf( '<style>.wc-proceed-to-checkout a.wc-forward {pointer-events: none; background: #747474 !important; color: #fff !important;}</style>' );
+		}
 	}
 
 	/**
@@ -111,24 +123,21 @@ class Alg_WC_OMA_Core {
 	/**
 	 * wipe_notices_if_login_requirement_is_enabled.
 	 *
-	 * @version 4.0.9
+	 * @version 4.1.1
 	 * @since   4.0.9
 	 *
-	 * @param $result
-	 * @param $area
-	 * @param $limits
-	 * @param $types
+	 * @param $info
 	 *
 	 * @return array
 	 */
-	function wipe_notices_if_login_requirement_is_enabled( $result, $area, $limits, $types ) {
+	function wipe_notices_if_login_requirement_is_enabled( $info ) {
 		if (
 			'yes' === get_option( 'alg_wc_oma_login_requirement_enabled', 'no' ) &&
 			! is_user_logged_in()
 		) {
-			$result = array();
+			$info['flat_notices'] = array();
 		}
-		return $result;
+		return $info;
 	}
 
 	/**
@@ -226,7 +235,7 @@ class Alg_WC_OMA_Core {
 	/**
 	 * check_product_max_amount.
 	 *
-	 * @version 4.0.4
+	 * @version 4.1.1
 	 * @since   3.4.0
 	 *
 	 * @see     https://woocommerce.github.io/code-reference/classes/WC-Cart.html#method_add_to_cart
@@ -242,7 +251,10 @@ class Alg_WC_OMA_Core {
 			WC()->cart->add_to_cart( $product_id, $quantity, $variation_id ) );
 		if ( $cart_item_key ) {
 			WC()->cart->set_quantity( $cart_item_key, ( WC()->cart->cart_contents[ $cart_item_key ]['quantity'] - $quantity ) );
-			$notices = $this->messages->get_notices( 'cart', array( 'max' ) );
+			$notices = $this->messages->get_notices( array(
+				'area'   => 'cart',
+				'limits' => array( 'max' ),
+			) )['flat_notices'];
 			if ( ! empty( $notices ) ) {
 				if ( $show_notices ) {
 					foreach ( $notices as $notice ) {
@@ -371,15 +383,17 @@ class Alg_WC_OMA_Core {
 	/**
 	 * block_checkout.
 	 *
-	 * @version 4.0.4
+	 * @version 4.1.1
 	 * @since   1.0.0
 	 */
 	function block_checkout( $wp ) {
-		if ( ! is_checkout() || ! apply_filters( 'alg_wc_oma_block_checkout', true ) ) {
-			return;
-		}
-		$result = $this->messages->get_notices( 'cart' );
-		if ( ! empty( $result ) ) {
+		if (
+			( function_exists( 'is_checkout' ) && is_checkout() ) &&
+			! is_wc_endpoint_url( 'order-received' ) &&
+			'yes' === get_option( 'alg_wc_oma_block_checkout', 'no' ) &&
+			apply_filters( 'alg_wc_oma_block_checkout', true ) &&
+			! empty( $notices = $this->messages->get_notices( 'cart' )['flat_notices'] )
+		) {
 			wp_safe_redirect( version_compare( get_option( 'woocommerce_version', null ), '2.5.0', '<' ) ? WC()->cart->get_cart_url() : wc_get_cart_url() );
 			exit;
 		}

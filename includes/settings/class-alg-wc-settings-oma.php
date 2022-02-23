@@ -32,6 +32,7 @@ class Alg_WC_Settings_OMA extends WC_Settings_Page {
 		require_once( 'class-alg-wc-oma-settings-section.php' );
 		require_once( 'class-alg-wc-oma-settings-general.php' );
 		require_once( 'class-alg-wc-oma-settings-amounts.php' );
+		require_once( 'class-alg-wc-oma-settings-fees.php' );
 		require_once( 'class-alg-wc-oma-settings-messages.php' );
 		require_once( 'class-alg-wc-oma-settings-user-roles.php' );
 		require_once( 'class-alg-wc-oma-settings-users.php' );

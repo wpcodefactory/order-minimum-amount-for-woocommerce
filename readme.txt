@@ -1,9 +1,9 @@
 === Order Minimum/Maximum Amount for WooCommerce ===
-Contributors: wpcodefactory, karzin
+Contributors: wpcodefactory, karzin, jaedm97
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 4.4
-Tested up to: 5.8
-Stable tag: 4.1.0
+Tested up to: 5.9
+Stable tag: 4.1.1
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -70,6 +70,16 @@ With [premium version](https://wpfactory.com/item/order-minimum-maximum-amount-f
 1. Frontend example – Cart notice.
 
 == Changelog ==
+
+= 4.1.1 - 23/02/2022 =
+* Fix - General - Checkout options - "Block checkout page" redirects to cart even on successful purchases.
+* Fix - Products - Per product category - Doesn't work well sometimes with multiple categories at once.
+* Fix - Call to a member function get_cart () on null in `Alg_WC_OMA_Core`.
+* Dev - Create new section "Fees" to add individual fee for each limit reached.
+* Dev - Now `Alg_WC_OMA_Messages::get_notices()` return results in array format.
+* Dev - General - Cart Page - Added option to disable "proceed to checkout" button.
+* Tested up to: 5.9.
+* WC tested up to: 6.2.
 
 = 4.1.0 - 20/01/2022 =
 * Dev - Shipping - Special cases - Create "Identification" option.

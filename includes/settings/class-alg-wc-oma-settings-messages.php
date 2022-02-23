@@ -265,11 +265,12 @@ class Alg_WC_OMA_Settings_Messages extends Alg_WC_OMA_Settings_Section {
 			),
 		);
 
-		$notes = array();
-
+		$notes        = array();
+		$placeholders = array( '%amount%', '%total%', '%diff%', '%amount_raw%', '%total_raw%', '%diff_raw%' );
+		$placeholders = 'yes' === get_option( 'alg_wc_oma_add_fee_for_each_limit', 'no' ) ? array_merge( $placeholders, array( '%fee_amount%' ) ) : $placeholders;
 		$notes[] = sprintf( __( 'Available placeholders: %s', 'order-minimum-amount-for-woocommerce' ),
 			'<div style="padding: 0px 0px 15px;">' .
-				'<code>' . implode( '</code>, <code>', array( '%amount%', '%total%', '%diff%', '%amount_raw%', '%total_raw%', '%diff_raw%' ) ) . '</code>' .
+				'<code>' . implode( '</code>, <code>', $placeholders ) . '</code>' .
 			'</div>' );
 
 		if ( array() != apply_filters( 'alg_wc_oma_enabled_scopes', array() ) ) {
