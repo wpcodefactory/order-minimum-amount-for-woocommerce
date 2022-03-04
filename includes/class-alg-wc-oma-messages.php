@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Messages
  *
- * @version 4.1.1
+ * @version 4.1.2
  * @since   4.0.4
  *
  * @author  WPFactory
@@ -17,7 +17,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * Constructor.
 		 *
-		 * @version 4.0.5
+		 * @version 4.1.2
 		 * @since   4.0.4
 		 */
 		function __construct() {
@@ -35,20 +35,49 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 			}
 			// Force checkout notice refresh
 			add_action( 'woocommerce_review_order_after_order_total', array( $this, 'force_checkout_notice_refresh' ), 10, 2 );
+			add_action( 'woocommerce_review_order_before_submit', array( $this, 'force_checkout_notice_refresh' ) );
+			add_filter( 'woocommerce_checkout_fields', array( $this, 'update_totals_on_checkout_field_change' ), PHP_INT_MAX );
+		}
+
+		/**
+		 * update_totals_on_checkout_field_change.
+		 *
+		 * @version 4.1.2
+		 * @since   4.1.2
+		 *
+		 * @param $fields_sections
+		 *
+		 * @return mixed
+		 */
+		function update_totals_on_checkout_field_change( $fields_sections ) {
+			if ( 'yes' === get_option( 'alg_wc_oma_checkout_force_refresh', 'no' ) ) {
+				$words = array( 'country', 'address', 'city', 'postcode' );
+				foreach ( $fields_sections as $section_key => $section ) {
+					foreach ( $section as $field_key => $field ) {
+						if ( preg_match( '(' . implode( '|', $words ) . ')', $field_key ) ) {
+							if ( ! in_array( 'update_totals_on_change', $fields_sections[ $section_key ][ $field_key ]['class'] ) ) {
+								$fields_sections[ $section_key ][ $field_key ]['class'][] = 'update_totals_on_change';
+							}
+						}
+					}
+				}
+			}
+			return $fields_sections;
 		}
 
 		/**
 		 * Force checkout notice refresh.
 		 *
-		 * @version 4.0.5
+		 * @version 4.1.2
 		 * @since   4.0.5
 		 *
 		 */
 		function force_checkout_notice_refresh() {
 			if (
-				'yes' === get_option( 'alg_wc_oma_checkout_force_refresh', 'no' )
-				&& isset( $_REQUEST['wc-ajax'] )
-				&& 'update_order_review' == $_REQUEST['wc-ajax']
+				'yes' === get_option( 'alg_wc_oma_checkout_force_refresh', 'no' ) &&
+				isset( $_REQUEST['wc-ajax'] ) &&
+				'update_order_review' == $_REQUEST['wc-ajax'] &&
+				get_option( 'alg_wc_oma_checkout_force_refresh_hook', 'woocommerce_review_order_after_order_total' ) === current_filter()
 			) {
 				$this->display_dynamic_message( array(
 					'area' => 'checkout',

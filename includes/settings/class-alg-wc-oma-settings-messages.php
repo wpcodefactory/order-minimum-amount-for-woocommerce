@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Messages Section Settings
  *
- * @version 4.0.8
+ * @version 4.1.2
  * @since   1.2.0
  *
  * @author  WPFactory
@@ -95,7 +95,7 @@ class Alg_WC_OMA_Settings_Messages extends Alg_WC_OMA_Settings_Section {
 	/**
 	 * add_unique_settings.
 	 *
-	 * @version 4.0.5
+	 * @version 4.1.2
 	 * @since   4.0.5
 	 *
 	 * @param $area
@@ -124,6 +124,17 @@ class Alg_WC_OMA_Settings_Messages extends Alg_WC_OMA_Settings_Section {
 					'id'       => "alg_wc_oma_{$area}_force_refresh",
 					'default'  => 'no',
 					'type'     => 'checkbox',
+				),
+				array(
+					'desc'     => __( 'Hook used to refresh the notice.', 'order-minimum-amount-for-woocommerce' ),
+					'id'       => "alg_wc_oma_{$area}_force_refresh_hook",
+					'default'  => 'no',
+					'class'   => 'woocommerce_review_order_after_order_total',
+					'options'  => array(
+						'woocommerce_review_order_after_order_total' => __( 'woocommerce_review_order_after_order_total', 'order-minimum-amount-for-woocommerce' ),
+						'woocommerce_review_order_before_submit' => __( 'woocommerce_review_order_before_submit', 'order-minimum-amount-for-woocommerce' ),
+					),
+					'type'     => 'select',
 				),
 			) );
 		}
