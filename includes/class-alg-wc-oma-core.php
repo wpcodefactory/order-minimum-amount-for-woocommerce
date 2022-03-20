@@ -84,7 +84,7 @@ class Alg_WC_OMA_Core {
 		add_filter( 'alg_wc_oma_get_notices', array( $this, 'wipe_notices_if_login_requirement_is_enabled' ), 10 );
 		add_filter( 'wp', array( $this, 'display_login_requirement_notice' ), 10, 4 );
 
-        // Disable checkout button.
+		// Disable checkout button.
 		add_action( 'woocommerce_update_cart_action_cart_updated', array( $this, 'set_cookie_if_has_notices' ) );
 		add_action( 'wp', array( $this, 'set_cookie_on_cart' ) );
 		add_action( 'wp_footer', array( $this, 'add_disable_checkout_script' ) );
@@ -96,11 +96,11 @@ class Alg_WC_OMA_Core {
 	 * @version 4.1.2
 	 * @since   4.1.2
 	 */
-    function set_cookie_on_cart() {
-        if( is_cart() ) {
-            $this->set_cookie_if_has_notices();
-        }
-    }
+	function set_cookie_on_cart() {
+		if ( is_cart() ) {
+			$this->set_cookie_if_has_notices();
+		}
+	}
 
 	/**
 	 * Set cookie if there is any notices.
@@ -108,7 +108,7 @@ class Alg_WC_OMA_Core {
 	 * @version 4.1.2
 	 * @since   4.1.2
 	 */
-	function set_cookie_if_has_notices(){
+	function set_cookie_if_has_notices() {
 		if ( ! empty( $this->messages->get_notices( 'cart' )['flat_notices'] ) && 'disable' === get_option( 'alg_wc_oma_disable_block_checkout_btn', 'do_not_disable' ) ) {
 			setcookie( 'alg_wc_oma_has_notices', true, time() + 31556926 );
 		} else {
@@ -123,41 +123,43 @@ class Alg_WC_OMA_Core {
 	 * @since   4.1.2
 	 */
 	function add_disable_checkout_script() {
-		if( ! is_cart() ) {
+		if ( ! is_cart() ) {
 			return;
 		}
 		?>
-        <style>
-            .disable-checkout-btn{
-                pointer-events: none;
-                background: #747474 !important;
-                color: #fff !important;
-            }
-        </style>
-        <script>
-            jQuery(document).ready(function($){
-                function getCookie(name) {
-                    let value = `; ${document.cookie}`;
-                    let parts = value.split(`; ${name}=`);
-                    if (parts.length === 2) return parts.pop().split(';').shift();
-                }
-                function disable_or_enable_btn(){
-                    let checkoutButton = $('.wc-proceed-to-checkout > a');
+		<style>
+			.disable-checkout-btn {
+				pointer-events: none;
+				background: #747474 !important;
+				color: #fff !important;
+			}
+		</style>
+		<script>
+			jQuery(document).ready(function ($) {
+				function getCookie(name) {
+					let value = `; ${document.cookie}`;
+					let parts = value.split(`; ${name}=`);
+					if (parts.length === 2) return parts.pop().split(';').shift();
+				}
 
-                    if( typeof checkoutButton === 'undefined' || checkoutButton.length <= 0 ) {
-                        return;
-                    }
+				function disable_or_enable_btn() {
+					let checkoutButton = $('.wc-proceed-to-checkout > a');
 
-                    if( getCookie('alg_wc_oma_has_notices') ) {
-                        checkoutButton.addClass('disable-checkout-btn');
-                    } else {
-                        checkoutButton.removeClass('disable-checkout-btn');
-                    }
-                }
-                $( document.body ).on( 'updated_cart_totals', disable_or_enable_btn);
-                disable_or_enable_btn();
-            });
-        </script>
+					if (typeof checkoutButton === 'undefined' || checkoutButton.length <= 0) {
+						return;
+					}
+
+					if (getCookie('alg_wc_oma_has_notices')) {
+						checkoutButton.addClass('disable-checkout-btn');
+					} else {
+						checkoutButton.removeClass('disable-checkout-btn');
+					}
+				}
+
+				$(document.body).on('updated_cart_totals', disable_or_enable_btn);
+				disable_or_enable_btn();
+			});
+		</script>
 		<?php
 	}
 

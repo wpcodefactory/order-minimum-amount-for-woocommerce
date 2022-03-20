@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Messages
  *
- * @version 4.1.2
+ * @version 4.1.3
  * @since   4.0.4
  *
  * @author  WPFactory
@@ -17,26 +17,28 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * Constructor.
 		 *
-		 * @version 4.1.2
+		 * @version 4.1.3
 		 * @since   4.0.4
 		 */
 		function __construct() {
-			if ( is_admin() ) {
-				return;
-			}
-			$messages_areas = $this->get_enabled_message_areas();
-			foreach ( $messages_areas as $area ) {
-				$positions = get_option( "alg_wc_oma_{$area}_area_message_positions", $this->get_message_default_positions( $area ) );
-				if ( ! empty( $positions ) ) {
-					foreach ( $positions as $position ) {
-						add_action( $position, array( $this, 'display_dynamic_message' ) );
+			if (
+				! is_admin() &&
+				'yes' === get_option( 'alg_wc_oma_plugin_enabled', 'yes' )
+			) {
+				$messages_areas = $this->get_enabled_message_areas();
+				foreach ( $messages_areas as $area ) {
+					$positions = get_option( "alg_wc_oma_{$area}_area_message_positions", $this->get_message_default_positions( $area ) );
+					if ( ! empty( $positions ) ) {
+						foreach ( $positions as $position ) {
+							add_action( $position, array( $this, 'display_dynamic_message' ) );
+						}
 					}
 				}
+				// Force checkout notice refresh
+				add_action( 'woocommerce_review_order_after_order_total', array( $this, 'force_checkout_notice_refresh' ), 10, 2 );
+				add_action( 'woocommerce_review_order_before_submit', array( $this, 'force_checkout_notice_refresh' ) );
+				add_filter( 'woocommerce_checkout_fields', array( $this, 'update_totals_on_checkout_field_change' ), PHP_INT_MAX );
 			}
-			// Force checkout notice refresh
-			add_action( 'woocommerce_review_order_after_order_total', array( $this, 'force_checkout_notice_refresh' ), 10, 2 );
-			add_action( 'woocommerce_review_order_before_submit', array( $this, 'force_checkout_notice_refresh' ) );
-			add_filter( 'woocommerce_checkout_fields', array( $this, 'update_totals_on_checkout_field_change' ), PHP_INT_MAX );
 		}
 
 		/**

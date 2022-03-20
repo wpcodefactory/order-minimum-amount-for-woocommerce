@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Shortcodes Class
  *
- * @version 4.0.0
+ * @version 4.1.3
  * @since   4.0.0
  *
  * @author  WPFactory
@@ -17,11 +17,13 @@ class Alg_WC_OMA_Shortcodes {
 	/**
 	 * Constructor.
 	 *
-	 * @version 4.0.0
+	 * @version 4.1.3
 	 * @since   4.0.0
 	 */
 	function __construct() {
-		add_shortcode( 'alg_wc_oma_translate', array( $this, 'language_shortcode' ) );
+		if ( 'yes' === get_option( 'alg_wc_oma_plugin_enabled', 'yes' ) ) {
+			add_shortcode( 'alg_wc_oma_translate', array( $this, 'language_shortcode' ) );
+		}
 	}
 
 	/**
