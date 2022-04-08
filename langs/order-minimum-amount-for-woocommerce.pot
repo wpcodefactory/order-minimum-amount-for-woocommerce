@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Order Minimum/Maximum Amount for WooCommerce 4.1.3\n"
+"Project-Id-Version: Order Minimum/Maximum Amount for WooCommerce 4.1.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/order-minimum-amount-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-03-20T15:46:15+01:00\n"
+"POT-Creation-Date: 2022-04-08T21:21:31+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: order-minimum-amount-for-woocommerce\n"
@@ -159,37 +159,37 @@ msgstr ""
 msgid "%s product tag(s)"
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:181
+#: includes/class-alg-wc-oma-core.php:177
 #: includes/settings/class-alg-wc-oma-settings-general.php:119
 msgid "Please login to access the min/max requirements for your order."
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:585
+#: includes/class-alg-wc-oma-core.php:581
 msgid "Guest"
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:613
+#: includes/class-alg-wc-oma-core.php:609
 msgid "Min %s"
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:613
+#: includes/class-alg-wc-oma-core.php:609
 msgid "Max %s"
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:673
+#: includes/class-alg-wc-oma-core.php:669
 msgid "Amount is <strong>ignored</strong> if set to zero (%s), i.e. next level (e.g. \"General\") amount will be applied."
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:674
+#: includes/class-alg-wc-oma-core.php:670
 msgid "<strong>No amount</strong> (i.e. no limit) will be applied if set to a negative value (e.g. %s)."
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:773
+#: includes/class-alg-wc-oma-core.php:769
 #: includes/settings/class-alg-wc-oma-settings-memberships.php:44
 msgid "WooCommerce Memberships"
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:791
+#: includes/class-alg-wc-oma-core.php:787
 #: includes/settings/class-alg-wc-oma-settings-memberships.php:46
 msgid "MemberPress"
 msgstr ""
@@ -420,6 +420,42 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-oma-settings-amounts.php:39
 msgid "Ignored if set to zero."
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-amounts.php:66
+msgid "Amount shortcodes"
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-amounts.php:68
+msgid "It's possible to set multiple shortcodes on the same amount input. In that case, the first one with a non-empty result will be used."
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-amounts.php:72
+msgid "Shortcodes"
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-amounts.php:73
+msgid "Allow to add shortcodes to the amounts"
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-amounts.php:74
+msgid "The amount input type will be changed from \"number\" to \"text\"."
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-amounts.php:81
+msgid "[alg_wc_oma_amount]"
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-amounts.php:82
+msgid "Create the <code>[alg_wc_oma_amount]</code> shortcode"
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-amounts.php:83
+msgid "For now, it allows to set different values for different customer types."
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-amounts.php:84
+msgid "Please check the <a href=\"%s\" target=\"_blank\">documentation</a> for more info."
 msgstr ""
 
 #: includes/settings/class-alg-wc-oma-settings-cart-products.php:25

@@ -1,8 +1,8 @@
 <?php
 /**
- * Order Minimum Amount for WooCommerce - Amounts Section Settings
+ * Order Minimum Amount for WooCommerce - Amounts Section Settings.
  *
- * @version 4.1.1
+ * @version 4.1.4
  * @since   3.0.0
  *
  * @author  WPFactory
@@ -29,7 +29,7 @@ class Alg_WC_OMA_Settings_Amounts extends Alg_WC_OMA_Settings_Section {
 	/**
 	 * get_settings.
 	 *
-	 * @version 4.1.1
+	 * @version 4.1.4
 	 * @since   3.0.0
 	 */
 	function get_settings() {
@@ -49,7 +49,7 @@ class Alg_WC_OMA_Settings_Amounts extends Alg_WC_OMA_Settings_Section {
 						'desc_tip' => alg_wc_oma()->core->amounts->get_unit( $amount_type ),
 						'id'       => "alg_wc_oma_{$min_or_max}_{$amount_type}",
 						'default'  => 0,
-						'type'     => 'number',
+						'type'     => apply_filters( 'alg_wc_oma_amount_input_type', 'number', 'amounts' ),
 						'custom_attributes' => alg_wc_oma()->core->get_amount_custom_atts( 0 ),
 					),
 				) );
@@ -61,7 +61,38 @@ class Alg_WC_OMA_Settings_Amounts extends Alg_WC_OMA_Settings_Section {
 				'id'       => 'alg_wc_oma_amounts_options',
 			),
 		) );
-		return $settings;
+		$shortcode_opts = array(
+			array(
+				'title'    => __( 'Amount shortcodes', 'order-minimum-amount-for-woocommerce' ),
+				'type'     => 'title',
+				'desc'     => __( 'It\'s possible to set multiple shortcodes on the same amount input. In that case, the first one with a non-empty result will be used.', 'order-minimum-amount-for-woocommerce' ),
+				'id'       => 'alg_wc_oma_amounts_shortcode_options',
+			),
+			array(
+				'title'             => __( 'Shortcodes', 'order-minimum-amount-for-woocommerce' ),
+				'desc'              => __( 'Allow to add shortcodes to the amounts', 'order-minimum-amount-for-woocommerce' ),
+				'desc_tip'          => __( 'The amount input type will be changed from "number" to "text".', 'order-minimum-amount-for-woocommerce' ),
+				'type'              => 'checkbox',
+				'default'           => 'no',
+				'custom_attributes' => apply_filters( 'alg_wc_oma_settings', array( 'disabled' => 'disabled' ) ),
+				'id'                => 'alg_wc_oma_amounts_shortcodes_allowed',
+			),
+			array(
+				'title'             => __( '[alg_wc_oma_amount]', 'order-minimum-amount-for-woocommerce' ),
+				'desc'              => __( 'Create the <code>[alg_wc_oma_amount]</code> shortcode', 'order-minimum-amount-for-woocommerce' ),
+				'desc_tip'          => __( 'For now, it allows to set different values for different customer types.', 'order-minimum-amount-for-woocommerce' ) . '<br />' .
+				                       sprintf( __( 'Please check the <a href="%s" target="_blank">documentation</a> for more info.', 'order-minimum-amount-for-woocommerce' ), 'https://wpfactory.com/item/order-minimum-maximum-amount-for-woocommerce/#tab-shortcodes' ) . '<br />',
+				'type'              => 'checkbox',
+				'default'           => 'no',
+				'custom_attributes' => apply_filters( 'alg_wc_oma_settings', array( 'disabled' => 'disabled' ) ),
+				'id'                => 'alg_wc_oma_amounts_alg_wc_oma_amount_enabled',
+			),
+			array(
+				'type'     => 'sectionend',
+				'id'       => 'alg_wc_oma_amounts_shortcode_options',
+			),
+		);
+		return array_merge($settings,$shortcode_opts);
 	}
 
 }

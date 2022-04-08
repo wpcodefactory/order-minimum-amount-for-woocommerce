@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - General Section Settings
  *
- * @version 4.1.1
+ * @version 4.1.4
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -29,7 +29,7 @@ class Alg_WC_OMA_Settings_General extends Alg_WC_OMA_Settings_Section {
 	/**
 	 * get_settings.
 	 *
-	 * @version 4.1.1
+	 * @version 4.1.4
 	 * @since   1.0.0
 	 */
 	function get_settings() {

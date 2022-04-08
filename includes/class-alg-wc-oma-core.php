@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Core Class
  *
- * @version 4.1.2
+ * @version 4.1.4
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -119,7 +119,7 @@ class Alg_WC_OMA_Core {
 	/**
 	 * Add script to disable checkout button in cart page.
 	 *
-	 * @version 4.1.2
+	 * @version 4.1.4
 	 * @since   4.1.2
 	 */
 	function add_disable_checkout_script() {
@@ -130,8 +130,8 @@ class Alg_WC_OMA_Core {
 		<style>
 			.disable-checkout-btn {
 				pointer-events: none;
-				background: #747474 !important;
 				color: #fff !important;
+				background-color:rgba(0, 0, 0, 0.5) !important;
 			}
 		</style>
 		<script>
@@ -141,21 +141,17 @@ class Alg_WC_OMA_Core {
 					let parts = value.split(`; ${name}=`);
 					if (parts.length === 2) return parts.pop().split(';').shift();
 				}
-
 				function disable_or_enable_btn() {
 					let checkoutButton = $('.wc-proceed-to-checkout > a');
-
 					if (typeof checkoutButton === 'undefined' || checkoutButton.length <= 0) {
 						return;
 					}
-
 					if (getCookie('alg_wc_oma_has_notices')) {
 						checkoutButton.addClass('disable-checkout-btn');
 					} else {
 						checkoutButton.removeClass('disable-checkout-btn');
 					}
 				}
-
 				$(document.body).on('updated_cart_totals', disable_or_enable_btn);
 				disable_or_enable_btn();
 			});

@@ -3,7 +3,7 @@ Contributors: wpcodefactory, karzin, jaedm97
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 4.4
 Tested up to: 5.9
-Stable tag: 4.1.3
+Stable tag: 4.1.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -70,6 +70,13 @@ With [premium version](https://wpfactory.com/item/order-minimum-maximum-amount-f
 1. Frontend example – Cart notice.
 
 == Changelog ==
+
+= 4.1.4 - 08/04/2022 =
+* Dev - General - Cart options - Improve the disabled button style.
+* Dev - Amounts - Create option to allow adding shortcodes on the amounts.
+* Dev - Amounts - Create the `[alg_wc_oma_amount]` shortcode.
+* Dev - Create `alg_wc_oma_amount_input_type` filter.
+* Dev - Shortcode deprecated. From `[alg_wc_order_min_max_amount]` to `[alg_wc_oma_amount_msg]`.
 
 = 4.1.3 - 20/03/2022 =
 * Fix - Messages and shortcodes work with "Enable plugin" option disabled.
