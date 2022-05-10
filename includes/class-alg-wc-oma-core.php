@@ -1,8 +1,8 @@
 <?php
 /**
- * Order Minimum Amount for WooCommerce - Core Class
+ * Order Minimum Amount for WooCommerce - Core Class.
  *
- * @version 4.1.4
+ * @version 4.1.5
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -443,13 +443,14 @@ class Alg_WC_OMA_Core {
 	/**
 	 * block_checkout.
 	 *
-	 * @version 4.1.1
+	 * @version 4.1.5
 	 * @since   1.0.0
 	 */
 	function block_checkout( $wp ) {
 		if (
 			( function_exists( 'is_checkout' ) && is_checkout() ) &&
 			! is_wc_endpoint_url( 'order-received' ) &&
+			! is_wc_endpoint_url('order-pay') &&
 			'yes' === get_option( 'alg_wc_oma_block_checkout', 'no' ) &&
 			apply_filters( 'alg_wc_oma_block_checkout', true ) &&
 			! empty( $notices = $this->messages->get_notices( 'cart' )['flat_notices'] )

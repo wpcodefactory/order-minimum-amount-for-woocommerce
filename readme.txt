@@ -3,7 +3,7 @@ Contributors: wpcodefactory, karzin, jaedm97
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 4.4
 Tested up to: 5.9
-Stable tag: 4.1.4
+Stable tag: 4.1.5
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -70,6 +70,10 @@ With [premium version](https://wpfactory.com/item/order-minimum-maximum-amount-f
 1. Frontend example – Cart notice.
 
 == Changelog ==
+
+= 4.1.5 - 10/05/2022 =
+* Fix - General - Checkout options - "Block checkout page" may redirect to cart if paying via "Order pay page".
+* WC tested up to: 6.4.
 
 = 4.1.4 - 08/04/2022 =
 * Dev - General - Cart options - Improve the disabled button style.
