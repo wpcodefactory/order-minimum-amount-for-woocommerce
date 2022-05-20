@@ -1,8 +1,8 @@
 <?php
 /**
- * Order Minimum Amount for WooCommerce - Shipping Section Settings
+ * Order Minimum Amount for WooCommerce - Shipping Section Settings.
  *
- * @version 4.1.0
+ * @version 4.1.6
  * @since   3.2.0
  *
  * @author  WPFactory
@@ -29,7 +29,7 @@ class Alg_WC_OMA_Settings_Shipping extends Alg_WC_OMA_Settings_Section {
 	/**
 	 * get_settings.
 	 *
-	 * @version 4.1.0
+	 * @version 4.1.6
 	 * @since   3.2.0
 	 */
 	function get_settings() {
@@ -157,7 +157,7 @@ class Alg_WC_OMA_Settings_Shipping extends Alg_WC_OMA_Settings_Section {
 							'desc_tip' => alg_wc_oma()->core->amounts->get_unit( $amount_type ),
 							'id'       => "alg_wc_oma_{$min_or_max}_{$amount_type}_by_shipping_{$shipping_type}[{$id}]",
 							'default'  => 0,
-							'type'     => 'number',
+							'type'     => apply_filters( 'alg_wc_oma_amount_input_type', 'number', 'shipping' ),
 							'custom_attributes' => alg_wc_oma()->core->get_amount_custom_atts(),
 						),
 					) );

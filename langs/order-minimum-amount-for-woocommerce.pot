@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Order Minimum/Maximum Amount for WooCommerce 4.1.5\n"
+"Project-Id-Version: Order Minimum/Maximum Amount for WooCommerce 4.1.6\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/order-minimum-amount-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-05-10T18:39:15+02:00\n"
+"POT-Creation-Date: 2022-05-20T20:05:07+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: order-minimum-amount-for-woocommerce\n"
@@ -614,7 +614,7 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-oma-settings-currencies.php:25
 #: includes/settings/class-alg-wc-oma-settings-currencies.php:42
-#: includes/settings/class-alg-wc-oma-settings-currencies.php:58
+#: includes/settings/class-alg-wc-oma-settings-currencies.php:65
 #: includes/settings/class-alg-wc-oma-settings-section.php:58
 msgid "Currencies"
 msgstr ""
@@ -635,11 +635,19 @@ msgstr ""
 msgid "Amount by currency"
 msgstr ""
 
+#: includes/settings/class-alg-wc-oma-settings-currencies.php:58
+msgid "Section overriding"
+msgstr ""
+
 #: includes/settings/class-alg-wc-oma-settings-currencies.php:59
+msgid "Using %s in amounts from other sections will prevent this section from overriding them"
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-currencies.php:66
 msgid "\"Save changes\" after you add new currencies here - new settings fields will be displayed."
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-currencies.php:104
+#: includes/settings/class-alg-wc-oma-settings-currencies.php:111
 #: includes/settings/class-alg-wc-oma-settings-fees.php:106
 #: includes/settings/class-alg-wc-oma-settings-gateways.php:109
 #: includes/settings/class-alg-wc-oma-settings-memberships.php:98
