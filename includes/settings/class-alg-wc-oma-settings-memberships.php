@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Memberships Section Settings.
  *
- * @version 4.1.6
+ * @version 4.1.7
  * @since   3.4.0
  *
  * @author  WPFactory
@@ -29,22 +29,24 @@ class Alg_WC_OMA_Settings_Memberships extends Alg_WC_OMA_Settings_Section {
 	/**
 	 * get_settings.
 	 *
-	 * @version 4.1.6
+	 * @version 4.1.7
 	 * @since   3.4.0
 	 */
 	function get_settings() {
 
 		$settings = array(
 			array(
-				'title'    => __( 'Memberships', 'order-minimum-amount-for-woocommerce' ),
-				'type'     => 'title',
-				'desc'     => __( 'Optional amounts per membership.', 'order-minimum-amount-for-woocommerce' ) . ' ' .
-					sprintf( __( 'Requires %s or %s plugins.', 'order-minimum-amount-for-woocommerce' ),
-						'<a href="https://woocommerce.com/products/woocommerce-memberships/" target="_blank">' .
-							__( 'WooCommerce Memberships', 'order-minimum-amount-for-woocommerce' ) . '</a>',
-						'<a href="https://memberpress.com/" target="_blank">' .
-							__( 'MemberPress', 'order-minimum-amount-for-woocommerce' ) . '</a>' ),
-				'id'       => 'alg_wc_oma_by_membership_options',
+				'title' => __( 'Memberships', 'order-minimum-amount-for-woocommerce' ),
+				'type'  => 'title',
+				'desc'  => __( 'Optional amounts per membership.', 'order-minimum-amount-for-woocommerce' ) . ' ' .
+				           sprintf( __( 'Compatible with %s, %s and %s plugins.', 'order-minimum-amount-for-woocommerce' ),
+					           '<a href="https://woocommerce.com/products/woocommerce-memberships/" target="_blank">' .
+					           __( 'WooCommerce Memberships', 'order-minimum-amount-for-woocommerce' ) . '</a>',
+					           '<a href="https://memberpress.com/" target="_blank">' .
+					           __( 'MemberPress', 'order-minimum-amount-for-woocommerce' ) . '</a>',
+					           '<a href="https://fantasticplugins.com/shop/sumo-memberships/" target="_blank">' .
+					           __( 'SUMO Memberships', 'order-minimum-amount-for-woocommerce' ) . '</a>' ),
+				'id'    => 'alg_wc_oma_by_membership_options',
 			),
 			array(
 				'title'    => __( 'Amount per membership', 'order-minimum-amount-for-woocommerce' ),

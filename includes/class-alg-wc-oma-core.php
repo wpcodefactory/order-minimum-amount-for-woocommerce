@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Core Class.
  *
- * @version 4.1.5
+ * @version 4.1.7
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -755,7 +755,7 @@ class Alg_WC_OMA_Core {
 	/**
 	 * get_memberships.
 	 *
-	 * @version 3.4.0
+	 * @version 4.1.7
 	 * @since   3.4.0
 	 *
 	 * @see     https://docs.woocommerce.com/document/woocommerce-memberships-function-reference/
@@ -789,6 +789,15 @@ class Alg_WC_OMA_Core {
 						'type' => 'memberpress',
 					);
 				}
+			}
+		}
+		// SUMO Memberships
+		if ( class_exists( 'SUMOMemberships' ) ) {
+			foreach ( sumo_get_membership_levels() as $membership_id=>$membership_name ) {
+				$memberships[ 'alg_wc_sumo_' . $membership_id ] = array(
+					'title' => $membership_name . ' (' . __( 'SUMO Memberships', 'order-minimum-amount-for-woocommerce' ) . ')',
+					'type' => 'sumo_memberships',
+				);
 			}
 		}
 		return $memberships;

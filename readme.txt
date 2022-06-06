@@ -1,9 +1,9 @@
 === Order Minimum/Maximum Amount for WooCommerce ===
-Contributors: wpcodefactory, karzin, jaedm97
+Contributors: wpcodefactory, karzin, jaedm97, algoritmika, anbinder
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 4.4
-Tested up to: 5.9
-Stable tag: 4.1.6
+Tested up to: 6.0
+Stable tag: 4.1.7
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -70,6 +70,14 @@ With [premium version](https://wpfactory.com/item/order-minimum-maximum-amount-f
 1. Frontend example – Cart notice.
 
 == Changelog ==
+
+= 4.1.7 - 06/06/2022 =
+* Fix - Products - Per product category/tag is not working properly.
+* Fix - PHP Warning: Undefined property: `Alg_WC_OMA_Pro_Products::$do_list_variations`.
+* Dev - Memberships - Add compatibility with the SUMO Memberships plugin.
+* Dev - Add `user_bought_term_id` param to `alg_wc_oma_amount` shortcode with the possibility of using multiple ids with commas.
+* Dev - Add `check_parent_bought_term_id` param to `alg_wc_oma_amount` shortcode. Default is `false`.
+* Tested up to: 6.0.
 
 = 4.1.6 - 20/05/2022 =
 * Fix - Amounts - Shortcodes are not changing the input type from number to text in all sections.
