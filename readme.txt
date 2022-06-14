@@ -3,7 +3,7 @@ Contributors: wpcodefactory, karzin, jaedm97, algoritmika, anbinder
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 4.4
 Tested up to: 6.0
-Stable tag: 4.1.7
+Stable tag: 4.1.8
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -70,6 +70,10 @@ With [premium version](https://wpfactory.com/item/order-minimum-maximum-amount-f
 1. Frontend example – Cart notice.
 
 == Changelog ==
+
+= 4.1.8 - 14/06/2022 =
+* Fix - Products - Per product - Error: Cannot access protected property `Alg_WC_OMA_Pro_Products::$do_list_variations`.
+* WC tested up to: 6.5.
 
 = 4.1.7 - 06/06/2022 =
 * Fix - Products - Per product category/tag is not working properly.
