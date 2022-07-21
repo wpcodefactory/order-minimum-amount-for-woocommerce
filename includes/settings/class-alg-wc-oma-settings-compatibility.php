@@ -63,8 +63,28 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Compatibility' ) ) :
 					'id'   => 'alg_wc_oma_product_bundles_compatibility_options',
 				),
 			);
+			$wc_subscriptions_opts = array(
+				array(
+					'title' => __( 'WooCommerce Subscriptions', 'order-minimum-amount-for-woocommerce' ),
+					'type'  => 'title',
+					'desc'  => sprintf( __( 'Compatibility with %s plugin.', 'order-minimum-amount-for-woocommerce' ), sprintf( '<a href="%s" target="_blank">%s</a>', 'https://woocommerce.com/pt-br/products/woocommerce-subscriptions/', __( 'WooCommerce Subscriptions', 'order-minimum-amount-for-woocommerce' ) ) ),
+					'id'    => 'alg_wc_oma_wc_subscriptions_compatibility_options',
+				),
+				array(
+					'title'             => __( 'Subscription switching', 'order-minimum-amount-for-woocommerce' ),
+					'desc'              => __( 'Skip min/max amount checks if the user has a switching subscription item in cart', 'order-minimum-amount-for-woocommerce' ),
+					'id'                => 'alg_wc_oma_wc_subscriptions_skip_subscription_switching',
+					'default'           => 'no',
+					'type'              => 'checkbox',
+					'custom_attributes' => apply_filters( 'alg_wc_oma_settings', array( 'disabled' => 'disabled' ) ),
+				),
+				array(
+					'type' => 'sectionend',
+					'id'   => 'alg_wc_oma_wc_subscriptions_compatibility_options',
+				),
+			);
 			return array_merge(
-				$prod_bundle_opts, array()
+				$prod_bundle_opts, $wc_subscriptions_opts
 			);
 		}
 	}

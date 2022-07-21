@@ -3,7 +3,7 @@ Contributors: wpcodefactory, karzin, jaedm97, algoritmika, anbinder
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 4.4
 Tested up to: 6.0
-Stable tag: 4.1.8
+Stable tag: 4.1.9
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -70,6 +70,10 @@ With [premium version](https://wpfactory.com/item/order-minimum-maximum-amount-f
 1. Frontend example – Cart notice.
 
 == Changelog ==
+
+= 4.1.9 - 21/07/2022 =
+* Dev - Compatibility - WooCommerce Subscriptions - Add new option to skip min/max amount checks if the user has a switching subscription item in cart.
+* WC tested up to: 6.7.
 
 = 4.1.8 - 14/06/2022 =
 * Fix - Products - Per product - Error: Cannot access protected property `Alg_WC_OMA_Pro_Products::$do_list_variations`.

@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Order Minimum/Maximum Amount for WooCommerce 4.1.8\n"
+"Project-Id-Version: Order Minimum/Maximum Amount for WooCommerce 4.1.9\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/order-minimum-amount-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-06-14T23:43:58+02:00\n"
+"POT-Creation-Date: 2022-07-21T23:49:27+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: order-minimum-amount-for-woocommerce\n"
@@ -539,6 +539,7 @@ msgid "Product Bundles"
 msgstr ""
 
 #: includes/settings/class-alg-wc-oma-settings-compatibility.php:40
+#: includes/settings/class-alg-wc-oma-settings-compatibility.php:70
 msgid "Compatibility with %s plugin."
 msgstr ""
 
@@ -565,6 +566,19 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-oma-settings-compatibility.php:55
 msgid "Allows to set up a min/max price for bundle product in cart."
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-compatibility.php:68
+#: includes/settings/class-alg-wc-oma-settings-compatibility.php:70
+msgid "WooCommerce Subscriptions"
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-compatibility.php:74
+msgid "Subscription switching"
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-compatibility.php:75
+msgid "Skip min/max amount checks if the user has a switching subscription item in cart"
 msgstr ""
 
 #: includes/settings/class-alg-wc-oma-settings-coupons.php:25
