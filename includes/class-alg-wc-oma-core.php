@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Core Class.
  *
- * @version 4.1.7
+ * @version 4.2.0
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -47,7 +47,7 @@ class Alg_WC_OMA_Core {
 	/**
 	 * add_hooks.
 	 *
-	 * @version 4.1.2
+	 * @version 4.2.0
 	 * @since   1.0.0
 	 */
 	function add_hooks() {
@@ -78,6 +78,8 @@ class Alg_WC_OMA_Core {
 			}
 			if ( 'yes' === get_option( 'alg_wc_oma_max_hide_add_to_cart_single', 'no' ) ) {
 				add_action( 'woocommerce_single_product_summary', array( $this, 'hide_add_to_cart_single' ), 29, 3 );
+				add_action( 'woocommerce_available_variation', array( $this, 'add_add_to_cart_single_variation_data' ), 29, 3 );
+				add_action( 'woocommerce_single_product_summary', array( $this, 'hide_variation_add_to_cart_single' ), 29, 3 );
 			}
 		}
 		// Login requirement.
@@ -246,23 +248,82 @@ class Alg_WC_OMA_Core {
 	/**
 	 * hide_add_to_cart_single.
 	 *
-	 * @version 3.4.0
+	 * @version 4.2.0
 	 * @since   3.4.0
 	 *
 	 * @todo    variable: disable on per variation basis?
 	 */
 	function hide_add_to_cart_single() {
 		global $product;
-		if ( ! $this->check_product_max_amount( $product->get_id(), 1, 0, false, true, $product ) ) {
+		if ( ! $this->check_product_max_amount( array(
+			'product_id'    => $product->get_id(),
+			'quantity'      => 1,
+			'variation_id'  => 0,
+			'show_notices'  => false,
+			'is_simplified' => true,
+			'product'       => $product,
+		) ) ) {
 			remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
 			echo get_option( 'alg_wc_oma_max_hide_add_to_cart_single_content', '' );
 		}
 	}
 
 	/**
+	 * hide_variation_add_to_cart_single.
+	 *
+	 * @version 4.2.0
+	 * @since   4.2.0
+	 */
+	function hide_variation_add_to_cart_single() {
+		?>
+		<script>
+			jQuery(document).ready(function ($) {
+				$(".single_variation_wrap").on("show_variation", function (event, variation) {
+					if (variation.hasOwnProperty('alg_wc_oma_hide_add_to_cart_btn_content')) {
+						$('.woocommerce-variation-add-to-cart').hide();
+						if (!$('.alg-wc-oma-custom-text-on-hidden-add-to-cart').length) {
+							$(".woocommerce-product-details__short-description").append("<div class='alg-wc-oma-custom-text-on-hidden-add-to-cart'>" + variation.alg_wc_oma_hide_add_to_cart_btn_content + "</div>");
+						}
+						$('.alg-wc-oma-custom-text-on-hidden-add-to-cart').show();
+					} else {
+						$('.alg-wc-oma-custom-text-on-hidden-add-to-cart').hide();
+						$('.woocommerce-variation-add-to-cart').show();
+					}
+				});
+			});
+		</script>
+		<?php
+	}
+
+	/**
+	 * add_variation_data_regarding_add_to_cart_single.
+	 *
+	 * @version 4.2.0
+	 * @since   4.2.0
+	 *
+	 * @param $data
+	 * @param $variable_product
+	 * @param $variation
+	 *
+	 * @return mixed
+	 * @throws Exception
+	 */
+	function add_add_to_cart_single_variation_data( $data, $variable_product, $variation ) {
+		if ( ! $this->check_product_max_amount( array(
+			'quantity'      => ! empty( $amount_data = alg_wc_oma()->core->get_min_max_amount_data( 'min', 'qty', $variation->get_id(), 'product' ) ) && isset( $amount_data['amount'] ) ? $amount_data['amount'] : 1,
+			'show_notices'  => false,
+			'is_simplified' => true,
+			'product'       => $variation,
+		) ) ) {
+			$data['alg_wc_oma_hide_add_to_cart_btn_content'] = get_option( 'alg_wc_oma_max_hide_add_to_cart_single_content', '' );
+		}
+		return $data;
+	}
+
+	/**
 	 * hide_add_to_cart_loop.
 	 *
-	 * @version 3.4.0
+	 * @version 4.2.0
 	 * @since   3.4.0
 	 */
 	function hide_add_to_cart_loop( $link, $product, $args ) {
@@ -270,7 +331,14 @@ class Alg_WC_OMA_Core {
 			$product_id = $product->get_id();
 			if ( ! isset( $this->product_cache['hide_add_to_cart_loop'][ $product_id ] ) ) {
 				$this->product_cache['hide_add_to_cart_loop'][ $product_id ] = $link;
-				if ( ! $this->check_product_max_amount( $product_id, 1, 0, false, true, $product ) ) {
+				if ( ! $this->check_product_max_amount( array(
+					'product_id'    => $product_id,
+					'quantity'      => 1,
+					'variation_id'  => 0,
+					'show_notices'  => false,
+					'is_simplified' => true,
+					'product'       => $product,
+				) ) ) {
 					$this->product_cache['hide_add_to_cart_loop'][ $product_id ] = $this->max_hide_add_to_cart_loop_content;
 				}
 			}
@@ -282,12 +350,17 @@ class Alg_WC_OMA_Core {
 	/**
 	 * validate_max_on_add_to_cart.
 	 *
-	 * @version 3.4.0
+	 * @version 4.2.0
 	 * @since   3.4.0
 	 */
 	function validate_max_on_add_to_cart( $passed, $product_id, $quantity, $variation_id = 0 ) {
 		if ( $passed ) {
-			$passed = $this->check_product_max_amount( $product_id, $quantity, $variation_id, true );
+			$passed = $this->check_product_max_amount( array(
+				'product_id'      => $product_id,
+				'quantity'        => $quantity,
+				'variation_id'    => $variation_id,
+				'show_notices'    => true,
+			) );
 		}
 		return $passed;
 	}
@@ -295,7 +368,7 @@ class Alg_WC_OMA_Core {
 	/**
 	 * check_product_max_amount.
 	 *
-	 * @version 4.1.1
+	 * @version 4.2.0
 	 * @since   3.4.0
 	 *
 	 * @see     https://woocommerce.github.io/code-reference/classes/WC-Cart.html#method_add_to_cart
@@ -304,17 +377,43 @@ class Alg_WC_OMA_Core {
 	 * @todo    `set_quantity()`: `$refresh_totals`?
 	 * @todo    add option to auto-correct qty: `WC_Cart::add_to_cart(): apply_filters( 'woocommerce_add_to_cart_quantity', $quantity, $product_id );`?
 	 * @todo    add option to disable products (hide (`woocommerce_product_is_visible`), remove "add to cart" (`woocommerce_is_purchasable`, `woocommerce_variation_is_purchasable`), etc.)?
+	 *
+	 * @param null $args
+	 *
+	 * @return bool
+	 * @throws Exception
 	 */
-	function check_product_max_amount( $product_id, $quantity, $variation_id = 0, $show_notices = false, $is_simplified = false, $product = false ) {
+	function check_product_max_amount( $args = null ) {
+		$args = wp_parse_args( $args, array(
+			'product_id'      => '',
+			'quantity'        => '',
+			'variation_id'    => 0,
+			'undo_qty_method' => 'after_get_notices', // before_get_notices | after_get_notices
+			'show_notices'    => false,
+			'is_simplified'   => false,
+			'product'         => false,
+		) );
+		$product_id      = $args['product_id'];
+		$quantity        = $args['quantity'];
+		$variation_id    = $args['variation_id'];
+		$show_notices    = $args['show_notices'];
+		$is_simplified   = $args['is_simplified'];
+		$product         = $args['product'];
+		$undo_qty_method = $args['undo_qty_method'];
 		$cart_item_key = ( $is_simplified ?
 			$this->add_to_cart_simplified( $product_id, ( $product ? $product : wc_get_product( $product_id ) ), $quantity ) :
 			WC()->cart->add_to_cart( $product_id, $quantity, $variation_id ) );
 		if ( $cart_item_key ) {
-			WC()->cart->set_quantity( $cart_item_key, ( WC()->cart->cart_contents[ $cart_item_key ]['quantity'] - $quantity ) );
+			if ( 'before_get_notices' === $undo_qty_method ) {
+				WC()->cart->set_quantity( $cart_item_key, ( WC()->cart->cart_contents[ $cart_item_key ]['quantity'] - $quantity ) );
+			}
 			$notices = $this->messages->get_notices( array(
 				'area'   => 'cart',
 				'limits' => array( 'max' ),
 			) )['flat_notices'];
+			if ( 'after_get_notices' === $undo_qty_method ) {
+				WC()->cart->set_quantity( $cart_item_key, ( WC()->cart->cart_contents[ $cart_item_key ]['quantity'] - $quantity ) );
+			}
 			if ( ! empty( $notices ) ) {
 				if ( $show_notices ) {
 					foreach ( $notices as $notice ) {

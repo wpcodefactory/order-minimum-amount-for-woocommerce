@@ -3,7 +3,7 @@ Contributors: wpcodefactory, karzin, jaedm97, algoritmika, anbinder
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 4.4
 Tested up to: 6.0
-Stable tag: 4.1.9
+Stable tag: 4.2.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -70,6 +70,14 @@ With [premium version](https://wpfactory.com/item/order-minimum-maximum-amount-f
 1. Frontend example – Cart notice.
 
 == Changelog ==
+
+= 4.2.0 - 16/08/2022 =
+* Fix - PHP Warning: Undefined array key "line_subtotal".
+* Fix - General - "Maximum" amount limit options - Validate on add to cart.
+* Fix - General - "Maximum" amount limit options - Hide "add to cart" button.
+* Fix - General - "Quantity" amount type options - Min and Max attributes should reflect when changing between variations.
+* Dev - General - "Maximum" amount limit options - Improve hiding on variations.
+* WC tested up to: 6.8.
 
 = 4.1.9 - 21/07/2022 =
 * Dev - Compatibility - WooCommerce Subscriptions - Add new option to skip min/max amount checks if the user has a switching subscription item in cart.

@@ -4,7 +4,7 @@
  *
  * This class includes everything needed to add a new "amount type".
  *
- * @version 4.1.0
+ * @version 4.2.0
  * @since   3.0.0
  *
  * @author  WPFactory
@@ -291,7 +291,7 @@ class Alg_WC_OMA_Amount_Types {
 	/**
 	 * get_cart_value.
 	 *
-	 * @version 4.0.8
+	 * @version 4.2.0
 	 * @since   4.0.0
 	 */
 	function get_cart_value( $args = null ) {
@@ -310,6 +310,7 @@ class Alg_WC_OMA_Amount_Types {
 		$final_result = false;
 		switch ( $type ) {
 			case 'sum':
+				$cart_item['line_subtotal'] = ! isset( $cart_item['line_subtotal'] ) ? 0 : $cart_item['line_subtotal'];
 				$value  = ( $this->get_order_sum_option( 'is_subtotal' ) || $this->get_order_sum_option( 'do_exclude_discounts' ) ?
 					$cart_item['line_subtotal'] + ( $this->get_order_sum_option( 'do_exclude_taxes' ) ? 0 : $cart_item['line_subtotal_tax'] ) :
 					$cart_item['line_total'] + ( $this->get_order_sum_option( 'do_exclude_taxes' ) ? 0 : $cart_item['line_tax'] )
