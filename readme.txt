@@ -3,7 +3,7 @@ Contributors: wpcodefactory, karzin, jaedm97, algoritmika, anbinder
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 4.4
 Tested up to: 6.0
-Stable tag: 4.2.0
+Stable tag: 4.2.1
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -70,6 +70,9 @@ With [premium version](https://wpfactory.com/item/order-minimum-maximum-amount-f
 1. Frontend example – Cart notice.
 
 == Changelog ==
+
+= 4.2.1 - 12/09/2022 =
+* Fix - General - Cart options - Improve "Proceed to checkout buttons" checks.
 
 = 4.2.0 - 16/08/2022 =
 * Fix - PHP Warning: Undefined array key "line_subtotal".

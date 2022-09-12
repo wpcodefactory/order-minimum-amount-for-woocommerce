@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Core Class.
  *
- * @version 4.2.0
+ * @version 4.2.1
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -107,11 +107,11 @@ class Alg_WC_OMA_Core {
 	/**
 	 * Set cookie if there is any notices.
 	 *
-	 * @version 4.1.2
+	 * @version 4.2.1
 	 * @since   4.1.2
 	 */
 	function set_cookie_if_has_notices() {
-		if ( ! empty( $this->messages->get_notices( 'cart' )['flat_notices'] ) && 'disable' === get_option( 'alg_wc_oma_disable_block_checkout_btn', 'do_not_disable' ) ) {
+		if ( 'disable' === get_option( 'alg_wc_oma_disable_block_checkout_btn', 'do_not_disable' ) && ! empty( $this->messages->get_notices( 'cart' )['flat_notices'] ) ) {
 			setcookie( 'alg_wc_oma_has_notices', true, time() + 31556926 );
 		} else {
 			setcookie( 'alg_wc_oma_has_notices' );
@@ -121,11 +121,14 @@ class Alg_WC_OMA_Core {
 	/**
 	 * Add script to disable checkout button in cart page.
 	 *
-	 * @version 4.1.4
+	 * @version 4.2.1
 	 * @since   4.1.2
 	 */
 	function add_disable_checkout_script() {
-		if ( ! is_cart() ) {
+		if (
+			! is_cart() ||
+			'disable' !== get_option( 'alg_wc_oma_disable_block_checkout_btn', 'do_not_disable' )
+		) {
 			return;
 		}
 		?>
@@ -133,7 +136,7 @@ class Alg_WC_OMA_Core {
 			.disable-checkout-btn {
 				pointer-events: none;
 				color: #fff !important;
-				background-color:rgba(0, 0, 0, 0.5) !important;
+				background-color: rgba(0, 0, 0, 0.5) !important;
 			}
 		</style>
 		<script>
