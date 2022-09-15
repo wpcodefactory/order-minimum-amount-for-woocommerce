@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Order Minimum/Maximum Amount for WooCommerce 4.2.1\n"
+"Project-Id-Version: Order Minimum/Maximum Amount for WooCommerce 4.2.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/order-minimum-amount-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-09-12T22:30:16+02:00\n"
+"POT-Creation-Date: 2022-09-15T20:52:36+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: order-minimum-amount-for-woocommerce\n"
@@ -164,37 +164,37 @@ msgstr ""
 msgid "Please login to access the min/max requirements for your order."
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:684
+#: includes/class-alg-wc-oma-core.php:691
 msgid "Guest"
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:712
+#: includes/class-alg-wc-oma-core.php:719
 msgid "Min %s"
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:712
+#: includes/class-alg-wc-oma-core.php:719
 msgid "Max %s"
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:772
+#: includes/class-alg-wc-oma-core.php:779
 msgid "Amount is <strong>ignored</strong> if set to zero (%s), i.e. next level (e.g. \"General\") amount will be applied."
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:773
+#: includes/class-alg-wc-oma-core.php:780
 msgid "<strong>No amount</strong> (i.e. no limit) will be applied if set to a negative value (e.g. %s)."
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:872
+#: includes/class-alg-wc-oma-core.php:879
 #: includes/settings/class-alg-wc-oma-settings-memberships.php:44
 msgid "WooCommerce Memberships"
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:890
+#: includes/class-alg-wc-oma-core.php:897
 #: includes/settings/class-alg-wc-oma-settings-memberships.php:46
 msgid "MemberPress"
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:900
+#: includes/class-alg-wc-oma-core.php:907
 #: includes/settings/class-alg-wc-oma-settings-memberships.php:48
 msgid "SUMO Memberships"
 msgstr ""

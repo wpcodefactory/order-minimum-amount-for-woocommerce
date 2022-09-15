@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Core Class.
  *
- * @version 4.2.1
+ * @version 4.2.2
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -47,7 +47,7 @@ class Alg_WC_OMA_Core {
 	/**
 	 * add_hooks.
 	 *
-	 * @version 4.2.0
+	 * @version 4.2.2
 	 * @since   1.0.0
 	 */
 	function add_hooks() {
@@ -79,7 +79,7 @@ class Alg_WC_OMA_Core {
 			if ( 'yes' === get_option( 'alg_wc_oma_max_hide_add_to_cart_single', 'no' ) ) {
 				add_action( 'woocommerce_single_product_summary', array( $this, 'hide_add_to_cart_single' ), 29, 3 );
 				add_action( 'woocommerce_available_variation', array( $this, 'add_add_to_cart_single_variation_data' ), 29, 3 );
-				add_action( 'woocommerce_single_product_summary', array( $this, 'hide_variation_add_to_cart_single' ), 29, 3 );
+				add_action( 'wp_footer', array( $this, 'hide_variation_add_to_cart_single' ), PHP_INT_MAX );
 			}
 		}
 		// Login requirement.
@@ -89,7 +89,7 @@ class Alg_WC_OMA_Core {
 		// Disable checkout button.
 		add_action( 'woocommerce_update_cart_action_cart_updated', array( $this, 'set_cookie_if_has_notices' ) );
 		add_action( 'wp', array( $this, 'set_cookie_on_cart' ) );
-		add_action( 'wp_footer', array( $this, 'add_disable_checkout_script' ) );
+		add_action( 'wp_footer', array( $this, 'add_disable_checkout_script' ), PHP_INT_MAX );
 	}
 
 	/**
@@ -274,10 +274,17 @@ class Alg_WC_OMA_Core {
 	/**
 	 * hide_variation_add_to_cart_single.
 	 *
-	 * @version 4.2.0
+	 * @version 4.2.2
 	 * @since   4.2.0
 	 */
 	function hide_variation_add_to_cart_single() {
+		global $product;
+		if (
+			! is_product() ||
+			! is_a( $product, 'WC_Product_Variable' )
+		) {
+			return;
+		}
 		?>
 		<script>
 			jQuery(document).ready(function ($) {
