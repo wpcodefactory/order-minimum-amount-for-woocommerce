@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Core Class.
  *
- * @version 4.2.2
+ * @version 4.2.3
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -47,7 +47,7 @@ class Alg_WC_OMA_Core {
 	/**
 	 * add_hooks.
 	 *
-	 * @version 4.2.2
+	 * @version 4.2.3
 	 * @since   1.0.0
 	 */
 	function add_hooks() {
@@ -87,7 +87,7 @@ class Alg_WC_OMA_Core {
 		add_filter( 'wp', array( $this, 'display_login_requirement_notice' ), 10, 4 );
 
 		// Disable checkout button.
-		add_action( 'woocommerce_update_cart_action_cart_updated', array( $this, 'set_cookie_if_has_notices' ) );
+		add_filter( 'woocommerce_update_cart_action_cart_updated', array( $this, 'set_cookie_on_cart_updated' ) );
 		add_action( 'wp', array( $this, 'set_cookie_on_cart' ) );
 		add_action( 'wp_footer', array( $this, 'add_disable_checkout_script' ), PHP_INT_MAX );
 	}
@@ -105,16 +105,29 @@ class Alg_WC_OMA_Core {
 	}
 
 	/**
+	 * @version 4.2.3
+	 * @since   4.2.3
+	 *
+	 * @param $updated
+	 *
+	 * @return mixed
+	 */
+	function set_cookie_on_cart_updated( $updated ) {
+		$this->set_cookie_if_has_notices();
+		return $updated;
+	}
+
+	/**
 	 * Set cookie if there is any notices.
 	 *
-	 * @version 4.2.1
+	 * @version 4.2.3
 	 * @since   4.1.2
 	 */
 	function set_cookie_if_has_notices() {
 		if ( 'disable' === get_option( 'alg_wc_oma_disable_block_checkout_btn', 'do_not_disable' ) && ! empty( $this->messages->get_notices( 'cart' )['flat_notices'] ) ) {
-			setcookie( 'alg_wc_oma_has_notices', true, time() + 31556926 );
+			wc_setcookie( 'alg_wc_oma_has_notices', true, time() + 31556926 );
 		} else {
-			setcookie( 'alg_wc_oma_has_notices' );
+			wc_setcookie( 'alg_wc_oma_has_notices', '', 1 );
 		}
 	}
 

@@ -2,20 +2,20 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Order Minimum/Maximum Amount for WooCommerce 4.2.2\n"
+"Project-Id-Version: order-minimum-amount-for-woocommerce 4.2.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/order-minimum-amount-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-09-15T20:52:36+02:00\n"
+"POT-Creation-Date: 2022-11-10T01:34:55+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: order-minimum-amount-for-woocommerce\n"
 
 #. Plugin Name of the plugin
-msgid "Order Minimum/Maximum Amount for WooCommerce"
+msgid "Order Minimum/Maximum Amount for WooCommerce Pro"
 msgstr ""
 
 #. Plugin URI of the plugin
@@ -159,42 +159,42 @@ msgstr ""
 msgid "%s product tag(s)"
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:182
+#: includes/class-alg-wc-oma-core.php:195
 #: includes/settings/class-alg-wc-oma-settings-general.php:119
 msgid "Please login to access the min/max requirements for your order."
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:691
+#: includes/class-alg-wc-oma-core.php:704
 msgid "Guest"
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:719
+#: includes/class-alg-wc-oma-core.php:732
 msgid "Min %s"
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:719
+#: includes/class-alg-wc-oma-core.php:732
 msgid "Max %s"
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:779
+#: includes/class-alg-wc-oma-core.php:792
 msgid "Amount is <strong>ignored</strong> if set to zero (%s), i.e. next level (e.g. \"General\") amount will be applied."
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:780
+#: includes/class-alg-wc-oma-core.php:793
 msgid "<strong>No amount</strong> (i.e. no limit) will be applied if set to a negative value (e.g. %s)."
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:879
+#: includes/class-alg-wc-oma-core.php:892
 #: includes/settings/class-alg-wc-oma-settings-memberships.php:44
 msgid "WooCommerce Memberships"
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:897
+#: includes/class-alg-wc-oma-core.php:910
 #: includes/settings/class-alg-wc-oma-settings-memberships.php:46
 msgid "MemberPress"
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:907
+#: includes/class-alg-wc-oma-core.php:920
 #: includes/settings/class-alg-wc-oma-settings-memberships.php:48
 msgid "SUMO Memberships"
 msgstr ""
@@ -204,10 +204,18 @@ msgid "You must have an order with a %s of %%amount%% to place your order, your 
 msgstr ""
 
 #: includes/class-alg-wc-oma-messages.php:317
+#: includes/pro/class-alg-wc-oma-pro-compatibility.php:220
+#: includes/pro/class-alg-wc-oma-pro-gateways.php:82
+#: includes/pro/class-alg-wc-oma-pro-products.php:90
+#: includes/pro/class-alg-wc-oma-pro-shipping.php:83
 msgid "minimum"
 msgstr ""
 
 #: includes/class-alg-wc-oma-messages.php:317
+#: includes/pro/class-alg-wc-oma-pro-compatibility.php:220
+#: includes/pro/class-alg-wc-oma-pro-gateways.php:82
+#: includes/pro/class-alg-wc-oma-pro-products.php:90
+#: includes/pro/class-alg-wc-oma-pro-shipping.php:83
 msgid "maximum"
 msgstr ""
 
@@ -336,6 +344,7 @@ msgid "Billing"
 msgstr ""
 
 #: includes/class-alg-wc-oma-messages.php:385
+#: includes/pro/class-alg-wc-oma-pro-shipping.php:49
 #: includes/settings/class-alg-wc-oma-settings-messages.php:57
 #: includes/settings/class-alg-wc-oma-settings-section.php:55
 #: includes/settings/class-alg-wc-oma-settings-shipping.php:25
@@ -415,6 +424,97 @@ msgstr ""
 
 #: includes/class-alg-wc-oma-messages.php:411
 msgid "After add to cart quantity"
+msgstr ""
+
+#: includes/pro/class-alg-wc-oma-pro-bought-products-manager.php:90
+msgid "Empty term ids"
+msgstr ""
+
+#: includes/pro/class-alg-wc-oma-pro-bought-products-manager.php:93
+msgid "Empty user id"
+msgstr ""
+
+#: includes/pro/class-alg-wc-oma-pro-compatibility.php:208
+msgid "You must have a Product Bundle with a %s of %%amount%% to place your order, there is at least one in cart costing %%total%%."
+msgstr ""
+
+#: includes/pro/class-alg-wc-oma-pro-compatibility.php:211
+msgid "The %s value for %%product_title%% should be %%amount%%. Currently it is costing %%total%%."
+msgstr ""
+
+#: includes/pro/class-alg-wc-oma-pro-compatibility.php:214
+msgid "The %s value for %%term_title%% should be %%amount%%. your current category total is %%total%%."
+msgstr ""
+
+#: includes/pro/class-alg-wc-oma-pro-compatibility.php:217
+msgid "The %s value for %%term_title%% should be %%amount%%. your current tag total is %%total%%."
+msgstr ""
+
+#: includes/pro/class-alg-wc-oma-pro-compatibility.php:237
+#: includes/pro/class-alg-wc-oma-pro-compatibility.php:258
+msgid "Bundle price"
+msgstr ""
+
+#: includes/pro/class-alg-wc-oma-pro-currencies.php:43
+#: includes/settings/class-alg-wc-oma-settings-currencies.php:25
+#: includes/settings/class-alg-wc-oma-settings-currencies.php:42
+#: includes/settings/class-alg-wc-oma-settings-currencies.php:65
+#: includes/settings/class-alg-wc-oma-settings-section.php:58
+msgid "Currencies"
+msgstr ""
+
+#: includes/pro/class-alg-wc-oma-pro-gateways.php:49
+#: includes/settings/class-alg-wc-oma-settings-gateways.php:25
+#: includes/settings/class-alg-wc-oma-settings-gateways.php:39
+#: includes/settings/class-alg-wc-oma-settings-messages.php:59
+#: includes/settings/class-alg-wc-oma-settings-section.php:56
+msgid "Payment Gateways"
+msgstr ""
+
+#: includes/pro/class-alg-wc-oma-pro-gateways.php:81
+msgid "You must have an order with a %s of %%amount%% for \"%%payment_gateway%%\" to place your order, your current order total is %%total%%."
+msgstr ""
+
+#: includes/pro/class-alg-wc-oma-pro-memberships.php:42
+#: includes/settings/class-alg-wc-oma-settings-memberships.php:25
+#: includes/settings/class-alg-wc-oma-settings-memberships.php:39
+#: includes/settings/class-alg-wc-oma-settings-section.php:57
+msgid "Memberships"
+msgstr ""
+
+#: includes/pro/class-alg-wc-oma-pro-products.php:93
+msgid "You must have an order with a %s of %%amount%% for %%product_title%% to place your order, your current product total is %%total%%."
+msgstr ""
+
+#: includes/pro/class-alg-wc-oma-pro-products.php:96
+msgid "You must have an order with a %s of %%amount%% for %%term_title%% category to place your order, your current category total is %%total%%."
+msgstr ""
+
+#: includes/pro/class-alg-wc-oma-pro-products.php:99
+msgid "You must have an order with a %s of %%amount%% for %%term_title%% tag to place your order, your current tag total is %%total%%."
+msgstr ""
+
+#: includes/pro/class-alg-wc-oma-pro-shipping.php:82
+msgid "You must have an order with a %s of %%amount%% for \"%%shipping_method%%\" to place your order, your current order total is %%total%%."
+msgstr ""
+
+#: includes/pro/class-alg-wc-oma-pro-user-roles.php:40
+#: includes/settings/class-alg-wc-oma-settings-section.php:52
+#: includes/settings/class-alg-wc-oma-settings-user-roles.php:25
+#: includes/settings/class-alg-wc-oma-settings-user-roles.php:41
+msgid "User Roles"
+msgstr ""
+
+#: includes/pro/settings/class-alg-wc-oma-pro-settings-per-item.php:76
+#: includes/pro/settings/class-alg-wc-oma-pro-settings-per-user.php:70
+#: includes/settings/class-alg-wc-oma-settings-general.php:42
+#: includes/settings/class-alg-wc-oma-settings-general.php:47
+#: includes/settings/class-alg-wc-settings-oma.php:27
+msgid "Order Min/Max Amount"
+msgstr ""
+
+#: includes/pro/settings/class-alg-wc-oma-pro-settings-per-item.php:186
+msgid "Order Minimum/Maximum Amount"
 msgstr ""
 
 #: includes/settings/class-alg-wc-oma-settings-amounts.php:25
@@ -631,13 +731,6 @@ msgstr ""
 msgid "The %s option will overwrite this option."
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-currencies.php:25
-#: includes/settings/class-alg-wc-oma-settings-currencies.php:42
-#: includes/settings/class-alg-wc-oma-settings-currencies.php:65
-#: includes/settings/class-alg-wc-oma-settings-section.php:58
-msgid "Currencies"
-msgstr ""
-
 #: includes/settings/class-alg-wc-oma-settings-currencies.php:44
 msgid "Set different amounts for different currencies (i.e. multi-currency)."
 msgstr ""
@@ -748,13 +841,6 @@ msgstr ""
 msgid "If you want to disable some fee, set the amount as zero or leave it empty."
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-gateways.php:25
-#: includes/settings/class-alg-wc-oma-settings-gateways.php:39
-#: includes/settings/class-alg-wc-oma-settings-messages.php:59
-#: includes/settings/class-alg-wc-oma-settings-section.php:56
-msgid "Payment Gateways"
-msgstr ""
-
 #: includes/settings/class-alg-wc-oma-settings-gateways.php:41
 msgid "Optional amounts per payment gateway."
 msgstr ""
@@ -842,12 +928,6 @@ msgstr ""
 #: includes/settings/class-alg-wc-oma-settings-general.php:25
 #: includes/settings/class-alg-wc-oma-settings-section.php:49
 msgid "General"
-msgstr ""
-
-#: includes/settings/class-alg-wc-oma-settings-general.php:42
-#: includes/settings/class-alg-wc-oma-settings-general.php:47
-#: includes/settings/class-alg-wc-settings-oma.php:27
-msgid "Order Min/Max Amount"
 msgstr ""
 
 #: includes/settings/class-alg-wc-oma-settings-general.php:48
@@ -1204,12 +1284,6 @@ msgstr ""
 msgid "For now only administrators can update user metas."
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-memberships.php:25
-#: includes/settings/class-alg-wc-oma-settings-memberships.php:39
-#: includes/settings/class-alg-wc-oma-settings-section.php:57
-msgid "Memberships"
-msgstr ""
-
 #: includes/settings/class-alg-wc-oma-settings-memberships.php:41
 msgid "Optional amounts per membership."
 msgstr ""
@@ -1434,12 +1508,6 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-oma-settings-products.php:76
 msgid "product tag"
-msgstr ""
-
-#: includes/settings/class-alg-wc-oma-settings-section.php:52
-#: includes/settings/class-alg-wc-oma-settings-user-roles.php:25
-#: includes/settings/class-alg-wc-oma-settings-user-roles.php:41
-msgid "User Roles"
 msgstr ""
 
 #: includes/settings/class-alg-wc-oma-settings-section.php:53
@@ -1693,6 +1761,6 @@ msgstr ""
 msgid "Your settings have been reset."
 msgstr ""
 
-#: order-minimum-amount-for-woocommerce.php:182
+#: order-minimum-amount-for-woocommerce-pro.php:182
 msgid "Go Pro"
 msgstr ""
