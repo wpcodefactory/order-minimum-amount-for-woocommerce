@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Core Class.
  *
- * @version 4.2.3
+ * @version 4.2.4
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -47,7 +47,7 @@ class Alg_WC_OMA_Core {
 	/**
 	 * add_hooks.
 	 *
-	 * @version 4.2.3
+	 * @version 4.2.4
 	 * @since   1.0.0
 	 */
 	function add_hooks() {
@@ -86,7 +86,7 @@ class Alg_WC_OMA_Core {
 		add_filter( 'alg_wc_oma_get_notices', array( $this, 'wipe_notices_if_login_requirement_is_enabled' ), 10 );
 		add_filter( 'wp', array( $this, 'display_login_requirement_notice' ), 10, 4 );
 
-		// Disable checkout button.
+		// Disable "Proceed to checkout" button on cart page.
 		add_filter( 'woocommerce_update_cart_action_cart_updated', array( $this, 'set_cookie_on_cart_updated' ) );
 		add_action( 'wp', array( $this, 'set_cookie_on_cart' ) );
 		add_action( 'wp_footer', array( $this, 'add_disable_checkout_script' ), PHP_INT_MAX );
@@ -95,11 +95,14 @@ class Alg_WC_OMA_Core {
 	/**
 	 * Set cookie if there is any notices in cart page.
 	 *
-	 * @version 4.1.2
+	 * @version 4.2.4
 	 * @since   4.1.2
 	 */
 	function set_cookie_on_cart() {
-		if ( is_cart() ) {
+		if (
+			is_cart() ||
+			( isset( $_REQUEST['wc-ajax'] ) && 'get_refreshed_fragments' === $_REQUEST['wc-ajax'] )
+		) {
 			$this->set_cookie_if_has_notices();
 		}
 	}
@@ -134,7 +137,7 @@ class Alg_WC_OMA_Core {
 	/**
 	 * Add script to disable checkout button in cart page.
 	 *
-	 * @version 4.2.1
+	 * @version 4.2.4
 	 * @since   4.1.2
 	 */
 	function add_disable_checkout_script() {
@@ -159,7 +162,7 @@ class Alg_WC_OMA_Core {
 					let parts = value.split(`; ${name}=`);
 					if (parts.length === 2) return parts.pop().split(';').shift();
 				}
-				function disable_or_enable_btn() {
+				function disableOrEnableBtn() {
 					let checkoutButton = $('.wc-proceed-to-checkout > a');
 					if (typeof checkoutButton === 'undefined' || checkoutButton.length <= 0) {
 						return;
@@ -170,8 +173,9 @@ class Alg_WC_OMA_Core {
 						checkoutButton.removeClass('disable-checkout-btn');
 					}
 				}
-				$(document.body).on('updated_cart_totals', disable_or_enable_btn);
-				disable_or_enable_btn();
+				$(document.body).on('updated_cart_totals', disableOrEnableBtn);
+				$(document.body).on('wc_fragments_refreshed', disableOrEnableBtn);
+				disableOrEnableBtn();
 			});
 		</script>
 		<?php

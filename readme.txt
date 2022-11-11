@@ -3,7 +3,7 @@ Contributors: wpcodefactory, karzin, jaedm97, algoritmika, anbinder
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 4.4
 Tested up to: 6.1
-Stable tag: 4.2.3
+Stable tag: 4.2.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -70,6 +70,9 @@ With [premium version](https://wpfactory.com/item/order-minimum-maximum-amount-f
 1. Frontend example – Cart notice.
 
 == Changelog ==
+
+= 4.2.4 - 11/11/2022 =
+* Fix - General - Cart options - Proceed to checkout button - Disable is not working consistently.
 
 = 4.2.3 - 09/11/2022 =
 * Fix - General - Cart options - Proceed to checkout button - Disable is not working consistently.
