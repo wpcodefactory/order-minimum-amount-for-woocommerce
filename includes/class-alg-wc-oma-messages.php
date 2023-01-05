@@ -1,8 +1,8 @@
 <?php
 /**
- * Order Minimum Amount for WooCommerce - Messages
+ * Order Minimum Amount for WooCommerce - Messages.
  *
- * @version 4.1.3
+ * @version 4.2.5
  * @since   4.0.4
  *
  * @author  WPFactory
@@ -137,7 +137,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * get_output_notices_params_from_position.
 		 *
-		 * @version 4.0.7
+		 * @version 4.2.5
 		 * @since   4.0.4
 		 *
 		 * @param $position
@@ -147,6 +147,12 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		function get_output_notices_params_from_position( $position ) {
 			$params = array(
 				'woocommerce_before_checkout_form' => array(
+					'func' => 'wc_print_notice',
+				),
+				'woocommerce_blocks_cart_enqueue_data' => array(
+					'func' => 'wc_print_notice',
+				),
+				'woocommerce_blocks_checkout_enqueue_data' => array(
 					'func' => 'wc_print_notice',
 				),
 				'woocommerce_before_single_product' => array(
@@ -325,7 +331,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * get_messages_info.
 		 *
-		 * @version 4.0.7
+		 * @version 4.2.5
 		 * @since   4.0.4
 		 *
 		 * @return array
@@ -337,6 +343,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 					'default_notice_type'  => 'notice',
 					'positions' => array(
 						'woocommerce_before_cart'                    => __( 'Before cart (Notice)', 'order-minimum-amount-for-woocommerce' ),
+						'woocommerce_blocks_cart_enqueue_data'       => __( 'Blocks cart enqueue data (Notice)', 'order-minimum-amount-for-woocommerce' ),
 						'woocommerce_before_cart_table'              => __( 'Before cart table', 'order-minimum-amount-for-woocommerce' ),
 						'woocommerce_before_cart_contents'           => __( 'Before cart contents', 'order-minimum-amount-for-woocommerce' ),
 						'woocommerce_cart_contents'                  => __( 'Cart contents', 'order-minimum-amount-for-woocommerce' ),
@@ -380,6 +387,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 					'default_notice_type'  => 'error',
 					'positions' => array(
 						'woocommerce_before_checkout_form'             => __( 'Before checkout form (Notice)', 'order-minimum-amount-for-woocommerce' ),
+						'woocommerce_blocks_checkout_enqueue_data'     => __( 'Blocks checkout enqueue data (Notice)', 'order-minimum-amount-for-woocommerce' ),
 						'woocommerce_checkout_before_customer_details' => __( 'Before customer details', 'order-minimum-amount-for-woocommerce' ),
 						'woocommerce_checkout_billing'                 => __( 'Billing', 'order-minimum-amount-for-woocommerce' ),
 						'woocommerce_checkout_shipping'                => __( 'Shipping', 'order-minimum-amount-for-woocommerce' ),

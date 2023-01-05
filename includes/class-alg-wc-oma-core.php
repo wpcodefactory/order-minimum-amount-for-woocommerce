@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Core Class.
  *
- * @version 4.2.4
+ * @version 4.2.5
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -47,7 +47,7 @@ class Alg_WC_OMA_Core {
 	/**
 	 * add_hooks.
 	 *
-	 * @version 4.2.4
+	 * @version 4.2.5
 	 * @since   1.0.0
 	 */
 	function add_hooks() {
@@ -56,6 +56,7 @@ class Alg_WC_OMA_Core {
 		// Checkout: Process
 		if ( 'yes' === get_option( 'alg_wc_oma_block_checkout_process', 'yes' ) ) {
 			add_action( 'woocommerce_checkout_process', array( $this, 'checkout_process_notices' ) );
+			add_action( 'woocommerce_store_api_checkout_order_processed', array( $this, 'checkout_process_notices' ) );
 		}
 		// Checkout: Block page
 		add_action( 'wp', array( $this, 'block_checkout' ), PHP_INT_MAX );
@@ -137,7 +138,7 @@ class Alg_WC_OMA_Core {
 	/**
 	 * Add script to disable checkout button in cart page.
 	 *
-	 * @version 4.2.4
+	 * @version 4.2.5
 	 * @since   4.1.2
 	 */
 	function add_disable_checkout_script() {
@@ -163,7 +164,7 @@ class Alg_WC_OMA_Core {
 					if (parts.length === 2) return parts.pop().split(';').shift();
 				}
 				function disableOrEnableBtn() {
-					let checkoutButton = $('.wc-proceed-to-checkout > a');
+					let checkoutButton = $('.wc-proceed-to-checkout > a, .wp-block-woocommerce-proceed-to-checkout-block a');
 					if (typeof checkoutButton === 'undefined' || checkoutButton.length <= 0) {
 						return;
 					}

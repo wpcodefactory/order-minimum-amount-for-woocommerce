@@ -1,15 +1,15 @@
-# Copyright (C) 2022 WPFactory
+# Copyright (C) 2023 WPFactory
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: order-minimum-amount-for-woocommerce 4.2.4\n"
+"Project-Id-Version: order-minimum-amount-for-woocommerce 4.2.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/order-minimum-amount-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-11-11T21:31:06+01:00\n"
+"POT-Creation-Date: 2023-01-06T00:28:50+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: order-minimum-amount-for-woocommerce\n"
@@ -159,51 +159,51 @@ msgstr ""
 msgid "%s product tag(s)"
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:199
+#: includes/class-alg-wc-oma-core.php:200
 #: includes/settings/class-alg-wc-oma-settings-general.php:119
 msgid "Please login to access the min/max requirements for your order."
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:708
+#: includes/class-alg-wc-oma-core.php:709
 msgid "Guest"
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:736
+#: includes/class-alg-wc-oma-core.php:737
 msgid "Min %s"
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:736
+#: includes/class-alg-wc-oma-core.php:737
 msgid "Max %s"
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:796
+#: includes/class-alg-wc-oma-core.php:797
 msgid "Amount is <strong>ignored</strong> if set to zero (%s), i.e. next level (e.g. \"General\") amount will be applied."
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:797
+#: includes/class-alg-wc-oma-core.php:798
 msgid "<strong>No amount</strong> (i.e. no limit) will be applied if set to a negative value (e.g. %s)."
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:896
+#: includes/class-alg-wc-oma-core.php:897
 #: includes/settings/class-alg-wc-oma-settings-memberships.php:44
 msgid "WooCommerce Memberships"
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:914
+#: includes/class-alg-wc-oma-core.php:915
 #: includes/settings/class-alg-wc-oma-settings-memberships.php:46
 msgid "MemberPress"
 msgstr ""
 
-#: includes/class-alg-wc-oma-core.php:924
+#: includes/class-alg-wc-oma-core.php:925
 #: includes/settings/class-alg-wc-oma-settings-memberships.php:48
 msgid "SUMO Memberships"
 msgstr ""
 
-#: includes/class-alg-wc-oma-messages.php:316
+#: includes/class-alg-wc-oma-messages.php:322
 msgid "You must have an order with a %s of %%amount%% to place your order, your current order total is %%total%%."
 msgstr ""
 
-#: includes/class-alg-wc-oma-messages.php:317
+#: includes/class-alg-wc-oma-messages.php:323
 #: includes/pro/class-alg-wc-oma-pro-compatibility.php:220
 #: includes/pro/class-alg-wc-oma-pro-gateways.php:82
 #: includes/pro/class-alg-wc-oma-pro-products.php:90
@@ -211,7 +211,7 @@ msgstr ""
 msgid "minimum"
 msgstr ""
 
-#: includes/class-alg-wc-oma-messages.php:317
+#: includes/class-alg-wc-oma-messages.php:323
 #: includes/pro/class-alg-wc-oma-pro-compatibility.php:220
 #: includes/pro/class-alg-wc-oma-pro-gateways.php:82
 #: includes/pro/class-alg-wc-oma-pro-products.php:90
@@ -219,131 +219,139 @@ msgstr ""
 msgid "maximum"
 msgstr ""
 
-#: includes/class-alg-wc-oma-messages.php:336
+#: includes/class-alg-wc-oma-messages.php:342
 msgid "Cart"
 msgstr ""
 
-#: includes/class-alg-wc-oma-messages.php:339
+#: includes/class-alg-wc-oma-messages.php:345
 msgid "Before cart (Notice)"
 msgstr ""
 
-#: includes/class-alg-wc-oma-messages.php:340
-msgid "Before cart table"
-msgstr ""
-
-#: includes/class-alg-wc-oma-messages.php:341
-msgid "Before cart contents"
-msgstr ""
-
-#: includes/class-alg-wc-oma-messages.php:342
-msgid "Cart contents"
-msgstr ""
-
-#: includes/class-alg-wc-oma-messages.php:343
-msgid "Cart coupon"
-msgstr ""
-
-#: includes/class-alg-wc-oma-messages.php:344
-msgid "Cart actions"
-msgstr ""
-
-#: includes/class-alg-wc-oma-messages.php:345
-msgid "After cart contents"
-msgstr ""
-
 #: includes/class-alg-wc-oma-messages.php:346
-msgid "After cart table"
+msgid "Blocks cart enqueue data (Notice)"
 msgstr ""
 
 #: includes/class-alg-wc-oma-messages.php:347
-msgid "Before cart totals"
+msgid "Before cart table"
 msgstr ""
 
 #: includes/class-alg-wc-oma-messages.php:348
-msgid "Cart totals: Before shipping"
+msgid "Before cart contents"
 msgstr ""
 
 #: includes/class-alg-wc-oma-messages.php:349
-msgid "Cart totals: After shipping"
+msgid "Cart contents"
 msgstr ""
 
 #: includes/class-alg-wc-oma-messages.php:350
-msgid "Cart totals: Before order total"
+msgid "Cart coupon"
 msgstr ""
 
 #: includes/class-alg-wc-oma-messages.php:351
-msgid "Cart totals: After order total"
+msgid "Cart actions"
 msgstr ""
 
 #: includes/class-alg-wc-oma-messages.php:352
-msgid "Proceed to checkout"
+msgid "After cart contents"
 msgstr ""
 
 #: includes/class-alg-wc-oma-messages.php:353
-msgid "After cart totals"
+msgid "After cart table"
 msgstr ""
 
 #: includes/class-alg-wc-oma-messages.php:354
-msgid "Before shipping calculator"
+msgid "Before cart totals"
 msgstr ""
 
 #: includes/class-alg-wc-oma-messages.php:355
-msgid "After shipping calculator"
+msgid "Cart totals: Before shipping"
+msgstr ""
+
+#: includes/class-alg-wc-oma-messages.php:356
+msgid "Cart totals: After shipping"
+msgstr ""
+
+#: includes/class-alg-wc-oma-messages.php:357
+msgid "Cart totals: Before order total"
+msgstr ""
+
+#: includes/class-alg-wc-oma-messages.php:358
+msgid "Cart totals: After order total"
+msgstr ""
+
+#: includes/class-alg-wc-oma-messages.php:359
+msgid "Proceed to checkout"
+msgstr ""
+
+#: includes/class-alg-wc-oma-messages.php:360
+msgid "After cart totals"
+msgstr ""
+
+#: includes/class-alg-wc-oma-messages.php:361
+msgid "Before shipping calculator"
 msgstr ""
 
 #: includes/class-alg-wc-oma-messages.php:362
-msgid "Mini-cart"
-msgstr ""
-
-#: includes/class-alg-wc-oma-messages.php:365
-msgid "After mini cart"
-msgstr ""
-
-#: includes/class-alg-wc-oma-messages.php:366
-msgid "Before mini cart"
-msgstr ""
-
-#: includes/class-alg-wc-oma-messages.php:367
-msgid "Before mini cart contents"
-msgstr ""
-
-#: includes/class-alg-wc-oma-messages.php:368
-msgid "After mini cart contents"
+msgid "After shipping calculator"
 msgstr ""
 
 #: includes/class-alg-wc-oma-messages.php:369
-msgid "In mini cart total"
-msgstr ""
-
-#: includes/class-alg-wc-oma-messages.php:370
-msgid "Before mini cart buttons"
-msgstr ""
-
-#: includes/class-alg-wc-oma-messages.php:371
-msgid "In mini cart buttons"
+msgid "Mini-cart"
 msgstr ""
 
 #: includes/class-alg-wc-oma-messages.php:372
-msgid "After mini cart buttons"
+msgid "After mini cart"
+msgstr ""
+
+#: includes/class-alg-wc-oma-messages.php:373
+msgid "Before mini cart"
+msgstr ""
+
+#: includes/class-alg-wc-oma-messages.php:374
+msgid "Before mini cart contents"
+msgstr ""
+
+#: includes/class-alg-wc-oma-messages.php:375
+msgid "After mini cart contents"
+msgstr ""
+
+#: includes/class-alg-wc-oma-messages.php:376
+msgid "In mini cart total"
+msgstr ""
+
+#: includes/class-alg-wc-oma-messages.php:377
+msgid "Before mini cart buttons"
+msgstr ""
+
+#: includes/class-alg-wc-oma-messages.php:378
+msgid "In mini cart buttons"
 msgstr ""
 
 #: includes/class-alg-wc-oma-messages.php:379
+msgid "After mini cart buttons"
+msgstr ""
+
+#: includes/class-alg-wc-oma-messages.php:386
 msgid "Checkout"
 msgstr ""
 
-#: includes/class-alg-wc-oma-messages.php:382
+#: includes/class-alg-wc-oma-messages.php:389
 msgid "Before checkout form (Notice)"
 msgstr ""
 
-#: includes/class-alg-wc-oma-messages.php:383
+#: includes/class-alg-wc-oma-messages.php:390
+msgid "Blocks checkout enqueue data (Notice)"
+msgstr ""
+
+#: includes/class-alg-wc-oma-messages.php:391
 msgid "Before customer details"
 msgstr ""
 
-#: includes/class-alg-wc-oma-messages.php:384
+#: includes/class-alg-wc-oma-messages.php:392
 msgid "Billing"
 msgstr ""
 
-#: includes/class-alg-wc-oma-messages.php:385
+#: includes/class-alg-wc-oma-messages.php:393
 #: includes/pro/class-alg-wc-oma-pro-shipping.php:49
 #: includes/settings/class-alg-wc-oma-settings-messages.php:57
 #: includes/settings/class-alg-wc-oma-settings-section.php:55
@@ -352,77 +360,77 @@ msgstr ""
 msgid "Shipping"
 msgstr ""
 
-#: includes/class-alg-wc-oma-messages.php:386
+#: includes/class-alg-wc-oma-messages.php:394
 msgid "After customer details"
 msgstr ""
 
-#: includes/class-alg-wc-oma-messages.php:387
+#: includes/class-alg-wc-oma-messages.php:395
 msgid "Before order review"
 msgstr ""
 
-#: includes/class-alg-wc-oma-messages.php:388
+#: includes/class-alg-wc-oma-messages.php:396
 msgid "Order review"
 msgstr ""
 
-#: includes/class-alg-wc-oma-messages.php:389
+#: includes/class-alg-wc-oma-messages.php:397
 msgid "Order review: Before shipping"
 msgstr ""
 
-#: includes/class-alg-wc-oma-messages.php:390
+#: includes/class-alg-wc-oma-messages.php:398
 msgid "Order review: After shipping"
 msgstr ""
 
-#: includes/class-alg-wc-oma-messages.php:391
+#: includes/class-alg-wc-oma-messages.php:399
 #: includes/settings/class-alg-wc-oma-settings-gateways.php:118
 #: includes/settings/class-alg-wc-oma-settings-shipping.php:193
 msgid "Order review: Payment: Before submit button"
 msgstr ""
 
-#: includes/class-alg-wc-oma-messages.php:392
+#: includes/class-alg-wc-oma-messages.php:400
 msgid "Order review: Payment: After submit button"
 msgstr ""
 
-#: includes/class-alg-wc-oma-messages.php:393
+#: includes/class-alg-wc-oma-messages.php:401
 msgid "After order review"
 msgstr ""
 
-#: includes/class-alg-wc-oma-messages.php:394
+#: includes/class-alg-wc-oma-messages.php:402
 msgid "After checkout form"
 msgstr ""
 
-#: includes/class-alg-wc-oma-messages.php:401
+#: includes/class-alg-wc-oma-messages.php:409
 msgid "Product page"
 msgstr ""
 
-#: includes/class-alg-wc-oma-messages.php:404
+#: includes/class-alg-wc-oma-messages.php:412
 msgid "Before single product (Notice)"
 msgstr ""
 
-#: includes/class-alg-wc-oma-messages.php:405
+#: includes/class-alg-wc-oma-messages.php:413
 msgid "Before single product summary (Notice)"
 msgstr ""
 
-#: includes/class-alg-wc-oma-messages.php:406
+#: includes/class-alg-wc-oma-messages.php:414
 msgid "After single product summary"
 msgstr ""
 
-#: includes/class-alg-wc-oma-messages.php:407
+#: includes/class-alg-wc-oma-messages.php:415
 msgid "Before add to cart form"
 msgstr ""
 
-#: includes/class-alg-wc-oma-messages.php:408
+#: includes/class-alg-wc-oma-messages.php:416
 msgid "Before add to cart button"
 msgstr ""
 
-#: includes/class-alg-wc-oma-messages.php:409
+#: includes/class-alg-wc-oma-messages.php:417
 msgid "After add to cart button"
 msgstr ""
 
-#: includes/class-alg-wc-oma-messages.php:410
+#: includes/class-alg-wc-oma-messages.php:418
 msgid "Before add to cart quantity"
 msgstr ""
 
-#: includes/class-alg-wc-oma-messages.php:411
+#: includes/class-alg-wc-oma-messages.php:419
 msgid "After add to cart quantity"
 msgstr ""
 
