@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Currencies Section Settings.
  *
- * @version 4.1.6
+ * @version 4.2.7
  * @since   3.1.0
  *
  * @author  WPFactory
@@ -29,7 +29,7 @@ class Alg_WC_OMA_Settings_Currencies extends Alg_WC_OMA_Settings_Section {
 	/**
 	 * get_settings.
 	 *
-	 * @version 4.1.6
+	 * @version 4.2.7
 	 * @since   3.1.0
 	 */
 	function get_settings() {
@@ -62,6 +62,17 @@ class Alg_WC_OMA_Settings_Currencies extends Alg_WC_OMA_Settings_Section {
 				'type'     => 'checkbox',
 			),
 			array(
+				'title'    => __( 'Calculation method', 'order-minimum-amount-for-woocommerce' ),
+				'id'       => 'alg_wc_oma_currencies_calculation_method',
+				'default'  => 'amount_types',
+				'type'     => 'select',
+				'class'    => 'chosen_select',
+				'options'  => array(
+					'amount_types'   => __( 'Amount types per currency', 'order-minimum-amount-for-woocommerce' ),
+					'exchange_rates' => __( 'Exchange rates', 'order-minimum-amount-for-woocommerce' ),
+				)
+			),
+			array(
 				'title'    => __( 'Currencies', 'order-minimum-amount-for-woocommerce' ),
 				'desc_tip' => __( '"Save changes" after you add new currencies here - new settings fields will be displayed.', 'order-minimum-amount-for-woocommerce' ),
 				'id'       => 'alg_wc_oma_currencies',
@@ -70,38 +81,62 @@ class Alg_WC_OMA_Settings_Currencies extends Alg_WC_OMA_Settings_Section {
 				'class'    => 'chosen_select',
 				'options'  => $all_currencies,
 			),
-			array(
-				'type'     => 'sectionend',
-				'id'       => 'alg_wc_oma_by_currency_options',
-			),
 		);
 
-		foreach ( $currencies as $currency ) {
+		if ( 'amount_types' === get_option( 'alg_wc_oma_currencies_calculation_method', 'amount_types' ) ) {
 			$settings = array_merge( $settings, array(
 				array(
-					'title'    => ( isset( $all_currencies[ $currency ] ) ? $all_currencies[ $currency ] : $currency ),
-					'type'     => 'title',
-					'id'       => "alg_wc_oma_by_currency_{$currency}",
-				),
+					'type' => 'sectionend',
+					'id'   => 'alg_wc_oma_by_currency_options',
+				)
 			) );
-			foreach ( alg_wc_oma()->core->get_enabled_amount_limits() as $min_or_max ) {
-				foreach ( alg_wc_oma()->core->get_enabled_amount_types() as $amount_type ) {
-					$settings = array_merge( $settings, array(
-						array(
-							'title'    => alg_wc_oma()->core->get_title( $min_or_max, $amount_type ),
-							'desc_tip' => alg_wc_oma()->core->amounts->get_unit( $amount_type, $currency ),
-							'id'       => "alg_wc_oma_{$min_or_max}_{$amount_type}_by_currency[{$currency}]",
-							'default'  => 0,
-							'type'     => apply_filters( 'alg_wc_oma_amount_input_type', 'number', 'currencies' ),
-							'custom_attributes' => alg_wc_oma()->core->get_amount_custom_atts(),
-						),
-					) );
+			foreach ( $currencies as $currency ) {
+				$settings = array_merge( $settings, array(
+					array(
+						'title' => ( isset( $all_currencies[ $currency ] ) ? $all_currencies[ $currency ] : $currency ),
+						'type'  => 'title',
+						'id'    => "alg_wc_oma_by_currency_{$currency}",
+					),
+				) );
+				foreach ( alg_wc_oma()->core->get_enabled_amount_limits() as $min_or_max ) {
+					foreach ( alg_wc_oma()->core->get_enabled_amount_types() as $amount_type ) {
+						$settings = array_merge( $settings, array(
+							array(
+								'title'             => alg_wc_oma()->core->get_title( $min_or_max, $amount_type ),
+								'desc_tip'          => alg_wc_oma()->core->amounts->get_unit( $amount_type, $currency ),
+								'id'                => "alg_wc_oma_{$min_or_max}_{$amount_type}_by_currency[{$currency}]",
+								'default'           => 0,
+								'type'              => apply_filters( 'alg_wc_oma_amount_input_type', 'number', 'currencies' ),
+								'custom_attributes' => alg_wc_oma()->core->get_amount_custom_atts(),
+							),
+						) );
+					}
 				}
+				$settings = array_merge( $settings, array(
+					array(
+						'type' => 'sectionend',
+						'id'   => "alg_wc_oma_by_currency_{$currency}",
+					),
+				) );
+			}
+		} elseif ( 'exchange_rates' === get_option( 'alg_wc_oma_currencies_calculation_method', 'amount_types' ) ) {
+			$wc_currency = get_option( 'woocommerce_currency' );
+			foreach ( $currencies as $currency ) {
+				$pair                                 = $wc_currency . $currency;
+				$settings = array_merge( $settings, array(
+					array(
+						'title'             => $pair,
+						'type'              => 'number',
+						'id'                => "alg_wc_oma_exchange_rates[{$pair}]",
+						'default'           => 1,
+						'custom_attributes' => array( 'step' => '0.000001' ),
+					),
+				) );
 			}
 			$settings = array_merge( $settings, array(
 				array(
-					'type'     => 'sectionend',
-					'id'       => "alg_wc_oma_by_currency_{$currency}",
+					'type' => 'sectionend',
+					'id'   => "alg_wc_oma_by_currency_{$currency}",
 				),
 			) );
 		}

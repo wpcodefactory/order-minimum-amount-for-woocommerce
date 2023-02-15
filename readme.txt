@@ -3,7 +3,7 @@ Contributors: wpcodefactory, karzin, jaedm97, algoritmika, anbinder
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 4.4
 Tested up to: 6.1
-Stable tag: 4.2.6
+Stable tag: 4.2.7
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -70,6 +70,12 @@ With [premium version](https://wpfactory.com/item/order-minimum-maximum-amount-f
 1. Frontend example – Cart notice.
 
 == Changelog ==
+
+= 4.2.7 - 15/02/2023 =
+* Dev - Currencies - New option to calculate currency value by exchange rates.
+* Dev - Compatibility - Get exchange rates from the Currency Switcher plugin by WP Wham.
+* Dev - Improve the way of initializing the main class.
+* WC tested up to: 7.4.
 
 = 4.2.6 - 02/02/2023 =
 * Add Russian translation.

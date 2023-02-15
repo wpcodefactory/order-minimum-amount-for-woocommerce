@@ -1,8 +1,8 @@
 <?php
 /**
- * Order Minimum Amount for WooCommerce - Compatibility Settings
+ * Order Minimum Amount for WooCommerce - Compatibility Settings.
  *
- * @version 4.0.8
+ * @version 4.2.7
  * @since   4.0.8
  *
  * @author  WPFactory
@@ -29,7 +29,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Compatibility' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 4.0.8
+		 * @version 4.2.7
 		 * @since   4.0.8
 		 */
 		function get_settings() {
@@ -83,8 +83,29 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Compatibility' ) ) :
 					'id'   => 'alg_wc_oma_wc_subscriptions_compatibility_options',
 				),
 			);
+			$currency_switcher_wpham_opts = array(
+				array(
+					'title' => __( 'Currency Switcher for WooCommerce - By WP Wham', 'order-minimum-amount-for-woocommerce' ),
+					'type'  => 'title',
+					'desc'  => sprintf( __( 'Compatibility with %s plugin.', 'order-minimum-amount-for-woocommerce' ), sprintf( '<a href="%s" target="_blank">%s</a>', 'https://wordpress.org/plugins/currency-switcher-woocommerce/', __( 'Currency Switcher for WooCommerce - By WP Wham', 'order-minimum-amount-for-woocommerce' ) ) ),
+					'id'    => 'alg_wc_oma_wc_currency_switcher_wpham_options',
+				),
+				array(
+					'title'             => __( 'Exchange rates', 'order-minimum-amount-for-woocommerce' ),
+					'desc'              => __( 'Get exchange rates from the Currency Switcher plugin', 'order-minimum-amount-for-woocommerce' ),
+					'desc_tip'          => sprintf( __( 'It\'s necessary to enable the %s section and set its %s option as %s.', 'order-minimum-amount-for-woocommerce' ), '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_oma&section=currencies' ) . '">' . __( 'Currencies', 'order-minimum-amount-for-woocommerce' ) . '</a>', '<strong>' . __( 'Calculation method', 'order-minimum-amount-for-woocommerce' ) . '</strong>', '<code>' . __( 'Exchange rates', 'order-minimum-amount-for-woocommerce' ) . '</code>' ),
+					'id'                => 'alg_wc_oma_wc_currency_switcher_wpham_get_exchange_rates',
+					'default'           => 'no',
+					'type'              => 'checkbox',
+					'custom_attributes' => apply_filters( 'alg_wc_oma_settings', array( 'disabled' => 'disabled' ) ),
+				),
+				array(
+					'type' => 'sectionend',
+					'id'   => 'alg_wc_oma_wc_currency_switcher_wpham_options',
+				),
+			);
 			return array_merge(
-				$prod_bundle_opts, $wc_subscriptions_opts
+				$prod_bundle_opts, $wc_subscriptions_opts, $currency_switcher_wpham_opts
 			);
 		}
 	}
