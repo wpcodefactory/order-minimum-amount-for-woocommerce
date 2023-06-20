@@ -8,7 +8,9 @@
  * @author  WPFactory
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} // Exit if accessed directly
 
 if ( ! class_exists( 'Alg_WC_OMA_Settings_Fees' ) ) :
 
@@ -37,7 +39,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Fees' ) ) :
 				array(
 					'title' => __( 'Fees options', 'order-minimum-amount-for-woocommerce' ),
 					'desc'  => __( 'Here you can set fees for each limit reached.', 'order-minimum-amount-for-woocommerce' ) . '<br />' .
-					           sprintf( __( 'If you don\'t want to block the orders, you should also <strong>disable</strong> the %s options from the %s settings.', 'order-minimum-amount-for-woocommerce' ), '<strong>"' . __( 'Block checkout', 'order-minimum-amount-for-woocommerce' ) . '"</strong>','<strong><a href="'.admin_url( 'admin.php?page=wc-settings&tab=alg_wc_oma' ).'">' . __( 'General > Checkout options', 'order-minimum-amount-for-woocommerce' ) . '</a></strong>' ),
+					           sprintf( __( 'If you don\'t want to block the orders, you should also <strong>disable</strong> the %s options from the %s settings.', 'order-minimum-amount-for-woocommerce' ), '<strong>"' . __( 'Block checkout', 'order-minimum-amount-for-woocommerce' ) . '"</strong>', '<strong><a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_oma' ) . '">' . __( 'General > Checkout options', 'order-minimum-amount-for-woocommerce' ) . '</a></strong>' ),
 					'type'  => 'title',
 					'id'    => 'alg_wc_oma_fees_options',
 				),
@@ -59,8 +61,8 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Fees' ) ) :
 					'type'     => 'checkbox',
 				),
 				array(
-					'type'     => 'sectionend',
-					'id'       => 'alg_wc_oma_fees_options',
+					'type' => 'sectionend',
+					'id'   => 'alg_wc_oma_fees_options',
 				),
 			);
 
@@ -89,8 +91,8 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Fees' ) ) :
 								'custom_attributes' => alg_wc_oma()->core->get_amount_custom_atts( 0 ),
 							),
 							array(
-								'type'  => 'sectionend',
-								'id'    => "alg_wc_oma_{$min_or_max}_{$amount_type}_fee_options",
+								'type' => 'sectionend',
+								'id'   => "alg_wc_oma_{$min_or_max}_{$amount_type}_fee_options",
 							),
 						) );
 					}
@@ -98,19 +100,19 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Fees' ) ) :
 			}
 
 			// Notes.
-			$notes[] = __( 'If you don\'t want to block the orders, you should also <strong>disable</strong> the <strong>"Block checkout"</strong> options from the <strong>"General > Checkout options"</strong> settings.', 'order-minimum-amount-for-woocommerce' );
-			$notes[] = sprintf( __( 'If this section is enabled, there will be a new placeholder available on the <strong>messages</strong> section: %s.', 'order-minimum-amount-for-woocommerce' ), '<code>%fee_amount%</code>' );
-			$notes[] = __( 'If you want to disable some fee, set the amount as zero or leave it empty.', 'order-minimum-amount-for-woocommerce' );
+			$notes[]        = __( 'If you don\'t want to block the orders, you should also <strong>disable</strong> the <strong>"Block checkout"</strong> options from the <strong>"General > Checkout options"</strong> settings.', 'order-minimum-amount-for-woocommerce' );
+			$notes[]        = sprintf( __( 'If this section is enabled, there will be a new placeholder available on the <strong>messages</strong> section: %s.', 'order-minimum-amount-for-woocommerce' ), '<code>%fee_amount%</code>' );
+			$notes[]        = __( 'If you want to disable some fee, set the amount as zero or leave it empty.', 'order-minimum-amount-for-woocommerce' );
 			$notes_settings = array(
 				array(
-					'title'    => __( 'Notes', 'order-minimum-amount-for-woocommerce' ),
-					'desc'     => $this->format_notes( $notes ),
-					'type'     => 'title',
-					'id'       => 'alg_wc_oma_fees_notes',
+					'title' => __( 'Notes', 'order-minimum-amount-for-woocommerce' ),
+					'desc'  => $this->format_notes( $notes ),
+					'type'  => 'title',
+					'id'    => 'alg_wc_oma_fees_notes',
 				),
 				array(
-					'type'     => 'sectionend',
-					'id'       => 'alg_wc_oma_fees_notes',
+					'type' => 'sectionend',
+					'id'   => 'alg_wc_oma_fees_notes',
 				),
 			);
 

@@ -2,8 +2,8 @@
 Contributors: wpcodefactory, karzin, jaedm97, algoritmika, anbinder
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 4.4
-Tested up to: 6.1
-Stable tag: 4.2.9
+Tested up to: 6.2
+Stable tag: 4.3.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -70,6 +70,10 @@ With [premium version](https://wpfactory.com/item/order-minimum-maximum-amount-f
 1. Frontend example – Cart notice.
 
 == Changelog ==
+
+= 4.3.0 - 20/06/2023 =
+* WC tested up to: 7.8
+* Tested up to: 6.2.
 
 = 4.2.9 - 20/03/2023 =
 * Fix plugin name.

@@ -1,3 +1,13 @@
 .idea
 .idea/*
 node_modules/
+
+# Coding standards
+/vendor/dealerdirect
+/vendor/phpcompatibility
+/vendor/squizlabs
+/vendor/wp-coding-standards
+composer.lock
+.phpcs.cache
+.idea
+.vscode

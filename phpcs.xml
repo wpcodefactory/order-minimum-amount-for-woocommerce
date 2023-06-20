@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<ruleset name="WPFactory-Coding-Standards">
+	<config name="installed_paths" value="vendor/wp-coding-standards/wpcs" />
+	<arg name="extensions" value="php"/>
+
+	<exclude-pattern>\.codeception/*</exclude-pattern>
+	<exclude-pattern>\.github/*</exclude-pattern>
+	<exclude-pattern>vendor/*</exclude-pattern>
+	<exclude-pattern>node_modues/*</exclude-pattern>
+	<exclude-pattern>\.idea/*</exclude-pattern>
+	<exclude-pattern>assets/*</exclude-pattern>
+
+	<rule ref="WordPress">
+		<!-- Classes with "class-"" prefix -->
+		<!--<exclude name="WordPress.Files.FileName.InvalidClassFileName"/>-->
+		<!--<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>-->
+
+		<!-- Missing @package -->
+		<exclude name="Squiz.Commenting.FileComment.MissingPackageTag"/>
+
+		<!-- Missing capital letter on comments -->
+		<exclude name="Generic.Commenting.DocComment.ShortNotCapital"/>
+
+		<!-- Inline comments must end in full-stops, exclamation marks, or question marks -->
+		<!--<exclude name="Squiz.Commenting.InlineComment.InvalidEndChar"/>-->
+
+		<!-- Missing parameter comment -->
+		<exclude name="Squiz.Commenting.FunctionComment.MissingParamComment"/>
+
+		<!-- Missing parameter name -->
+		<exclude name="Squiz.Commenting.FunctionComment.MissingParamName"/>
+
+		<!-- Doc comment for parameter missing -->
+		<exclude name="Squiz.Commenting.FunctionComment.MissingParamTag"/>
+
+		<!-- Missing doc comment for class -->
+		<exclude name="Squiz.Commenting.ClassComment.Missing"/>
+
+		<!-- Visibility must be declared on method -->
+		<exclude name="Squiz.Scope.MethodScope.Missing"/>
+
+		<!-- This comment is X% valid code; is this commented out code? -->
+		<exclude name="Squiz.PHP.CommentedOutCode.Found"/>
+
+		<!-- End of line character is invalid; expected "\n" but found "\r\n" -->
+		<exclude name="Generic.Files.LineEndings.InvalidEOLChar"/>
+	</rule>
+</ruleset>

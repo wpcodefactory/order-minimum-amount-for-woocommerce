@@ -8,7 +8,9 @@
  * @author  WPFactory
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} // Exit if accessed directly
 
 if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 
@@ -113,7 +115,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		 * @param null $args
 		 */
 		function display_dynamic_message( $args = null ) {
-			$args = wp_parse_args( $args, array(
+			$args                  = wp_parse_args( $args, array(
 				'position' => current_filter(),
 				'func'     => false,
 				'area'     => $this->get_area_from_position( current_filter() )
@@ -146,22 +148,22 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		 */
 		function get_output_notices_params_from_position( $position ) {
 			$params = array(
-				'woocommerce_before_checkout_form' => array(
+				'woocommerce_before_checkout_form'          => array(
 					'func' => 'wc_print_notice',
 				),
-				'woocommerce_blocks_cart_enqueue_data' => array(
+				'woocommerce_blocks_cart_enqueue_data'      => array(
 					'func' => 'wc_print_notice',
 				),
-				'woocommerce_blocks_checkout_enqueue_data' => array(
+				'woocommerce_blocks_checkout_enqueue_data'  => array(
 					'func' => 'wc_print_notice',
 				),
-				'woocommerce_before_single_product' => array(
+				'woocommerce_before_single_product'         => array(
 					'func' => 'wc_add_notice',
 				),
 				'woocommerce_before_single_product_summary' => array(
 					'func' => 'wc_print_notice',
 				),
-				'woocommerce_before_cart' => array(
+				'woocommerce_before_cart'                   => array(
 					'func' => 'wc_print_notice',
 				)
 			);
@@ -204,15 +206,15 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		 * @return mixed
 		 */
 		function get_notices( $args = null ) {
-			$args          = wp_parse_args( $args, array(
-				'area'          => 'cart',
-				'limits'        => false,
-				'types'         => false,
+			$args   = wp_parse_args( $args, array(
+				'area'   => 'cart',
+				'limits' => false,
+				'types'  => false,
 			) );
-			$area          = $args['area'];
-			$limits        = $args['limits'];
-			$types         = $args['types'];
-			$result        = array();
+			$area   = $args['area'];
+			$limits = $args['limits'];
+			$types  = $args['types'];
+			$result = array();
 			// Check amounts
 			foreach ( alg_wc_oma()->core->get_enabled_amount_limits( $limits ) as $min_or_max ) {
 				foreach ( alg_wc_oma()->core->get_enabled_amount_types( $types ) as $amount_type ) {
@@ -223,7 +225,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 						     ( 'yes' === $display_on_empty_cart )
 					     )
 					) {
-						$total = alg_wc_oma()->core->amounts->get_cart_total( array(
+						$total                                     = alg_wc_oma()->core->amounts->get_cart_total( array(
 							'type'       => $amount_type,
 							'limit_type' => $min_or_max
 						) );
@@ -336,12 +338,12 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		 *
 		 * @return array
 		 */
-		function get_messages_info(){
+		function get_messages_info() {
 			return array(
-				'cart' => array(
-					'title'                => __( 'Cart', 'order-minimum-amount-for-woocommerce' ),
-					'default_notice_type'  => 'notice',
-					'positions' => array(
+				'cart'         => array(
+					'title'               => __( 'Cart', 'order-minimum-amount-for-woocommerce' ),
+					'default_notice_type' => 'notice',
+					'positions'           => array(
 						'woocommerce_before_cart'                    => __( 'Before cart (Notice)', 'order-minimum-amount-for-woocommerce' ),
 						'woocommerce_blocks_cart_enqueue_data'       => __( 'Blocks cart enqueue data (Notice)', 'order-minimum-amount-for-woocommerce' ),
 						'woocommerce_before_cart_table'              => __( 'Before cart table', 'order-minimum-amount-for-woocommerce' ),
@@ -361,14 +363,14 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 						'woocommerce_before_shipping_calculator'     => __( 'Before shipping calculator', 'order-minimum-amount-for-woocommerce' ),
 						'woocommerce_after_shipping_calculator'      => __( 'After shipping calculator', 'order-minimum-amount-for-woocommerce' ),
 					),
-					'default_positions' => array(
+					'default_positions'   => array(
 						'woocommerce_before_cart'
 					)
 				),
-				'mini_cart' => array(
-					'title'                => __( 'Mini-cart', 'order-minimum-amount-for-woocommerce' ),
+				'mini_cart'    => array(
+					'title'             => __( 'Mini-cart', 'order-minimum-amount-for-woocommerce' ),
 					//'default_notice_type'  => 'notice',
-					'positions' => array(
+					'positions'         => array(
 						'woocommerce_after_mini_cart'                     => __( 'After mini cart', 'order-minimum-amount-for-woocommerce' ),
 						'woocommerce_before_mini_cart'                    => __( 'Before mini cart', 'order-minimum-amount-for-woocommerce' ),
 						'woocommerce_before_mini_cart_contents'           => __( 'Before mini cart contents', 'order-minimum-amount-for-woocommerce' ),
@@ -382,10 +384,10 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 						'woocommerce_after_mini_cart'
 					)
 				),
-				'checkout' => array(
-					'title'                => __( 'Checkout', 'order-minimum-amount-for-woocommerce' ),
-					'default_notice_type'  => 'error',
-					'positions' => array(
+				'checkout'     => array(
+					'title'               => __( 'Checkout', 'order-minimum-amount-for-woocommerce' ),
+					'default_notice_type' => 'error',
+					'positions'           => array(
 						'woocommerce_before_checkout_form'             => __( 'Before checkout form (Notice)', 'order-minimum-amount-for-woocommerce' ),
 						'woocommerce_blocks_checkout_enqueue_data'     => __( 'Blocks checkout enqueue data (Notice)', 'order-minimum-amount-for-woocommerce' ),
 						'woocommerce_checkout_before_customer_details' => __( 'Before customer details', 'order-minimum-amount-for-woocommerce' ),
@@ -401,14 +403,14 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 						'woocommerce_checkout_after_order_review'      => __( 'After order review', 'order-minimum-amount-for-woocommerce' ),
 						'woocommerce_after_checkout_form'              => __( 'After checkout form', 'order-minimum-amount-for-woocommerce' ),
 					),
-					'default_positions' => array(
+					'default_positions'   => array(
 						'woocommerce_before_checkout_form'
 					)
 				),
 				'product_page' => array(
-					'title'                => __( 'Product page', 'order-minimum-amount-for-woocommerce' ),
-					'default_notice_type'  => 'notice',
-					'positions' => array(
+					'title'               => __( 'Product page', 'order-minimum-amount-for-woocommerce' ),
+					'default_notice_type' => 'notice',
+					'positions'           => array(
 						'woocommerce_before_single_product'         => __( 'Before single product (Notice)', 'order-minimum-amount-for-woocommerce' ),
 						'woocommerce_before_single_product_summary' => __( 'Before single product summary (Notice)', 'order-minimum-amount-for-woocommerce' ),
 						'woocommerce_after_single_product_summary'  => __( 'After single product summary', 'order-minimum-amount-for-woocommerce' ),
@@ -418,7 +420,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 						'woocommerce_before_add_to_cart_quantity'   => __( 'Before add to cart quantity', 'order-minimum-amount-for-woocommerce' ),
 						'woocommerce_after_add_to_cart_quantity'    => __( 'After add to cart quantity', 'order-minimum-amount-for-woocommerce' ),
 					),
-					'default_positions' => array(
+					'default_positions'   => array(
 						'woocommerce_before_single_product_summary'
 					)
 				),
@@ -455,20 +457,20 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		 * @todo    `%term_title%`: add aliases `%category_title%` and `%tag_title%`?
 		 */
 		function get_placeholders( $min_or_max, $amount_type, $amount_data, $total, $product_id = false, $term_id = false ) {
-			$diff = ( 'min' === $min_or_max ? ( $amount_data['amount'] - $total ) : ( $total - $amount_data['amount'] ) );
+			$diff         = ( 'min' === $min_or_max ? ( $amount_data['amount'] - $total ) : ( $total - $amount_data['amount'] ) );
 			$placeholders = array(
 				'%amount_type%'   => $amount_type,           // for debugging
 				'%amount_source%' => $amount_data['source'], // for debugging
 				'%product_id%'    => $product_id,            // for debugging
 				'%term_id%'       => $term_id,               // for debugging
 				'%amount%'        => alg_wc_oma()->core->amounts->format( $amount_data['amount'], $amount_type ),
-				'%total%'         => alg_wc_oma()->core->amounts->format( $total,                 $amount_type ),
-				'%diff%'          => alg_wc_oma()->core->amounts->format( $diff,                  $amount_type ),
+				'%total%'         => alg_wc_oma()->core->amounts->format( $total, $amount_type ),
+				'%diff%'          => alg_wc_oma()->core->amounts->format( $diff, $amount_type ),
 				'%amount_raw%'    => $amount_data['amount'],
 				'%total_raw%'     => $total,
 				'%diff_raw%'      => $diff,
 				'%product_title%' => ( $product_id ? get_the_title( $product_id ) : '' ),
-				'%term_title%'    => ( $term_id    ? ( ( $term = get_term( $term_id ) ) && ! is_wp_error( $term ) ? $term->name : '' ) : '' ),
+				'%term_title%'    => ( $term_id ? ( ( $term = get_term( $term_id ) ) && ! is_wp_error( $term ) ? $term->name : '' ) : '' ),
 			);
 			return apply_filters( 'alg_wc_oma_placeholders', $placeholders, $min_or_max, $amount_type, $amount_data, $total, $diff, $product_id, $term_id );
 		}

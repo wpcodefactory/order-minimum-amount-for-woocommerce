@@ -8,6 +8,13 @@
   "require": {
     "wpfactory/wpfactory-promoting-notice": "*"
   },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "*",
+    "wp-coding-standards/wpcs": "*"
+  },
+  "scripts": {
+    "phpcs": "phpcs --standard=phpcs.xml"
+  },
   "config": {
     "preferred-install": "dist"
   }

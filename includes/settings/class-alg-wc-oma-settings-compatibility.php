@@ -8,7 +8,9 @@
  * @author  WPFactory
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} // Exit if accessed directly
 
 if ( ! class_exists( 'Alg_WC_OMA_Settings_Compatibility' ) ) :
 
@@ -33,7 +35,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Compatibility' ) ) :
 		 * @since   4.0.8
 		 */
 		function get_settings() {
-			$prod_bundle_opts = array(
+			$prod_bundle_opts             = array(
 				array(
 					'title' => __( 'Product Bundles', 'order-minimum-amount-for-woocommerce' ),
 					'type'  => 'title',
@@ -63,7 +65,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Compatibility' ) ) :
 					'id'   => 'alg_wc_oma_product_bundles_compatibility_options',
 				),
 			);
-			$wc_subscriptions_opts = array(
+			$wc_subscriptions_opts        = array(
 				array(
 					'title' => __( 'WooCommerce Subscriptions', 'order-minimum-amount-for-woocommerce' ),
 					'type'  => 'title',
