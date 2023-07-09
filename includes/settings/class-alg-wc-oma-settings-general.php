@@ -31,7 +31,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_General' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 4.1.4
+		 * @version 4.3.1
 		 * @since   1.0.0
 		 */
 		function get_settings() {
@@ -280,6 +280,13 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_General' ) ) :
 						'default'       => 'no',
 						'type'          => 'checkbox',
 						'checkboxgroup' => 'end',
+					),
+					array(
+						'title'   => __( 'WC Subscription recurring amount', 'order-minimum-amount-for-woocommerce' ),
+						'desc'    => __( 'Include WC Subscription recurring amount to cart total', 'order-minimum-amount-for-woocommerce' ),
+						'id'      => 'alg_wc_oma_include_wc_subscription_cart_total',
+						'default' => 'no',
+						'type'    => 'checkbox',
 					),
 					array(
 						'type' => 'sectionend',

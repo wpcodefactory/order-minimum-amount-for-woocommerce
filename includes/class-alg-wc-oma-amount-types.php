@@ -228,7 +228,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Amount_Types' ) ) :
 		/**
 		 * get_cart_total.
 		 *
-		 * @version 4.1.0
+		 * @version 4.3.1
 		 * @since   3.0.0
 		 *
 		 * @param null $args
@@ -253,6 +253,10 @@ if ( ! class_exists( 'Alg_WC_OMA_Amount_Types' ) ) :
 			}
 			$cart_terms = array();
 			$result     = 0;
+
+			$wc_subscription_cart_total = get_option( 'alg_wc_oma_include_wc_subscription_cart_total', 'no' );
+			$subscription_sum = 0;
+
 			foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
 				if ( apply_filters( 'alg_wc_oma_get_cart_total_do_count_product', true, $cart_item, $type, $product_id, $do_count_by_term, $taxonomy ) ) {
 					$result = $this->get_cart_value( array(
@@ -262,8 +266,25 @@ if ( ! class_exists( 'Alg_WC_OMA_Amount_Types' ) ) :
 						'cart_terms' => $cart_terms,
 						'limit_type' => $limit_type
 					) );
+
+					if($wc_subscription_cart_total == 'yes')
+					{
+						$product = $cart_item['data'];
+						
+						if ( class_exists( 'WC_Subscriptions_Product' ) && WC_Subscriptions_Product::is_subscription( $product ) && $cart_item['$cart_item'] <= 0){
+							$subscription_price_item = WC_Subscriptions_Product::get_price($product);
+							$resultsub = $subscription_price_item * $cart_item['quantity'];
+							$subscription_sum = $subscription_sum + $resultsub;
+						}
+					}
 				}
 			}
+
+			if($wc_subscription_cart_total == 'yes')
+			{
+				$result = $result + $subscription_sum;
+			}
+
 			if ( 'sum' === $type && ! $product_id && ! $this->get_order_sum_option( 'is_subtotal' ) ) {
 				WC()->cart->calculate_totals();
 				if ( ! $this->get_order_sum_option( 'do_exclude_shipping' ) ) {
