@@ -267,10 +267,10 @@ if ( ! class_exists( 'Alg_WC_OMA_Amount_Types' ) ) :
 						'limit_type' => $limit_type
 					) );
 
-					if( 'yes' === $wc_subscription_cart_total ) {
+					if ( 'yes' === $wc_subscription_cart_total ) {
 						$product = $cart_item['data'];
 						
-						if ( class_exists( 'WC_Subscriptions_Product' ) && WC_Subscriptions_Product::is_subscription( $product ) && $cart_item['$cart_item'] <= 0) {
+						if ( class_exists( 'WC_Subscriptions_Product' ) && WC_Subscriptions_Product::is_subscription( $product ) && $cart_item['$cart_item'] <= 0 ) {
 							$subscription_price_item = WC_Subscriptions_Product::get_price($product);
 							$resultsub = $subscription_price_item * $cart_item['quantity'];
 							$subscription_sum = $subscription_sum + $resultsub;
@@ -279,7 +279,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Amount_Types' ) ) :
 				}
 			}
 
-			if( 'yes' === $wc_subscription_cart_total ) {
+			if ( 'yes' === $wc_subscription_cart_total ) {
 				$result = $result + $subscription_sum;
 			}
 
