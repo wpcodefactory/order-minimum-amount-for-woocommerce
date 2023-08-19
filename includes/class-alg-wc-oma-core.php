@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Core Class.
  *
- * @version 4.2.5
+ * @version 4.3.2
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -49,7 +49,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 		/**
 		 * add_hooks.
 		 *
-		 * @version 4.2.5
+		 * @version 4.3.2
 		 * @since   1.0.0
 		 */
 		function add_hooks() {
@@ -59,6 +59,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 			if ( 'yes' === get_option( 'alg_wc_oma_block_checkout_process', 'yes' ) ) {
 				add_action( 'woocommerce_checkout_process', array( $this, 'checkout_process_notices' ) );
 				add_action( 'woocommerce_store_api_checkout_order_processed', array( $this, 'checkout_process_notices' ) );
+				add_filter( 'woocommerce_rest_pre_insert_shop_order_object', array( $this, 'checkout_process_notices_rest_api' ), 10, 3 );
 			}
 			// Checkout: Block page
 			add_action( 'wp', array( $this, 'block_checkout' ), PHP_INT_MAX );
@@ -126,11 +127,14 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 		/**
 		 * Set cookie if there is any notices.
 		 *
-		 * @version 4.2.3
+		 * @version 4.3.2
 		 * @since   4.1.2
 		 */
 		function set_cookie_if_has_notices() {
-			if ( 'disable' === get_option( 'alg_wc_oma_disable_block_checkout_btn', 'do_not_disable' ) && ! empty( $this->messages->get_notices( 'cart' )['flat_notices'] ) ) {
+			if (
+				'disable' === get_option( 'alg_wc_oma_disable_block_checkout_btn', 'do_not_disable' ) &&
+				! empty( $this->messages->get_notices( array( 'area' => 'cart' ) )['flat_notices'] )
+			) {
 				wc_setcookie( 'alg_wc_oma_has_notices', true, time() + 31556926 );
 			} else {
 				wc_setcookie( 'alg_wc_oma_has_notices', '', 1 );
@@ -574,9 +578,36 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 		}
 
 		/**
+		 * checkout_process_notices_rest_api.
+		 *
+		 * @version 4.3.2
+		 * @since   4.3.2
+		 *
+		 * @param $order
+		 * @param $request
+		 * @param $creating
+		 *
+		 * @return mixed|WP_Error
+		 */
+		function checkout_process_notices_rest_api( $order, $request, $creating ) {
+			
+			if ( ! empty( $notice = $this->messages->get_notices( array(
+				'area'                       => 'cart',
+				'get_only_first_flat_notice' => true,
+				'from_rest_api' 			 => true,
+				'order' 					 => $order
+			) )['flat_notices'] ) ) {
+				/*return new WP_Error( 'alg_wc_oma_error', $notice[0], array( 'status' => 400 ) );*/
+				throw new WC_REST_Exception( 'alg_wc_oma_error', $notice[0], 400 );
+			}
+
+			return $order;
+		}
+
+		/**
 		 * block_checkout.
 		 *
-		 * @version 4.1.5
+		 * @version 4.3.2
 		 * @since   1.0.0
 		 */
 		function block_checkout( $wp ) {
@@ -586,7 +617,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 				! is_wc_endpoint_url( 'order-pay' ) &&
 				'yes' === get_option( 'alg_wc_oma_block_checkout', 'no' ) &&
 				apply_filters( 'alg_wc_oma_block_checkout', true ) &&
-				! empty( $notices = $this->messages->get_notices( 'cart' )['flat_notices'] )
+				! empty( $notices = $this->messages->get_notices( array( 'area' => 'cart' ) )['flat_notices'] )
 			) {
 				wp_safe_redirect( version_compare( get_option( 'woocommerce_version', null ), '2.5.0', '<' ) ? WC()->cart->get_cart_url() : wc_get_cart_url() );
 				exit;
@@ -699,6 +730,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 			$amount = floatval( $amount );
 			$total  = floatval( $total );
 			$passed = ( ! $amount || $this->is_equal( $amount, $total ) ? true : ( 'min' === $min_or_max ? $total > $amount : $total < $amount ) );
+
 			return apply_filters( 'alg_wc_oma_check_order_min_max_amount', $passed, $min_or_max, $amount_type, $amount, $total );
 		}
 

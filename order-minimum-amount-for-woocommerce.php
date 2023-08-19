@@ -3,13 +3,13 @@
 Plugin Name: Order Minimum/Maximum Amount for WooCommerce
 Plugin URI: https://wpfactory.com/item/order-minimum-maximum-amount-for-woocommerce/
 Description: Set required minimum and/or maximum order amounts (e.g. sum, quantity, weight, volume, etc.) in WooCommerce.
-Version: 4.3.1
+Version: 4.3.2
 Author: WPFactory
 Author URI: https://wpfactory.com
 Text Domain: order-minimum-amount-for-woocommerce
 Domain Path: /langs
 Copyright: © 2023 WPFactory
-WC tested up to: 7.8
+WC tested up to: 8.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 */
@@ -66,7 +66,7 @@ if ( ! class_exists( 'Alg_WC_OMA' ) ) :
 		 * @var   string
 		 * @since 1.0.0
 		 */
-		public $version = '4.3.0';
+		public $version = '4.3.2';
 
 		/**
 		 * @var   Alg_WC_OMA The single instance of the class
@@ -258,3 +258,10 @@ add_action(
 		$plugin->init();
 	}
 );
+
+
+add_action( 'before_woocommerce_init', function() {
+	if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+	}
+} );

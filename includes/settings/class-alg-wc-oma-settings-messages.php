@@ -1,8 +1,8 @@
 <?php
 /**
- * Order Minimum Amount for WooCommerce - Messages Section Settings
+ * Order Minimum Amount for WooCommerce - Messages Section Settings.
  *
- * @version 4.1.2
+ * @version 4.3.2
  * @since   1.2.0
  *
  * @author  WPFactory
@@ -146,7 +146,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Messages' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 4.0.8
+		 * @version 4.3.2
 		 * @since   1.2.0
 		 *
 		 * @todo    add optional "Message on requirements met"
@@ -168,6 +168,14 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Messages' ) ) :
 					'type'     => 'checkbox',
 					'default'  => 'no',
 					'id'       => 'alg_wc_oma_display_messages_on_empty_cart',
+				),
+				array(
+					'title'    => __( 'Multiple messages', 'order-minimum-amount-for-woocommerce' ),
+					'desc'     => __( 'Display one message for each unmet requirement', 'order-minimum-amount-for-woocommerce' ),
+					'desc_tip' => __( 'Disable to display only a single message for the first unmet requirement.', 'order-minimum-amount-for-woocommerce' ),
+					'type'     => 'checkbox',
+					'default'  => 'yes',
+					'id'       => 'alg_wc_oma_display_multiple_msg',
 				),
 				array(
 					'type' => 'sectionend',

@@ -4,7 +4,7 @@
  *
  * This class includes everything needed to add a new "amount type".
  *
- * @version 4.2.0
+ * @version 4.3.2
  * @since   3.0.0
  *
  * @author  WPFactory
@@ -17,6 +17,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'Alg_WC_OMA_Amount_Types' ) ) :
 
 	class Alg_WC_OMA_Amount_Types {
+
+		/**
+		 * Stored Cart Category Result.
+		 *
+		 * @var   1.0.0
+		 * @since 1.0.0
+		 */
+		public $cart_category = array();
 
 		/**
 		 * Constructor.
@@ -226,9 +234,137 @@ if ( ! class_exists( 'Alg_WC_OMA_Amount_Types' ) ) :
 		}
 
 		/**
+		 * get_cart_total_rest_api.
+		 *
+		 * @version 4.3.2
+		 * @since   4.3.2
+		 *
+		 * @param null $args
+		 *
+		 * @return int|mixed
+		 */
+		function get_cart_total_rest_api( $args = null ) {
+			
+			$args             = wp_parse_args( $args, array(
+				'type'             => '',
+				'product_id'       => false,
+				'do_count_by_term' => false,
+				'taxonomy'         => false,
+				'limit_type'       => '',
+				'order'            => null,
+			) );
+			$type             = $args['type'];
+			$product_id       = $args['product_id'];
+			$do_count_by_term = $args['do_count_by_term'];
+			$taxonomy         = $args['taxonomy'];
+			$limit_type       = $args['limit_type'];
+			$order            = $args['order'];
+			
+			if(!$order){
+				return 0;
+			}
+			
+			$cart_terms = array();
+			$result     = 0;
+
+			$wc_subscription_cart_total = get_option( 'alg_wc_oma_include_wc_subscription_cart_total', 'no' );
+			$subscription_sum = 0;
+			
+			if($order){
+				
+				$order_items = $order->get_items();
+				
+				
+				if( isset( $order_items ) ){
+					foreach ( $order_items as  $item_key => $item_values ) {
+						$item_data = $item_values->get_changes();
+						if( $item_data['product_id'] > 0 ) {
+							$cart_item = array();
+							$product_name = $item_data['name'];
+							$product_id_data = $item_data['product_id'];
+							$product_obj = wc_get_product( $product_id_data );
+							$quantity = $item_data['quantity'];
+							$line_total = $item_data['total'];
+							$cart_item = $item_data;
+							$cart_item['data'] = $product_obj;
+							$cart_item['line_subtotal'] = $item_data['subtotal'];
+							$cart_item['line_total'] = $item_data['total'];
+							if ( apply_filters( 'alg_wc_oma_get_cart_total_do_count_product', true, $cart_item, $type, $product_id, $do_count_by_term, $taxonomy ) ) {
+								
+								$result = $this->get_cart_value( array(
+									'result'     => $result,
+									'type'       => $type,
+									'cart_item'  => $cart_item,
+									'cart_terms' => $cart_terms,
+									'limit_type' => $limit_type
+								) );
+								
+								if ( 'yes' === $wc_subscription_cart_total ) {
+									$product = $cart_item['data'];
+									
+									if ( class_exists( 'WC_Subscriptions_Product' ) && WC_Subscriptions_Product::is_subscription( $product ) && $cart_item['$cart_item'] <= 0 ) {
+										$subscription_price_item = WC_Subscriptions_Product::get_price($product);
+										$resultsub = $subscription_price_item * $cart_item['quantity'];
+										$subscription_sum = $subscription_sum + $resultsub;
+									}
+								}
+							}
+						}
+					}
+				}
+				
+			}
+			
+			
+
+			if ( 'yes' === $wc_subscription_cart_total ) {
+				$result = $result + $subscription_sum;
+			}
+			
+			
+			if(($limit_type == 'min' || $limit_type == 'max') && !empty($this->cart_category)) {
+				$result = count(array_unique($this->cart_category));
+			}
+			
+			
+
+			if ( 'sum' === $type && ! $product_id && ! $this->get_order_sum_option( 'is_subtotal' ) ) {
+				$shipping_total = 0;
+				if( $order ){
+					$shipping = $order->get_items( 'shipping' );
+					if( isset( $shipping ) ){
+						foreach( $shipping as $shipping_item_id => $shipping_item ){
+							$shipping_each = $shipping_item->get_changes();
+							if($shipping_each['total'] > 0){
+								$shipping_total = $shipping_total + $shipping_each['total'];
+							}
+						}
+					}
+					$result += $shipping_total;
+				}
+			}
+			// Rounding.
+			if (
+				'sum' === $type &&
+				'none' !== ( $rounding = get_option( 'alg_wc_oma_type_sum_cart_total_rounding', 'none' ) )
+			) {
+				$precision = get_option( 'alg_wc_oma_type_sum_cart_total_rounding_precision', wc_get_price_decimals() );
+				if ( 'round' === $rounding ) {
+					$result = round( $result, $precision );
+				} elseif ( 'ceil' === $rounding ) {
+					$result = ceil( $result );
+				} elseif ( 'floor' === $rounding ) {
+					$result = floor( $result );
+				}
+			}
+			
+			return apply_filters( 'alg_wc_oma_amount_cart_total', $result, $type, $product_id, $do_count_by_term, $taxonomy );
+		}
+
+		/**
 		 * get_cart_total.
 		 *
-		 * @version 4.3.1
+		 * @version 4.3.2
 		 * @since   3.0.0
 		 *
 		 * @param null $args
@@ -236,6 +372,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Amount_Types' ) ) :
 		 * @return int|mixed
 		 */
 		function get_cart_total( $args = null ) {
+
 			$args             = wp_parse_args( $args, array(
 				'type'             => '',
 				'product_id'       => false,
@@ -248,14 +385,18 @@ if ( ! class_exists( 'Alg_WC_OMA_Amount_Types' ) ) :
 			$do_count_by_term = $args['do_count_by_term'];
 			$taxonomy         = $args['taxonomy'];
 			$limit_type       = $args['limit_type'];
+
 			if ( ! isset( WC()->cart ) ) {
 				return 0;
 			}
+
+
 			$cart_terms = array();
 			$result     = 0;
 
 			$wc_subscription_cart_total = get_option( 'alg_wc_oma_include_wc_subscription_cart_total', 'no' );
 			$subscription_sum = 0;
+
 
 			foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
 				if ( apply_filters( 'alg_wc_oma_get_cart_total_do_count_product', true, $cart_item, $type, $product_id, $do_count_by_term, $taxonomy ) ) {
@@ -281,6 +422,10 @@ if ( ! class_exists( 'Alg_WC_OMA_Amount_Types' ) ) :
 
 			if ( 'yes' === $wc_subscription_cart_total ) {
 				$result = $result + $subscription_sum;
+			}
+
+			if(($limit_type == 'min' || $limit_type == 'max') && !empty($this->cart_category)) {
+				$result = count(array_unique($this->cart_category));
 			}
 
 			if ( 'sum' === $type && ! $product_id && ! $this->get_order_sum_option( 'is_subtotal' ) ) {
@@ -347,6 +492,15 @@ if ( ! class_exists( 'Alg_WC_OMA_Amount_Types' ) ) :
 				case 'product_cat':
 				case 'product_tag':
 					$cart_terms   = alg_wc_oma()->core->amounts->add_product_terms( $cart_item['product_id'], $type, $cart_terms );
+
+					if ( $type == 'product_cat' && isset( $cart_terms['product_cat'] ) && !empty( $cart_terms['product_cat'] ) ) {
+						if ( empty( $this->cart_category ) ) {
+							$this->cart_category = $cart_terms['product_cat'];
+						} else {
+							$this->cart_category = array_merge( $this->cart_category, $cart_terms['product_cat'] );
+						}
+					}
+
 					$final_result = ( isset( $cart_terms[ $type ] ) ? count( $cart_terms[ $type ] ) : 0 );
 					break;
 				case 'weight':

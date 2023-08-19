@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Messages.
  *
- * @version 4.2.5
+ * @version 4.3.2
  * @since   4.0.4
  *
  * @author  WPFactory
@@ -37,9 +37,15 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 					}
 				}
 				// Force checkout notice refresh
-				add_action( 'woocommerce_review_order_after_order_total', array( $this, 'force_checkout_notice_refresh' ), 10, 2 );
+				add_action( 'woocommerce_review_order_after_order_total', array(
+					$this,
+					'force_checkout_notice_refresh'
+				), 10, 2 );
 				add_action( 'woocommerce_review_order_before_submit', array( $this, 'force_checkout_notice_refresh' ) );
-				add_filter( 'woocommerce_checkout_fields', array( $this, 'update_totals_on_checkout_field_change' ), PHP_INT_MAX );
+				add_filter( 'woocommerce_checkout_fields', array(
+					$this,
+					'update_totals_on_checkout_field_change'
+				), PHP_INT_MAX );
 			}
 		}
 
@@ -66,6 +72,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 					}
 				}
 			}
+
 			return $fields_sections;
 		}
 
@@ -103,6 +110,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 			$areas          = array_map( function ( $possible_area ) {
 				return 'yes' === get_option( "alg_wc_oma_{$possible_area}_notice_enabled", 'no' ) ? $possible_area : null;
 			}, $possible_areas );
+
 			return array_filter( $areas );
 		}
 
@@ -112,7 +120,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		 * @version 4.0.5
 		 * @since   4.0.4
 		 *
-		 * @param null $args
+		 * @param   null  $args
 		 */
 		function display_dynamic_message( $args = null ) {
 			$args                  = wp_parse_args( $args, array(
@@ -192,51 +200,95 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 			}
 			$deprecated_positions = get_option( 'alg_wc_oma_message_positions_' . $area, array() );
 			$default_positions    = $default_positions + $deprecated_positions;
+
 			return $default_positions;
 		}
 
 		/**
 		 * get_notices.
 		 *
-		 * @version 4.1.1
+		 * @version 4.3.2
 		 * @since   3.2.0
 		 *
-		 * @param null $args
+		 * @param   null  $args
 		 *
 		 * @return mixed
 		 */
 		function get_notices( $args = null ) {
-			$args   = wp_parse_args( $args, array(
-				'area'   => 'cart',
-				'limits' => false,
-				'types'  => false,
+			$args                       = wp_parse_args( $args, array(
+				'area'                       => 'cart',
+				'get_only_first_flat_notice' => false,
+				'limits'                     => false,
+				'types'                      => false,
+				'from_rest_api'              => false,
+				'order'              		 => null,
 			) );
-			$area   = $args['area'];
-			$limits = $args['limits'];
-			$types  = $args['types'];
-			$result = array();
+			$area                       = $args['area'];
+			$limits                     = $args['limits'];
+			$types                      = $args['types'];
+			$from_rest_api              = $args['from_rest_api'];
+			$order              		= $args['order'];
+			
+			$get_only_first_flat_notice = $args['get_only_first_flat_notice'];
+			$result                     = array();
+
+			$category_total = array();
+
 			// Check amounts
 			foreach ( alg_wc_oma()->core->get_enabled_amount_limits( $limits ) as $min_or_max ) {
 				foreach ( alg_wc_oma()->core->get_enabled_amount_types( $types ) as $amount_type ) {
 					$amount_data = alg_wc_oma()->core->get_min_max_amount_data( $min_or_max, $amount_type );
-					if ( ! empty( $amount_data['amount'] )
-					     && (
-						     ( 'no' === ( $display_on_empty_cart = get_option( 'alg_wc_oma_display_messages_on_empty_cart', 'no' ) ) && ! alg_wc_oma()->core->is_cart_empty() ) ||
-						     ( 'yes' === $display_on_empty_cart )
-					     )
-					) {
-						$total                                     = alg_wc_oma()->core->amounts->get_cart_total( array(
-							'type'       => $amount_type,
-							'limit_type' => $min_or_max
-						) );
-						$result[ $min_or_max ][ $amount_type ][''] = ( ! alg_wc_oma()->core->check_min_max_amount( $min_or_max, $amount_type, $amount_data['amount'], $total ) ?
-							$this->get_notice_content( $min_or_max, $amount_type, $amount_data, $total, $area ) :
-							true );
+					
+					if( $from_rest_api && $order !== null ){
+						if ( ! empty( $amount_data['amount'] )
+							 && (
+								 ( 'no' === ( $display_on_empty_cart = get_option( 'alg_wc_oma_display_messages_on_empty_cart', 'no' ) ) ) ||
+								 ( 'yes' === $display_on_empty_cart )
+							 )
+						) {
+							$total                                     = alg_wc_oma()->core->amounts->get_cart_total_rest_api( array(
+								'type'       => $amount_type,
+								'limit_type' => $min_or_max,
+								'order'      => $order
+							) );
+							
+							
+							$result[ $min_or_max ][ $amount_type ][''] = ( ! alg_wc_oma()->core->check_min_max_amount( $min_or_max, $amount_type, $amount_data['amount'], $total ) ?
+								$this->get_notice_content( $min_or_max, $amount_type, $amount_data, $total, $area ) :
+								true );
+						}
+					}else{
+					
+					
+						if ( ! empty( $amount_data['amount'] )
+							 && (
+								 ( 'no' === ( $display_on_empty_cart = get_option( 'alg_wc_oma_display_messages_on_empty_cart', 'no' ) ) && ! alg_wc_oma()->core->is_cart_empty() ) ||
+								 ( 'yes' === $display_on_empty_cart )
+							 )
+						) {
+							
+							$total                                     = alg_wc_oma()->core->amounts->get_cart_total( array(
+								'type'       => $amount_type,
+								'limit_type' => $min_or_max
+							) );
+							
+							
+							$result[ $min_or_max ][ $amount_type ][''] = ( ! alg_wc_oma()->core->check_min_max_amount( $min_or_max, $amount_type, $amount_data['amount'], $total ) ?
+								$this->get_notice_content( $min_or_max, $amount_type, $amount_data, $total, $area ) :
+								true );
+								
+						}
 					}
+					
 				}
 			}
+
+			
 			// Filter
-			$result = apply_filters( 'alg_wc_oma_after_get_notices', $result, $area, $limits, $types );
+			if( !($from_rest_api && $order !== null) ){
+				$result = apply_filters( 'alg_wc_oma_after_get_notices', $result, $area, $limits, $types );
+			}
+			
 			// "Require all"
 			$result = $raw_result = alg_wc_oma()->core->process_require_all_option( $result );
 			// Preparing notices
@@ -246,6 +298,10 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 				$result = array_unique( $result );
 				$result = array_values( $result );
 			}
+			if ( $get_only_first_flat_notice && is_array( $result ) && count( $result ) > 0 ) {
+				$result = array( $result[0] );
+			}
+
 			return apply_filters( 'alg_wc_oma_get_notices', array(
 					'flat_notices' => $result,
 					'raw_notices'  => $raw_result,
@@ -259,17 +315,21 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * output_notices.
 		 *
-		 * @version 4.1.1
+		 * @version 4.3.2
 		 * @since   1.0.0
 		 *
-		 * @param $area 'cart' | 'checkout' | 'product_page'
-		 * @param bool $func
-		 * @param bool $notice_type
+		 * @param         $area  'cart' | 'checkout' | 'product_page'
+		 * @param   bool  $func
+		 * @param   bool  $notice_type
 		 *
 		 * @return string
 		 */
 		function output_notices( $area, $func = false, $notice_type = false ) {
-			$result = $this->get_notices( array( 'area' => $area ) )['flat_notices'];
+			$result = $this->get_notices( array(
+				'area'                       => $area,
+				'get_only_first_flat_notice' => 'no' === get_option( 'alg_wc_oma_display_multiple_msg', 'yes' ),
+			) )['flat_notices'];
+
 			if ( ! $func ) {
 				return implode( '<br>', $result );
 			} else {
@@ -291,6 +351,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 			$content      = ( isset( $content[ $id ] ) ? $content[ $id ] : $this->get_default_message( $min_or_max, $scope, $amount_data['source'], $amount_type ) );
 			$content      = do_shortcode( $content );
 			$placeholders = $this->get_placeholders( $min_or_max, $amount_type, $amount_data, $total, $product_id, $term_id );
+
 			return str_replace( array_keys( $placeholders ), $placeholders, $content );
 		}
 
@@ -308,6 +369,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 			if ( '' != $source && apply_filters( 'alg_wc_oma_is_source_message', false, $source ) ) {
 				$id .= '_' . $source;
 			}
+
 			return $id;
 		}
 
@@ -472,6 +534,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 				'%product_title%' => ( $product_id ? get_the_title( $product_id ) : '' ),
 				'%term_title%'    => ( $term_id ? ( ( $term = get_term( $term_id ) ) && ! is_wp_error( $term ) ? $term->name : '' ) : '' ),
 			);
+
 			return apply_filters( 'alg_wc_oma_placeholders', $placeholders, $min_or_max, $amount_type, $amount_data, $total, $diff, $product_id, $term_id );
 		}
 	}
