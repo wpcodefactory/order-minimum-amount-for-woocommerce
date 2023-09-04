@@ -31,7 +31,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_General' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 4.3.1
+		 * @version 4.3.3
 		 * @since   1.0.0
 		 */
 		function get_settings() {
@@ -200,6 +200,14 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_General' ) ) :
 					'desc_tip' => __( 'Customer is redirected back to the cart page.', 'order-minimum-amount-for-woocommerce' ),
 					'desc'     => __( 'Prevent users from reaching the checkout page on wrong min/max amount', 'order-minimum-amount-for-woocommerce' ),
 					'id'       => 'alg_wc_oma_block_checkout',
+					'default'  => 'no',
+					'type'     => 'checkbox',
+				),
+				array(
+					'title'    => __( 'Block store api request', 'order-minimum-amount-for-woocommerce' ),
+					'desc_tip' => __( 'Overwrite store api request at tthe time of order creation on wrong min/max amount.', 'order-minimum-amount-for-woocommerce' ),
+					'desc'     => __( 'Prevent api user to place order on wrong min/max amount.', 'order-minimum-amount-for-woocommerce' ),
+					'id'       => 'alg_wc_oma_block_store_api',
 					'default'  => 'no',
 					'type'     => 'checkbox',
 				),

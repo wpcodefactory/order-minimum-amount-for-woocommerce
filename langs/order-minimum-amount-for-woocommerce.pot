@@ -1,47 +1,47 @@
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\class-alg-wc-oma-core.php:208
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\class-alg-wc-oma-core.php:211
 #: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:121
 msgid "Please login to access the min/max requirements for your order."
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\class-alg-wc-oma-core.php:747
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\class-alg-wc-oma-core.php:750
 msgid "Guest"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\class-alg-wc-oma-core.php:775
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\class-alg-wc-oma-core.php:778
 #, php-format
 msgid "Min %s"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\class-alg-wc-oma-core.php:775
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\class-alg-wc-oma-core.php:778
 #, php-format
 msgid "Max %s"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\class-alg-wc-oma-core.php:835
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\class-alg-wc-oma-core.php:838
 #, php-format
 msgid ""
 "Amount is <strong>ignored</strong> if set to zero (%s), i.e. next level (e."
 "g. \"General\") amount will be applied."
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\class-alg-wc-oma-core.php:836
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\class-alg-wc-oma-core.php:839
 #, php-format
 msgid ""
 "<strong>No amount</strong> (i.e. no limit) will be applied if set to a "
 "negative value (e.g. %s)."
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\class-alg-wc-oma-core.php:935
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\class-alg-wc-oma-core.php:938
 #: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-memberships.php:46
 msgid "WooCommerce Memberships"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\class-alg-wc-oma-core.php:953
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\class-alg-wc-oma-core.php:956
 #: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-memberships.php:48
 msgid "MemberPress"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\class-alg-wc-oma-core.php:963
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\class-alg-wc-oma-core.php:966
 #: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-memberships.php:50
 msgid "SUMO Memberships"
 msgstr ""
@@ -889,13 +889,13 @@ msgid "Block checkout page"
 msgstr ""
 
 #: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-gateways.php:124
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:383
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:391
 #: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-shipping.php:200
 msgid "Validate on add to cart"
 msgstr ""
 
 #: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-gateways.php:125
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:390
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:398
 #: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-shipping.php:201
 msgid "Hide \"add to cart\" button"
 msgstr ""
@@ -932,7 +932,7 @@ msgid "Minimum"
 msgstr ""
 
 #: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:77
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:378
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:386
 msgid "Maximum"
 msgstr ""
 
@@ -1073,236 +1073,250 @@ msgstr ""
 msgid "Prevent users from reaching the checkout page on wrong min/max amount"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:216
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:302
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:339
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:207
+msgid "Block store api request"
+msgstr ""
+
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:208
+msgid ""
+"Overwrite store api request at tthe time of order creation on wrong min/max "
+"amount."
+msgstr ""
+
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:209
+msgid "Prevent api user to place order on wrong min/max amount."
+msgstr ""
+
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:224
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:310
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:347
 #, php-format
 msgid "\"%s\" Amount Type options"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:217
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:219
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:225
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:227
 #: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-products-cart-total.php:91
 msgid "Sum"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:218
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:304
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:341
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:226
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:312
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:349
 #, php-format
 msgid "Extra settings for min/max \"%s\" options."
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:224
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:263
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:232
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:271
 msgid "Order sum"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:230
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:263
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:238
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:271
 msgid "Order total"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:231
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:239
 msgid "Order subtotal"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:235
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:243
 msgid "Cart total rounding"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:236
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:244
 msgid ""
 "If the limit messages are still getting displayed even if the cart amount "
 "matches the limit, it's because the cart total amount being compared behind "
 "the scenes is raw. Here is how you can round it."
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:242
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:250
 msgid "None"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:243
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:251
 msgid "Round"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:244
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:252
 msgid "Ceil"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:245
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:253
 msgid "Floor"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:249
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:257
 msgid "Precision"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:255
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:263
 msgid "Exclude taxes"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:256
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:264
 msgid "Exclude taxes from order total/subtotal"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:262
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:270
 #, php-format
 msgid "Exclude (ignored unless \"%s\" is set to \"%s\")"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:264
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:272
 msgid "Exclude shipping"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:271
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:279
 msgid "Exclude discounts"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:278
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:286
 msgid "Exclude fees"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:285
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:293
 msgid "WC Subscription recurring amount"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:286
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:294
 msgid "Include WC Subscription recurring amount to cart total"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:303
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:305
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:311
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:313
 msgid "Product categories"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:310
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:318
 msgid "Product categories to include"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:311
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:319
 msgid ""
 "If set, then only selected product categories will be counted (and all other "
 "categories will be ignored)."
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:312
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:320
 msgid "If empty, then all product categories will be counted."
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:320
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:328
 msgid "Product categories to exclude"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:321
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:329
 msgid ""
 "If set, then selected product categories will be ignored when counting "
 "categories for the product."
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:340
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:342
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:348
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:350
 msgid "Product tags"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:347
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:355
 msgid "Product tags to include"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:348
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:356
 msgid ""
 "If set, then only selected product tags will be counted (and all other tags "
 "will be ignored)."
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:349
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:357
 msgid "If empty, then all product tags will be counted."
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:357
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:365
 msgid "Product tags to exclude"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:358
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:366
 msgid ""
 "If set, then selected product tags will be ignored when counting tags for "
 "the product."
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:376
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:384
 msgid "\"Maximum\" amount limit options"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:377
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:385
 #, php-format
 msgid "Extra settings for \"%s\" limit options."
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:384
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:392
 msgid "Validate maximum limits when customer clicks \"add to cart\" button"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:391
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:399
 msgid ""
 "Hides \"add to cart\" button for the product on shop pages if maximum limits "
 "are reached."
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:392
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:400
 msgid "Shop"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:398
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:406
 msgid "Shop content"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:399
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:415
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:407
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:423
 msgid ""
 "You can optionally output something else if \"add to cart\" button is hidden "
 "for the product."
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:407
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:415
 msgid ""
 "Hides \"add to cart\" button for the product on single product pages if "
 "maximum limits are reached."
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:408
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:416
 msgid "Single product"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:414
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:422
 msgid "Single product content"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:433
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:441
 msgid "\"Quantity\" amount type options"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:434
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:442
 #, php-format
 msgid "Extra settings for \"%s\" amount type options."
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:435
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:443
 msgid "Quantity"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:440
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:448
 msgid "Quantity input"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:441
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:449
 #, php-format
 msgid "Set default quantity based on %s minimum limits"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:441
 #: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:449
 #: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:457
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:466
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:465
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:474
 #: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-messages.php:40
 #: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-products-cart-total.php:57
 #: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-products-cart-total.php:61
@@ -1310,45 +1324,45 @@ msgstr ""
 msgid "Per product"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:449
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:457
 #, php-format
 msgid "Set minimum parameter based on %s minimum limits"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:457
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:465
 #, php-format
 msgid "Set maximum parameter based on %s maximum limits"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:465
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:473
 msgid "Add to cart button"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:466
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:474
 #, php-format
 msgid "Set quantity on loop pages based on %s minimum limits"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:482
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:490
 msgid "REST API"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:487
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:495
 msgid "User metas"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:488
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:496
 msgid "Add user metas to the REST API"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:489
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:497
 #, php-format
 msgid ""
 "It will be possible to use the %s route to read and update user metas like "
 "%s for example."
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:490
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\order-minimum-amount-for-woocommerce-pro\includes\settings\class-alg-wc-oma-settings-general.php:498
 msgid "For now only administrators can update user metas."
 msgstr ""
 

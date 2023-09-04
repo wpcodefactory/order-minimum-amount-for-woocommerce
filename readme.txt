@@ -3,7 +3,7 @@ Contributors: wpcodefactory, karzin, jaedm97, algoritmika, anbinder, omardabbas,
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 4.4
 Tested up to: 6.3
-Stable tag: 4.3.2
+Stable tag: 4.3.3
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -71,12 +71,15 @@ With [premium version](https://wpfactory.com/item/order-minimum-maximum-amount-f
 
 == Changelog ==
 
+= 4.3.3 - 04/09/2023 =
+* Dev - General > Checkout options > Block store api request
+
 = 4.3.2 - 20/08/2023 =
+* Fix - Counting all unique product categories in the cart products to restrict order by category count.
 * Dev - Messages - New option: Display one message for each limit problem.
-* Dev - Checkout options - Block checkout process using REST Api.
-* Dev - Checkout options - new function get_cart_total for rest api.
-* Fix - counting all unique product categories in the cart products to restrict order by category count.
-* HPOS Compatibility.
+* Dev - Checkout options - Block checkout process using REST API.
+* Dev - Checkout options - New function `get_cart_total` for REST API.
+* Dev - HPOS compatibility.
 * WC tested up to: 8.0.
 * Tested up to: 6.3.
 
