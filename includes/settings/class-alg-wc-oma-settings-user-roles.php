@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - User Roles Section Settings
  *
- * @version 4.1.4
+ * @version 4.3.5
  * @since   1.2.0
  *
  * @author  WPFactory
@@ -31,7 +31,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_User_Roles' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 4.1.4
+		 * @version 4.3.5
 		 * @since   1.2.0
 		 */
 		function get_settings() {
@@ -51,6 +51,16 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_User_Roles' ) ) :
 					'id'      => 'alg_wc_oma_by_user_role_enabled',
 					'default' => 'no',
 					'type'    => 'checkbox',
+				),
+				array(
+					'title'   => __( 'Get user roles method', 'order-minimum-amount-for-woocommerce' ),
+					'id'      => 'alg_wc_oma_get_user_roles_method',
+					'options' => array(
+						'editable_roles' => __( 'Editable roles', 'order-minimum-amount-for-woocommerce' ),
+						'all_roles'      => __( 'All roles', 'order-minimum-amount-for-woocommerce' ),
+					),
+					'default' => 'editable_roles',
+					'type'    => 'select',
 				),
 				array(
 					'title'    => __( 'Enabled user roles', 'order-minimum-amount-for-woocommerce' ),

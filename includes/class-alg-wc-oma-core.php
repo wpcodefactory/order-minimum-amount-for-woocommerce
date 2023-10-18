@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Core Class.
  *
- * @version 4.3.2
+ * @version 4.3.5
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -740,12 +740,16 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 		/**
 		 * get_all_user_roles.
 		 *
-		 * @version 3.2.0
+		 * @version 4.3.5
 		 * @since   1.0.0
 		 */
 		function get_all_user_roles( $do_rearrange = false ) {
 			global $wp_roles;
-			$roles = apply_filters( 'editable_roles', ( isset( $wp_roles ) && is_object( $wp_roles ) ? $wp_roles->roles : array() ) );
+			$get_user_roles_method = get_option( 'alg_wc_oma_get_user_roles_method', 'editable_roles' );
+			$roles                 = ( isset( $wp_roles ) && is_object( $wp_roles ) ? $wp_roles->roles : array() );
+			if ( 'editable_roles' === $get_user_roles_method ) {
+				$roles = apply_filters( 'editable_roles', $roles );
+			}
 			$roles = wp_list_pluck( $roles, 'name' );
 			$roles = array_merge( array( 'guest' => __( 'Guest', 'order-minimum-amount-for-woocommerce' ) ), $roles );
 			if ( $do_rearrange && isset( $roles['customer'] ) ) {
@@ -753,6 +757,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 				unset( $roles['customer'] );
 				$roles = array_merge( array( 'customer' => $customer_title ), $roles );
 			}
+
 			return $roles;
 		}
 
