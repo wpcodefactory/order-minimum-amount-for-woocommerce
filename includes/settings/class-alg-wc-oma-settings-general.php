@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - General Section Settings
  *
- * @version 4.1.4
+ * @version 4.3.6
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -31,7 +31,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_General' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 4.3.3
+		 * @version 4.3.6
 		 * @since   1.0.0
 		 */
 		function get_settings() {
@@ -194,6 +194,18 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_General' ) ) :
 					'id'       => 'alg_wc_oma_block_checkout_process',
 					'default'  => 'yes',
 					'type'     => 'checkbox',
+				),
+				array(
+					'desc'     => __( 'Checkout hook.', 'order-minimum-amount-for-woocommerce' ),
+					'desc_tip' => __( 'Checkout hook used to check for error messages.', 'order-minimum-amount-for-woocommerce' ),
+					'id'       => 'alg_wc_oma_block_checkout_hook',
+					'default'  => 'woocommerce_checkout_process',
+					'options'  => array(
+						'woocommerce_checkout_process'          => 'woocommerce_checkout_process',
+						'woocommerce_after_checkout_validation' => 'woocommerce_after_checkout_validation',
+					),
+					'class'    => 'chosen_select',
+					'type'     => 'select',
 				),
 				array(
 					'title'    => __( 'Block checkout page', 'order-minimum-amount-for-woocommerce' ),

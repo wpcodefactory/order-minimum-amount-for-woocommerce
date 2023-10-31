@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Core Class.
  *
- * @version 4.3.5
+ * @version 4.3.6
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -49,7 +49,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 		/**
 		 * add_hooks.
 		 *
-		 * @version 4.3.3
+		 * @version 4.3.6
 		 * @since   1.0.0
 		 */
 		function add_hooks() {
@@ -58,6 +58,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 			// Checkout: Process
 			if ( 'yes' === get_option( 'alg_wc_oma_block_checkout_process', 'yes' ) ) {
 				add_action( 'woocommerce_checkout_process', array( $this, 'checkout_process_notices' ) );
+				add_action( 'woocommerce_after_checkout_validation', array( $this, 'check_checkout_notices' ), 10, 2 );
 
 				if ( 'yes' === get_option( 'alg_wc_oma_block_store_api', 'no' ) ) {
 					add_action( 'woocommerce_store_api_checkout_order_processed', array( $this, 'checkout_process_notices' ) );
@@ -97,6 +98,29 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 			add_filter( 'woocommerce_update_cart_action_cart_updated', array( $this, 'set_cookie_on_cart_updated' ) );
 			add_action( 'wp', array( $this, 'set_cookie_on_cart' ) );
 			add_action( 'wp_footer', array( $this, 'add_disable_checkout_script' ), PHP_INT_MAX );
+		}
+
+		/**
+		 * check_checkout_notices.
+		 *
+		 * @version 4.3.6
+		 * @since   4.3.6
+		 *
+		 * @param $data
+		 * @param $errors
+		 *
+		 * @return void
+		 */
+		function check_checkout_notices( $data, $errors ) {
+			if (
+				'woocommerce_after_checkout_validation' === get_option( 'alg_wc_oma_block_checkout_hook', 'woocommerce_checkout_process' ) &&
+				! empty( $notice = $this->messages->get_notices( array(
+					'area'                       => 'checkout',
+					'get_only_first_flat_notice' => true,
+				) )['flat_notices'] )
+			) {
+				$errors->add( 'alg_wc_oma_error', $notice[0] );
+			}
 		}
 
 		/**
@@ -573,11 +597,13 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 		/**
 		 * checkout_process_notices.
 		 *
-		 * @version 4.0.4
+		 * @version 4.3.6
 		 * @since   2.2.0
 		 */
 		function checkout_process_notices() {
-			$this->messages->output_notices( 'checkout', 'wc_add_notice', 'error' );
+			if ( 'woocommerce_checkout_process' === get_option( 'alg_wc_oma_block_checkout_hook', 'woocommerce_checkout_process' ) ) {
+				$this->messages->output_notices( 'checkout', 'wc_add_notice', 'error' );
+			}
 		}
 
 		/**
