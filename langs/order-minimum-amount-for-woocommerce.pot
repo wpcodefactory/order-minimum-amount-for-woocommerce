@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: order-minimum-amount-for-woocommerce 4.3.6\n"
+"Project-Id-Version: order-minimum-amount-for-woocommerce 4.3.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/order-minimum-amount-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-10-31T16:55:04+01:00\n"
+"POT-Creation-Date: 2023-11-02T21:03:37+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: order-minimum-amount-for-woocommerce\n"
@@ -522,15 +522,7 @@ msgstr ""
 msgid "Order Min/Max Amount"
 msgstr ""
 
-#: includes/pro/settings/class-alg-wc-oma-pro-settings-per-item.php:176
-msgid "Message priority"
-msgstr ""
-
-#: includes/pro/settings/class-alg-wc-oma-pro-settings-per-item.php:178
-msgid "Higher priority message will be shown first."
-msgstr ""
-
-#: includes/pro/settings/class-alg-wc-oma-pro-settings-per-item.php:203
+#: includes/pro/settings/class-alg-wc-oma-pro-settings-per-item.php:191
 msgid "Order Minimum/Maximum Amount"
 msgstr ""
 
@@ -1859,6 +1851,6 @@ msgstr ""
 msgid "Your settings have been reset."
 msgstr ""
 
-#: order-minimum-amount-for-woocommerce-pro.php:185
+#: order-minimum-amount-for-woocommerce-pro.php:187
 msgid "Go Pro"
 msgstr ""

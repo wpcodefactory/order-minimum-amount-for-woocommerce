@@ -3,7 +3,7 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmu
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 4.4
 Tested up to: 6.3
-Stable tag: 4.3.6
+Stable tag: 4.3.7
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -70,6 +70,9 @@ With [premium version](https://wpfactory.com/item/order-minimum-maximum-amount-f
 1. Frontend example – Cart notice.
 
 == Changelog ==
+
+= 4.3.7 - 02/11/2023 =
+* Fix - Priority replaces product tag values. Remove it.
 
 = 4.3.6 - 30/10/2023 =
 * Dev - General - Block checkout process - New option: Checkout hook.
