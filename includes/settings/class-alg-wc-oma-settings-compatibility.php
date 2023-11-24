@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Compatibility Settings.
  *
- * @version 4.2.7
+ * @version 4.3.8
  * @since   4.0.8
  *
  * @author  WPFactory
@@ -31,7 +31,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Compatibility' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 4.2.7
+		 * @version 4.3.8
 		 * @since   4.0.8
 		 */
 		function get_settings() {
@@ -87,9 +87,16 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Compatibility' ) ) :
 			);
 			$currency_switcher_wpham_opts = array(
 				array(
-					'title' => __( 'Currency Switcher for WooCommerce - By WP Wham', 'order-minimum-amount-for-woocommerce' ),
+					'title' => __( 'Currency Switcher for WooCommerce', 'order-minimum-amount-for-woocommerce' ),
 					'type'  => 'title',
-					'desc'  => sprintf( __( 'Compatibility with %s plugin.', 'order-minimum-amount-for-woocommerce' ), sprintf( '<a href="%s" target="_blank">%s</a>', 'https://wordpress.org/plugins/currency-switcher-woocommerce/', __( 'Currency Switcher for WooCommerce - By WP Wham', 'order-minimum-amount-for-woocommerce' ) ) ),
+					'desc'  => sprintf(
+						__( 'Compatibility with %s plugin.', 'order-minimum-amount-for-woocommerce' ),
+						sprintf( '<a href="%s" target="_blank">%s</a> (%s)',
+							'https://wordpress.org/plugins/currency-switcher-woocommerce/',
+							__( 'Currency Switcher for WooCommerce', 'order-minimum-amount-for-woocommerce' ),
+							__( 'By WP Wham', 'order-minimum-amount-for-woocommerce' )
+						)
+					),
 					'id'    => 'alg_wc_oma_wc_currency_switcher_wpham_options',
 				),
 				array(
@@ -106,8 +113,46 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Compatibility' ) ) :
 					'id'   => 'alg_wc_oma_wc_currency_switcher_wpham_options',
 				),
 			);
+			$wc_paypal_opts = array(
+				array(
+					'title' => __( 'WooCommerce PayPal Payments', 'order-minimum-amount-for-woocommerce' ),
+					'type'  => 'title',
+					'desc'  => sprintf(
+						           __( 'Compatibility with %s plugin.', 'order-minimum-amount-for-woocommerce' ),
+						           sprintf(
+							           '<a href="%s" target="_blank">%s</a> (%s)',
+							           'https://wordpress.org/plugins/woocommerce-paypal-payments/',
+							           __( 'WooCommerce PayPal Payments', 'order-minimum-amount-for-woocommerce' ),
+							           __( 'By WooCommerce', 'order-minimum-amount-for-woocommerce' )
+						           )
+					           ) . ' ' .
+					           sprintf(
+						           __( 'Paypal will probably work better if the %s option is set to %s.', 'order-minimum-amount-for-woocommerce' ),
+						           sprintf(
+							           '<a href="%s">%s</a>',
+							           admin_url( 'admin.php?page=wc-settings&tab=alg_wc_oma&section=' ),
+							           __( 'Checkout hook', 'order-minimum-amount-for-woocommerce' )
+						           ),
+						           '<code>woocommerce_after_checkout_validation</code>'
+					           ),
+					'id'    => 'alg_wc_oma_wc_wc_paypal_payments_opts',
+				),
+				array(
+					'title'             => __( 'PayPal buttons', 'order-minimum-amount-for-woocommerce' ),
+					'desc'              => __( 'Disable PayPal buttons if the limits are not respected', 'order-minimum-amount-for-woocommerce' ),
+					'desc_tip'          => __( 'On product pages, the button will need a page reload to refresh the changes.', 'order-minimum-amount-for-woocommerce' ),
+					'id'                => 'alg_wc_oma_wc_wc_paypal_payments_disable_btn',
+					'default'           => 'no',
+					'type'              => 'checkbox',
+					'custom_attributes' => apply_filters( 'alg_wc_oma_settings', array( 'disabled' => 'disabled' ) ),
+				),
+				array(
+					'type' => 'sectionend',
+					'id'   => 'alg_wc_oma_wc_wc_paypal_payments_opts',
+				),
+			);
 			return array_merge(
-				$prod_bundle_opts, $wc_subscriptions_opts, $currency_switcher_wpham_opts
+				$prod_bundle_opts, $wc_subscriptions_opts, $currency_switcher_wpham_opts, $wc_paypal_opts
 			);
 		}
 	}

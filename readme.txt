@@ -2,8 +2,8 @@
 Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmukherjeeli
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 4.4
-Tested up to: 6.3
-Stable tag: 4.3.7
+Tested up to: 6.4
+Stable tag: 4.3.8
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -70,6 +70,11 @@ With [premium version](https://wpfactory.com/item/order-minimum-maximum-amount-f
 1. Frontend example – Cart notice.
 
 == Changelog ==
+
+= 4.3.8 - 24/11/2023 =
+* Dev - Compatibility - Add compatibility option with PayPal for WooCommerce plugin to disable the PayPal buttons.
+* WC tested up to: 8.3.
+* Tested up to: 6.4.
 
 = 4.3.7 - 02/11/2023 =
 * Fix - Priority replaces product tag values. Remove it.
