@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Messages.
  *
- * @version 4.3.2
+ * @version 4.4.0
  * @since   4.0.4
  *
  * @author  WPFactory
@@ -499,7 +499,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * get_placeholders.
 		 *
-		 * @version 4.0.0
+		 * @version 4.4.0
 		 * @since   2.2.0
 		 *
 		 * @todo    `%term_title%`: add aliases `%category_title%` and `%tag_title%`?
@@ -507,18 +507,20 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		function get_placeholders( $min_or_max, $amount_type, $amount_data, $total, $product_id = false, $term_id = false ) {
 			$diff         = ( 'min' === $min_or_max ? ( $amount_data['amount'] - $total ) : ( $total - $amount_data['amount'] ) );
 			$placeholders = array(
-				'%amount_type%'   => $amount_type,           // for debugging
-				'%amount_source%' => $amount_data['source'], // for debugging
-				'%product_id%'    => $product_id,            // for debugging
-				'%term_id%'       => $term_id,               // for debugging
-				'%amount%'        => alg_wc_oma()->core->amounts->format( $amount_data['amount'], $amount_type ),
-				'%total%'         => alg_wc_oma()->core->amounts->format( $total, $amount_type ),
-				'%diff%'          => alg_wc_oma()->core->amounts->format( $diff, $amount_type ),
-				'%amount_raw%'    => $amount_data['amount'],
-				'%total_raw%'     => $total,
-				'%diff_raw%'      => $diff,
-				'%product_title%' => ( $product_id ? get_the_title( $product_id ) : '' ),
-				'%term_title%'    => ( $term_id ? ( ( $term = get_term( $term_id ) ) && ! is_wp_error( $term ) ? $term->name : '' ) : '' ),
+				'%amount_type%'          => $amount_type,           // for debugging
+				'%amount_source%'        => $amount_data['source'], // for debugging
+				'%product_id%'           => $product_id,            // for debugging
+				'%term_id%'              => $term_id,               // for debugging
+				'%amount%'               => alg_wc_oma()->core->amounts->format( $amount_data['amount'], $amount_type ),
+				'%total%'                => alg_wc_oma()->core->amounts->format( $total, $amount_type ),
+				'%diff%'                 => alg_wc_oma()->core->amounts->format( $diff, $amount_type ),
+				'%amount_raw%'           => $amount_data['amount'],
+				'%total_raw%'            => $total,
+				'%diff_raw%'             => $diff,
+				'%product_title%'        => ( $product_id ? get_the_title( $product_id ) : '' ),
+				'%term_title%'           => ( $term_id ? ( ( $term = get_term( $term_id ) ) && ! is_wp_error( $term ) ? $term->name : '' ) : '' ),
+				'%term_link%'            => ( $term_id ? ( ( $term = get_term( $term_id ) ) && ! is_wp_error( $term ) ? get_term_link( $term ) : '' ) : '' ),
+				'%term_title_with_link%' => ( $term_id ? ( ( $term = get_term( $term_id ) ) && ! is_wp_error( $term ) ? '<a href="' . get_term_link( $term ) . '">' . $term->name : '' ) : '' ),
 			);
 
 			return apply_filters( 'alg_wc_oma_placeholders', $placeholders, $min_or_max, $amount_type, $amount_data, $total, $diff, $product_id, $term_id );

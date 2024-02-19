@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Messages Section Settings.
  *
- * @version 4.3.2
+ * @version 4.4.0
  * @since   1.2.0
  *
  * @author  WPFactory
@@ -146,7 +146,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Messages' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 4.3.2
+		 * @version 4.4.0
 		 * @since   1.2.0
 		 *
 		 * @todo    add optional "Message on requirements met"
@@ -295,9 +295,14 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Messages' ) ) :
 				'</div>' );
 
 			if ( array() != apply_filters( 'alg_wc_oma_enabled_scopes', array() ) ) {
-				$notes[] = sprintf( __( 'For "Per product", "Per product category" and "Per product tag" messages you can also use these additional placeholders: %s', 'order-minimum-amount-for-woocommerce' ),
+				$notes[] = sprintf( __( 'For "Per product" you can also use these additional placeholders: %s', 'order-minimum-amount-for-woocommerce' ),
 					'<div style="padding: 0 0 15px;">' .
-					'<code>' . implode( '</code>, <code>', array( '%product_title%', '%term_title%' ) ) . '</code>' .
+					'<code>' . implode( '</code>, <code>', array( '%product_title%' ) ) . '</code>' .
+					'</div>' );
+
+				$notes[] = sprintf( __( 'For "Per product category" and "Per product tag" messages you can also use these additional placeholders: %s', 'order-minimum-amount-for-woocommerce' ),
+					'<div style="padding: 0 0 15px;">' .
+					'<code>' . implode( '</code>, <code>', array( '%term_title%', '%term_link%', '%term_title_with_link%' ) ) . '</code>' .
 					'</div>' );
 			}
 
