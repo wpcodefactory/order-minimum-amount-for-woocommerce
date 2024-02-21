@@ -3,7 +3,7 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmu
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 6.1
 Tested up to: 6.4
-Stable tag: 4.4.0
+Stable tag: 4.4.1
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -365,6 +365,9 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 1. Frontend example â€“ Cart notice.
 
 == Changelog ==
+
+= 4.4.1 - 20/02/2023 =
+* Fix - Link from `%term_title_with_link%` does not close.
 
 = 4.4.0 - 19/02/2023 =
 * Dev - Add `%term_link%` and `%term_title_with_link%` placeholders for "Per product category" and "Per product tag" scopes.

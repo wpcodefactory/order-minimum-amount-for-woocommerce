@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Messages.
  *
- * @version 4.4.0
+ * @version 4.4.1
  * @since   4.0.4
  *
  * @author  WPFactory
@@ -499,7 +499,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * get_placeholders.
 		 *
-		 * @version 4.4.0
+		 * @version 4.4.1
 		 * @since   2.2.0
 		 *
 		 * @todo    `%term_title%`: add aliases `%category_title%` and `%tag_title%`?
@@ -520,7 +520,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 				'%product_title%'        => ( $product_id ? get_the_title( $product_id ) : '' ),
 				'%term_title%'           => ( $term_id ? ( ( $term = get_term( $term_id ) ) && ! is_wp_error( $term ) ? $term->name : '' ) : '' ),
 				'%term_link%'            => ( $term_id ? ( ( $term = get_term( $term_id ) ) && ! is_wp_error( $term ) ? get_term_link( $term ) : '' ) : '' ),
-				'%term_title_with_link%' => ( $term_id ? ( ( $term = get_term( $term_id ) ) && ! is_wp_error( $term ) ? '<a href="' . get_term_link( $term ) . '">' . $term->name : '' ) : '' ),
+				'%term_title_with_link%' => ( $term_id ? ( ( $term = get_term( $term_id ) ) && ! is_wp_error( $term ) ? '<a href="' . get_term_link( $term ) . '">' . $term->name . '</a>' : '' ) : '' ),
 			);
 
 			return apply_filters( 'alg_wc_oma_placeholders', $placeholders, $min_or_max, $amount_type, $amount_data, $total, $diff, $product_id, $term_id );
