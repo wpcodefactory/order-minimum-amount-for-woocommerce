@@ -3,13 +3,13 @@
 Plugin Name: Order Minimum/Maximum Amount for WooCommerce
 Plugin URI: https://wpfactory.com/item/order-minimum-maximum-amount-for-woocommerce/
 Description: Set required minimum and/or maximum order amounts (e.g. sum, quantity, weight, volume, etc.) in WooCommerce.
-Version: 4.4.1
+Version: 4.4.2
 Author: WPFactory
 Author URI: https://wpfactory.com
 Text Domain: order-minimum-amount-for-woocommerce
 Domain Path: /langs
-Copyright: © 2023 WPFactory
-WC tested up to: 8.6
+Copyright: © 2024 WPFactory
+WC tested up to: 8.7
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 */
@@ -66,7 +66,7 @@ if ( ! class_exists( 'Alg_WC_OMA' ) ) :
 		 * @since 1.0.0
 		 * @var   string
 		 */
-		public $version = '4.4.1';
+		public $version = '4.4.2';
 
 		/**
 		 * $_instance.
@@ -84,6 +84,15 @@ if ( ! class_exists( 'Alg_WC_OMA' ) ) :
 		 * @var Alg_WC_OMA_Pro
 		 */
 		public $pro;
+
+		/**
+		 * Core.
+		 *
+		 * @since 4.4.2
+		 *
+		 * @var Alg_WC_OMA_Core
+		 */
+		public $core;
 
 		/**
 		 * Main Alg_WC_OMA Instance.
@@ -115,6 +124,9 @@ if ( ! class_exists( 'Alg_WC_OMA' ) ) :
 			// Set up localisation
 			add_action( 'init', array( $this, 'localize' ) );
 
+			// Handling dynamic properties warning.
+			require_once 'includes/class-alg-wc-oma-dynamic-properties-obj.php';
+
 			// Pro
 			if ( 'order-minimum-amount-for-woocommerce-pro.php' === basename( __FILE__ ) ) {
 				$this->pro = require_once 'includes/pro/class-alg-wc-oma-pro.php';
@@ -142,13 +154,13 @@ if ( ! class_exists( 'Alg_WC_OMA' ) ) :
 		/**
 		 * Include required core files used in admin and on the frontend.
 		 *
-		 * @version 3.0.0
+		 * @version 4.4.2
 		 * @since   1.0.0
 		 */
 		function includes() {
-			// Handling deprecated options
+			// Handling deprecated options.
 			require_once 'includes/class-alg-wc-oma-deprecated.php';
-			// Core
+			// Core.
 			$this->core = require_once 'includes/class-alg-wc-oma-core.php';
 		}
 

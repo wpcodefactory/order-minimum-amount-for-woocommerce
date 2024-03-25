@@ -4,7 +4,7 @@
  *
  * This class includes everything needed to add a new "amount type".
  *
- * @version 4.3.2
+ * @version 4.4.2
  * @since   3.0.0
  *
  * @author  WPFactory
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'Alg_WC_OMA_Amount_Types' ) ) :
 
-	class Alg_WC_OMA_Amount_Types {
+	class Alg_WC_OMA_Amount_Types extends Alg_WC_OMA_Dynamic_Properties_Obj {
 
 		/**
 		 * Stored Cart Category Result.

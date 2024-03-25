@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Section Settings
  *
- * @version 4.0.5
+ * @version 4.4.2
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -15,6 +15,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'Alg_WC_OMA_Settings_Section' ) ) :
 
 	class Alg_WC_OMA_Settings_Section {
+
+		/**
+		 * id.
+		 *
+		 * @since   4.4.2
+		 */
+		protected $id;
+
+		/**
+		 * desc.
+		 *
+		 * @since   4.4.2
+		 */
+		protected $desc;
 
 		/**
 		 * Constructor.
