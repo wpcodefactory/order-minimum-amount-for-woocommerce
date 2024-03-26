@@ -3,7 +3,7 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmu
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 6.1
 Tested up to: 6.4
-Stable tag: 4.4.2
+Stable tag: 4.4.3
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -365,6 +365,9 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 1. Frontend example â€“ Cart notice.
 
 == Changelog ==
+
+= 4.4.3 - 26/03/2024 =
+* Fix - General - Checkout options - Add "Block store api request" option back.
 
 = 4.4.2 - 25/03/2024 =
 * Fix - Multiple warnings of "Creation of dynamic property is deprecated" are being triggered.

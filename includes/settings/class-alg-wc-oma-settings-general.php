@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - General Section Settings
  *
- * @version 4.4.2
+ * @version 4.4.3
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -31,7 +31,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_General' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 4.4.2
+		 * @version 4.4.3
 		 * @since   1.0.0
 		 */
 		function get_settings() {
@@ -192,7 +192,17 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_General' ) ) :
 					              __( 'Most of our plugin users will keep this option enabled.', 'order-minimum-amount-for-woocommerce' ),
 					'desc'     => __( 'Prevent users from placing the order with wrong amounts', 'order-minimum-amount-for-woocommerce' ),
 					'id'       => 'alg_wc_oma_block_checkout_process',
+					'checkboxgroup' => 'start',
 					'default'  => 'yes',
+					'type'     => 'checkbox',
+				),
+				array(
+					//'title'    => __( 'Block store api request', 'order-minimum-amount-for-woocommerce' ),
+					'desc_tip' => __( 'Overwrite store api request at the time of order creation on wrong min/max amount.', 'order-minimum-amount-for-woocommerce' ),
+					'desc'     => __( 'Prevent api user to place order on wrong min/max amount.', 'order-minimum-amount-for-woocommerce' ),
+					'id'       => 'alg_wc_oma_block_store_api',
+					'default'  => 'no',
+					'checkboxgroup' => 'end',
 					'type'     => 'checkbox',
 				),
 				array(
