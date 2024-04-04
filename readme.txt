@@ -2,8 +2,8 @@
 Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmukherjeeli
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 6.1
-Tested up to: 6.4
-Stable tag: 4.4.3
+Tested up to: 6.5
+Stable tag: 4.4.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -12,6 +12,8 @@ Implement minimum/maximum order amounts, regulate quantity, weight, volume, dime
 == Description ==
 
 > “What I needed: Easy to configure, and helpful support in the forum. Working as expected.” – ⭐⭐⭐⭐⭐  [reivorz](https://wordpress.org/support/topic/what-i-needed-61/)
+
+[Main Page](https://wpfactory.com/item/order-minimum-maximum-amount-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Main Page**") | [Support Forum](https://wpfactory.com/support/item/order-minimum-maximum-amount-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Support Forum**") | [Documentation & How to](https://wpfactory.com/docs/order-minimum-maximum-amount-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Documentation & How to**") | [Demo](https://orderminmax.instawp.xyz/)
 
 As the eCommerce landscape advances, establishing distinct order prerequisites, including setting minimum and maximum bounds, as well as numerous other conditions like weight and volume, becomes imperative, underscoring the necessity for a more refined tool.
 
@@ -37,12 +39,6 @@ Whether your goal is to enforce specialized limits, numeric prerequisites, or en
 
 * **Advanced Maximum Amount Controls:** For maximum limits, choose to validate amounts immediately upon adding to cart, or alternatively, entirely conceal the “add to cart” button for products when amounts surpass the defined limits.
 
----
-
-#### Useful Links ####
-* [**Plugin Main Page**](https://wpfactory.com/item/order-minimum-maximum-amount-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Plugin Main Page**")
-* [**Plugin Support Forum**](https://wpfactory.com/support/item/order-minimum-maximum-amount-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Plugin Support Forum**")
-* [**Documentation & How to**](https://wpfactory.com/docs/order-minimum-maximum-amount-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Documentation & How to**")
 
 ___
 ## 🤝 Recommended By##
@@ -302,25 +298,25 @@ ___
 
 ___
 
-## What's Next? Check More Plugins by WPFactory##
+## What's Next? Discover More Plugins by WPFactory ##
 
-If you're enjoying our plugin, we'd love for you to explore our other offerings. WPFactory has a diverse range of plugins tailored to enhance your experience. 
+WPFactory has a diverse range of plugins tailored to enhance your experience, some of our top-selling plugins are:
 
-Dive in and discover more tools to empower your WooCommerce Store!
+* [**Min Max Step Quantity**](https://wpfactory.com/item/product-quantity-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Min Max Step Quantity**"): Set minimum, maximum, step, and default product quantities, including dropdowns and decimal options on WooCommerce (**[Free version](https://wordpress.org/plugins/product-quantity-for-woocommerce/ "Free version")**)
 
-* [**Min Max Step Quantity**](https://wpfactory.com/item/product-quantity-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Min Max Step Quantity**"): Define a min max, step and default quantity for products, show a dropdown, quantities on archive/categories pages, use decimal quantities, and much more on WooCommerce stores (**[Try our Free version](https://wordpress.org/plugins/product-quantity-for-woocommerce/ "Try our Free version")**)
+* [**Cost of Goods for WooCommerce**](https://wpfactory.com/item/cost-of-goods-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Cost of Goods WooCommerce**"): Enhance profit maximization and financial management by accurately calculating your WooCommerce store's COGS (**[Free version](https://wordpress.org/plugins/cost-of-goods-for-woocommerce/ "Free version")**)
 
-* [**Cost of Goods for WooCommerce**](https://wpfactory.com/item/cost-of-goods-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Cost of Goods WooCommerce**"): Make informed decisions to maximize profits, correctly calculate Cost of Goods Sold (COGS) for your WooCommerce store and enhance your financial management capabilities (**[Try our Free version](https://wordpress.org/plugins/cost-of-goods-for-woocommerce/ "Try our Free version")**)
+* [**Maximum Products per User**](https://wpfactory.com/item/maximum-products-per-user-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Maximum Products per User**"): Impose personalized purchase limits based on user roles and date ranges to manage customer buying behavior (**[Free version](https://wordpress.org/plugins/maximum-products-per-user-for-woocommerce/ "Free version")**)
 
-* [**Maximum Products per User**](https://wpfactory.com/item/maximum-products-per-user-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Maximum Products per User**"): Set personalized purchase limits for your customers, define maximum product quantities, catered to specific user roles & selected date range (**[Try our Free version](https://wordpress.org/plugins/maximum-products-per-user-for-woocommerce/ "Try our Free version")**)
+* [**Order Minimum/Maximum Amount**](https://wpfactory.com/item/order-minimum-maximum-amount-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Order Minimum/Maximum Amount**"): Customize order limits by amount, quantity, weight, or volume, including user role, category, and more (**[Free version](https://wordpress.org/plugins/order-minimum-amount-for-woocommerce/ "Free version")**)
 
-* [**EU/UK VAT Manager for WooCommerce**](https://wpfactory.com/item/eu-vat-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**EU/UK VAT Manager for WooCommerce**"): Streamline your WooCommerce store’s EU/UK VAT compliance effortlessly, automate VAT settings, validation (VIES), and how to apply taxes, ensuring a seamless and compliant customer experience (**[Try our Free version](https://wordpress.org/plugins/eu-vat-for-woocommerce/ "Try our Free version")**)
+* [**EU/UK VAT Manager for WooCommerce**](https://wpfactory.com/item/eu-vat-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**EU/UK VAT Manager for WooCommerce**"): Automate VAT compliance for your WooCommerce store, including settings and VIES validation for a seamless experience (**[Free version](https://wordpress.org/plugins/eu-vat-for-woocommerce/ "Free version")**)
 
-* [**Email Verification for WooCommerce**](https://wpfactory.com/item/email-verification-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Email Verification for WooCommerce**"): Enhance WooCommerce security and credibility with Email Verification best plugin. Ensure genuine customer interactions, eliminate spam, and elevate email marketing efficiency (**[Try our Free version](https://wordpress.org/plugins/maximum-products-per-user-for-woocommerce/ "Try our Free version")**)
+* [**Email Verification for WooCommerce**](https://wpfactory.com/item/email-verification-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Email Verification for WooCommerce**"): Boost security and credibility by verifying customer emails, reducing spam, and improving email marketing (**[Free version](https://wordpress.org/plugins/maximum-products-per-user-for-woocommerce/ "Free version")**)
 
-* [**Free Shipping Over Amount for WooCommerce**](https://wpfactory.com/item/amount-left-free-shipping-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Free Shipping Over Amount for WooCommerce**"): WooCommerce Advanced Free Shipping plugin, use our plugin to quality customers for free shipping when they spend specific amount, by showing a bar on remaining amounts they need to spend to qualify for free shipping (**[Try our Free version](https://wordpress.org/plugins/amount-left-free-shipping-woocommerce/ "Try our Free version")**)
+* [**Free Shipping Over Amount for WooCommerce**](https://wpfactory.com/item/amount-left-free-shipping-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Free Shipping Over Amount for WooCommerce**"): Encourage higher spending by offering free shipping based on amount, with a progress bar for customers (**[Free version](https://wordpress.org/plugins/amount-left-free-shipping-woocommerce/ "Free version")**)
 
-* [**Dynamic Pricing & Bulk Quantity Discounts**](https://wpfactory.com/item/product-price-by-quantity-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Dynamic Pricing & Bulk Quantity Discounts**"): Create and manage advanced dynamic pricing and bulk discount rules for WooCommerce, encouraging bulk purchases and driving your sales to new heights (**[Try our Free version](https://wordpress.org/plugins/wholesale-pricing-woocommerce/ "Try our Free version")**)
+* [**Dynamic Pricing & Bulk Quantity Discounts**](https://wpfactory.com/item/product-price-by-quantity-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Dynamic Pricing & Bulk Quantity Discounts**"): Advanced dynamic pricing and discount rules for WooCommerce, encouraging bulk purchases and driving more sales (**[Free version](https://wordpress.org/plugins/wholesale-pricing-woocommerce/ "Free version")**)
 
 ## ❤️ User Testimonials: See What Others Are Saying!##
 
@@ -328,9 +324,7 @@ Dive in and discover more tools to empower your WooCommerce Store!
 
 > “Wow such a fantastic plugin! The ability to set minimum order value saved us completely” – ⭐⭐⭐⭐⭐ [Helen](https://wpfactory.com/item/order-minimum-maximum-amount-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme)
 
-> “Using the Pro version. Support has been very good. They really know their product and WP.
-
-Product works well with lots of options.” – ⭐⭐⭐⭐⭐ [Washington Chestnut Co](https://wpfactory.com/item/order-minimum-maximum-amount-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme)
+> “Using the Pro version. Support has been very good. They really know their product and WP. Product works well with lots of options.” – ⭐⭐⭐⭐⭐ [Washington Chestnut Co](https://wpfactory.com/item/order-minimum-maximum-amount-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme)
 
 > “The best: The best supports ever! They have helped me with everything I have needed! It has been a pleasure. Also the Plugin itself work perfectly!” – ⭐⭐⭐⭐⭐ [matte61](https://wordpress.org/support/topic/the-best-2262/)
 
@@ -365,6 +359,10 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 1. Frontend example â€“ Cart notice.
 
 == Changelog ==
+
+= 4.4.4 - 04/04/2024 =
+* Update - readme.txt
+* Tested up to: 6.5.
 
 = 4.4.3 - 26/03/2024 =
 * Fix - General - Checkout options - Add "Block store api request" option back.

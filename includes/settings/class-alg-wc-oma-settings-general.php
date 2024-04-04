@@ -199,7 +199,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_General' ) ) :
 				array(
 					//'title'    => __( 'Block store api request', 'order-minimum-amount-for-woocommerce' ),
 					'desc_tip' => __( 'Overwrite store api request at the time of order creation on wrong min/max amount.', 'order-minimum-amount-for-woocommerce' ),
-					'desc'     => __( 'Prevent api user to place order on wrong min/max amount.', 'order-minimum-amount-for-woocommerce' ),
+					'desc'     => __( 'Prevent api user to place order on wrong min/max amount', 'order-minimum-amount-for-woocommerce' ),
 					'id'       => 'alg_wc_oma_block_store_api',
 					'default'  => 'no',
 					'checkboxgroup' => 'end',
