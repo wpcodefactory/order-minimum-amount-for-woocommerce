@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Core Class.
  *
- * @version 4.4.3
+ * @version 4.4.5
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -596,12 +596,16 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 		/**
 		 * checkout_process_notices.
 		 *
-		 * @version 4.3.6
+		 * @version 4.4.5
 		 * @since   2.2.0
 		 */
 		function checkout_process_notices() {
 			if ( 'woocommerce_checkout_process' === get_option( 'alg_wc_oma_block_checkout_hook', 'woocommerce_checkout_process' ) ) {
-				$this->messages->output_notices( 'checkout', 'wc_add_notice', 'error' );
+				$this->messages->output_notices( array(
+					'area'        => 'checkout',
+					'func'        => 'wc_add_notice',
+					'notice_type' => 'error'
+				) );
 			}
 		}
 
