@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Messages.
  *
- * @version 4.4.1
+ * @version 4.4.5
  * @since   4.0.4
  *
  * @author  WPFactory
@@ -117,7 +117,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * display_dynamic_message.
 		 *
-		 * @version 4.0.5
+		 * @version 4.4.5
 		 * @since   4.0.4
 		 *
 		 * @param   null  $args
@@ -138,7 +138,14 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 				$func        = ! $func ? ( isset( $output_notices_params['func'] ) ? $output_notices_params['func'] : $func ) : $func;
 				$notice_type = isset( $output_notices_params['notice_type'] ) ? $output_notices_params['notice_type'] : $notice_type;
 			}
-			$output = $this->output_notices( $area, $func, $notice_type );
+			$output = $this->output_notices(
+				array(
+					'area'        => $area,
+					'func'        => $func,
+					'notice_type' => $notice_type,
+					'position'    => $position,
+				)
+			);
 			if ( false === $func ) {
 				echo $output;
 			}
@@ -301,26 +308,64 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * output_notices.
 		 *
-		 * @version 4.3.2
+		 * @version 4.4.5
 		 * @since   1.0.0
 		 *
-		 * @param         $area  'cart' | 'checkout' | 'product_page'
-		 * @param   bool  $func
-		 * @param   bool  $notice_type
+		 * @param $args
 		 *
-		 * @return string
+		 * @return string|void
 		 */
-		function output_notices( $area, $func = false, $notice_type = false ) {
-			$result = $this->get_notices( array(
+		function output_notices( $args = null ) {
+			$args        = wp_parse_args( $args, array(
+				'area'        => '',
+				'func'        => false,
+				'notice_type' => false,
+				'position'    => ''
+			) );
+			$area        = $args['area'];
+			$func        = $args['func'];
+			$notice_type = $args['notice_type'];
+			$position    = $args['position'];
+			$result      = $this->get_notices( array(
 				'area'                       => $area,
 				'get_only_first_flat_notice' => 'no' === get_option( 'alg_wc_oma_display_multiple_msg', 'yes' ),
 			) )['flat_notices'];
 
+			$templates = array(
+				'default'  => '<div class="alg-wc-oma-msg">{content}</div>',
+				'in_table' => '<tr><th></th><td><div class="alg-wc-oma-msg">{content}</div></td></tr>'
+			);
+
 			if ( ! $func ) {
-				return implode( '<br>', $result );
+				$wrapped_result = array_map( function ( $item ) use ( $templates, $position ) {
+					$array_from_to = array(
+						'{content}' => $item,
+					);
+					$template      = $templates['default'];
+					if (
+						in_array( $position, array(
+							'woocommerce_cart_totals_before_shipping',
+							'woocommerce_cart_totals_after_shipping',
+							'woocommerce_cart_totals_before_order_total',
+							'woocommerce_cart_totals_after_order_total',
+							'woocommerce_review_order_before_shipping',
+							'woocommerce_review_order_after_shipping'
+						) )
+					) {
+						$template = $templates['in_table'];
+					}
+
+					return str_replace( array_keys( $array_from_to ), $array_from_to, $template );
+				}, $result );
+
+				return implode( '', $wrapped_result );
 			} else {
 				foreach ( $result as $content ) {
-					call_user_func_array( $func, array( $content, $notice_type ) );
+					$array_from_to = array(
+						'{content}' => $content,
+					);
+					$final_content = str_replace( array_keys( $array_from_to ), $array_from_to, $templates['default'] );
+					call_user_func_array( $func, array( $final_content, $notice_type ) );
 				}
 			}
 		}
