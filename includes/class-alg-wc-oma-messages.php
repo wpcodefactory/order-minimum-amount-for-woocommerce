@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Messages.
  *
- * @version 4.4.5
+ * @version 4.4.6
  * @since   4.0.4
  *
  * @author  WPFactory
@@ -17,16 +17,20 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 	class Alg_WC_OMA_Messages {
 
 		/**
+		 * $enabled_message_areas.
+		 *
+		 * @since 4.4.6
+		 */
+		protected $enabled_message_areas = null;
+
+		/**
 		 * Constructor.
 		 *
-		 * @version 4.1.3
+		 * @version 4.4.6
 		 * @since   4.0.4
 		 */
 		function __construct() {
-			if (
-				! is_admin() &&
-				'yes' === get_option( 'alg_wc_oma_plugin_enabled', 'yes' )
-			) {
+			if ( 'yes' === get_option( 'alg_wc_oma_plugin_enabled', 'yes' ) && ! is_admin() ) {
 				$messages_areas = $this->get_enabled_message_areas();
 				foreach ( $messages_areas as $area ) {
 					$positions = get_option( "alg_wc_oma_{$area}_area_message_positions", $this->get_message_default_positions( $area ) );
@@ -36,17 +40,135 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 						}
 					}
 				}
-				// Force checkout notice refresh
-				add_action( 'woocommerce_review_order_after_order_total', array(
-					$this,
-					'force_checkout_notice_refresh'
-				), 10, 2 );
+
+				// Force checkout notice refresh.
+				add_action( 'woocommerce_review_order_after_order_total', array( $this, 'force_checkout_notice_refresh' ), 10, 2 );
 				add_action( 'woocommerce_review_order_before_submit', array( $this, 'force_checkout_notice_refresh' ) );
-				add_filter( 'woocommerce_checkout_fields', array(
-					$this,
-					'update_totals_on_checkout_field_change'
-				), PHP_INT_MAX );
+				add_filter( 'woocommerce_checkout_fields', array( $this, 'update_totals_on_checkout_field_change' ), PHP_INT_MAX );
 			}
+
+			// Blocks.
+			add_action( 'wp_ajax_alg_wc_oma_get_block_cart_notices', array( $this, 'get_ajax_notices_on_block_cart_change' ) );
+			add_action( 'wp_ajax_nopriv_alg_wc_oma_get_block_cart_notices', array( $this, 'get_ajax_notices_on_block_cart_change' ) );
+			add_action( 'wp_footer', array( $this, 'check_limits_on_cart_change' ), PHP_INT_MAX );
+			add_action( 'wp_footer', array( $this, 'cart_block_change_detector' ), PHP_INT_MAX );
+		}
+
+		/**
+		 * get_ajax_notices_on_block_cart_change.
+		 *
+		 * @version 4.4.6
+		 * @since   4.4.6
+		 *
+		 * @return void
+		 */
+		public function get_ajax_notices_on_block_cart_change() {
+			$args = wp_parse_args(
+				$_POST,
+				array(
+					'wc_page_origin' => 'cart',
+				)
+			);
+			$messages_areas = $this->get_enabled_message_areas();
+			$wc_page_origin = $args['wc_page_origin'];
+			if (
+				in_array( $wc_page_origin, $messages_areas, true ) &&
+				in_array( "woocommerce_blocks_{$wc_page_origin}_enqueue_data", get_option( "alg_wc_oma_{$wc_page_origin}_area_message_positions", $this->get_message_default_positions( $wc_page_origin ) ), true )
+			) {
+				$this->display_dynamic_message(
+					array(
+						'area' => $wc_page_origin,
+						'func' => 'wc_add_notice',
+					)
+				);
+				wc_print_notices();
+			}
+			die();
+		}
+
+		/**
+		 * check_limits_on_cart_change.
+		 *
+		 * @version 4.4.6
+		 * @since   4.4.6
+		 *
+		 * @return void
+		 */
+		function check_limits_on_cart_change() {
+			$php_to_js = array(
+				'action'           => 'alg_wc_oma_get_block_cart_notices',
+				'ajax_url'         => admin_url( 'admin-ajax.php' ),
+				'wrapper_selector' => '.wp-block-woocommerce-cart,.wp-block-woocommerce-checkout', // Place where the notices will be appended to.
+				'removal_selector' => array(
+					'notices'        => '.wc-block-components-notice-banner,.woocommerce-info,.woocommerce-error,.woocommerce-message', // Notices that will be removed.
+					'notice_wrapper' => '.alg-wc-oma-msg', // Only notices wrapped in this wrapper will be removed.
+				),
+			);
+			?>
+			<script>
+				jQuery(document).ready(function ($) {
+					let data = <?php echo json_encode( $php_to_js );?>;
+					document.addEventListener('alg_wc_oma_cart_block_update', function (e) {
+						$.post(data.ajax_url, {
+							action: data.action,
+							wc_page_origin: e.detail.wcPageOrigin
+						}, function (response) {
+							// Remove other notices.
+							$(data.removal_selector.notice_wrapper).closest(data.removal_selector.notices).remove();
+							// Display notices on cart block.
+							$(data.wrapper_selector).eq(0).prepend(response);
+						});
+					});
+				});
+			</script>
+			<?php
+		}
+
+		/**
+		 * cart_block_change_detector.
+		 *
+		 * @version 4.4.6
+		 * @since   4.4.6
+		 *
+		 * @return void
+		 */
+		function cart_block_change_detector() {
+			if ( ! is_cart() && ! is_checkout() ) {
+				return;
+			}
+			$php_to_js = array(
+				'wc_page_origin' => is_cart() ? 'cart' : 'checkout'
+			);
+			?>
+			<script>
+				(function () {
+					const {select, subscribe} = window.wp.data;
+					const cartStoreKey = window.wc.wcBlocksData.CART_STORE_KEY;
+					let previousCart = null;
+					const unsub = subscribe(onCartChange, cartStoreKey);
+					let data = <?php echo json_encode( $php_to_js );?>;
+
+					function onCartChange() {
+						// Get the current cart data.
+						const cart = select(cartStoreKey).getCartData();
+						// Check if the cart has changed.
+						if (JSON.stringify(cart) !== JSON.stringify(previousCart)) {
+							if (previousCart != null) {
+								let event = new CustomEvent('alg_wc_oma_cart_block_update', {
+									detail: {
+										cart: cart,
+										wcPageOrigin: data.wc_page_origin
+									}
+								});
+								document.dispatchEvent(event);
+							}
+							// Update the previous cart state.
+							previousCart = cart;
+						}
+					}
+				})();
+			</script>
+			<?php
 		}
 
 		/**
@@ -100,18 +222,24 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * get_enabled_message_areas.
 		 *
-		 * @version 4.0.4
+		 * @version 4.4.6
 		 * @since   4.0.4
 		 *
 		 * @return array
 		 */
 		function get_enabled_message_areas() {
-			$possible_areas = array( 'cart', 'mini_cart', 'checkout', 'product_page' );
-			$areas          = array_map( function ( $possible_area ) {
-				return 'yes' === get_option( "alg_wc_oma_{$possible_area}_notice_enabled", 'no' ) ? $possible_area : null;
-			}, $possible_areas );
+			if ( is_null( $this->enabled_message_areas ) ) {
+				$possible_areas              = array( 'cart', 'mini_cart', 'checkout', 'product_page' );
+				$areas                       = array_map(
+					function ( $possible_area ) {
+						return 'yes' === get_option( "alg_wc_oma_{$possible_area}_notice_enabled", 'no' ) ? $possible_area : null;
+					},
+					$possible_areas
+				);
+				$this->enabled_message_areas = array_filter( $areas );
+			}
 
-			return array_filter( $areas );
+			return $this->enabled_message_areas;
 		}
 
 		/**
@@ -308,7 +436,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * output_notices.
 		 *
-		 * @version 4.4.5
+		 * @version 4.4.6
 		 * @since   1.0.0
 		 *
 		 * @param $args
@@ -331,9 +459,12 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 				'get_only_first_flat_notice' => 'no' === get_option( 'alg_wc_oma_display_multiple_msg', 'yes' ),
 			) )['flat_notices'];
 
-			$templates = array(
-				'default'  => '<div class="alg-wc-oma-msg">{content}</div>',
-				'in_table' => '<tr><th></th><td><div class="alg-wc-oma-msg">{content}</div></td></tr>'
+			$templates = apply_filters(
+				'alg_wc_oma_msg_templates',
+				array(
+					'default'  => '<div class="alg-wc-oma-msg">{content}</div>',
+					'in_table' => '<tr><th></th><td><div class="alg-wc-oma-msg">{content}</div></td></tr>',
+				)
 			);
 
 			if ( ! $func ) {
@@ -426,7 +557,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * get_messages_info.
 		 *
-		 * @version 4.2.5
+		 * @version 4.4.6
 		 * @since   4.0.4
 		 *
 		 * @return array
@@ -457,7 +588,8 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 						'woocommerce_after_shipping_calculator'      => __( 'After shipping calculator', 'order-minimum-amount-for-woocommerce' ),
 					),
 					'default_positions'   => array(
-						'woocommerce_before_cart'
+						'woocommerce_before_cart',
+						'woocommerce_blocks_cart_enqueue_data'
 					)
 				),
 				'mini_cart'    => array(
@@ -497,7 +629,8 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 						'woocommerce_after_checkout_form'              => __( 'After checkout form', 'order-minimum-amount-for-woocommerce' ),
 					),
 					'default_positions'   => array(
-						'woocommerce_before_checkout_form'
+						'woocommerce_before_checkout_form',
+						'woocommerce_blocks_checkout_enqueue_data'
 					)
 				),
 				'product_page' => array(
