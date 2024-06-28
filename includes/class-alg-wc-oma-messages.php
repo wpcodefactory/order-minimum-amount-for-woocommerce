@@ -127,7 +127,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * cart_block_change_detector.
 		 *
-		 * @version 4.4.6
+		 * @version 4.4.7
 		 * @since   4.4.6
 		 *
 		 * @return void
@@ -142,11 +142,15 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 			?>
 			<script>
 				(function () {
+					if (!window || !window.wp || !window.wp.data) {
+						return;
+					}
 					const {select, subscribe} = window.wp.data;
+
 					const cartStoreKey = window.wc.wcBlocksData.CART_STORE_KEY;
 					let previousCart = null;
 					const unsub = subscribe(onCartChange, cartStoreKey);
-					let data = <?php echo json_encode( $php_to_js );?>;
+					let data = <?php echo wp_json_encode( $php_to_js ); ?>;
 
 					function onCartChange() {
 						// Get the current cart data.
@@ -214,7 +218,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 			) {
 				$this->display_dynamic_message( array(
 					'area' => 'checkout',
-					'func' => 'wc_add_notice'
+					'func' => 'wc_add_notice',
 				) );
 			}
 		}
