@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Messages.
  *
- * @version 4.4.6
+ * @version 4.4.8
  * @since   4.0.4
  *
  * @author  WPFactory
@@ -57,7 +57,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * get_ajax_notices_on_block_cart_change.
 		 *
-		 * @version 4.4.6
+		 * @version 4.4.8
 		 * @since   4.4.6
 		 *
 		 * @return void
@@ -75,6 +75,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 				in_array( $wc_page_origin, $messages_areas, true ) &&
 				in_array( "woocommerce_blocks_{$wc_page_origin}_enqueue_data", get_option( "alg_wc_oma_{$wc_page_origin}_area_message_positions", $this->get_message_default_positions( $wc_page_origin ) ), true )
 			) {
+				do_action('alg_wc_oma_check_notices_on_block_cart_change');
 				$this->display_dynamic_message(
 					array(
 						'area' => $wc_page_origin,
@@ -89,7 +90,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * check_limits_on_cart_change.
 		 *
-		 * @version 4.4.6
+		 * @version 4.4.8
 		 * @since   4.4.6
 		 *
 		 * @return void
@@ -117,6 +118,16 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 							$(data.removal_selector.notice_wrapper).closest(data.removal_selector.notices).remove();
 							// Display notices on cart block.
 							$(data.wrapper_selector).eq(0).prepend(response);
+							let event = new CustomEvent('alg_wc_oma_msg_display_on_cart_block_update', {
+								detail: {
+									cart: e.detail.cart,
+									wcPageOrigin: e.detail.wcPageOrigin
+								}
+							});
+							document.dispatchEvent(event);
+							if(wp && wp.data){
+								wp.data.dispatch('wc/store/cart').invalidateResolutionForStore();
+							}
 						});
 					});
 				});

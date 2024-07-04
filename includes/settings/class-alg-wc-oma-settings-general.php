@@ -168,6 +168,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_General' ) ) :
 					'desc'    => __( '"Proceed to checkout" button behaviour when limits are not respected.', 'order-minimum-amount-for-woocommerce' ),
 					'id'      => 'alg_wc_oma_disable_block_checkout_btn',
 					'default' => 'do_not_disable',
+					'class'   => 'chosen_select',
 					'type'    => 'select',
 					'options' => array(
 						'do_not_disable' => __( 'Leave it enabled', 'order-minimum-amount-for-woocommerce' ),

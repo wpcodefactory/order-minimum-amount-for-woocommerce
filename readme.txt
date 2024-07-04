@@ -3,7 +3,7 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmu
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 6.1
 Tested up to: 6.5
-Stable tag: 4.4.7
+Stable tag: 4.4.8
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -359,6 +359,12 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 1. Frontend example â€“ Cart notice.
 
 == Changelog ==
+
+= 4.4.8 - 04/07/2024 =
+* Fix - Fees - Improved Fees compatibility on cart and cart block.
+* Fix - General - Improved compatibility between "Proceed to checkout button" option and the Cart block.
+* Dev - Added 'alg_wc_oma_check_notices_on_block_cart_change' action.
+* Dev - Added 'alg_wc_oma_msg_display_on_cart_block_update' javascript event.
 
 = 4.4.7 - 28/06/2024 =
 * Fix - Compatibility with cart/checkout block could create a problem on classic cart/checkout.

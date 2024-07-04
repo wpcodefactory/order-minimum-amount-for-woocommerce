@@ -97,6 +97,19 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 			add_filter( 'woocommerce_update_cart_action_cart_updated', array( $this, 'set_cookie_on_cart_updated' ) );
 			add_action( 'wp', array( $this, 'set_cookie_on_cart' ) );
 			add_action( 'wp_footer', array( $this, 'add_disable_checkout_script' ), PHP_INT_MAX );
+			add_action( 'alg_wc_oma_check_notices_on_block_cart_change', array( $this, 'set_cookie_on_block_cart_updated' ), PHP_INT_MAX );
+		}
+
+		/**
+		 * set_cookie_on_block_cart_updated.
+		 *
+		 * @version 4.4.8
+		 * @since   4.4.8
+		 *
+		 * @return void
+		 */
+		function set_cookie_on_block_cart_updated() {
+			$this->set_cookie_if_has_notices();
 		}
 
 		/**
@@ -170,7 +183,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 		/**
 		 * Add script to disable checkout button in cart page.
 		 *
-		 * @version 4.2.5
+		 * @version 4.4.8
 		 * @since   4.1.2
 		 */
 		function add_disable_checkout_script() {
@@ -210,6 +223,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 
 					$(document.body).on('updated_cart_totals', disableOrEnableBtn);
 					$(document.body).on('wc_fragments_refreshed', disableOrEnableBtn);
+					document.addEventListener('alg_wc_oma_msg_display_on_cart_block_update', disableOrEnableBtn);
 					disableOrEnableBtn();
 				});
 			</script>
