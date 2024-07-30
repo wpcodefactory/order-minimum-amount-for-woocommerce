@@ -2,8 +2,8 @@
 Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmukherjeeli
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 6.1
-Tested up to: 6.5
-Stable tag: 4.4.8
+Tested up to: 6.6
+Stable tag: 4.4.9
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -359,6 +359,10 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 1. Frontend example â€“ Cart notice.
 
 == Changelog ==
+
+= 4.4.9 - 30/07/2024 =
+* Tested up to: 6.6.
+* WC tested up to: 9.1.
 
 = 4.4.8 - 04/07/2024 =
 * Fix - Fees - Improved Fees compatibility on cart and cart block.
