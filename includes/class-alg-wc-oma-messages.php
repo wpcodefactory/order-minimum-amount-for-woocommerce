@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Messages.
  *
- * @version 4.4.8
+ * @version 4.5.0
  * @since   4.0.4
  *
  * @author  WPFactory
@@ -57,30 +57,41 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * get_ajax_notices_on_block_cart_change.
 		 *
-		 * @version 4.4.8
+		 * @version 4.5.0
 		 * @since   4.4.6
 		 *
 		 * @return void
 		 */
 		public function get_ajax_notices_on_block_cart_change() {
-			$args = wp_parse_args(
-				$_POST,
-				array(
-					'wc_page_origin' => 'cart',
-				)
+			$args           = wp_parse_args(
+					$_POST,
+					array(
+							'wc_page_origin' => 'cart',
+							'payment_method' => '',
+							'cart'           => '',
+					)
 			);
 			$messages_areas = $this->get_enabled_message_areas();
 			$wc_page_origin = $args['wc_page_origin'];
+			$cart           = $args['cart'];
+			$payment_method = sanitize_text_field( $args['payment_method'] );
 			if (
-				in_array( $wc_page_origin, $messages_areas, true ) &&
-				in_array( "woocommerce_blocks_{$wc_page_origin}_enqueue_data", get_option( "alg_wc_oma_{$wc_page_origin}_area_message_positions", $this->get_message_default_positions( $wc_page_origin ) ), true )
+					in_array( $wc_page_origin, $messages_areas, true ) &&
+					in_array( "woocommerce_blocks_{$wc_page_origin}_enqueue_data", get_option( "alg_wc_oma_{$wc_page_origin}_area_message_positions", $this->get_message_default_positions( $wc_page_origin ) ), true )
 			) {
-				do_action('alg_wc_oma_check_notices_on_block_cart_change');
+
+				// Force payment method setting.
+				if ( ! empty( $payment_method ) ) {
+					WC()->session->set( 'chosen_payment_method', sanitize_text_field( $payment_method ) );
+				}
+
+				// Check for limits.
+				do_action( 'alg_wc_oma_check_notices_on_block_cart_change' );
 				$this->display_dynamic_message(
-					array(
-						'area' => $wc_page_origin,
-						'func' => 'wc_add_notice',
-					)
+						array(
+								'area' => $wc_page_origin,
+								'func' => 'wc_add_notice',
+						)
 				);
 				wc_print_notices();
 			}
@@ -90,12 +101,15 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * check_limits_on_cart_change.
 		 *
-		 * @version 4.4.8
+		 * @version 4.5.0
 		 * @since   4.4.6
 		 *
 		 * @return void
 		 */
 		function check_limits_on_cart_change() {
+			if ( ! is_cart() && ! is_checkout() ) {
+				return;
+			}
 			$php_to_js = array(
 				'action'           => 'alg_wc_oma_get_block_cart_notices',
 				'ajax_url'         => admin_url( 'admin-ajax.php' ),
@@ -112,20 +126,19 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 					document.addEventListener('alg_wc_oma_cart_block_update', function (e) {
 						$.post(data.ajax_url, {
 							action: data.action,
-							wc_page_origin: e.detail.wcPageOrigin
+							wc_page_origin: e.detail.wcPageOrigin,
+							payment_method: e.detail.paymentMethod,
+							cart: e.detail.cart,
 						}, function (response) {
 							// Remove other notices.
 							$(data.removal_selector.notice_wrapper).closest(data.removal_selector.notices).remove();
 							// Display notices on cart block.
 							$(data.wrapper_selector).eq(0).prepend(response);
 							let event = new CustomEvent('alg_wc_oma_msg_display_on_cart_block_update', {
-								detail: {
-									cart: e.detail.cart,
-									wcPageOrigin: e.detail.wcPageOrigin
-								}
+								detail: e.detail
 							});
 							document.dispatchEvent(event);
-							if(wp && wp.data){
+							if (wp && wp.data) {
 								wp.data.dispatch('wc/store/cart').invalidateResolutionForStore();
 							}
 						});
@@ -157,21 +170,29 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 						return;
 					}
 					const {select, subscribe} = window.wp.data;
-
 					const cartStoreKey = window.wc.wcBlocksData.CART_STORE_KEY;
+					const paymentStoreKey = window.wc.wcBlocksData.PAYMENT_STORE_KEY;
+
 					let previousCart = null;
+					let previousPaymentMethod = null;
 					const unsub = subscribe(onCartChange, cartStoreKey);
+					const unsub2 = subscribe(onCartChange, paymentStoreKey);
 					let data = <?php echo wp_json_encode( $php_to_js ); ?>;
 
 					function onCartChange() {
 						// Get the current cart data.
 						const cart = select(cartStoreKey).getCartData();
+						const activePaymentMethod = select(paymentStoreKey).getActivePaymentMethod();
 						// Check if the cart has changed.
-						if (JSON.stringify(cart) !== JSON.stringify(previousCart)) {
+						if (
+								JSON.stringify(cart) !== JSON.stringify(previousCart) ||
+								activePaymentMethod != previousPaymentMethod
+						) {
 							if (previousCart != null) {
 								let event = new CustomEvent('alg_wc_oma_cart_block_update', {
 									detail: {
 										cart: cart,
+										paymentMethod: activePaymentMethod,
 										wcPageOrigin: data.wc_page_origin
 									}
 								});
@@ -179,6 +200,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 							}
 							// Update the previous cart state.
 							previousCart = cart;
+							previousPaymentMethod = activePaymentMethod;
 						}
 					}
 				})();
