@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Messages.
  *
- * @version 4.5.0
+ * @version 4.5.2
  * @since   4.0.4
  *
  * @author  WPFactory
@@ -151,7 +151,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * cart_block_change_detector.
 		 *
-		 * @version 4.4.7
+		 * @version 4.5.2
 		 * @since   4.4.6
 		 *
 		 * @return void
@@ -166,9 +166,10 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 			?>
 			<script>
 				(function () {
-					if (!window || !window.wp || !window.wp.data) {
+					if ( !window || !window.wp || !window.wp.data || !window.wc || !window.wc.wcBlocksData ) {
 						return;
 					}
+					console.log(window.wc.wcBlocksData);
 					const {select, subscribe} = window.wp.data;
 					const cartStoreKey = window.wc.wcBlocksData.CART_STORE_KEY;
 					const paymentStoreKey = window.wc.wcBlocksData.PAYMENT_STORE_KEY;
