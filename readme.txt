@@ -3,7 +3,7 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmu
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 6.1
 Tested up to: 6.6
-Stable tag: 4.5.2
+Stable tag: 4.5.3
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -359,6 +359,13 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 1. Frontend example â€“ Cart notice.
 
 == Changelog ==
+
+= 4.5.3 - 18/10/2024 =
+* Dev - Add Cross-selling library.
+* Dev - Move settings to WPFactory menu.
+* Dev - Added the License Key Manager library.
+* Dev - Improve compatibility with HPOS.
+* WC tested up to: 9.3.
 
 = 4.5.2 - 29/08/2024 =
 * Fix - Fees class cleared.

@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: order-minimum-amount-for-woocommerce 4.5.2\n"
+"Project-Id-Version: order-minimum-amount-for-woocommerce 4.5.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/order-minimum-amount-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-08-29T21:36:06+02:00\n"
+"POT-Creation-Date: 2024-10-19T04:12:09+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: order-minimum-amount-for-woocommerce\n"
@@ -519,6 +519,7 @@ msgstr ""
 #: includes/settings/class-alg-wc-oma-settings-general.php:44
 #: includes/settings/class-alg-wc-oma-settings-general.php:49
 #: includes/settings/class-alg-wc-settings-oma.php:29
+#: order-minimum-amount-for-woocommerce-pro.php:214
 msgid "Order Min/Max Amount"
 msgstr ""
 
@@ -1074,6 +1075,42 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-oma-settings-general.php:136
 msgid "Display condition"
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-general.php:142
+msgid "Is WooCommerce"
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-general.php:143
+msgid "Is Shop"
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-general.php:144
+msgid "Is Product Category"
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-general.php:145
+msgid "Is Product Tag"
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-general.php:146
+msgid "Is Product"
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-general.php:147
+msgid "Is Cart"
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-general.php:148
+msgid "Is Checkout"
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-general.php:149
+msgid "Is Account Page"
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-general.php:150
+msgid "Is WC Endpoint URL"
 msgstr ""
 
 #: includes/settings/class-alg-wc-oma-settings-general.php:162
@@ -1885,6 +1922,10 @@ msgstr ""
 msgid "Your settings have been reset."
 msgstr ""
 
-#: order-minimum-amount-for-woocommerce-pro.php:200
+#: order-minimum-amount-for-woocommerce-pro.php:213
+msgid "Order Min/Max"
+msgstr ""
+
+#: order-minimum-amount-for-woocommerce-pro.php:291
 msgid "Go Pro"
 msgstr ""

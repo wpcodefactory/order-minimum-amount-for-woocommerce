@@ -3,13 +3,13 @@
 Plugin Name: Order Minimum/Maximum Amount for WooCommerce
 Plugin URI: https://wpfactory.com/item/order-minimum-maximum-amount-for-woocommerce/
 Description: Set required minimum and/or maximum order amounts (e.g. sum, quantity, weight, volume, etc.) in WooCommerce.
-Version: 4.5.2
+Version: 4.5.3
 Author: WPFactory
 Author URI: https://wpfactory.com
 Text Domain: order-minimum-amount-for-woocommerce
 Domain Path: /langs
 Copyright: © 2024 WPFactory
-WC tested up to: 9.1
+WC tested up to: 9.3
 Requires Plugins: woocommerce
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -42,6 +42,12 @@ if (
 	! alg_wc_oma_is_plugin_active( 'woocommerce/woocommerce.php' ) ||
 	( 'order-minimum-amount-for-woocommerce.php' === basename( __FILE__ ) && alg_wc_oma_is_plugin_active( 'order-minimum-amount-for-woocommerce-pro/order-minimum-amount-for-woocommerce-pro.php' ) )
 ) {
+	if ( function_exists( 'alg_wc_oma' ) ) {
+		$plugin = alg_wc_oma();
+		if ( method_exists( $plugin, 'set_free_version_filesystem_path' ) ) {
+			$plugin->set_free_version_filesystem_path( __FILE__ );
+		}
+	}
 	return;
 }
 
@@ -67,7 +73,7 @@ if ( ! class_exists( 'Alg_WC_OMA' ) ) :
 		 * @since 1.0.0
 		 * @var   string
 		 */
-		public $version = '4.5.2';
+		public $version = '4.5.3';
 
 		/**
 		 * $_instance.
@@ -96,6 +102,20 @@ if ( ! class_exists( 'Alg_WC_OMA' ) ) :
 		public $core;
 
 		/**
+		 * $file_system_path.
+		 *
+		 * @since 4.5.3
+		 */
+		protected $file_system_path;
+
+		/**
+		 * $free_version_file_system_path.
+		 *
+		 * @since 4.5.3
+		 */
+		protected $free_version_file_system_path;
+
+		/**
 		 * Main Alg_WC_OMA Instance.
 		 *
 		 * Ensures only one instance of Alg_WC_OMA is loaded or can be loaded.
@@ -116,29 +136,100 @@ if ( ! class_exists( 'Alg_WC_OMA' ) ) :
 		/**
 		 * Initializer.
 		 *
-		 * @version 4.2.7
+		 * @version 4.5.3
 		 * @since   4.2.7
 		 *
 		 * @access  public
 		 */
 		function init() {
-			// Set up localisation
+			// Adds cross-selling library.
+			$this->add_cross_selling_library();
+
+			// Move WC Settings tab to WPFactory menu.
+			$this->move_wc_settings_tab_to_wpfactory_menu();
+
+			// Set up localisation.
 			add_action( 'init', array( $this, 'localize' ) );
+
+			// Adds compatibility with HPOS.
+			add_action( 'before_woocommerce_init', function () {
+				$this->declare_compatibility_with_hpos( $this->get_filesystem_path() );
+				if ( ! empty( $this->get_free_version_filesystem_path() ) ) {
+					$this->declare_compatibility_with_hpos( $this->get_free_version_filesystem_path() );
+				}
+			} );
 
 			// Handling dynamic properties warning.
 			require_once 'includes/class-alg-wc-oma-dynamic-properties-obj.php';
 
-			// Pro
+			// Pro.
 			if ( 'order-minimum-amount-for-woocommerce-pro.php' === basename( __FILE__ ) ) {
 				$this->pro = require_once 'includes/pro/class-alg-wc-oma-pro.php';
 			}
 
-			// Include required files
+			// Include required files.
 			$this->includes();
 
-			// Admin
+			// Admin.
 			if ( is_admin() ) {
 				$this->admin();
+			}
+		}
+
+		/**
+		 * add_cross_selling_library.
+		 *
+		 * @version 4.5.3
+		 * @since   4.5.3
+		 *
+		 * @return void
+		 */
+		function add_cross_selling_library(){
+			if ( ! is_admin() ) {
+				return;
+			}
+			// Cross-selling library.
+			$cross_selling = new \WPFactory\WPFactory_Cross_Selling\WPFactory_Cross_Selling();
+			$cross_selling->setup( array( 'plugin_file_path'   => $this->get_filesystem_path() ) );
+			$cross_selling->init();
+		}
+
+		/**
+		 * move_wc_settings_tab_to_wpfactory_submenu.
+		 *
+		 * @version 4.5.3
+		 * @since   4.5.3
+		 *
+		 * @return void
+		 */
+		function move_wc_settings_tab_to_wpfactory_menu() {
+			if ( ! is_admin() ) {
+				return;
+			}
+			// WC Settings tab as WPFactory submenu item.
+			$wpf_admin_menu = \WPFactory\WPFactory_Admin_Menu\WPFactory_Admin_Menu::get_instance();
+			$wpf_admin_menu->move_wc_settings_tab_to_wpfactory_menu( array(
+				'wc_settings_tab_id' => 'alg_wc_oma',
+				'menu_title'         => __( 'Order Min/Max', 'order-minimum-amount-for-woocommerce' ),
+				'page_title'         => __( 'Order Min/Max Amount', 'order-minimum-amount-for-woocommerce' ),
+			) );
+		}
+
+		/**
+		 * Declare compatibility with custom order tables for WooCommerce.
+		 *
+		 * @version 4.5.3
+		 * @since   4.5.3
+		 *
+		 * @param $filesystem_path
+		 *
+		 * @return void
+		 * @link    https://github.com/woocommerce/woocommerce/wiki/High-Performance-Order-Storage-Upgrade-Recipe-Book#declaring-extension-incompatibility
+		 *
+		 */
+		function declare_compatibility_with_hpos( $filesystem_path ) {
+			if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+				\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', $filesystem_path, true );
 			}
 		}
 
@@ -248,6 +339,54 @@ if ( ! class_exists( 'Alg_WC_OMA' ) ) :
 			return untrailingslashit( plugin_dir_path( __FILE__ ) );
 		}
 
+		/**
+		 * get_filesystem_path.
+		 *
+		 * @version 4.5.3
+		 * @since   4.5.3
+		 *
+		 * @return string
+		 */
+		function get_filesystem_path() {
+			return $this->file_system_path;
+		}
+
+		/**
+		 * set_filesystem_path.
+		 *
+		 * @version 4.5.3
+		 * @since   4.5.3
+		 *
+		 * @param   mixed  $file_system_path
+		 */
+		public function set_filesystem_path( $file_system_path ) {
+			$this->file_system_path = $file_system_path;
+		}
+
+		/**
+		 * get_free_version_filesystem_path.
+		 *
+		 * @version 4.5.3
+		 * @since   4.5.3
+		 *
+		 * @return mixed
+		 */
+		public function get_free_version_filesystem_path() {
+			return $this->free_version_file_system_path;
+		}
+
+		/**
+		 * set_free_version_filesystem_path.
+		 *
+		 * @version 4.5.3
+		 * @since   4.5.3
+		 *
+		 * @param   mixed  $free_version_file_system_path
+		 */
+		public function set_free_version_filesystem_path( $free_version_file_system_path ) {
+			$this->free_version_file_system_path = $free_version_file_system_path;
+		}
+
 	}
 
 endif;
@@ -266,17 +405,8 @@ if ( ! function_exists( 'alg_wc_oma' ) ) {
 	}
 }
 
-add_action(
-	'plugins_loaded',
-	function () {
-		$plugin = alg_wc_oma();
-		$plugin->init();
-	}
-);
-
-
-add_action( 'before_woocommerce_init', function() {
-	if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
-		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
-	}
+add_action( 'plugins_loaded', function () {
+	$plugin = alg_wc_oma();
+	$plugin->set_filesystem_path( __FILE__ );
+	$plugin->init();
 } );
