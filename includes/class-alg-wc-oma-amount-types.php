@@ -1,6 +1,6 @@
 <?php
 /**
- * Order Minimum/Maximum Amount for WooCommerce - Amount Types Class
+ * Order Minimum/Maximum Amount Limits for WooCommerce - Amount Types Class
  *
  * This class includes everything needed to add a new "amount type".
  *

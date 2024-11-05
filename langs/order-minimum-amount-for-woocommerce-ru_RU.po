@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Order Minimum/Maximum Amount for WooCommerce 4.1.4\n"
+"Project-Id-Version: Order Minimum/Maximum Amount Limits for WooCommerce 4.1.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/order-minimum-amount-for-woocommerce\n"
 "Last-Translator: Николай\n"
 "Language-Team: Русский\n"
@@ -1054,7 +1054,7 @@ msgid "Order Minimum/Maximum Amount"
 msgstr "Минимальная/Максимальная сумма заказа"
 
 #. Plugin Name of the plugin
-msgid "Order Minimum/Maximum Amount for WooCommerce Pro"
+msgid "Order Minimum/Maximum Amount Limits for WooCommerce Pro"
 msgstr "Минимальная/максимальная сумма заказа для WooCommerce Pro"
 
 #: includes/class-alg-wc-oma-messages.php:661

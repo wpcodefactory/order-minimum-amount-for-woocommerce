@@ -69,7 +69,7 @@ if ( ! class_exists( 'Alg_WC_Settings_OMA' ) ) :
 				'template_variables'            => array(
 					'%pro_version_url%'    => 'https://wpfactory.com/item/order-minimum-maximum-amount-for-woocommerce/',
 					'%plugin_icon_url%'    => 'https://ps.w.org/order-minimum-amount-for-woocommerce/assets/icon-128x128.png',
-					'%pro_version_title%'  => __( 'Order Minimum/Maximum Amount for WooCommerce Pro', 'maximum-products-per-user-for-woocommerce' ),
+					'%pro_version_title%'  => __( 'Order Minimum/Maximum Amount Limits for WooCommerce Pro', 'maximum-products-per-user-for-woocommerce' ),
 					'%main_text%'          => __( 'Disabled options can be unlocked using <a href="%pro_version_url%" target="_blank"><strong>%pro_version_title%</strong></a>', 'maximum-products-per-user-for-woocommerce' ),
 					'%btn_call_to_action%' => __( 'Upgrade to Pro version', 'maximum-products-per-user-for-woocommerce' ),
 					//'%plugin_icon_style%' => 'width:41px;margin-right:10px;vertical-align:middle'

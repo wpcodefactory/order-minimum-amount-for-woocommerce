@@ -1,13 +1,13 @@
-=== Order Minimum/Maximum Amount for WooCommerce ===
+=== Order Minimum/Maximum Amount Limits for WooCommerce ===
 Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmukherjeeli
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 6.1
 Tested up to: 6.6
-Stable tag: 4.5.3
+Stable tag: 4.5.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Implement minimum/maximum order amounts, regulate quantity, weight, volume, dimensions, and apply user-role-specific conditions with Order Minimum/Maximum Amount for WooCommerce
+Implement minimum/maximum order amounts, regulate quantity, weight, volume, dimensions, and apply user-role-specific conditions with Order Minimum/Maximum Amount Limits for WooCommerce
 
 == Description ==
 
@@ -45,7 +45,7 @@ ___
 
 * [LearnWoo: 6 Best Free Plugins that Restrict Amount](https://learnwoo.com/best-free-plugins-restrict-amount-based-wordpress-user-roles/ "LearnWoo: 6 Best Free Plugins that Restrict Amount")
 
-* [WPHive: Order Minimum/Maximum Amount for WooCommerce](https://wphive.com/plugins/order-minimum-amount-for-woocommerce/ "WPHive: Order Minimum/Maximum Amount for WooCommerce")
+* [WPHive: Order Minimum/Maximum Amount Limits for WooCommerce](https://wphive.com/plugins/order-minimum-amount-for-woocommerce/ "WPHive: Order Minimum/Maximum Amount Limits for WooCommerce")
 
 * [ThemeLocation: How To Set Minimum Order Amount In WooCommerce](https://www.themelocation.com/how-to-set-minimum-order-amount-in-woocommerce/ "ThemeLocation: How To Set Minimum Order Amount In WooCommerce")
 
@@ -179,7 +179,7 @@ ___
 
 Too many features already?
 
-All what's listed above is included in the free version of the plugin, however, if you would want to unlock new potentials for forcing minimum & maximum amounts for your store, we offer the upgraded [Order Minimum/Maximum Amount for WooCommerce](https://wpfactory.com/item/order-minimum-maximum-amount-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme) plugin.
+All what's listed above is included in the free version of the plugin, however, if you would want to unlock new potentials for forcing minimum & maximum amounts for your store, we offer the upgraded [Order Minimum/Maximum Amount Limits for WooCommerce](https://wpfactory.com/item/order-minimum-maximum-amount-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme) plugin.
 
 Upgrade & get a collection of more features, such as:
 
@@ -359,6 +359,9 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 1. Frontend example â€“ Cart notice.
 
 == Changelog ==
+
+= 4.5.4 - 05/11/2024 =
+* Changed plugin name to "Order Minimum/Maximum Amount Limits for WooCommerce".
 
 = 4.5.3 - 18/10/2024 =
 * Dev - Add Cross-selling library.

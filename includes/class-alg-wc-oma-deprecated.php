@@ -1,6 +1,6 @@
 <?php
 /**
- * Order Minimum/Maximum Amount for WooCommerce - Deprecated Options Class.
+ * Order Minimum/Maximum Amount Limits for WooCommerce - Deprecated Options Class.
  *
  * Handles deprecated options, placeholders, etc.
  *

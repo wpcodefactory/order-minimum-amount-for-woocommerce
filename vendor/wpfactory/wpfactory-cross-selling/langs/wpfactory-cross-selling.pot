@@ -45,7 +45,7 @@ msgid "Set maximum quantities based on your store's needs. Keep things fair, con
 msgstr ""
 
 #: class-products.php:86
-msgid "Order Minimum/Maximum Amount for WooCommerce"
+msgid "Order Minimum/Maximum Amount Limits for WooCommerce"
 msgstr ""
 
 #: class-products.php:87
