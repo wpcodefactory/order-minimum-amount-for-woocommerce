@@ -2,8 +2,8 @@
 Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmukherjeeli
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 6.1
-Tested up to: 6.6
-Stable tag: 4.5.4
+Tested up to: 6.7
+Stable tag: 4.5.5
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -359,6 +359,11 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 1. Frontend example â€“ Cart notice.
 
 == Changelog ==
+
+= 4.5.5 - 04/12/2024 =
+* Dev - Update Key manager library.
+* WC tested up to: 9.4.
+* Tested up to: 6.7.
 
 = 4.5.4 - 05/11/2024 =
 * Changed plugin name to "Order Minimum/Maximum Amount Limits for WooCommerce".

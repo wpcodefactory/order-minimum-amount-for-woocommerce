@@ -1839,10 +1839,6 @@ msgstr ""
 msgid "Enable it if you're using the Checkout Block."
 msgstr ""
 
-#: includes/settings/class-alg-wc-oma-settings-general.php:203
-msgid "Prevent api user from placing the order with wrongs amounts"
-msgstr ""
-
 #: includes/settings/class-alg-wc-oma-settings-general.php:210
 msgid "Checkout hook."
 msgstr ""
@@ -1929,4 +1925,8 @@ msgstr ""
 
 #: order-minimum-amount-for-woocommerce-pro.php:213
 msgid "Order Min/Max"
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-general.php:203
+msgid "Prevent API users from placing orders with wrong amounts"
 msgstr ""

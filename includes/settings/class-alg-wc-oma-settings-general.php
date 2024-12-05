@@ -200,7 +200,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_General' ) ) :
 				array(
 					//'title'    => __( 'Block store api request', 'order-minimum-amount-for-woocommerce' ),
 					'desc_tip' => __( 'Enable it if you\'re using the Checkout Block.', 'order-minimum-amount-for-woocommerce' ),
-					'desc'     => __( 'Prevent api user from placing the order with wrongs amounts', 'order-minimum-amount-for-woocommerce' ),
+					'desc'     => __( 'Prevent API users from placing orders with wrong amounts', 'order-minimum-amount-for-woocommerce' ),
 					'id'       => 'alg_wc_oma_block_store_api',
 					'default'  => 'no',
 					'checkboxgroup' => 'end',
