@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Messages.
  *
- * @version 4.5.2
+ * @version 4.5.6
  * @since   4.0.4
  *
  * @author  WPFactory
@@ -380,7 +380,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * get_notices.
 		 *
-		 * @version 4.3.2
+		 * @version 4.5.6
 		 * @since   3.2.0
 		 *
 		 * @param   null  $args
@@ -404,40 +404,36 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 			$get_only_first_flat_notice = $args['get_only_first_flat_notice'];
 			$result                     = array();
 			$category_total             = array();
+			$alg_wc_oma_msg_force_display = 'yes' === get_option( 'alg_wc_oma_msg_force_display', 'no' );
 			// Check amounts
 			foreach ( alg_wc_oma()->core->get_enabled_amount_limits( $limits ) as $min_or_max ) {
 				foreach ( alg_wc_oma()->core->get_enabled_amount_types( $types ) as $amount_type ) {
 					$amount_data = alg_wc_oma()->core->get_min_max_amount_data( $min_or_max, $amount_type );
-					if ( $from_rest_api && $order !== null ) {
-						if ( ! empty( $amount_data['amount'] )
-						     && (
-							     ( 'no' === ( $display_on_empty_cart = get_option( 'alg_wc_oma_display_messages_on_empty_cart', 'no' ) ) ) ||
-							     ( 'yes' === $display_on_empty_cart )
-						     )
-						) {
-							$total                                     = alg_wc_oma()->core->amounts->get_cart_total_rest_api( array(
+					if ( ! empty( $amount_data['amount'] )
+						 && (
+							 ( 'no' === ( $display_on_empty_cart = get_option( 'alg_wc_oma_display_messages_on_empty_cart', 'no' ) ) && ! alg_wc_oma()->core->is_cart_empty() ) ||
+							 ( 'yes' === $display_on_empty_cart )
+						 )
+					) {
+						if ( ! $from_rest_api ) {
+							$total = alg_wc_oma()->core->amounts->get_cart_total( array(
+								'type'       => $amount_type,
+								'limit_type' => $min_or_max
+							) );
+						} else {
+							$total = alg_wc_oma()->core->amounts->get_cart_total_rest_api( array(
 								'type'       => $amount_type,
 								'limit_type' => $min_or_max,
 								'order'      => $order
 							) );
-							$result[ $min_or_max ][ $amount_type ][''] = ( ! alg_wc_oma()->core->check_min_max_amount( $min_or_max, $amount_type, $amount_data['amount'], $total ) ?
-								$this->get_notice_content( $min_or_max, $amount_type, $amount_data, $total, $area ) :
-								true );
 						}
-					} else {
-						if ( ! empty( $amount_data['amount'] )
-						     && (
-							     ( 'no' === ( $display_on_empty_cart = get_option( 'alg_wc_oma_display_messages_on_empty_cart', 'no' ) ) && ! alg_wc_oma()->core->is_cart_empty() ) ||
-							     ( 'yes' === $display_on_empty_cart )
-						     )
-						) {
-							$total                                     = alg_wc_oma()->core->amounts->get_cart_total( array(
-								'type'       => $amount_type,
-								'limit_type' => $min_or_max
-							) );
+
+						if ( ! $alg_wc_oma_msg_force_display ) {
 							$result[ $min_or_max ][ $amount_type ][''] = ( ! alg_wc_oma()->core->check_min_max_amount( $min_or_max, $amount_type, $amount_data['amount'], $total ) ?
 								$this->get_notice_content( $min_or_max, $amount_type, $amount_data, $total, $area ) :
 								true );
+						} else {
+							$result[ $min_or_max ][ $amount_type ][''] = $this->get_notice_content( $min_or_max, $amount_type, $amount_data, $total, $area );
 						}
 					}
 				}

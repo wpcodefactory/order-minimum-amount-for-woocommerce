@@ -157,7 +157,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Messages' ) ) :
 			$header = array(
 				array(
 					'title' => __( 'Messages', 'order-minimum-amount-for-woocommerce' ),
-					'desc'  => __( 'Customer messages when order does not meet the amount requirements.', 'order-minimum-amount-for-woocommerce' ),
+					'desc'  => __( 'Messages informing users about minimum and maximum requirements.', 'order-minimum-amount-for-woocommerce' ),
 					'type'  => 'title',
 					'id'    => 'alg_wc_oma_message_header',
 				),
@@ -176,6 +176,13 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Messages' ) ) :
 					'type'     => 'checkbox',
 					'default'  => 'yes',
 					'id'       => 'alg_wc_oma_display_multiple_msg',
+				),
+				array(
+					'title'    => __( 'Force display', 'order-minimum-amount-for-woocommerce' ),
+					'desc'     => __( 'Always display messages, regardless of the requirements', 'order-minimum-amount-for-woocommerce' ),
+					'type'     => 'checkbox',
+					'default'  => 'no',
+					'id'       => 'alg_wc_oma_msg_force_display',
 				),
 				array(
 					'type' => 'sectionend',
