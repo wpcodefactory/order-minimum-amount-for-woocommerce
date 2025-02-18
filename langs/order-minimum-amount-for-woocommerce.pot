@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: order-minimum-amount-for-woocommerce 4.5.6\n"
+"Project-Id-Version: order-minimum-amount-for-woocommerce 4.5.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/order-minimum-amount-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-02-05T18:47:22+01:00\n"
+"POT-Creation-Date: 2025-02-18T22:01:17+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: order-minimum-amount-for-woocommerce\n"
@@ -207,7 +207,7 @@ msgstr ""
 #: includes/pro/class-alg-wc-oma-pro-compatibility.php:304
 #: includes/pro/class-alg-wc-oma-pro-gateways.php:84
 #: includes/pro/class-alg-wc-oma-pro-products.php:92
-#: includes/pro/class-alg-wc-oma-pro-shipping.php:85
+#: includes/pro/class-alg-wc-oma-pro-shipping.php:92
 msgid "minimum"
 msgstr ""
 
@@ -215,7 +215,7 @@ msgstr ""
 #: includes/pro/class-alg-wc-oma-pro-compatibility.php:304
 #: includes/pro/class-alg-wc-oma-pro-gateways.php:84
 #: includes/pro/class-alg-wc-oma-pro-products.php:92
-#: includes/pro/class-alg-wc-oma-pro-shipping.php:85
+#: includes/pro/class-alg-wc-oma-pro-shipping.php:92
 msgid "maximum"
 msgstr ""
 
@@ -352,7 +352,7 @@ msgid "Billing"
 msgstr ""
 
 #: includes/class-alg-wc-oma-messages.php:654
-#: includes/pro/class-alg-wc-oma-pro-shipping.php:51
+#: includes/pro/class-alg-wc-oma-pro-shipping.php:58
 #: includes/settings/class-alg-wc-oma-settings-messages.php:59
 #: includes/settings/class-alg-wc-oma-settings-section.php:71
 #: includes/settings/class-alg-wc-oma-settings-shipping.php:27
@@ -503,7 +503,7 @@ msgstr ""
 msgid "You must have an order with a %s of %%amount%% for %%term_title%% tag to place your order, your current tag total is %%total%%."
 msgstr ""
 
-#: includes/pro/class-alg-wc-oma-pro-shipping.php:84
+#: includes/pro/class-alg-wc-oma-pro-shipping.php:91
 msgid "You must have an order with a %s of %%amount%% for \"%%shipping_method%%\" to place your order, your current order total is %%total%%."
 msgstr ""
 

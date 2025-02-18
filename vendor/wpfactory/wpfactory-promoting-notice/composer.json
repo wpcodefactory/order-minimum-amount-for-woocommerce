@@ -1,9 +1,0 @@
-{
-  "name": "wpfactory/wpfactory-promoting-notice",
-  "autoload": {
-    "classmap": [
-      "src/php/"
-    ],
-    "files": ["src/php/functions.php"]
-  }
-}

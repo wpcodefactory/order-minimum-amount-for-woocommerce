@@ -899,7 +899,7 @@ msgstr "Максимальная"
 #: includes/pro/class-alg-wc-oma-pro-compatibility.php:304
 #: includes/pro/class-alg-wc-oma-pro-gateways.php:84
 #: includes/pro/class-alg-wc-oma-pro-products.php:92
-#: includes/pro/class-alg-wc-oma-pro-shipping.php:85
+#: includes/pro/class-alg-wc-oma-pro-shipping.php:92
 msgid "maximum"
 msgstr "максимальная"
 
@@ -949,7 +949,7 @@ msgstr "Минимальная"
 #: includes/pro/class-alg-wc-oma-pro-compatibility.php:304
 #: includes/pro/class-alg-wc-oma-pro-gateways.php:84
 #: includes/pro/class-alg-wc-oma-pro-products.php:92
-#: includes/pro/class-alg-wc-oma-pro-shipping.php:85
+#: includes/pro/class-alg-wc-oma-pro-shipping.php:92
 msgid "minimum"
 msgstr "минимальная"
 
@@ -1390,7 +1390,7 @@ msgid "Set required minimum and/or maximum order amounts (e.g. sum, quantity, we
 msgstr "Установите требуемые минимальные и/или максимальные суммы заказа (например, сумму, количество, вес, объем и т.д.) в WooCommerce."
 
 #: includes/class-alg-wc-oma-messages.php:654
-#: includes/pro/class-alg-wc-oma-pro-shipping.php:51
+#: includes/pro/class-alg-wc-oma-pro-shipping.php:58
 #: includes/settings/class-alg-wc-oma-settings-messages.php:59
 #: includes/settings/class-alg-wc-oma-settings-section.php:71
 #: includes/settings/class-alg-wc-oma-settings-shipping.php:27
@@ -1737,7 +1737,7 @@ msgstr "Для оформления заказа у вас должен быть
 msgid "You must have an order with a %s of %%amount%% for \"%%payment_gateway%%\" to place your order, your current order total is %%total%%."
 msgstr "У вас должен быть заказ с %s от %%суммы%% для \"%%payment_gateway%%\", чтобы разместить свой заказ, ваша текущая сумма заказа равна %%total%%."
 
-#: includes/pro/class-alg-wc-oma-pro-shipping.php:84
+#: includes/pro/class-alg-wc-oma-pro-shipping.php:91
 msgid "You must have an order with a %s of %%amount%% for \"%%shipping_method%%\" to place your order, your current order total is %%total%%."
 msgstr "У вас должен быть заказ с %s от %%суммы%% для \"%%shipping_method%%\", чтобы разместить свой заказ, ваша текущая сумма заказа равна %%total%%."
 

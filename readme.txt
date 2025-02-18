@@ -3,7 +3,7 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmu
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 6.1
 Tested up to: 6.7
-Stable tag: 4.5.6
+Stable tag: 4.5.7
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -360,7 +360,10 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 
 == Changelog ==
 
-= 4.5.6 - 05/02/2024 =
+= 4.5.7 - 18/02/2025 =
+* Shipping - Fixed dynamic property warning.
+
+= 4.5.6 - 05/02/2025 =
 * Dev - Messages - New option added (Force display) to always display messages, regardless of the requirements.
 * WC tested up to: 9.6.
 
