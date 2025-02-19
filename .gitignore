@@ -4,6 +4,7 @@ node_modules/
 
 # Coding standards
 /vendor/dealerdirect
+/vendor/phpcsstandards
 /vendor/phpcompatibility
 /vendor/squizlabs
 /vendor/wp-coding-standards
