@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Core Class.
  *
- * @version 4.4.5
+ * @version 4.5.9
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -49,7 +49,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 		/**
 		 * add_hooks.
 		 *
-		 * @version 4.4.3
+		 * @version 4.5.9
 		 * @since   1.0.0
 		 */
 		function add_hooks() {
@@ -59,6 +59,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 			if ( 'yes' === get_option( 'alg_wc_oma_block_checkout_process', 'yes' ) ) {
 				add_action( 'woocommerce_checkout_process', array( $this, 'checkout_process_notices' ) );
 				add_action( 'woocommerce_after_checkout_validation', array( $this, 'check_checkout_notices' ), 10, 2 );
+				add_action( 'woocommerce_review_order_after_shipping', array( $this, 'checkout_process_notices' ), 10 );
 				if ( 'yes' === get_option( 'alg_wc_oma_block_store_api', 'no' ) ) {
 					add_action( 'woocommerce_store_api_checkout_order_processed', array( $this, 'checkout_process_notices' ) );
 					add_filter( 'woocommerce_rest_pre_insert_shop_order_object', array( $this, 'checkout_process_notices_rest_api' ), 10, 3 );

@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Messages.
  *
- * @version 4.5.6
+ * @version 4.5.9
  * @since   4.0.4
  *
  * @author  WPFactory
@@ -50,7 +50,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 			// Blocks.
 			add_action( 'wp_ajax_alg_wc_oma_get_block_cart_notices', array( $this, 'get_ajax_notices_on_block_cart_change' ) );
 			add_action( 'wp_ajax_nopriv_alg_wc_oma_get_block_cart_notices', array( $this, 'get_ajax_notices_on_block_cart_change' ) );
-			add_action( 'wp_footer', array( $this, 'check_limits_on_cart_change' ), PHP_INT_MAX );
+			add_action( 'wp_footer', array( $this, 'check_limits_on_cart_block_change' ), PHP_INT_MAX );
 			add_action( 'wp_footer', array( $this, 'cart_block_change_detector' ), PHP_INT_MAX );
 		}
 
@@ -101,12 +101,12 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * check_limits_on_cart_change.
 		 *
-		 * @version 4.5.0
+		 * @version 4.5.9
 		 * @since   4.4.6
 		 *
 		 * @return void
 		 */
-		function check_limits_on_cart_change() {
+		function check_limits_on_cart_block_change() {
 			if ( ! is_cart() && ! is_checkout() ) {
 				return;
 			}
@@ -121,29 +121,29 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 			);
 			?>
 			<script>
-				jQuery(document).ready(function ($) {
+				jQuery( document ).ready( function ( $ ) {
 					let data = <?php echo json_encode( $php_to_js );?>;
-					document.addEventListener('alg_wc_oma_cart_block_update', function (e) {
-						$.post(data.ajax_url, {
+					document.addEventListener( 'alg_wc_oma_cart_block_update', function ( e ) {
+						$.post( data.ajax_url, {
 							action: data.action,
 							wc_page_origin: e.detail.wcPageOrigin,
 							payment_method: e.detail.paymentMethod,
 							cart: e.detail.cart,
-						}, function (response) {
+						}, function ( response ) {
 							// Remove other notices.
-							$(data.removal_selector.notice_wrapper).closest(data.removal_selector.notices).remove();
+							$( data.removal_selector.notice_wrapper ).closest( data.removal_selector.notices ).remove();
 							// Display notices on cart block.
-							$(data.wrapper_selector).eq(0).prepend(response);
-							let event = new CustomEvent('alg_wc_oma_msg_display_on_cart_block_update', {
+							$( data.wrapper_selector ).eq( 0 ).prepend( response );
+							let event = new CustomEvent( 'alg_wc_oma_msg_display_on_cart_block_update', {
 								detail: e.detail
-							});
-							document.dispatchEvent(event);
-							if (wp && wp.data) {
-								wp.data.dispatch('wc/store/cart').invalidateResolutionForStore();
+							} );
+							document.dispatchEvent( event );
+							if ( wp && wp.data ) {
+								//wp.data.dispatch('wc/store/cart').invalidateResolutionForStore();
 							}
-						});
-					});
-				});
+						} );
+					} );
+				} );
 			</script>
 			<?php
 		}
@@ -151,7 +151,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * cart_block_change_detector.
 		 *
-		 * @version 4.5.2
+		 * @version 4.5.9
 		 * @since   4.4.6
 		 *
 		 * @return void
@@ -165,46 +165,51 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 			);
 			?>
 			<script>
-				(function () {
+				( function () {
 					if ( !window || !window.wp || !window.wp.data || !window.wc || !window.wc.wcBlocksData ) {
 						return;
 					}
-					console.log(window.wc.wcBlocksData);
-					const {select, subscribe} = window.wp.data;
+					const { select, subscribe } = window.wp.data;
 					const cartStoreKey = window.wc.wcBlocksData.CART_STORE_KEY;
 					const paymentStoreKey = window.wc.wcBlocksData.PAYMENT_STORE_KEY;
 
 					let previousCart = null;
 					let previousPaymentMethod = null;
-					const unsub = subscribe(onCartChange, cartStoreKey);
-					const unsub2 = subscribe(onCartChange, paymentStoreKey);
+					const unsub = subscribe( onCartChange, cartStoreKey );
+					const unsub2 = subscribe( onCartChange, paymentStoreKey );
 					let data = <?php echo wp_json_encode( $php_to_js ); ?>;
+
+					let updateEventTimeout;
 
 					function onCartChange() {
 						// Get the current cart data.
-						const cart = select(cartStoreKey).getCartData();
-						const activePaymentMethod = select(paymentStoreKey).getActivePaymentMethod();
+						const cart = select( cartStoreKey ).getCartData();
+						const activePaymentMethod = select( paymentStoreKey ).getActivePaymentMethod();
 						// Check if the cart has changed.
 						if (
-								JSON.stringify(cart) !== JSON.stringify(previousCart) ||
-								activePaymentMethod != previousPaymentMethod
+							JSON.stringify( cart ) !== JSON.stringify( previousCart ) ||
+							activePaymentMethod != previousPaymentMethod
 						) {
-							if (previousCart != null) {
-								let event = new CustomEvent('alg_wc_oma_cart_block_update', {
-									detail: {
-										cart: cart,
-										paymentMethod: activePaymentMethod,
-										wcPageOrigin: data.wc_page_origin
-									}
-								});
-								document.dispatchEvent(event);
+							if ( previousCart != null ) {
+								clearTimeout( updateEventTimeout );
+								updateEventTimeout = setTimeout( () => {
+									let event = new CustomEvent( 'alg_wc_oma_cart_block_update', {
+										detail: {
+											cart: cart,
+											paymentMethod: activePaymentMethod,
+											wcPageOrigin: data.wc_page_origin
+										}
+									} );
+									document.dispatchEvent( event );
+								}, 600 ); // Wait before triggering the event
 							}
+
 							// Update the previous cart state.
 							previousCart = cart;
 							previousPaymentMethod = activePaymentMethod;
 						}
 					}
-				})();
+				} )();
 			</script>
 			<?php
 		}
@@ -470,7 +475,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * output_notices.
 		 *
-		 * @version 4.4.6
+		 * @version 4.5.9
 		 * @since   1.0.0
 		 *
 		 * @param $args
@@ -530,7 +535,13 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 						'{content}' => $content,
 					);
 					$final_content = str_replace( array_keys( $array_from_to ), $array_from_to, $templates['default'] );
-					call_user_func_array( $func, array( $final_content, $notice_type ) );
+					if ( 'wc_add_notice' === $func ) {
+						if ( ! wc_has_notice( $final_content, $notice_type ) ) {
+							call_user_func_array( $func, array( $final_content, $notice_type ) );
+						}
+					} else {
+						call_user_func_array( $func, array( $final_content, $notice_type ) );
+					}
 				}
 			}
 		}

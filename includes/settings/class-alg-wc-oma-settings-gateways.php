@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Gateways Section Settings.
  *
- * @version 4.1.6
+ * @version 4.5.9
  * @since   3.4.0
  *
  * @author  WPFactory
@@ -31,7 +31,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Gateways' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 4.1.6
+		 * @version 4.5.9
 		 * @since   3.4.0
 		 */
 		function get_settings() {
@@ -111,8 +111,8 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Gateways' ) ) :
 					'title' => __( 'Notes', 'order-minimum-amount-for-woocommerce' ),
 					'desc'  => $this->format_notes( array(
 						alg_wc_oma()->core->get_amounts_desc(),
-						__( 'When user changes payment gateway on the <strong>checkout page</strong>, notices are not updated automatically, unless user reloads the page.', 'order-minimum-amount-for-woocommerce' ) . ' ' .
-						sprintf( __( 'To solve this, currently, we suggest disabling "%s" option in %s section.', 'order-minimum-amount-for-woocommerce' ),
+						__( 'If <strong>checkout </strong> notices aren\'t updating automatically without a page reload,', 'order-minimum-amount-for-woocommerce' ) . ' ' .
+						sprintf( __( 'we suggest disabling the "%s" option in %s section.', 'order-minimum-amount-for-woocommerce' ),
 							__( 'Checkout notices', 'order-minimum-amount-for-woocommerce' ), $this->get_section_link( 'messages' ) ) . ' ' .
 						__( 'This way, if order amount will be wrong, the customer will see the correct notice when he will click "Place order" button.', 'order-minimum-amount-for-woocommerce' ) . ' ' .
 						sprintf( __( 'You can also optionally set "%s" option there to e.g. "%s" or any other position that is updated automatically when user changes payment gateway.', 'order-minimum-amount-for-woocommerce' ),

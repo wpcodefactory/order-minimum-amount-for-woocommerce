@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Shipping Section Settings.
  *
- * @version 4.1.6
+ * @version 4.5.9
  * @since   3.2.0
  *
  * @author  WPFactory
@@ -178,8 +178,8 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Shipping' ) ) :
 					'title' => __( 'Notes', 'order-minimum-amount-for-woocommerce' ),
 					'desc'  => $this->format_notes( array(
 						alg_wc_oma()->core->get_amounts_desc(),
-						__( 'While on the cart page notices will be updated automatically when user changes shipping method or zone, the <strong>checkout page</strong> behaves differently and notices are not updated automatically.', 'order-minimum-amount-for-woocommerce' ) . ' ' .
-						__( 'Currently, you can use these solutions to this problem:', 'order-minimum-amount-for-woocommerce' ) . ' ' .
+						__( 'If <strong>checkout </strong> notices aren\'t updating automatically without a page reload,', 'order-minimum-amount-for-woocommerce' ) . ' ' .
+						__( 'you could try these solutions:', 'order-minimum-amount-for-woocommerce' ) . ' ' .
 						'<ol>' .
 						'<li>' .
 						sprintf( __( 'Enable "%s" option in %s section.', 'order-minimum-amount-for-woocommerce' ),
