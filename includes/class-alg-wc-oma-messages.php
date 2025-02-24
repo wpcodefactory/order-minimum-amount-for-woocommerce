@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Messages.
  *
- * @version 4.5.9
+ * @version 4.6.0
  * @since   4.0.4
  *
  * @author  WPFactory
@@ -151,7 +151,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * cart_block_change_detector.
 		 *
-		 * @version 4.5.9
+		 * @version 4.6.0
 		 * @since   4.4.6
 		 *
 		 * @return void
@@ -190,25 +190,24 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 							JSON.stringify( cart ) !== JSON.stringify( previousCart ) ||
 							activePaymentMethod != previousPaymentMethod
 						) {
-							if ( previousCart != null ) {
-								clearTimeout( updateEventTimeout );
-								updateEventTimeout = setTimeout( () => {
-									let event = new CustomEvent( 'alg_wc_oma_cart_block_update', {
-										detail: {
-											cart: cart,
-											paymentMethod: activePaymentMethod,
-											wcPageOrigin: data.wc_page_origin
-										}
-									} );
-									document.dispatchEvent( event );
-								}, 600 ); // Wait before triggering the event
-							}
+							clearTimeout( updateEventTimeout );
+							updateEventTimeout = setTimeout( () => {
+								let event = new CustomEvent( 'alg_wc_oma_cart_block_update', {
+									detail: {
+										cart: cart,
+										paymentMethod: activePaymentMethod,
+										wcPageOrigin: data.wc_page_origin
+									}
+								} );
+								document.dispatchEvent( event );
+							}, 600 ); // Wait before triggering the event
 
 							// Update the previous cart state.
 							previousCart = cart;
 							previousPaymentMethod = activePaymentMethod;
 						}
 					}
+					onCartChange();
 				} )();
 			</script>
 			<?php
@@ -325,7 +324,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * get_output_notices_params_from_position.
 		 *
-		 * @version 4.2.5
+		 * @version 4.6.0
 		 * @since   4.0.4
 		 *
 		 * @param $position
@@ -338,10 +337,10 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 					'func' => 'wc_print_notice',
 				),
 				'woocommerce_blocks_cart_enqueue_data'      => array(
-					'func' => 'wc_print_notice',
+					'func' => 'wc_add_notice',
 				),
 				'woocommerce_blocks_checkout_enqueue_data'  => array(
-					'func' => 'wc_print_notice',
+					'func' => 'wc_add_notice',
 				),
 				'woocommerce_before_single_product'         => array(
 					'func' => 'wc_add_notice',
