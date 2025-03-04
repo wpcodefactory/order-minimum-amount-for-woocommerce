@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Messages.
  *
- * @version 4.6.0
+ * @version 4.6.1
  * @since   4.0.4
  *
  * @author  WPFactory
@@ -601,13 +601,15 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * get_messages_info.
 		 *
-		 * @version 4.4.6
+		 * Adding the @ to suppress the warning Translation loading was triggered too early.
+		 *
+		 * @version 4.6.1
 		 * @since   4.0.4
 		 *
 		 * @return array
 		 */
 		function get_messages_info() {
-			return array(
+			return @array(
 				'cart'         => array(
 					'title'               => __( 'Cart', 'order-minimum-amount-for-woocommerce' ),
 					'default_notice_type' => 'notice',

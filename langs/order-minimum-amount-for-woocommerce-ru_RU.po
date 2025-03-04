@@ -98,55 +98,55 @@ msgstr "Дополнительно: Приоритетные параметры"
 msgid "Affects %s placeholders."
 msgstr "Влияет на заполнители %s."
 
-#: includes/class-alg-wc-oma-messages.php:689
+#: includes/class-alg-wc-oma-messages.php:691
 msgid "After add to cart button"
 msgstr "После кнопки добавить в корзину"
 
-#: includes/class-alg-wc-oma-messages.php:691
+#: includes/class-alg-wc-oma-messages.php:693
 msgid "After add to cart quantity"
 msgstr "После добавления количества в корзину"
 
-#: includes/class-alg-wc-oma-messages.php:622
+#: includes/class-alg-wc-oma-messages.php:624
 msgid "After cart contents"
 msgstr "После содержимого корзины"
 
-#: includes/class-alg-wc-oma-messages.php:623
+#: includes/class-alg-wc-oma-messages.php:625
 msgid "After cart table"
 msgstr "Таблица после корзины"
 
-#: includes/class-alg-wc-oma-messages.php:630
+#: includes/class-alg-wc-oma-messages.php:632
 msgid "After cart totals"
 msgstr "После подведения итогов корзины"
 
-#: includes/class-alg-wc-oma-messages.php:673
+#: includes/class-alg-wc-oma-messages.php:675
 msgid "After checkout form"
 msgstr "После формы оформления заказа"
 
-#: includes/class-alg-wc-oma-messages.php:665
+#: includes/class-alg-wc-oma-messages.php:667
 msgid "After customer details"
 msgstr "После получения информации о клиенте"
 
-#: includes/class-alg-wc-oma-messages.php:643
+#: includes/class-alg-wc-oma-messages.php:645
 msgid "After mini cart"
 msgstr "После мини-корзины"
 
-#: includes/class-alg-wc-oma-messages.php:650
+#: includes/class-alg-wc-oma-messages.php:652
 msgid "After mini cart buttons"
 msgstr "После кнопок мини-корзины"
 
-#: includes/class-alg-wc-oma-messages.php:646
+#: includes/class-alg-wc-oma-messages.php:648
 msgid "After mini cart contents"
 msgstr "После содержимого мини-корзины"
 
-#: includes/class-alg-wc-oma-messages.php:672
+#: includes/class-alg-wc-oma-messages.php:674
 msgid "After order review"
 msgstr "После просмотра заказа"
 
-#: includes/class-alg-wc-oma-messages.php:632
+#: includes/class-alg-wc-oma-messages.php:634
 msgid "After shipping calculator"
 msgstr "Калькулятор после отправки"
 
-#: includes/class-alg-wc-oma-messages.php:686
+#: includes/class-alg-wc-oma-messages.php:688
 msgid "After single product summary"
 msgstr "После краткого описания одного товара"
 
@@ -221,71 +221,71 @@ msgstr "Площадь (т.е. длина х ширина)"
 msgid "Available placeholders: %s"
 msgstr "Доступные заполнители: %s"
 
-#: includes/class-alg-wc-oma-messages.php:688
+#: includes/class-alg-wc-oma-messages.php:690
 msgid "Before add to cart button"
 msgstr "Перед кнопкой добавить в корзину"
 
-#: includes/class-alg-wc-oma-messages.php:687
+#: includes/class-alg-wc-oma-messages.php:689
 msgid "Before add to cart form"
 msgstr "Перед добавлением в форму корзины"
 
-#: includes/class-alg-wc-oma-messages.php:690
+#: includes/class-alg-wc-oma-messages.php:692
 msgid "Before add to cart quantity"
 msgstr "Перед добавлением в корзину количество"
 
-#: includes/class-alg-wc-oma-messages.php:615
+#: includes/class-alg-wc-oma-messages.php:617
 msgid "Before cart (Notice)"
 msgstr "Перед отправкой в корзину (Уведомление)"
 
-#: includes/class-alg-wc-oma-messages.php:618
+#: includes/class-alg-wc-oma-messages.php:620
 msgid "Before cart contents"
 msgstr "Перед содержимым корзины"
 
-#: includes/class-alg-wc-oma-messages.php:617
+#: includes/class-alg-wc-oma-messages.php:619
 msgid "Before cart table"
 msgstr "Перед таблицей корзины"
 
-#: includes/class-alg-wc-oma-messages.php:624
+#: includes/class-alg-wc-oma-messages.php:626
 msgid "Before cart totals"
 msgstr "До подведения итогов в корзине"
 
-#: includes/class-alg-wc-oma-messages.php:660
+#: includes/class-alg-wc-oma-messages.php:662
 msgid "Before checkout form (Notice)"
 msgstr "Перед оформлением заказа форма (уведомление)"
 
-#: includes/class-alg-wc-oma-messages.php:662
+#: includes/class-alg-wc-oma-messages.php:664
 msgid "Before customer details"
 msgstr "Перед информацией о клиенте"
 
-#: includes/class-alg-wc-oma-messages.php:644
+#: includes/class-alg-wc-oma-messages.php:646
 msgid "Before mini cart"
 msgstr "Перед мини-корзиной"
 
-#: includes/class-alg-wc-oma-messages.php:648
+#: includes/class-alg-wc-oma-messages.php:650
 msgid "Before mini cart buttons"
 msgstr "Перед кнопками мини-корзины"
 
-#: includes/class-alg-wc-oma-messages.php:645
+#: includes/class-alg-wc-oma-messages.php:647
 msgid "Before mini cart contents"
 msgstr "Перед содержимым мини-корзины"
 
-#: includes/class-alg-wc-oma-messages.php:666
+#: includes/class-alg-wc-oma-messages.php:668
 msgid "Before order review"
 msgstr "Перед обзором заказа"
 
-#: includes/class-alg-wc-oma-messages.php:631
+#: includes/class-alg-wc-oma-messages.php:633
 msgid "Before shipping calculator"
 msgstr "Перед калькулятором доставки"
 
-#: includes/class-alg-wc-oma-messages.php:684
+#: includes/class-alg-wc-oma-messages.php:686
 msgid "Before single product (Notice)"
 msgstr "Перед отдельным товаром (Уведомление)"
 
-#: includes/class-alg-wc-oma-messages.php:685
+#: includes/class-alg-wc-oma-messages.php:687
 msgid "Before single product summary (Notice)"
 msgstr "Перед кратким описанием отдельного товара (Уведомление)"
 
-#: includes/class-alg-wc-oma-messages.php:663
+#: includes/class-alg-wc-oma-messages.php:665
 msgid "Billing"
 msgstr "Выставление счетов"
 
@@ -303,11 +303,11 @@ msgstr "Заблокировать страницу оформления зак�
 msgid "Block checkout process"
 msgstr "Заблокировать процесс оформления заказа"
 
-#: includes/class-alg-wc-oma-messages.php:616
+#: includes/class-alg-wc-oma-messages.php:618
 msgid "Blocks cart enqueue data (Notice)"
 msgstr "Блокирует данные для запроса корзины (уведомление)"
 
-#: includes/class-alg-wc-oma-messages.php:661
+#: includes/class-alg-wc-oma-messages.php:663
 msgid "Blocks checkout enqueue data (Notice)"
 msgstr "Блокирует данные очереди на оформление заказа (уведомление)"
 
@@ -324,19 +324,19 @@ msgstr "Сгруппированный товар в корзине"
 msgid "Calculate cart total by selected products only."
 msgstr "Рассчитать общую сумму корзины только по выбранным товарам."
 
-#: includes/class-alg-wc-oma-messages.php:612
+#: includes/class-alg-wc-oma-messages.php:614
 msgid "Cart"
 msgstr "Корзина"
 
-#: includes/class-alg-wc-oma-messages.php:621
+#: includes/class-alg-wc-oma-messages.php:623
 msgid "Cart actions"
 msgstr "Действия в корзине"
 
-#: includes/class-alg-wc-oma-messages.php:619
+#: includes/class-alg-wc-oma-messages.php:621
 msgid "Cart contents"
 msgstr "Содержимое корзины"
 
-#: includes/class-alg-wc-oma-messages.php:620
+#: includes/class-alg-wc-oma-messages.php:622
 msgid "Cart coupon"
 msgstr "Купон корзины"
 
@@ -368,19 +368,19 @@ msgstr "Общий расчет корзины"
 msgid "Cart total rounding"
 msgstr "Общее округление корзины"
 
-#: includes/class-alg-wc-oma-messages.php:628
+#: includes/class-alg-wc-oma-messages.php:630
 msgid "Cart totals: After order total"
 msgstr "Итоги корзины: После завершения заказа"
 
-#: includes/class-alg-wc-oma-messages.php:626
+#: includes/class-alg-wc-oma-messages.php:628
 msgid "Cart totals: After shipping"
 msgstr "Итоги корзины: После отгрузки"
 
-#: includes/class-alg-wc-oma-messages.php:627
+#: includes/class-alg-wc-oma-messages.php:629
 msgid "Cart totals: Before order total"
 msgstr "Итоги корзины: Перед общей суммой заказа"
 
-#: includes/class-alg-wc-oma-messages.php:625
+#: includes/class-alg-wc-oma-messages.php:627
 msgid "Cart totals: Before shipping"
 msgstr "Итоги корзины: Перед доставкой"
 
@@ -392,7 +392,7 @@ msgstr "Потолок"
 msgid "Check the box and save changes to reset."
 msgstr "Установите флажок и сохраните изменения для сброса настроек."
 
-#: includes/class-alg-wc-oma-messages.php:657
+#: includes/class-alg-wc-oma-messages.php:659
 msgid "Checkout"
 msgstr "Оформление"
 
@@ -823,11 +823,11 @@ msgstr "Игнорируйте сборы из этого раздела при 
 msgid "Ignored if set to zero."
 msgstr "Игнорируется, если установлено значение ноль."
 
-#: includes/class-alg-wc-oma-messages.php:649
+#: includes/class-alg-wc-oma-messages.php:651
 msgid "In mini cart buttons"
 msgstr "В кнопках мини-корзины"
 
-#: includes/class-alg-wc-oma-messages.php:647
+#: includes/class-alg-wc-oma-messages.php:649
 msgid "In mini cart total"
 msgstr "В мини-корзине итого"
 
@@ -933,7 +933,7 @@ msgstr "Методы, разделенные на части, отличные �
 msgid "Min %s"
 msgstr "Минимальная %s"
 
-#: includes/class-alg-wc-oma-messages.php:640
+#: includes/class-alg-wc-oma-messages.php:642
 msgid "Mini-cart"
 msgstr "Мини-корзина"
 
@@ -1049,23 +1049,23 @@ msgstr "Минимальная/Максимальная сумма заказа"
 msgid "Order Minimum/Maximum Amount Limits for WooCommerce Pro"
 msgstr "Минимальная/максимальная сумма заказа для WooCommerce Pro"
 
-#: includes/class-alg-wc-oma-messages.php:667
+#: includes/class-alg-wc-oma-messages.php:669
 msgid "Order review"
 msgstr "Проверка заказа"
 
-#: includes/class-alg-wc-oma-messages.php:669
+#: includes/class-alg-wc-oma-messages.php:671
 msgid "Order review: After shipping"
 msgstr "Проверка заказа: После отправки"
 
-#: includes/class-alg-wc-oma-messages.php:668
+#: includes/class-alg-wc-oma-messages.php:670
 msgid "Order review: Before shipping"
 msgstr "Проверка заказа: Перед отправкой"
 
-#: includes/class-alg-wc-oma-messages.php:671
+#: includes/class-alg-wc-oma-messages.php:673
 msgid "Order review: Payment: After submit button"
 msgstr "Просмотр заказа: Оплата: После кнопки отправки"
 
-#: includes/class-alg-wc-oma-messages.php:670
+#: includes/class-alg-wc-oma-messages.php:672
 #: includes/settings/class-alg-wc-oma-settings-gateways.php:120
 #: includes/settings/class-alg-wc-oma-settings-shipping.php:195
 msgid "Order review: Payment: Before submit button"
@@ -1174,7 +1174,7 @@ msgstr "Запретить пользователям заходить на ст
 msgid "Priority"
 msgstr "Приоритет"
 
-#: includes/class-alg-wc-oma-messages.php:629
+#: includes/class-alg-wc-oma-messages.php:631
 msgid "Proceed to checkout"
 msgstr "Оформить заказ"
 
@@ -1228,7 +1228,7 @@ msgstr "категория товара"
 msgid "Product category #%s"
 msgstr "Категория товара #%s"
 
-#: includes/class-alg-wc-oma-messages.php:681
+#: includes/class-alg-wc-oma-messages.php:683
 msgid "Product page"
 msgstr "Страница товара"
 
@@ -1385,7 +1385,7 @@ msgstr "Установите количество на страницах цик
 msgid "Set required minimum and/or maximum order amounts (e.g. sum, quantity, weight, volume, etc.) in WooCommerce."
 msgstr "Установите требуемые минимальные и/или максимальные суммы заказа (например, сумму, количество, вес, объем и т.д.) в WooCommerce."
 
-#: includes/class-alg-wc-oma-messages.php:664
+#: includes/class-alg-wc-oma-messages.php:666
 #: includes/pro/class-alg-wc-oma-pro-shipping.php:58
 #: includes/settings/class-alg-wc-oma-settings-messages.php:59
 #: includes/settings/class-alg-wc-oma-settings-section.php:71
