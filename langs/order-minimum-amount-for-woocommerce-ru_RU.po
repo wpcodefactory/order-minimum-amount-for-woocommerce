@@ -447,7 +447,7 @@ msgstr "Создать тип суммы цены пакета"
 msgid "Create the <code>[alg_wc_oma_amount]</code> shortcode"
 msgstr "Создайте <код>[alg_wc_oma_amount]</code> шорткод"
 
-#: includes/pro/class-alg-wc-oma-pro-currencies.php:45
+#: includes/pro/class-alg-wc-oma-pro-currencies.php:53
 #: includes/settings/class-alg-wc-oma-settings-compatibility.php:105
 #: includes/settings/class-alg-wc-oma-settings-currencies.php:27
 #: includes/settings/class-alg-wc-oma-settings-currencies.php:44
@@ -893,7 +893,7 @@ msgstr "Максимальная"
 
 #: includes/class-alg-wc-oma-messages.php:593
 #: includes/pro/class-alg-wc-oma-pro-compatibility.php:304
-#: includes/pro/class-alg-wc-oma-pro-gateways.php:84
+#: includes/pro/class-alg-wc-oma-pro-gateways.php:92
 #: includes/pro/class-alg-wc-oma-pro-products.php:92
 #: includes/pro/class-alg-wc-oma-pro-shipping.php:92
 msgid "maximum"
@@ -943,7 +943,7 @@ msgstr "Минимальная"
 
 #: includes/class-alg-wc-oma-messages.php:593
 #: includes/pro/class-alg-wc-oma-pro-compatibility.php:304
-#: includes/pro/class-alg-wc-oma-pro-gateways.php:84
+#: includes/pro/class-alg-wc-oma-pro-gateways.php:92
 #: includes/pro/class-alg-wc-oma-pro-products.php:92
 #: includes/pro/class-alg-wc-oma-pro-shipping.php:92
 msgid "minimum"
@@ -1089,7 +1089,7 @@ msgstr "Общая сумма заказа"
 msgid "Payment gateway messages"
 msgstr "Сообщения платежного шлюза"
 
-#: includes/pro/class-alg-wc-oma-pro-gateways.php:51
+#: includes/pro/class-alg-wc-oma-pro-gateways.php:59
 #: includes/settings/class-alg-wc-oma-settings-gateways.php:27
 #: includes/settings/class-alg-wc-oma-settings-gateways.php:41
 #: includes/settings/class-alg-wc-oma-settings-messages.php:61
@@ -1717,7 +1717,7 @@ msgstr "Вы можете использовать HTML в сообщениях.
 msgid "You must have a Product Bundle with a %s of %%amount%% to place your order, there is at least one in cart costing %%total%%."
 msgstr "Для оформления заказа у вас должен быть набор товаров с %s %% суммы%%, в корзине есть хотя бы один стоимостью %% всего%%."
 
-#: includes/pro/class-alg-wc-oma-pro-gateways.php:83
+#: includes/pro/class-alg-wc-oma-pro-gateways.php:91
 msgid "You must have an order with a %s of %%amount%% for \"%%payment_gateway%%\" to place your order, your current order total is %%total%%."
 msgstr "У вас должен быть заказ с %s от %%суммы%% для \"%%payment_gateway%%\", чтобы разместить свой заказ, ваша текущая сумма заказа равна %%total%%."
 
