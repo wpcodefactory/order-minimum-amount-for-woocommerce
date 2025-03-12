@@ -3,7 +3,7 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmu
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 6.1
 Tested up to: 6.7
-Stable tag: 4.6.2
+Stable tag: 4.6.3
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -359,6 +359,10 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 1. Frontend example â€“ Cart notice.
 
 == Changelog ==
+
+= 4.6.3 - 12/03/2025 =
+* Dev - Key Manager library - Changed namespace from `v5\PucFactory` to `v5p4\PucFactory` so it won't conflict with other plugins loading possible older versions of Puc.
+* Dev - Improved Composer loading on Pro version.
 
 = 4.6.2 - 09/03/2025 =
 * Fix - Resolved the "dynamic property is deprecated" notice.
