@@ -683,7 +683,7 @@ msgstr "Общие > Параметры оформления заказа"
 msgid "General options"
 msgstr "Общие параметры"
 
-#: order-minimum-amount-for-woocommerce-pro.php:291
+#: order-minimum-amount-for-woocommerce-pro.php:290
 msgid "Go Pro"
 msgstr "Стать профи"
 
@@ -1037,7 +1037,7 @@ msgstr "Опциональные суммы для каждого пользов
 #: includes/settings/class-alg-wc-oma-settings-general.php:44
 #: includes/settings/class-alg-wc-oma-settings-general.php:49
 #: includes/settings/class-alg-wc-settings-oma.php:29
-#: order-minimum-amount-for-woocommerce-pro.php:214
+#: order-minimum-amount-for-woocommerce-pro.php:213
 msgid "Order Min/Max Amount"
 msgstr "Минимальная/Максимальная сумма заказа"
 
@@ -1135,10 +1135,6 @@ msgstr "По способу доставки"
 #: includes/settings/class-alg-wc-oma-settings-shipping.php:67
 msgid "Per shipping zone"
 msgstr "По зоне доставки"
-
-#: includes/settings/class-alg-wc-oma-settings-amounts.php:86
-msgid "Please check the <a href=\"%s\" target=\"_blank\">documentation</a> for more info."
-msgstr "Пожалуйста, ознакомьтесь с <a href=%s target=_blank>документацией</a> для получения дополнительной информации."
 
 #: includes/class-alg-wc-oma-core.php:250
 #: includes/settings/class-alg-wc-oma-settings-general.php:121
@@ -1903,7 +1899,7 @@ msgstr ""
 msgid "Is WC Endpoint URL"
 msgstr ""
 
-#: order-minimum-amount-for-woocommerce-pro.php:213
+#: order-minimum-amount-for-woocommerce-pro.php:212
 msgid "Order Min/Max"
 msgstr ""
 
@@ -1934,4 +1930,8 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-oma-settings-shipping.php:182
 msgid "you could try these solutions:"
+msgstr ""
+
+#: includes/settings/class-alg-wc-oma-settings-amounts.php:86
+msgid "More <a href=\"%s\" target=\"_blank\">info</a>."
 msgstr ""

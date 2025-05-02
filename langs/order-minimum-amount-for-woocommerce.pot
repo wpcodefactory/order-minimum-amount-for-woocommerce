@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: order-minimum-amount-for-woocommerce 4.6.4\n"
+"Project-Id-Version: order-minimum-amount-for-woocommerce 4.6.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/order-minimum-amount-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-04-09T01:42:13+02:00\n"
+"POT-Creation-Date: 2025-05-03T00:06:06+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: order-minimum-amount-for-woocommerce\n"
@@ -519,7 +519,7 @@ msgstr ""
 #: includes/settings/class-alg-wc-oma-settings-general.php:44
 #: includes/settings/class-alg-wc-oma-settings-general.php:49
 #: includes/settings/class-alg-wc-settings-oma.php:29
-#: order-minimum-amount-for-woocommerce-pro.php:214
+#: order-minimum-amount-for-woocommerce-pro.php:213
 msgid "Order Min/Max Amount"
 msgstr ""
 
@@ -570,7 +570,7 @@ msgid "For now, it allows to set different values for different customer types."
 msgstr ""
 
 #: includes/settings/class-alg-wc-oma-settings-amounts.php:86
-msgid "Please check the <a href=\"%s\" target=\"_blank\">documentation</a> for more info."
+msgid "More <a href=\"%s\" target=\"_blank\">info</a>."
 msgstr ""
 
 #: includes/settings/class-alg-wc-oma-settings-cart-products.php:27
@@ -1927,10 +1927,10 @@ msgstr ""
 msgid "Your settings have been reset."
 msgstr ""
 
-#: order-minimum-amount-for-woocommerce-pro.php:213
+#: order-minimum-amount-for-woocommerce-pro.php:212
 msgid "Order Min/Max"
 msgstr ""
 
-#: order-minimum-amount-for-woocommerce-pro.php:291
+#: order-minimum-amount-for-woocommerce-pro.php:290
 msgid "Go Pro"
 msgstr ""
