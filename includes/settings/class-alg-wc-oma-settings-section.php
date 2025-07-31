@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Section Settings
  *
- * @version 4.4.2
+ * @version 4.6.6
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -33,12 +33,13 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Section' ) ) :
 		/**
 		 * Constructor.
 		 *
-		 * @version 3.0.0
+		 * @version 4.6.6
 		 * @since   1.0.0
 		 */
 		function __construct() {
 			add_filter( 'woocommerce_get_sections_' . 'alg_wc_oma', array( $this, 'settings_section' ) );
 			add_filter( 'woocommerce_get_settings_' . 'alg_wc_oma' . '_' . $this->id, array( $this, 'get_settings' ), PHP_INT_MAX );
+			add_action( 'admin_head', array( $this, 'custom_admin_inline_styles' ) );
 		}
 
 		/**
@@ -87,28 +88,6 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Section' ) ) :
 		 */
 		function get_save_changes_desc() {
 			return __( 'New settings fields will be displayed if you change this option and "Save changes".', 'order-minimum-amount-for-woocommerce' );
-		}
-
-		/**
-		 * get_info_icon.
-		 *
-		 * @version 3.2.0
-		 * @since   3.2.0
-		 *
-		 * @see     https://developer.wordpress.org/resource/dashicons/
-		 */
-		function get_info_icon() {
-			return '<span class="dashicons dashicons-info"></span> ';
-		}
-
-		/**
-		 * format_notes.
-		 *
-		 * @version 4.0.1
-		 * @since   3.2.0
-		 */
-		function format_notes( $notes ) {
-			return '<div class="alg-wc-oma-notes-wrapper"><div class="alg-wc-oma-note">' . $this->get_info_icon() . implode( '</div><div class="alg-wc-oma-note">' . $this->get_info_icon(), $notes ) . '</div></div>';
 		}
 
 		/**
@@ -273,6 +252,98 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Section' ) ) :
 					'id'   => "{$id}_options",
 				),
 			);
+		}
+
+		/**
+		 * custom_admin_inline_styles.
+		 *
+		 * @version 4.6.6
+		 * @since   4.6.6
+		 *
+		 * @return void
+		 */
+		function custom_admin_inline_styles() {
+			if ( isset( $_GET['page'] ) && $_GET['page'] === 'wc-settings' && isset( $_GET['tab'] ) && $_GET['tab'] === 'alg_wc_oma' ) {
+				?>
+				<style>
+                    .alg-wc-oma-section-notes {
+                        list-style: inside;
+                        margin-top: 0;
+                        margin-bottom:25px;
+                        background:#fff;
+                        padding:12px 12px 6px 12px;
+                        border:1px solid #c3c4c7
+                    }
+
+                    .alg-wc-oma-section-notes-header {
+                        background: #fff;
+                        border-left: 1px solid #c3c4c7;
+                        border-top: 1px solid #c3c4c7;
+                        border-right: 1px solid #c3c4c7;
+                        padding: 7px 6px 7px 7px;
+                        font-size: 14px;
+                        line-height: 1.4;
+                        font-weight: 600;
+                        margin: 25px 0 0 0;
+                    }
+
+                    .alg-wc-oma-section-notes-header .dashicons {
+                        margin: 0 2px 0 0;
+                    }
+				</style>
+				<?php
+			}
+		}
+
+		/**
+		 * section_notes.
+		 *
+		 * @version 4.6.6
+		 * @since   4.6.6
+		 *
+		 * @param $items
+		 * @param $args
+		 *
+		 * @return string
+		 */
+		function section_notes( $items, $args = null ) {
+			$output = '<div class="alg-wc-oma-section-notes-header"><span class="dashicons dashicons-info"></span> '.__('Notes','product-quantity-for-woocommerce').'</div>';
+			$output .= $this->array_to_html_list_items( $items, array(
+				'wrap_on_ul' => true,
+				'ul_class' => 'alg-wc-oma-section-notes',
+				'ul_style'   => ''
+			) );
+			return $output;
+		}
+
+		/**
+		 * array_to_html_list_items.
+		 *
+		 * @version 4.6.6
+		 * @since   4.6.6
+		 *
+		 * @param         $items
+		 * @param   null  $args
+		 *
+		 * @return string
+		 */
+		function array_to_html_list_items( $items, $args = null ) {
+			$args       = wp_parse_args( $args, array(
+				'wrap_on_ul' => true,
+				'ul_class'   => 'alg-wc-oma-array-to-list',
+				'ul_style'   => ''
+			) );
+			$ul_class   = $args['ul_class'];
+			$wrap_on_ul = $args['wrap_on_ul'];
+			$ul_style   = $args['ul_style'];
+			$output     = '';
+			if ( is_array( $items ) ) {
+				$output .= $wrap_on_ul ? '<ul class="' . esc_attr( $ul_class ) . '" style="' . wp_kses_post( $ul_style ) . '">' : '';
+				$output .= '<li>' . implode( '</li><li>', array_map( 'wp_kses_post', $items ) ) . '</li>';
+				$output .= $wrap_on_ul ? '</ul>' : '';
+			}
+
+			return $output;
 		}
 
 	}

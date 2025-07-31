@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Shipping Section Settings.
  *
- * @version 4.5.9
+ * @version 4.6.6
  * @since   3.2.0
  *
  * @author  WPFactory
@@ -31,7 +31,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Shipping' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 4.1.6
+		 * @version 4.6.6
 		 * @since   3.2.0
 		 */
 		function get_settings() {
@@ -175,8 +175,8 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Shipping' ) ) :
 
 			$notes = array(
 				array(
-					'title' => __( 'Notes', 'order-minimum-amount-for-woocommerce' ),
-					'desc'  => $this->format_notes( array(
+					'title' => __( 'Good to know', 'order-minimum-amount-for-woocommerce' ),
+					'desc'  => $this->section_notes( array(
 						alg_wc_oma()->core->get_amounts_desc(),
 						__( 'If <strong>checkout </strong> notices aren\'t updating automatically without a page reload,', 'order-minimum-amount-for-woocommerce' ) . ' ' .
 						__( 'you could try these solutions:', 'order-minimum-amount-for-woocommerce' ) . ' ' .

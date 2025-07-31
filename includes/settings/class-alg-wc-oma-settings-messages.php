@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Messages Section Settings.
  *
- * @version 4.4.0
+ * @version 4.6.6
  * @since   1.2.0
  *
  * @author  WPFactory
@@ -97,7 +97,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Messages' ) ) :
 		/**
 		 * add_unique_settings.
 		 *
-		 * @version 4.1.2
+		 * @version 4.6.6
 		 * @since   4.0.5
 		 *
 		 * @param $area
@@ -340,8 +340,8 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Messages' ) ) :
 
 			$notes_settings = array(
 				array(
-					'title' => __( 'Notes', 'order-minimum-amount-for-woocommerce' ),
-					'desc'  => $this->format_notes( $notes ),
+					'title' => __( 'Good to know', 'order-minimum-amount-for-woocommerce' ),
+					'desc'  => $this->section_notes( $notes ),
 					'type'  => 'title',
 					'id'    => 'alg_wc_oma_message_notes',
 				),

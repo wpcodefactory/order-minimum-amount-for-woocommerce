@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Gateways Section Settings.
  *
- * @version 4.5.9
+ * @version 4.6.6
  * @since   3.4.0
  *
  * @author  WPFactory
@@ -31,7 +31,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Gateways' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 4.5.9
+		 * @version 4.6.6
 		 * @since   3.4.0
 		 */
 		function get_settings() {
@@ -79,7 +79,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Gateways' ) ) :
 			foreach ( $gateways as $key => $gateway ) {
 				$settings = array_merge( $settings, array(
 					array(
-						'title' => $gateway->title,
+						'title' => ! empty( $gateway->title ) ? $gateway->title : $gateway->method_title,
 						'type'  => 'title',
 						'id'    => 'alg_wc_oma_by_gateway_' . $key,
 					),
@@ -108,8 +108,8 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Gateways' ) ) :
 
 			$notes = array(
 				array(
-					'title' => __( 'Notes', 'order-minimum-amount-for-woocommerce' ),
-					'desc'  => $this->format_notes( array(
+					'title' => __( 'Good to know', 'order-minimum-amount-for-woocommerce' ),
+					'desc'  => $this->section_notes( array(
 						alg_wc_oma()->core->get_amounts_desc(),
 						__( 'If <strong>checkout </strong> notices aren\'t updating automatically without a page reload,', 'order-minimum-amount-for-woocommerce' ) . ' ' .
 						sprintf( __( 'we suggest disabling the "%s" option in %s section.', 'order-minimum-amount-for-woocommerce' ),

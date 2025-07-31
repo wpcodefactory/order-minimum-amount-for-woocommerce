@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Memberships Section Settings.
  *
- * @version 4.1.7
+ * @version 4.6.6
  * @since   3.4.0
  *
  * @author  WPFactory
@@ -31,7 +31,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Memberships' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 4.1.7
+		 * @version 4.6.6
 		 * @since   3.4.0
 		 */
 		function get_settings() {
@@ -99,8 +99,8 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Memberships' ) ) :
 
 			$notes = array(
 				array(
-					'title' => __( 'Notes', 'order-minimum-amount-for-woocommerce' ),
-					'desc'  => $this->format_notes( array( alg_wc_oma()->core->get_amounts_desc() ) ),
+					'title' => __( 'Good to know', 'order-minimum-amount-for-woocommerce' ),
+					'desc'  => $this->section_notes( array( alg_wc_oma()->core->get_amounts_desc() ) ),
 					'type'  => 'title',
 					'id'    => "alg_wc_oma_{$this->id}_notes",
 				),
