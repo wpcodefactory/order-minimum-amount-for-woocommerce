@@ -3,12 +3,12 @@
 Plugin Name: Order Minimum/Maximum Amount Limits for WooCommerce
 Plugin URI: https://wpfactory.com/item/order-minimum-maximum-amount-for-woocommerce/
 Description: Set required minimum and/or maximum order amounts (e.g. sum, quantity, weight, volume, etc.) in WooCommerce.
-Version: 4.6.7
+Version: 4.6.8
 Author: WPFactory
 Author URI: https://wpfactory.com
 Text Domain: order-minimum-amount-for-woocommerce
 Domain Path: /langs
-WC tested up to: 10.1
+WC tested up to: 10.2
 Requires Plugins: woocommerce
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -72,7 +72,7 @@ if ( ! class_exists( 'Alg_WC_OMA' ) ) :
 		 * @since 1.0.0
 		 * @var   string
 		 */
-		public $version = '4.6.7';
+		public $version = '4.6.8';
 
 		/**
 		 * $_instance.
@@ -178,18 +178,29 @@ if ( ! class_exists( 'Alg_WC_OMA' ) ) :
 		/**
 		 * add_cross_selling_library.
 		 *
-		 * @version 4.5.3
+		 * @version 4.6.8
 		 * @since   4.5.3
 		 *
 		 * @return void
 		 */
-		function add_cross_selling_library(){
+		function add_cross_selling_library() {
 			if ( ! is_admin() ) {
 				return;
 			}
 			// Cross-selling library.
 			$cross_selling = new \WPFactory\WPFactory_Cross_Selling\WPFactory_Cross_Selling();
-			$cross_selling->setup( array( 'plugin_file_path'   => $this->get_filesystem_path() ) );
+			$cross_selling->setup( array(
+				'plugin_file_path'     => $this->get_filesystem_path(),
+				'recommendations_box'  => array(
+					'enable'             => true,
+					'wc_settings_tab_id' => 'alg_wc_oma',
+				),
+				'recommendations_page' => array(
+					'action_link' => array(
+						//'enable' => false,
+					)
+				)
+			) );
 			$cross_selling->init();
 		}
 

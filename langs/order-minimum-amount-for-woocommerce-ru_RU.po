@@ -679,7 +679,7 @@ msgstr "Общие > Параметры оформления заказа"
 msgid "General options"
 msgstr "Общие параметры"
 
-#: order-minimum-amount-for-woocommerce-pro.php:295
+#: order-minimum-amount-for-woocommerce-pro.php:306
 msgid "Go Pro"
 msgstr "Стать профи"
 
@@ -1882,7 +1882,7 @@ msgstr ""
 msgid "Is WC Endpoint URL"
 msgstr ""
 
-#: order-minimum-amount-for-woocommerce-pro.php:212
+#: order-minimum-amount-for-woocommerce-pro.php:223
 msgid "Order Min/Max"
 msgstr ""
 
@@ -1958,6 +1958,6 @@ msgstr ""
 msgid "Good to Know"
 msgstr ""
 
-#: order-minimum-amount-for-woocommerce-pro.php:213
+#: order-minimum-amount-for-woocommerce-pro.php:224
 msgid "Order Minimum/Maximum Amount Limits for WooCommerce"
 msgstr ""
