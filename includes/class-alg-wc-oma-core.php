@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Core Class.
  *
- * @version 4.6.0
+ * @version 4.6.9
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -321,7 +321,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 		/**
 		 * hide_add_to_cart_single.
 		 *
-		 * @version 4.2.0
+		 * @version 4.6.9
 		 * @since   3.4.0
 		 *
 		 * @todo    variable: disable on per variation basis?
@@ -337,7 +337,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 				'product'       => $product,
 			) ) ) {
 				remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
-				echo get_option( 'alg_wc_oma_max_hide_add_to_cart_single_content', '' );
+				echo wp_kses_post( get_option( 'alg_wc_oma_max_hide_add_to_cart_single_content', '' ) );
 			}
 		}
 
@@ -378,7 +378,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 		/**
 		 * add_variation_data_regarding_add_to_cart_single.
 		 *
-		 * @version 4.2.0
+		 * @version 4.6.9
 		 * @since   4.2.0
 		 *
 		 * @param $data
@@ -395,7 +395,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 				'is_simplified' => true,
 				'product'       => $variation,
 			) ) ) {
-				$data['alg_wc_oma_hide_add_to_cart_btn_content'] = get_option( 'alg_wc_oma_max_hide_add_to_cart_single_content', '' );
+				$data['alg_wc_oma_hide_add_to_cart_btn_content'] = wp_kses_post( get_option( 'alg_wc_oma_max_hide_add_to_cart_single_content', '' ) );
 			}
 			return $data;
 		}
@@ -403,7 +403,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 		/**
 		 * hide_add_to_cart_loop.
 		 *
-		 * @version 4.2.0
+		 * @version 4.6.9
 		 * @since   3.4.0
 		 */
 		function hide_add_to_cart_loop( $link, $product, $args ) {
@@ -419,7 +419,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 						'is_simplified' => true,
 						'product'       => $product,
 					) ) ) {
-						$this->product_cache['hide_add_to_cart_loop'][ $product_id ] = $this->max_hide_add_to_cart_loop_content;
+						$this->product_cache['hide_add_to_cart_loop'][ $product_id ] = wp_kses_post( $this->max_hide_add_to_cart_loop_content );
 					}
 				}
 				return $this->product_cache['hide_add_to_cart_loop'][ $product_id ];
