@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Messages Section Settings.
  *
- * @version 4.6.6
+ * @version 4.7.0
  * @since   1.2.0
  *
  * @author  WPFactory
@@ -146,7 +146,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Messages' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 4.4.0
+		 * @version 4.7.0
 		 * @since   1.2.0
 		 *
 		 * @todo    add optional "Message on requirements met"
@@ -332,7 +332,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Messages' ) ) :
 			$notes[] = __( 'You can use HTML in the messages.', 'order-minimum-amount-for-woocommerce' );
 
 			$notes[] = sprintf( __( 'You can also use shortcodes in the messages, for example, for WPML/Polylang translations: %s', 'order-minimum-amount-for-woocommerce' ),
-				'<br><pre style="background-color: #E0E0E0; padding: 15px; margin-bottom:0">' .
+				'<br><pre style="background-color: #E0E0E0; padding: 15px; overflow:auto ;margin-bottom:0">' .
 				'[alg_wc_oma_translate lang="DE"]Text for DE[/alg_wc_oma_translate]' .
 				'[alg_wc_oma_translate lang="NL"]Text for NL[/alg_wc_oma_translate]' .
 				'[alg_wc_oma_translate not_lang="DE,NL"]Text for other languages[/alg_wc_oma_translate]' .

@@ -65,7 +65,7 @@ msgstr "%s товарная бирка(ы)"
 msgid "%s product(s)"
 msgstr "%s товар (ы)"
 
-#: includes/class-alg-wc-oma-core.php:889
+#: includes/class-alg-wc-oma-core.php:971
 msgid "<strong>No amount</strong> (i.e. no limit) will be applied if set to a negative value (e.g. %s)."
 msgstr "<strong>Никакая сумма</strong> (т.е. без ограничения) не будет применена, если установлено отрицательное значение (например, %s)."
 
@@ -170,7 +170,7 @@ msgstr "Сумма в разбивке по валютам"
 msgid "Amount by user role"
 msgstr "Сумма по роли пользователя"
 
-#: includes/class-alg-wc-oma-core.php:888
+#: includes/class-alg-wc-oma-core.php:970
 msgid "Amount is <strong>ignored</strong> if set to zero (%s), i.e. next level (e.g. \"General\") amount will be applied."
 msgstr "Сумма <strong>игнорируется</strong>, если установлено значение ноль (%s), т.е. будет применена сумма следующего уровня (например, Общая)."
 
@@ -683,7 +683,7 @@ msgstr "Общие параметры"
 msgid "Go Pro"
 msgstr "Стать профи"
 
-#: includes/class-alg-wc-oma-core.php:799
+#: includes/class-alg-wc-oma-core.php:881
 msgid "Guest"
 msgstr "Гость"
 
@@ -878,7 +878,7 @@ msgstr "Варианты списка"
 msgid "Login requirement"
 msgstr "Требование для входа в систему"
 
-#: includes/class-alg-wc-oma-core.php:828
+#: includes/class-alg-wc-oma-core.php:910
 msgid "Max %s"
 msgstr "Максимальная %s"
 
@@ -895,7 +895,7 @@ msgstr "Максимальная"
 msgid "maximum"
 msgstr "максимальная"
 
-#: includes/class-alg-wc-oma-core.php:1006
+#: includes/class-alg-wc-oma-core.php:1088
 #: includes/settings/class-alg-wc-oma-settings-memberships.php:48
 msgid "MemberPress"
 msgstr "Членство"
@@ -925,7 +925,7 @@ msgstr "Способ 2: Проверяет, содержит ли выбранн
 msgid "Methods splitted in parts different than 2 will be considered special cases."
 msgstr "Методы, разделенные на части, отличные от 2, будут рассматриваться как особые случаи."
 
-#: includes/class-alg-wc-oma-core.php:828
+#: includes/class-alg-wc-oma-core.php:910
 msgid "Min %s"
 msgstr "Минимальная %s"
 
@@ -1119,7 +1119,7 @@ msgstr "По способу доставки"
 msgid "Per shipping zone"
 msgstr "По зоне доставки"
 
-#: includes/class-alg-wc-oma-core.php:250
+#: includes/class-alg-wc-oma-core.php:272
 #: includes/settings/class-alg-wc-oma-settings-general.php:121
 msgid "Please login to access the min/max requirements for your order."
 msgstr "Пожалуйста, войдите в систему, чтобы получить доступ к минимальным / максимальным требованиям для вашего заказа."
@@ -1457,7 +1457,7 @@ msgstr "сумма"
 msgid "Sum Amount Type options > Exclude fees"
 msgstr "Параметры типа суммы > Исключить сборы"
 
-#: includes/class-alg-wc-oma-core.php:1016
+#: includes/class-alg-wc-oma-core.php:1098
 #: includes/settings/class-alg-wc-oma-settings-memberships.php:50
 msgid "SUMO Memberships"
 msgstr "Членство в СУМО"
@@ -1645,7 +1645,7 @@ msgstr "Удалит старые уведомления WooCommerce о доба
 msgid "WooCommerce > Settings > Products"
 msgstr "WooCommerce > Настройки > Товары"
 
-#: includes/class-alg-wc-oma-core.php:988
+#: includes/class-alg-wc-oma-core.php:1070
 #: includes/settings/class-alg-wc-oma-settings-memberships.php:46
 msgid "WooCommerce Memberships"
 msgstr "Членство в WooCommerce"

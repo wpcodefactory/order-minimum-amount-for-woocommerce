@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Core Class.
  *
- * @version 4.6.9
+ * @version 4.7.0
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -49,7 +49,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 		/**
 		 * add_hooks.
 		 *
-		 * @version 4.6.0
+		 * @version 4.7.0
 		 * @since   1.0.0
 		 */
 		function add_hooks() {
@@ -100,6 +100,28 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 			add_action( 'wp', array( $this, 'set_cookie_on_cart' ) );
 			add_action( 'wp_footer', array( $this, 'add_disable_checkout_script' ), PHP_INT_MAX );
 			add_action( 'alg_wc_oma_check_notices_on_block_cart_change', array( $this, 'set_cookie_on_block_cart_updated' ), PHP_INT_MAX );
+
+			// Prevents considering a fake added product for Alg_WC_OMA_Amount_Types::get_cart_total().
+			add_filter( 'alg_wc_oma_get_cart_total_do_count_product', array( $this, 'prevent_considering_fake_added_products_on_get_cart_total' ),10,2 );
+		}
+
+		/**
+		 * Prevents considering a product for Alg_WC_OMA_Amount_Types::get_cart_total() if it has been added by the plugin, and it's not actually in the cart.
+		 *
+		 * @version 4.7.0
+		 * @since   4.7.0
+		 *
+		 * @param $count
+		 * @param $cart_item
+		 *
+		 * @return false|mixed
+		 */
+		function prevent_considering_fake_added_products_on_get_cart_total( $count, $cart_item ) {
+			if ( isset( $cart_item['alg_wc_oma_fake_added'] ) && true === $cart_item['alg_wc_oma_fake_added'] ) {
+				$count = false;
+			}
+
+			return $count;
 		}
 
 		/**
@@ -448,7 +470,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 		/**
 		 * check_product_max_amount.
 		 *
-		 * @version 4.2.0
+		 * @version 4.7.0
 		 * @since   3.4.0
 		 *
 		 * @see     https://woocommerce.github.io/code-reference/classes/WC-Cart.html#method_add_to_cart
@@ -464,7 +486,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 		 * @throws Exception
 		 */
 		function check_product_max_amount( $args = null ) {
-			$args            = wp_parse_args( $args, array(
+			$args             = wp_parse_args( $args, array(
 				'product_id'      => '',
 				'quantity'        => '',
 				'variation_id'    => 0,
@@ -473,16 +495,25 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 				'is_simplified'   => false,
 				'product'         => false,
 			) );
-			$product_id      = $args['product_id'];
-			$quantity        = $args['quantity'];
-			$variation_id    = $args['variation_id'];
-			$show_notices    = $args['show_notices'];
-			$is_simplified   = $args['is_simplified'];
-			$product         = $args['product'];
-			$undo_qty_method = $args['undo_qty_method'];
-			$cart_item_key   = ( $is_simplified ?
-				$this->add_to_cart_simplified( $product_id, ( $product ? $product : wc_get_product( $product_id ) ), $quantity ) :
-				WC()->cart->add_to_cart( $product_id, $quantity, $variation_id ) );
+			$product_id       = $args['product_id'];
+			$quantity         = $args['quantity'];
+			$variation_id     = $args['variation_id'];
+			$show_notices     = $args['show_notices'];
+			$is_simplified    = $args['is_simplified'];
+			$product          = $args['product'];
+			$undo_qty_method  = $args['undo_qty_method'];
+			$add_to_cart_data = array();
+
+			if ( ! $this->is_product_in_cart( $product_id, $variation_id ) ) {
+				$add_to_cart_data = array(
+					'alg_wc_oma_fake_added'     => true,
+					'alg_wc_oma_fake_added_qty' => $quantity
+				);
+			}
+
+			$cart_item_key = ( $is_simplified ?
+				$this->add_to_cart_simplified( $product_id, ( $product ? $product : wc_get_product( $product_id ) ), $quantity, $add_to_cart_data ) :
+				WC()->cart->add_to_cart( $product_id, $quantity, $variation_id, array(), $add_to_cart_data ) );
 			if ( $cart_item_key ) {
 				if ( 'before_get_notices' === $undo_qty_method ) {
 					WC()->cart->set_quantity( $cart_item_key, ( WC()->cart->cart_contents[ $cart_item_key ]['quantity'] - $quantity ) );
@@ -503,19 +534,57 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 					return false;
 				}
 			}
+
 			return true;
+		}
+
+		/**
+		 * is_product_in_cart.
+		 *
+		 * @version 4.7.0
+		 * @since   4.7.0
+		 *
+		 * @param $product_id
+		 * @param $variation_id
+		 *
+		 * @return bool
+		 */
+		function is_product_in_cart( $product_id, $variation_id = 0 ) {
+			if ( empty( WC()->cart ) ) {
+				return false;
+			}
+
+			foreach ( WC()->cart->get_cart() as $cart_item ) {
+				if ( $variation_id > 0 ) {
+					if (
+						(int) $cart_item['product_id'] === (int) $product_id &&
+						(int) $cart_item['variation_id'] === (int) $variation_id
+					) {
+						return true;
+					}
+				}
+
+				if (
+					0 === (int) $variation_id &&
+					(int) $cart_item['product_id'] === (int) $product_id
+				) {
+					return true;
+				}
+			}
+
+			return false;
 		}
 
 		/**
 		 * add_to_cart_simplified.
 		 *
-		 * @version 4.0.8
+		 * @version 4.7.0
 		 * @since   3.4.0
 		 *
 		 * @todo    `set_quantity()`: `$refresh_totals`?
 		 * @todo    `WC()->cart->get_cart()`: call only once?
 		 */
-		function add_to_cart_simplified( $product_id, $product, $quantity ) {
+		function add_to_cart_simplified( $product_id, $product, $quantity, $cart_item_data = array() ) {
 			if (
 				'' === $product->get_price() ||
 				empty( WC()->cart )
@@ -528,18 +597,31 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 			if ( $cart_item_key ) {
 				$new_quantity = $quantity + WC()->cart->cart_contents[ $cart_item_key ]['quantity'];
 				WC()->cart->set_quantity( $cart_item_key, $new_quantity, false );
+
+				// Merge / update custom cart item data.
+				WC()->cart->cart_contents[ $cart_item_key ] =
+					array_merge(
+						WC()->cart->cart_contents[ $cart_item_key ],
+						$cart_item_data
+					);
 			} else {
 				$cart_item_key                              = $cart_id;
-				WC()->cart->cart_contents[ $cart_item_key ] = array(
-					'key'          => $cart_item_key,
-					'product_id'   => $product_id,
-					'variation_id' => 0,
-					'variation'    => array(),
-					'quantity'     => $quantity,
-					'data'         => $product,
-					'data_hash'    => wc_get_cart_item_data_hash( $product ),
+				WC()->cart->cart_contents[ $cart_item_key ] = array_merge(
+					array(
+						'key'          => $cart_item_key,
+						'product_id'   => $product_id,
+						'variation_id' => 0,
+						'variation'    => array(),
+						'quantity'     => $quantity,
+						'data'         => $product,
+						'data_hash'    => wc_get_cart_item_data_hash( $product ),
+					),
+					$cart_item_data
 				);
 			}
+
+			WC()->cart->set_session();
+			WC()->cart->cart_contents_total = WC()->cart->get_cart_contents_count();
 			return $cart_item_key;
 		}
 
