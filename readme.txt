@@ -3,7 +3,7 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, kousikmukherjeeli
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 6.1
 Tested up to: 6.8
-Stable tag: 4.7.0
+Stable tag: 4.7.1
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -360,8 +360,11 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 
 == Changelog ==
 
+= 4.7.1 - 31/01/2026 =
+* Fix - Fix possible php warning regarding the Quantity Input.
+
 = 4.7.0 - 29/01/2026 =
-* Fix - Fixed format from <pre> on Messages > Good to know.
+* Fix - Fixed format from `<pre>` on "Messages > Good to know".
 * Fix - Hide "add to cart" button - Prevented PHP warnings regarding `line_tax` and `line_total`.
 
 = 4.6.9 - 26/01/2026 =
