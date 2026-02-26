@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Core Class.
  *
- * @version 4.7.0
+ * @version 4.7.2
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -49,7 +49,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 		/**
 		 * add_hooks.
 		 *
-		 * @version 4.7.0
+		 * @version 4.7.2
 		 * @since   1.0.0
 		 */
 		function add_hooks() {
@@ -103,6 +103,39 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 
 			// Prevents considering a fake added product for Alg_WC_OMA_Amount_Types::get_cart_total().
 			add_filter( 'alg_wc_oma_get_cart_total_do_count_product', array( $this, 'prevent_considering_fake_added_products_on_get_cart_total' ),10,2 );
+
+			// Cart block notices.
+			add_action( 'woocommerce_store_api_cart_errors', array( $this, 'display_cart_block_notices_as_errors' ),10,2 );
+		}
+
+		/**
+		 * display_cart_block_notices_as_errors.
+		 *
+		 * @version 4.7.2
+		 * @since   4.7.2
+		 *
+		 * @param $cart_errors
+		 * @param $cart
+		 *
+		 * @return void
+		 */
+		function display_cart_block_notices_as_errors( $cart_errors, $cart ) {
+			if (
+				'yes' === get_option( 'alg_wc_oma_cart_block_notices_as_errors', 'no' ) &&
+				is_cart() &&
+				! empty( $notices = $this->messages->get_notices( array(
+					'area'                       => 'cart',
+					'get_only_first_flat_notice' => 'no' === get_option( 'alg_wc_oma_display_multiple_msg', 'yes' ),
+					'from_rest_api'              => false,
+				) )['flat_notices'] )
+			) {
+				foreach ( $notices as $k => $notice ) {
+					$cart_errors->add(
+						'alg_wc_oma_error_' . $k,
+						$notice
+					);
+				}
+			}
 		}
 
 		/**

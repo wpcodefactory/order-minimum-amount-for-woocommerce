@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - General Section Settings
  *
- * @version 4.4.3
+ * @version 4.7.2
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -31,7 +31,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_General' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 4.4.3
+		 * @version 4.7.2
 		 * @since   1.0.0
 		 */
 		function get_settings() {
@@ -174,6 +174,16 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_General' ) ) :
 						'do_not_disable' => __( 'Leave it enabled', 'order-minimum-amount-for-woocommerce' ),
 						'disable'        => __( 'Disable checkout button', 'order-minimum-amount-for-woocommerce' ),
 					),
+				),
+				array(
+					'title'    => __( 'Cart block notices', 'order-minimum-amount-for-woocommerce' ),
+					'desc'     => __( 'Enable cart block notices as errors', 'order-minimum-amount-for-woocommerce' ),
+					'desc_tip' => sprintf(
+						__( 'If enabled, you might want to change the %s option.', 'order-minimum-amount-for-woocommerce' ), sprintf( '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_oma&section=messages' ) . '">' . __( 'Cart Notices', 'order-minimum-amount-for-woocommerce' ) . '</a>' )
+					),
+					'id'       => 'alg_wc_oma_cart_block_notices_as_errors',
+					'default'  => 'no',
+					'type'     => 'checkbox',
 				),
 				array(
 					'type' => 'sectionend',

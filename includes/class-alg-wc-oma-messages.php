@@ -534,6 +534,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 						'{content}' => $content,
 					);
 					$final_content = str_replace( array_keys( $array_from_to ), $array_from_to, $templates['default'] );
+
 					if ( 'wc_add_notice' === $func ) {
 						if ( ! wc_has_notice( $final_content, $notice_type ) ) {
 							call_user_func_array( $func, array( $final_content, $notice_type ) );
