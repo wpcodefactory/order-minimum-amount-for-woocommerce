@@ -2,8 +2,8 @@
 Contributors: wpcodefactory, omardabbas, karzin, anbinder, kousikmukherjeeli
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 6.1
-Tested up to: 6.9
-Stable tag: 4.7.2
+Tested up to: 7.0
+Stable tag: 4.7.3
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -359,6 +359,10 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 1. Frontend example â€“ Cart notice.
 
 == Changelog ==
+
+= 4.7.3 - 22/05/2026 =
+* Tested up to: 7.0.
+* WC tested up to: 10.7.
 
 = 4.7.2 - 26/02/2026 =
 * Dev - General - Added option to display cart block notices as errors.
