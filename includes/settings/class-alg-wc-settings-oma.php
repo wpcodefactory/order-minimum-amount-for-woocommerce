@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Settings.
  *
- * @version 4.0.8
+ * @version 4.7.4
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -31,22 +31,22 @@ if ( ! class_exists( 'Alg_WC_Settings_OMA' ) ) :
 			add_filter( 'woocommerce_admin_settings_sanitize_option', array( $this, 'maybe_unsanitize_option' ), PHP_INT_MAX, 3 );
 			add_action( 'admin_head-' . 'woocommerce_page_wc-settings', array( $this, 'admin_style' ) );
 			// Sections
-			require_once( 'class-alg-wc-oma-settings-section.php' );
-			require_once( 'class-alg-wc-oma-settings-general.php' );
-			require_once( 'class-alg-wc-oma-settings-amounts.php' );
-			require_once( 'class-alg-wc-oma-settings-fees.php' );
-			require_once( 'class-alg-wc-oma-settings-messages.php' );
-			require_once( 'class-alg-wc-oma-settings-user-roles.php' );
-			require_once( 'class-alg-wc-oma-settings-users.php' );
-			require_once( 'class-alg-wc-oma-settings-products.php' );
-			require_once( 'class-alg-wc-oma-settings-shipping.php' );
-			require_once( 'class-alg-wc-oma-settings-gateways.php' );
-			require_once( 'class-alg-wc-oma-settings-memberships.php' );
-			require_once( 'class-alg-wc-oma-settings-currencies.php' );
-			require_once( 'class-alg-wc-oma-settings-coupons.php' );
-			require_once( 'class-alg-wc-oma-settings-cart-products.php' );
-			require_once( 'class-alg-wc-oma-settings-products-cart-total.php' );
-			require_once( 'class-alg-wc-oma-settings-compatibility.php' );
+			require_once 'class-alg-wc-oma-settings-section.php';
+			require_once 'class-alg-wc-oma-settings-general.php';
+			require_once 'class-alg-wc-oma-settings-amounts.php';
+			require_once 'class-alg-wc-oma-settings-fees.php';
+			require_once 'class-alg-wc-oma-settings-messages.php';
+			require_once 'class-alg-wc-oma-settings-user-roles.php';
+			require_once 'class-alg-wc-oma-settings-users.php';
+			require_once 'class-alg-wc-oma-settings-products.php';
+			require_once 'class-alg-wc-oma-settings-shipping.php';
+			require_once 'class-alg-wc-oma-settings-gateways.php';
+			require_once 'class-alg-wc-oma-settings-memberships.php';
+			require_once 'class-alg-wc-oma-settings-currencies.php';
+			require_once 'class-alg-wc-oma-settings-coupons.php';
+			require_once 'class-alg-wc-oma-settings-cart-products.php';
+			require_once 'class-alg-wc-oma-settings-products-cart-total.php';
+			require_once 'class-alg-wc-oma-settings-compatibility.php';
 			// Create notice about pro
 			add_action( 'admin_init', array( $this, 'add_promoting_notice' ) );
 		}
@@ -72,7 +72,6 @@ if ( ! class_exists( 'Alg_WC_Settings_OMA' ) ) :
 					'%pro_version_title%'  => __( 'Order Minimum/Maximum Amount Limits for WooCommerce Pro', 'maximum-products-per-user-for-woocommerce' ),
 					'%main_text%'          => __( 'Disabled options can be unlocked using <a href="%pro_version_url%" target="_blank"><strong>%pro_version_title%</strong></a>', 'maximum-products-per-user-for-woocommerce' ),
 					'%btn_call_to_action%' => __( 'Upgrade to Pro version', 'maximum-products-per-user-for-woocommerce' ),
-					//'%plugin_icon_style%' => 'width:41px;margin-right:10px;vertical-align:middle'
 				),
 			) );
 			$promoting_notice->init();
@@ -81,14 +80,12 @@ if ( ! class_exists( 'Alg_WC_Settings_OMA' ) ) :
 		/**
 		 * admin_style.
 		 *
-		 * @version 4.0.1
+		 * @version 4.7.4
 		 * @since   4.0.1
 		 */
 		function admin_style() {
-			if (
-				! isset( $_GET['tab'] )
-				|| 'alg_wc_oma' != $_GET['tab']
-			) {
+			$tab = filter_input( INPUT_GET, 'tab', FILTER_SANITIZE_SPECIAL_CHARS );
+			if ( 'alg_wc_oma' !== $tab ) {
 				return;
 			}
 			?>
@@ -134,6 +131,7 @@ if ( ! class_exists( 'Alg_WC_Settings_OMA' ) ) :
 		 */
 		function get_settings() {
 			global $current_section;
+			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 			return array_merge( apply_filters( 'woocommerce_get_settings_' . $this->id . '_' . $current_section, array() ), array(
 				array(
 					'title' => __( 'Reset Settings', 'order-minimum-amount-for-woocommerce' ),
@@ -181,12 +179,12 @@ if ( ! class_exists( 'Alg_WC_Settings_OMA' ) ) :
 		/**
 		 * admin_notice_settings_reset.
 		 *
-		 * @version 1.2.1
+		 * @version 4.7.4
 		 * @since   1.2.1
 		 */
 		function admin_notice_settings_reset() {
-			echo '<div class="notice notice-warning is-dismissible"><p><strong>' .
-			     __( 'Your settings have been reset.', 'order-minimum-amount-for-woocommerce' ) . '</strong></p></div>';
+			$message = esc_html__( 'Your settings have been reset.', 'order-minimum-amount-for-woocommerce' );
+			echo '<div class="notice notice-warning is-dismissible"><p><strong>' . $message . '</strong></p></div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 
 		/**
@@ -203,7 +201,7 @@ if ( ! class_exists( 'Alg_WC_Settings_OMA' ) ) :
 		/**
 		 * Output sections.
 		 *
-		 * @version 4.0.0
+		 * @version 4.7.4
 		 * @since   4.0.0
 		 *
 		 * @see     https://github.com/woocommerce/woocommerce/blob/4.9.2/includes/admin/settings/class-wc-settings-page.php#L100
@@ -221,8 +219,12 @@ if ( ! class_exists( 'Alg_WC_Settings_OMA' ) ) :
 
 			$array_keys = array_keys( $sections );
 
-			foreach ( $sections as $id => $label ) {
-				echo '<li><a href="' . admin_url( 'admin.php?page=wc-settings&tab=' . $this->id . '&section=' . sanitize_title( $id ) ) . '" class="' . ( $current_section == $id ? 'current' : '' ) . '">' . $this->style_section_label( $label, $id ) . '</a> ' . ( end( $array_keys ) == $id ? '' : '|' ) . ' </li>';
+		foreach ( $sections as $id => $label ) {
+			$section_url   = esc_url( admin_url( 'admin.php?page=wc-settings&tab=' . $this->id . '&section=' . sanitize_title( $id ) ) );
+			$section_class = esc_attr( $current_section === $id ? 'current' : '' );
+			$section_label = wp_kses_post( $this->style_section_label( $label, $id ) );
+			$separator     = end( $array_keys ) === $id ? '' : '|';
+			echo '<li><a href="' . $section_url . '" class="' . $section_class . '">' . $section_label . '</a> ' . $separator . ' </li>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			}
 
 			echo '</ul><br class="clear" />';

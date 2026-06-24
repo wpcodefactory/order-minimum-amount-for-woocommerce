@@ -3,7 +3,7 @@
 Plugin Name: Order Minimum/Maximum Amount Limits for WooCommerce
 Plugin URI: https://wpfactory.com/item/order-minimum-maximum-amount-for-woocommerce/
 Description: Set required minimum and/or maximum order amounts (e.g. sum, quantity, weight, volume, etc.) in WooCommerce.
-Version: 4.7.3
+Version: 4.7.4
 Author: WPFactory
 Author URI: https://wpfactory.com
 Text Domain: order-minimum-amount-for-woocommerce
@@ -29,7 +29,7 @@ if ( ! function_exists( 'alg_wc_oma_is_plugin_active' ) ) {
 	function alg_wc_oma_is_plugin_active( $plugin ) {
 		return ( function_exists( 'is_plugin_active' ) ? is_plugin_active( $plugin ) :
 			(
-				in_array( $plugin, apply_filters( 'active_plugins', (array) get_option( 'active_plugins', array() ) ) ) ||
+			in_array( $plugin, apply_filters( 'active_plugins', (array) get_option( 'active_plugins', array() ) ) ) || // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 				( is_multisite() && array_key_exists( $plugin, (array) get_site_option( 'active_sitewide_plugins', array() ) ) )
 			)
 		);
@@ -72,7 +72,7 @@ if ( ! class_exists( 'Alg_WC_OMA' ) ) :
 		 * @since 1.0.0
 		 * @var   string
 		 */
-		public $version = '4.7.3';
+		public $version = '4.7.4';
 
 		/**
 		 * $_instance.
@@ -255,6 +255,7 @@ if ( ! class_exists( 'Alg_WC_OMA' ) ) :
 		 * @since   3.4.1
 		 */
 		function localize() {
+			// phpcs:ignore PluginCheck.CodeAnalysis.DiscouragedFunctions.load_plugin_textdomainFound
 			load_plugin_textdomain( 'order-minimum-amount-for-woocommerce', false, dirname( plugin_basename( __FILE__ ) ) . '/langs/' );
 		}
 

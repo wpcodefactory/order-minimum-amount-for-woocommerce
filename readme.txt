@@ -3,11 +3,11 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, kousikmukherjeeli
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 6.1
 Tested up to: 7.0
-Stable tag: 4.7.3
+Stable tag: 4.7.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Implement minimum/maximum order amounts, regulate quantity, weight, volume, dimensions, and apply user-role-specific conditions with Order Minimum/Maximum Amount Limits for WooCommerce
+Set minimum and maximum order limits by amount, quantity, weight, volume, or dimensions in WooCommerce.
 
 == Description ==
 
@@ -359,6 +359,15 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 1. Frontend example â€“ Cart notice.
 
 == Changelog ==
+
+= 4.7.4 - 24/06/2026 =
+* Fix - Fixed I18n issues on functions.
+* Fix - Fixed nonce, escaping and validation checks.
+* Fix - Code refactoring.
+* Dev - Updated Key Manager library to version 1.0.8.
+* Dev - Updated Admin Menu library to version 1.1.1.
+* Dev - Updated Cross-Selling library to version 1.1.2.
+* WC tested up to: 10.8.
 
 = 4.7.3 - 22/05/2026 =
 * Tested up to: 7.0.

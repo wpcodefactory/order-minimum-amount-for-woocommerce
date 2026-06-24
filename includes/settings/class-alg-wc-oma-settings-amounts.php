@@ -82,8 +82,13 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Amounts' ) ) :
 				array(
 					'title'             => __( '[alg_wc_oma_amount]', 'order-minimum-amount-for-woocommerce' ),
 					'desc'              => __( 'Create the <code>[alg_wc_oma_amount]</code> shortcode', 'order-minimum-amount-for-woocommerce' ),
-					'desc_tip'          => __( 'For now, it allows to set different values for different customer types.', 'order-minimum-amount-for-woocommerce' ) . '<br />' .
-					                       sprintf( __( 'More <a href="%s" target="_blank">info</a>.', 'order-minimum-amount-for-woocommerce' ), 'https://wpfactory.com/docs/order-min-max/shortcodes/understanding-placeholders/#1-algwcomaamount' ) . '<br />',
+				'desc_tip'          =>
+					__( 'For now, it allows to set different values for different customer types.', 'order-minimum-amount-for-woocommerce' ) . '<br />' .
+					sprintf(
+						/* translators: %s: URL to documentation */
+						__( 'More <a href="%s" target="_blank">info</a>.', 'order-minimum-amount-for-woocommerce' ),
+						'https://wpfactory.com/docs/order-min-max/shortcodes/understanding-placeholders/#1-algwcomaamount'
+					) . '<br />',
 					'type'              => 'checkbox',
 					'default'           => 'no',
 					'custom_attributes' => apply_filters( 'alg_wc_oma_settings', array( 'disabled' => 'disabled' ) ),

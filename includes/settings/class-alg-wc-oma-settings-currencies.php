@@ -58,7 +58,11 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Currencies' ) ) :
 				),
 				array(
 					'title'   => __( 'Section overriding', 'order-minimum-amount-for-woocommerce' ),
-					'desc'    => sprintf( __( 'Using %s in amounts from other sections will prevent this section from overriding them', 'order-minimum-amount-for-woocommerce' ), '<code>-1</code>' ),
+				'desc'    => sprintf(
+					/* translators: %s: HTML code element with value -1 */
+					__( 'Using %s in amounts from other sections will prevent this section from overriding them', 'order-minimum-amount-for-woocommerce' ),
+					'<code>-1</code>'
+				),
 					'id'      => 'alg_wc_oma_currencies_prevent_overriding_minusone_values_sections',
 					'default' => 'no',
 					'type'    => 'checkbox',

@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Compatibility Settings.
  *
- * @version 4.3.8
+ * @version 4.7.4
  * @since   4.0.8
  *
  * @author  WPFactory
@@ -31,15 +31,54 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Compatibility' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 4.3.8
+		 * @version 4.7.4
 		 * @since   4.0.8
 		 */
 		function get_settings() {
-			$prod_bundle_opts             = array(
+			/* translators: %s: plugin name with link */
+			$product_bundles_desc = sprintf(
+				__( 'Compatibility with %s plugin.', 'order-minimum-amount-for-woocommerce' ),
+				sprintf( '<a href="%s" target="_blank">%s</a>', 'https://woocommerce.com/products/product-bundles/', __( 'Product Bundles', 'order-minimum-amount-for-woocommerce' ) )
+			);
+
+			/* translators: %s: plugin name with link */
+			$subscriptions_desc = sprintf(
+				__( 'Compatibility with %s plugin.', 'order-minimum-amount-for-woocommerce' ),
+				sprintf( '<a href="%s" target="_blank">%s</a>', 'https://woocommerce.com/pt-br/products/woocommerce-subscriptions/', __( 'WooCommerce Subscriptions', 'order-minimum-amount-for-woocommerce' ) )
+			);
+
+			/* translators: %s: plugin name with link */
+			$currency_switcher_desc = sprintf(
+				__( 'Compatibility with %s plugin.', 'order-minimum-amount-for-woocommerce' ),
+				sprintf( '<a href="%s" target="_blank">%s</a> (%s)', 'https://wordpress.org/plugins/currency-switcher-woocommerce/', __( 'Currency Switcher for WooCommerce', 'order-minimum-amount-for-woocommerce' ), __( 'By WP Wham', 'order-minimum-amount-for-woocommerce' ) )
+			);
+
+			/* translators: %1$s: section link, %2$s: option name, %3$s: option value */
+			$exchange_rates_tip = sprintf(
+				__( 'It\'s necessary to enable the %1$s section and set its %2$s option as %3$s.', 'order-minimum-amount-for-woocommerce' ),
+				'<a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_oma&section=currencies' ) . '">' . __( 'Currencies', 'order-minimum-amount-for-woocommerce' ) . '</a>',
+				'<strong>' . __( 'Calculation method', 'order-minimum-amount-for-woocommerce' ) . '</strong>',
+				'<code>' . __( 'Exchange rates', 'order-minimum-amount-for-woocommerce' ) . '</code>'
+			);
+
+			/* translators: %s: plugin name with link */
+			$paypal_compat_desc = sprintf(
+				__( 'Compatibility with %s plugin.', 'order-minimum-amount-for-woocommerce' ),
+				sprintf( '<a href="%s" target="_blank">%s</a> (%s)', 'https://wordpress.org/plugins/woocommerce-paypal-payments/', __( 'WooCommerce PayPal Payments', 'order-minimum-amount-for-woocommerce' ), __( 'By WooCommerce', 'order-minimum-amount-for-woocommerce' ) )
+			);
+
+			/* translators: %1$s: option link, %2$s: value */
+			$paypal_tip = sprintf(
+				__( 'Paypal will probably work better if the %1$s option is set to %2$s.', 'order-minimum-amount-for-woocommerce' ),
+				sprintf( '<a href="%s">%s</a>', admin_url( 'admin.php?page=wc-settings&tab=alg_wc_oma&section=' ), __( 'Checkout hook', 'order-minimum-amount-for-woocommerce' ) ),
+				'<code>woocommerce_after_checkout_validation</code>'
+			);
+
+			$prod_bundle_opts = array(
 				array(
 					'title' => __( 'Product Bundles', 'order-minimum-amount-for-woocommerce' ),
 					'type'  => 'title',
-					'desc'  => sprintf( __( 'Compatibility with %s plugin.', 'order-minimum-amount-for-woocommerce' ), sprintf( '<a href="%s" target="_blank">%s</a>', 'https://woocommerce.com/products/product-bundles/', __( 'Product Bundles', 'order-minimum-amount-for-woocommerce' ) ) ),
+					'desc'  => $product_bundles_desc,
 					'id'    => 'alg_wc_oma_product_bundles_compatibility_options',
 				),
 				array(
@@ -65,11 +104,12 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Compatibility' ) ) :
 					'id'   => 'alg_wc_oma_product_bundles_compatibility_options',
 				),
 			);
-			$wc_subscriptions_opts        = array(
+
+			$wc_subscriptions_opts = array(
 				array(
 					'title' => __( 'WooCommerce Subscriptions', 'order-minimum-amount-for-woocommerce' ),
 					'type'  => 'title',
-					'desc'  => sprintf( __( 'Compatibility with %s plugin.', 'order-minimum-amount-for-woocommerce' ), sprintf( '<a href="%s" target="_blank">%s</a>', 'https://woocommerce.com/pt-br/products/woocommerce-subscriptions/', __( 'WooCommerce Subscriptions', 'order-minimum-amount-for-woocommerce' ) ) ),
+					'desc'  => $subscriptions_desc,
 					'id'    => 'alg_wc_oma_wc_subscriptions_compatibility_options',
 				),
 				array(
@@ -85,24 +125,18 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Compatibility' ) ) :
 					'id'   => 'alg_wc_oma_wc_subscriptions_compatibility_options',
 				),
 			);
+
 			$currency_switcher_wpham_opts = array(
 				array(
 					'title' => __( 'Currency Switcher for WooCommerce', 'order-minimum-amount-for-woocommerce' ),
 					'type'  => 'title',
-					'desc'  => sprintf(
-						__( 'Compatibility with %s plugin.', 'order-minimum-amount-for-woocommerce' ),
-						sprintf( '<a href="%s" target="_blank">%s</a> (%s)',
-							'https://wordpress.org/plugins/currency-switcher-woocommerce/',
-							__( 'Currency Switcher for WooCommerce', 'order-minimum-amount-for-woocommerce' ),
-							__( 'By WP Wham', 'order-minimum-amount-for-woocommerce' )
-						)
-					),
+					'desc'  => $currency_switcher_desc,
 					'id'    => 'alg_wc_oma_wc_currency_switcher_wpham_options',
 				),
 				array(
 					'title'             => __( 'Exchange rates', 'order-minimum-amount-for-woocommerce' ),
 					'desc'              => __( 'Get exchange rates from the Currency Switcher plugin', 'order-minimum-amount-for-woocommerce' ),
-					'desc_tip'          => sprintf( __( 'It\'s necessary to enable the %s section and set its %s option as %s.', 'order-minimum-amount-for-woocommerce' ), '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_oma&section=currencies' ) . '">' . __( 'Currencies', 'order-minimum-amount-for-woocommerce' ) . '</a>', '<strong>' . __( 'Calculation method', 'order-minimum-amount-for-woocommerce' ) . '</strong>', '<code>' . __( 'Exchange rates', 'order-minimum-amount-for-woocommerce' ) . '</code>' ),
+					'desc_tip'          => $exchange_rates_tip,
 					'id'                => 'alg_wc_oma_wc_currency_switcher_wpham_get_exchange_rates',
 					'default'           => 'no',
 					'type'              => 'checkbox',
@@ -113,28 +147,12 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Compatibility' ) ) :
 					'id'   => 'alg_wc_oma_wc_currency_switcher_wpham_options',
 				),
 			);
+
 			$wc_paypal_opts = array(
 				array(
 					'title' => __( 'WooCommerce PayPal Payments', 'order-minimum-amount-for-woocommerce' ),
 					'type'  => 'title',
-					'desc'  => sprintf(
-						           __( 'Compatibility with %s plugin.', 'order-minimum-amount-for-woocommerce' ),
-						           sprintf(
-							           '<a href="%s" target="_blank">%s</a> (%s)',
-							           'https://wordpress.org/plugins/woocommerce-paypal-payments/',
-							           __( 'WooCommerce PayPal Payments', 'order-minimum-amount-for-woocommerce' ),
-							           __( 'By WooCommerce', 'order-minimum-amount-for-woocommerce' )
-						           )
-					           ) . ' ' .
-					           sprintf(
-						           __( 'Paypal will probably work better if the %s option is set to %s.', 'order-minimum-amount-for-woocommerce' ),
-						           sprintf(
-							           '<a href="%s">%s</a>',
-							           admin_url( 'admin.php?page=wc-settings&tab=alg_wc_oma&section=' ),
-							           __( 'Checkout hook', 'order-minimum-amount-for-woocommerce' )
-						           ),
-						           '<code>woocommerce_after_checkout_validation</code>'
-					           ),
+					'desc'  => $paypal_compat_desc . ' ' . $paypal_tip,
 					'id'    => 'alg_wc_oma_wc_wc_paypal_payments_opts',
 				),
 				array(
@@ -151,9 +169,8 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Compatibility' ) ) :
 					'id'   => 'alg_wc_oma_wc_wc_paypal_payments_opts',
 				),
 			);
-			return array_merge(
-				$prod_bundle_opts, $wc_subscriptions_opts, $currency_switcher_wpham_opts, $wc_paypal_opts
-			);
+
+			return array_merge( $prod_bundle_opts, $wc_subscriptions_opts, $currency_switcher_wpham_opts, $wc_paypal_opts );
 		}
 	}
 

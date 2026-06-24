@@ -2,17 +2,17 @@
     "packages": [
         {
             "name": "dealerdirect/phpcodesniffer-composer-installer",
-            "version": "v1.2.0",
-            "version_normalized": "1.2.0.0",
+            "version": "v1.2.1",
+            "version_normalized": "1.2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/composer-installer.git",
-                "reference": "845eb62303d2ca9b289ef216356568ccc075ffd1"
+                "reference": "963f0c67bffde0eac41b56be71ac0e8ba132f0bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/composer-installer/zipball/845eb62303d2ca9b289ef216356568ccc075ffd1",
-                "reference": "845eb62303d2ca9b289ef216356568ccc075ffd1",
+                "url": "https://api.github.com/repos/PHPCSStandards/composer-installer/zipball/963f0c67bffde0eac41b56be71ac0e8ba132f0bd",
+                "reference": "963f0c67bffde0eac41b56be71ac0e8ba132f0bd",
                 "shasum": ""
             },
             "require": {
@@ -28,7 +28,7 @@
                 "phpcompatibility/php-compatibility": "^9.0 || ^10.0.0@dev",
                 "yoast/phpunit-polyfills": "^1.0"
             },
-            "time": "2025-11-11T04:32:07+00:00",
+            "time": "2026-05-06T08:26:05+00:00",
             "type": "composer-plugin",
             "extra": {
                 "class": "PHPCSStandards\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin"
@@ -433,23 +433,23 @@
         },
         {
             "name": "wpfactory/wpfactory-admin-menu",
-            "version": "v1.0.8",
-            "version_normalized": "1.0.8.0",
+            "version": "v1.1.1",
+            "version_normalized": "1.1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wpcodefactory/wpfactory-admin-menu.git",
-                "reference": "971a37f3b226a1884eeabae9c615d5b199784a31"
+                "reference": "97d51f09e96c7c5fdb314b6828f5a3ecc1301371"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wpcodefactory/wpfactory-admin-menu/zipball/971a37f3b226a1884eeabae9c615d5b199784a31",
-                "reference": "971a37f3b226a1884eeabae9c615d5b199784a31",
+                "url": "https://api.github.com/repos/wpcodefactory/wpfactory-admin-menu/zipball/97d51f09e96c7c5fdb314b6828f5a3ecc1301371",
+                "reference": "97d51f09e96c7c5fdb314b6828f5a3ecc1301371",
                 "shasum": ""
             },
             "require-dev": {
                 "wp-cli/wp-cli-bundle": "*"
             },
-            "time": "2025-06-20T23:08:43+00:00",
+            "time": "2026-05-20T16:27:36+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -477,24 +477,24 @@
                 ]
             },
             "support": {
-                "source": "https://github.com/wpcodefactory/wpfactory-admin-menu/tree/v1.0.8",
+                "source": "https://github.com/wpcodefactory/wpfactory-admin-menu/tree/v1.1.1",
                 "issues": "https://github.com/wpcodefactory/wpfactory-admin-menu/issues"
             },
             "install-path": "../wpfactory/wpfactory-admin-menu"
         },
         {
             "name": "wpfactory/wpfactory-cross-selling",
-            "version": "v1.0.9",
-            "version_normalized": "1.0.9.0",
+            "version": "v1.1.2",
+            "version_normalized": "1.1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wpcodefactory/wpfactory-cross-selling.git",
-                "reference": "8bd6caf3de67eeff5164a7a9a8cfd5c01c472a06"
+                "reference": "1a45063ff0171e944cbcc00f9ce8c518e6b13a2a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wpcodefactory/wpfactory-cross-selling/zipball/8bd6caf3de67eeff5164a7a9a8cfd5c01c472a06",
-                "reference": "8bd6caf3de67eeff5164a7a9a8cfd5c01c472a06",
+                "url": "https://api.github.com/repos/wpcodefactory/wpfactory-cross-selling/zipball/1a45063ff0171e944cbcc00f9ce8c518e6b13a2a",
+                "reference": "1a45063ff0171e944cbcc00f9ce8c518e6b13a2a",
                 "shasum": ""
             },
             "require": {
@@ -503,7 +503,7 @@
             "require-dev": {
                 "wp-cli/wp-cli-bundle": "*"
             },
-            "time": "2025-12-22T19:17:39+00:00",
+            "time": "2026-05-29T20:22:20+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -531,7 +531,7 @@
                 ]
             },
             "support": {
-                "source": "https://github.com/wpcodefactory/wpfactory-cross-selling/tree/v1.0.9",
+                "source": "https://github.com/wpcodefactory/wpfactory-cross-selling/tree/v1.1.2",
                 "issues": "https://github.com/wpcodefactory/wpfactory-cross-selling/issues"
             },
             "install-path": "../wpfactory/wpfactory-cross-selling"

@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Products Cart Total Section Settings
  *
- * @version 4.6.6
+ * @version 4.7.4
  * @since   3.3.0
  *
  * @author  WPFactory
@@ -31,7 +31,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Products_Cart_Total' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 4.6.6
+		 * @version 4.7.4
 		 * @since   3.3.0
 		 */
 		function get_settings() {
@@ -56,10 +56,13 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Products_Cart_Total' ) ) :
 				array(
 					'title'    => __( 'Per product', 'order-minimum-amount-for-woocommerce' ),
 					'desc'     => __( 'Enable', 'order-minimum-amount-for-woocommerce' ),
-					'desc_tip' => sprintf( __( 'Enable this if you want this section to affect %s section options (i.e. "%s") as well.', 'order-minimum-amount-for-woocommerce' ),
+					'desc_tip' => sprintf(
+						/* translators: %1$s: section link, %2$s: scope names like "Per product / Per product category / Per product tag" */
+						__( 'Enable this if you want this section to affect %1$s section options (i.e. "%2$s") as well.', 'order-minimum-amount-for-woocommerce' ),
 						$this->get_section_link( 'products' ),
 						__( 'Per product', 'order-minimum-amount-for-woocommerce' ) . ' / ' . __( 'Per product category', 'order-minimum-amount-for-woocommerce' ) . ' / ' .
-						__( 'Per product tag', 'order-minimum-amount-for-woocommerce' ) ),
+						__( 'Per product tag', 'order-minimum-amount-for-woocommerce' )
+					),
 					'id'       => 'alg_wc_oma_products_cart_total_per_product_enabled',
 					'default'  => 'no',
 					'type'     => 'checkbox',
@@ -81,16 +84,19 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Products_Cart_Total' ) ) :
 
 			$notes = array();
 			if ( in_array( 'sum', $enabled_types ) ) {
+				$cart_total_note = sprintf(
+					/* translators: %1$s: sum, %2$s: Amount Type Options link, %3$s: section link */
+					__( 'Please note that final order %1$s value will also be affected by the %2$s settings in %3$s section.', 'order-minimum-amount-for-woocommerce' ),
+					'<strong>' . __( 'sum', 'order-minimum-amount-for-woocommerce' ) . '</strong>',
+					'<strong>' .
+					/* translators: %s: amount type name */
+					sprintf( __( '"%s" Amount Type Options', 'order-minimum-amount-for-woocommerce' ), __( 'Sum', 'order-minimum-amount-for-woocommerce' ) ) . '</strong>',
+					$this->get_section_link( 'general' )
+				);
 				$notes = array(
 					array(
 						'title' => __( 'Good to know', 'order-minimum-amount-for-woocommerce' ),
-						'desc'  => $this->section_notes( array(
-							sprintf( __( 'Please note that final order %s value will also be affected by the %s settings in %s section.', 'order-minimum-amount-for-woocommerce' ),
-								'<strong>' . __( 'sum', 'order-minimum-amount-for-woocommerce' ) . '</strong>',
-								'<strong>' . sprintf( __( '"%s" Amount Type Options', 'order-minimum-amount-for-woocommerce' ),
-									__( 'Sum', 'order-minimum-amount-for-woocommerce' ) ) . '</strong>',
-								$this->get_section_link( 'general' ) ),
-						) ),
+						'desc'  => $this->section_notes( array( $cart_total_note ) ),
 						'type'  => 'title',
 						'id'    => "alg_wc_oma_{$this->id}_notes",
 					),

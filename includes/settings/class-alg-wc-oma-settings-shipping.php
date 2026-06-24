@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Shipping Section Settings.
  *
- * @version 4.6.6
+ * @version 4.7.4
  * @since   3.2.0
  *
  * @author  WPFactory
@@ -31,13 +31,15 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Shipping' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 4.6.6
+		 * @version 4.7.4
 		 * @since   3.2.0
 		 */
 		function get_settings() {
-
 			$shipping_type    = get_option( 'alg_wc_oma_by_shipping_type', 'method' );
 			$shipping_options = alg_wc_oma()->core->get_shipping_options( $shipping_type );
+
+			/* translators: %s: section link */
+			$messages_tip = sprintf( __( 'This will enable separate messages for shipping in %s section.', 'order-minimum-amount-for-woocommerce' ), $this->get_section_link( 'messages' ) );
 
 			$settings = array(
 				array(
@@ -70,8 +72,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Shipping' ) ) :
 				array(
 					'title'    => __( 'Shipping messages', 'order-minimum-amount-for-woocommerce' ),
 					'desc'     => __( 'Enable', 'order-minimum-amount-for-woocommerce' ),
-					'desc_tip' => sprintf( __( 'This will enable separate messages for shipping in %s section.', 'order-minimum-amount-for-woocommerce' ),
-						$this->get_section_link( 'messages' ) ),
+					'desc_tip' => $messages_tip,
 					'id'       => 'alg_wc_oma_by_shipping_messages_enabled',
 					'default'  => 'no',
 					'type'     => 'checkbox',
@@ -103,6 +104,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Shipping' ) ) :
 					),
 					array(
 						'title'    => __( 'Identification', 'order-minimum-amount-for-woocommerce' ),
+						/* translators: %s: colon character */
 						'desc'     => sprintf( __( 'Find special cases by splitting current method until the %s character', 'order-minimum-amount-for-woocommerce' ), '<code>:</code>' ),
 						'desc_tip' => __( 'Methods splitted in parts different than 2 will be considered special cases.', 'order-minimum-amount-for-woocommerce' ),
 						'id'       => 'alg_wc_oma_by_shipping_sc_find_by_colon_splitting',
@@ -121,17 +123,16 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Shipping' ) ) :
 					),
 					array(
 						'title'    => __( 'Shipping IDs', 'order-minimum-amount-for-woocommerce' ),
-						'desc'     => sprintf( __( 'Set as comma-separated list of shipping method IDs, e.g.: %s', 'order-minimum-amount-for-woocommerce' ),
-							'<code>flexible_shipping,jem_table_rate</code>' ),
-						'desc_tip' => __( 'Shipping IDs from special cases.', 'order-minimum-amount-for-woocommerce' ) . ' ' .
-						              __( 'Leave empty if unsure.', 'order-minimum-amount-for-woocommerce' ),
+						/* translators: %s: comma-separated example IDs */
+						'desc'     => sprintf( __( 'Set as comma-separated list of shipping method IDs, e.g.: %s', 'order-minimum-amount-for-woocommerce' ), '<code>flexible_shipping,jem_table_rate</code>' ),
+						'desc_tip' => __( 'Shipping IDs from special cases.', 'order-minimum-amount-for-woocommerce' ) . ' ' . __( 'Leave empty if unsure.', 'order-minimum-amount-for-woocommerce' ),
 						'id'       => 'alg_wc_oma_by_shipping_special_cases',
 						'default'  => '',
 						'type'     => 'text',
 					),
 					array(
-						'desc'    => sprintf( __( 'Try to autodetect Shipping IDs from %s', 'order-minimum-amount-for-woocommerce' ),
-							'<code>WC_Shipping::load_shipping_methods()</code>' ),
+						/* translators: %s: function name */
+						'desc'    => sprintf( __( 'Try to autodetect Shipping IDs from %s', 'order-minimum-amount-for-woocommerce' ), '<code>WC_Shipping::load_shipping_methods()</code>' ),
 						'id'      => 'alg_wc_oma_by_shipping_sc_auto_detect',
 						'default' => 'no',
 						'type'    => 'checkbox',
@@ -173,6 +174,16 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Shipping' ) ) :
 				) );
 			}
 
+			// Notes.
+			/* translators: %1$s: option name, %2$s: section link */
+			$note_enable_block = sprintf( __( 'Enable "%1$s" option in %2$s section.', 'order-minimum-amount-for-woocommerce' ), __( 'Block checkout page', 'order-minimum-amount-for-woocommerce' ), $this->get_section_link( 'general' ) );
+			/* translators: %1$s: option name, %2$s: section link */
+			$note_disable_notices = sprintf( __( 'Disable "%1$s" option in %2$s section.', 'order-minimum-amount-for-woocommerce' ), __( 'Checkout notices', 'order-minimum-amount-for-woocommerce' ), $this->get_section_link( 'messages' ) );
+			/* translators: %1$s: option name, %2$s: example position */
+			$note_optional_positions = sprintf( __( 'You can also optionally set "%1$s" option there to e.g. "%2$s" or any other position that is updated automatically when user changes shipping method or zone.', 'order-minimum-amount-for-woocommerce' ), __( 'Additional positions', 'order-minimum-amount-for-woocommerce' ), __( 'Order review: Payment: Before submit button', 'order-minimum-amount-for-woocommerce' ) );
+			/* translators: %1$s: option names, %2$s: section link */
+			$note_keep_disabled = sprintf( __( 'You\'ll probably want to keep %1$s options (in %2$s section) disabled, so your customer would have a chance to change shipping method on exceeded amounts.', 'order-minimum-amount-for-woocommerce' ), '<strong>' . implode( '</strong>, <strong>', array( __( 'Validate on add to cart', 'order-minimum-amount-for-woocommerce' ), __( 'Hide "add to cart" button', 'order-minimum-amount-for-woocommerce' ) ) ) . '</strong>', $this->get_section_link( 'general' ) );
+
 			$notes = array(
 				array(
 					'title' => __( 'Good to know', 'order-minimum-amount-for-woocommerce' ),
@@ -182,25 +193,16 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Shipping' ) ) :
 						__( 'you could try these solutions:', 'order-minimum-amount-for-woocommerce' ) . ' ' .
 						'<ol>' .
 						'<li>' .
-						sprintf( __( 'Enable "%s" option in %s section.', 'order-minimum-amount-for-woocommerce' ),
-							__( 'Block checkout page', 'order-minimum-amount-for-woocommerce' ), $this->get_section_link( 'general' ) ) . ' ' .
+						$note_enable_block . ' ' .
 						__( 'This way, the customer will never reach the checkout page, and instead he will be seeing the notices on the cart page (which are working normally).', 'order-minimum-amount-for-woocommerce' ) .
 						'</li>' .
 						'<li>' .
-						sprintf( __( 'Disable "%s" option in %s section.', 'order-minimum-amount-for-woocommerce' ),
-							__( 'Checkout notices', 'order-minimum-amount-for-woocommerce' ), $this->get_section_link( 'messages' ) ) . ' ' .
+						$note_disable_notices . ' ' .
 						__( 'This way, if order amount will be wrong, the customer will see the correct notice when he will click "Place order" button.', 'order-minimum-amount-for-woocommerce' ) . '<br>' .
-						sprintf( __( 'You can also optionally set "%s" option there to e.g. "%s" or any other position that is updated automatically when user changes shipping method or zone.', 'order-minimum-amount-for-woocommerce' ),
-							__( 'Additional positions', 'order-minimum-amount-for-woocommerce' ),
-							__( 'Order review: Payment: Before submit button', 'order-minimum-amount-for-woocommerce' ) ) .
+						$note_optional_positions .
 						'</li>' .
 						'</ol>',
-						sprintf( __( 'You\'ll probably want to keep %s options (in %s section) disabled, so your customer would have a chance to change shipping method on exceeded amounts.', 'order-minimum-amount-for-woocommerce' ),
-							'<strong>' . implode( '</strong>, <strong>', array(
-								__( 'Validate on add to cart', 'order-minimum-amount-for-woocommerce' ) . '</strong>',
-								__( 'Hide "add to cart" button', 'order-minimum-amount-for-woocommerce' ) . '</strong>',
-							) ) . '</strong>',
-							$this->get_section_link( 'general' ) ),
+						$note_keep_disabled,
 					) ),
 					'type'  => 'title',
 					'id'    => 'alg_wc_oma_shipping_notes',

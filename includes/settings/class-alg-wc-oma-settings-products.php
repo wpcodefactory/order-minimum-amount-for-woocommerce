@@ -45,8 +45,11 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Products' ) ) :
 				array(
 					'title'             => __( 'Per product', 'order-minimum-amount-for-woocommerce' ),
 					'desc'              => '<strong>' . __( 'Enable', 'order-minimum-amount-for-woocommerce' ) . '</strong>',
-					'desc_tip'          => sprintf( __( 'This will add new meta box to each %s edit page.', 'order-minimum-amount-for-woocommerce' ),
-						'<a target="_blank" href="' . admin_url( 'edit.php?post_type=product' ) . '">' . __( 'product', 'order-minimum-amount-for-woocommerce' ) . '</a>' ),
+		'desc_tip'          => sprintf(
+			/* translators: %s: admin URL link to products edit page */
+			__( 'This will add new meta box to each %s edit page.', 'order-minimum-amount-for-woocommerce' ),
+			'<a target="_blank" href="' . admin_url( 'edit.php?post_type=product' ) . '">' . __( 'product', 'order-minimum-amount-for-woocommerce' ) . '</a>'
+		),
 					'id'                => 'alg_wc_oma_per_product_enabled',
 					'default'           => 'no',
 					'type'              => 'checkbox',
@@ -64,9 +67,12 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Products' ) ) :
 				array(
 					'title'             => __( 'Per product category', 'order-minimum-amount-for-woocommerce' ),
 					'desc'              => '<strong>' . __( 'Enable', 'order-minimum-amount-for-woocommerce' ) . '</strong>',
-					'desc_tip'          => sprintf( __( 'This will add new settings fields to each %s edit page.', 'order-minimum-amount-for-woocommerce' ),
-						'<a target="_blank" href="' . admin_url( 'edit-tags.php?taxonomy=product_cat&post_type=product' ) . '">' . __( 'product category', 'order-minimum-amount-for-woocommerce' ) . '</a>' ),
-					'id'                => 'alg_wc_oma_per_product_cat_enabled',
+		'desc_tip'          => sprintf(
+			/* translators: %s: admin URL link to product categories edit page */
+			__( 'This will add new settings fields to each %s edit page.', 'order-minimum-amount-for-woocommerce' ),
+			'<a target="_blank" href="' . admin_url( 'edit-tags.php?taxonomy=product_cat&post_type=product' ) . '">' . __( 'product category', 'order-minimum-amount-for-woocommerce' ) . '</a>'
+		),
+				'id'                => 'alg_wc_oma_per_product_cat_enabled',
 					'default'           => 'no',
 					'type'              => 'checkbox',
 					'custom_attributes' => apply_filters( 'alg_wc_oma_settings', array( 'disabled' => 'disabled' ) ),
@@ -74,9 +80,12 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Products' ) ) :
 				array(
 					'title'             => __( 'Per product tag', 'order-minimum-amount-for-woocommerce' ),
 					'desc'              => '<strong>' . __( 'Enable', 'order-minimum-amount-for-woocommerce' ) . '</strong>',
-					'desc_tip'          => sprintf( __( 'This will add new settings fields to each %s edit page.', 'order-minimum-amount-for-woocommerce' ),
-						'<a target="_blank" href="' . admin_url( 'edit-tags.php?taxonomy=product_tag&post_type=product' ) . '">' . __( 'product tag', 'order-minimum-amount-for-woocommerce' ) . '</a>' ),
-					'id'                => 'alg_wc_oma_per_product_tag_enabled',
+		'desc_tip'          => sprintf(
+			/* translators: %s: admin URL link to product tags edit page */
+			__( 'This will add new settings fields to each %s edit page.', 'order-minimum-amount-for-woocommerce' ),
+			'<a target="_blank" href="' . admin_url( 'edit-tags.php?taxonomy=product_tag&post_type=product' ) . '">' . __( 'product tag', 'order-minimum-amount-for-woocommerce' ) . '</a>'
+		),
+				'id'                => 'alg_wc_oma_per_product_tag_enabled',
 					'default'           => 'no',
 					'type'              => 'checkbox',
 					'custom_attributes' => apply_filters( 'alg_wc_oma_settings', array( 'disabled' => 'disabled' ) ),

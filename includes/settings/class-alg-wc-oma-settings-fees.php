@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Fees Settings.
  *
- * @version 4.6.6
+ * @version 4.7.4
  * @since   4.1.1
  *
  * @author  WPFactory
@@ -31,22 +31,32 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Fees' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 4.6.6
+		 * @version 4.7.4
 		 * @since   4.1.1
 		 */
 		function get_settings() {
+			$fees_desc_note = sprintf(
+				/* translators: %1$s: Block checkout option name, %2$s: General > Checkout settings link */
+				__( 'If you don\'t want to block the orders, you should also <strong>disable</strong> the %1$s options from the %2$s settings.', 'order-minimum-amount-for-woocommerce' ),
+				'<strong>"' . __( 'Block checkout', 'order-minimum-amount-for-woocommerce' ) . '"</strong>',
+				'<strong><a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_oma' ) . '">' . __( 'General > Checkout options', 'order-minimum-amount-for-woocommerce' ) . '</a></strong>'
+			);
+
 			$fees_general_opts = array(
 				array(
 					'title' => __( 'Fees options', 'order-minimum-amount-for-woocommerce' ),
-					'desc'  => __( 'Here you can set fees for each limit reached.', 'order-minimum-amount-for-woocommerce' ) . ' ' .
-					           sprintf( __( 'If you don\'t want to block the orders, you should also <strong>disable</strong> the %s options from the %s settings.', 'order-minimum-amount-for-woocommerce' ), '<strong>"' . __( 'Block checkout', 'order-minimum-amount-for-woocommerce' ) . '"</strong>', '<strong><a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_oma' ) . '">' . __( 'General > Checkout options', 'order-minimum-amount-for-woocommerce' ) . '</a></strong>' ),
+					'desc'  => __( 'Here you can set fees for each limit reached.', 'order-minimum-amount-for-woocommerce' ) . ' ' . $fees_desc_note,
 					'type'  => 'title',
 					'id'    => 'alg_wc_oma_fees_options',
 				),
 				array(
 					'title'             => __( 'Fees', 'order-minimum-amount-for-woocommerce' ),
 					'desc'              => '<strong>' . __( 'Enable section', 'order-minimum-amount-for-woocommerce' ) . '</strong>',
-					'desc_tip'          => sprintf( __( 'If enabled, there will be a new placeholder available on the <strong>messages</strong> section: %s', 'order-minimum-amount-for-woocommerce' ), '<code>%fee_amount%</code>' ),
+					/* translators: %s: placeholder code */
+					'desc_tip'          => sprintf(
+						__( 'If enabled, there will be a new placeholder available on the <strong>messages</strong> section: %s', 'order-minimum-amount-for-woocommerce' ),
+						'<code>%fee_amount%</code>'
+					),
 					'id'                => 'alg_wc_oma_add_fee_for_each_limit',
 					'default'           => 'no',
 					'custom_attributes' => apply_filters( 'alg_wc_oma_settings', array( 'disabled' => 'disabled' ) ),
@@ -55,7 +65,11 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Fees' ) ) :
 				array(
 					'title'    => __( 'Ignore fees for sum calculation', 'order-minimum-amount-for-woocommerce' ),
 					'desc'     => __( 'Ignore fees from this section on cart total calculation for the "Sum" type', 'order-minimum-amount-for-woocommerce' ),
-					'desc_tip' => sprintf( __( 'Only noticeable if %s option is disabled.', 'order-minimum-amount-for-woocommerce' ), '"' . __( 'Sum Amount Type options > Exclude fees', 'order-minimum-amount-for-woocommerce' ) . '"' ),
+					/* translators: %s: option name in quotes */
+					'desc_tip' => sprintf(
+						__( 'Only noticeable if %s option is disabled.', 'order-minimum-amount-for-woocommerce' ),
+						'"' . __( 'Sum Amount Type options > Exclude fees', 'order-minimum-amount-for-woocommerce' ) . '"'
+					),
 					'id'       => 'alg_wc_oma_ignore_fees_for_sum_type',
 					'default'  => 'yes',
 					'type'     => 'checkbox',
@@ -70,7 +84,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Fees' ) ) :
 				),
 				array(
 					'desc'     => __( 'Tax class.', 'order-minimum-amount-for-woocommerce' ),
-					'desc_tip' => __( '', 'order-minimum-amount-for-woocommerce' ),
+					'desc_tip' => __( 'Tax class for the fee.', 'order-minimum-amount-for-woocommerce' ),
 					'id'       => 'alg_wc_oma_fee_tax_class',
 					'default'  => 'standard',
 					'type'     => 'text',
@@ -116,8 +130,17 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Fees' ) ) :
 
 			// Notes.
 			$notes[] = __( 'If you don\'t want to block the orders, you should also <strong>disable</strong> the <strong>"Block checkout"</strong> options from the <strong>"General > Checkout options"</strong> settings.', 'order-minimum-amount-for-woocommerce' );
-			$notes[] = sprintf( __( 'If the taxes options are enabled, you might want to enable %s on %s section.', 'order-minimum-amount-for-woocommerce' ), '<strong>'.__( 'Exclude fees' ).'</strong>', '<a href="'.admin_url('admin.php?page=wc-settings&tab=alg_wc_oma#alg_wc_oma_type_sum_options-description').'">' . __( '"Sum" Amount Type options' ) . '</a>' );
-			$notes[] = sprintf( __( 'If this section is enabled, there will be a new placeholder available on the <strong>messages</strong> section: %s.', 'order-minimum-amount-for-woocommerce' ), '<code>%fee_amount%</code>' );
+			$notes[] = sprintf(
+				/* translators: %1$s: Exclude fees option, %2$s: Sum Amount Type options link */
+				__( 'If the taxes options are enabled, you might want to enable %1$s on %2$s section.', 'order-minimum-amount-for-woocommerce' ),
+				'<strong>' . __( 'Exclude fees', 'order-minimum-amount-for-woocommerce' ) . '</strong>',
+				'<a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_oma#alg_wc_oma_type_sum_options-description' ) . '">' . __( '"Sum" Amount Type options', 'order-minimum-amount-for-woocommerce' ) . '</a>'
+			);
+			/* translators: %s: placeholder code */
+			$notes[] = sprintf(
+				__( 'If this section is enabled, there will be a new placeholder available on the <strong>messages</strong> section: %s.', 'order-minimum-amount-for-woocommerce' ),
+				'<code>%fee_amount%</code>'
+			);
 			$notes[] = __( 'If you want to disable some fee, set the amount as zero or leave it empty.', 'order-minimum-amount-for-woocommerce' );
 
 			$notes_settings = array(

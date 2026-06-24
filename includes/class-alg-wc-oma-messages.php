@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Messages.
  *
- * @version 4.6.1
+ * @version 4.7.4
  * @since   4.0.4
  *
  * @author  WPFactory
@@ -57,27 +57,28 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * get_ajax_notices_on_block_cart_change.
 		 *
-		 * @version 4.5.0
+		 * @version 4.7.4
 		 * @since   4.4.6
 		 *
 		 * @return void
 		 */
 		public function get_ajax_notices_on_block_cart_change() {
+			check_ajax_referer( 'alg_wc_oma_block_cart_nonce', 'nonce' );
 			$args           = wp_parse_args(
-					$_POST,
-					array(
-							'wc_page_origin' => 'cart',
-							'payment_method' => '',
-							'cart'           => '',
-					)
+				$_POST,
+				array(
+					'wc_page_origin' => 'cart',
+					'payment_method' => '',
+					'cart'           => '',
+				)
 			);
 			$messages_areas = $this->get_enabled_message_areas();
 			$wc_page_origin = $args['wc_page_origin'];
 			$cart           = $args['cart'];
 			$payment_method = sanitize_text_field( $args['payment_method'] );
 			if (
-					in_array( $wc_page_origin, $messages_areas, true ) &&
-					in_array( "woocommerce_blocks_{$wc_page_origin}_enqueue_data", get_option( "alg_wc_oma_{$wc_page_origin}_area_message_positions", $this->get_message_default_positions( $wc_page_origin ) ), true )
+				in_array( $wc_page_origin, $messages_areas, true ) &&
+				in_array( "woocommerce_blocks_{$wc_page_origin}_enqueue_data", get_option( "alg_wc_oma_{$wc_page_origin}_area_message_positions", $this->get_message_default_positions( $wc_page_origin ) ), true )
 			) {
 
 				// Force payment method setting.
@@ -88,10 +89,10 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 				// Check for limits.
 				do_action( 'alg_wc_oma_check_notices_on_block_cart_change' );
 				$this->display_dynamic_message(
-						array(
-								'area' => $wc_page_origin,
-								'func' => 'wc_add_notice',
-						)
+					array(
+						'area' => $wc_page_origin,
+						'func' => 'wc_add_notice',
+					)
 				);
 				wc_print_notices();
 			}
@@ -113,6 +114,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 			$php_to_js = array(
 				'action'           => 'alg_wc_oma_get_block_cart_notices',
 				'ajax_url'         => admin_url( 'admin-ajax.php' ),
+				'nonce'            => wp_create_nonce( 'alg_wc_oma_block_cart_nonce' ),
 				'wrapper_selector' => '.wp-block-woocommerce-cart,.wp-block-woocommerce-checkout', // Place where the notices will be appended to.
 				'removal_selector' => array(
 					'notices'        => '.wc-block-components-notice-banner,.woocommerce-info,.woocommerce-error,.woocommerce-message', // Notices that will be removed.
@@ -126,6 +128,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 					document.addEventListener( 'alg_wc_oma_cart_block_update', function ( e ) {
 						$.post( data.ajax_url, {
 							action: data.action,
+							nonce: data.nonce,
 							wc_page_origin: e.detail.wcPageOrigin,
 							payment_method: e.detail.paymentMethod,
 							cart: e.detail.cart,
@@ -207,6 +210,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 							previousPaymentMethod = activePaymentMethod;
 						}
 					}
+
 					onCartChange();
 				} )();
 			</script>
@@ -243,15 +247,14 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * Force checkout notice refresh.
 		 *
-		 * @version 4.1.2
+		 * @version 4.7.4
 		 * @since   4.0.5
-		 *
 		 */
 		function force_checkout_notice_refresh() {
 			if (
 				'yes' === get_option( 'alg_wc_oma_checkout_force_refresh', 'no' ) &&
-				isset( $_REQUEST['wc-ajax'] ) &&
-				'update_order_review' == $_REQUEST['wc-ajax'] &&
+				isset( $_REQUEST['wc-ajax'] ) && // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				'update_order_review' == $_REQUEST['wc-ajax'] && // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				get_option( 'alg_wc_oma_checkout_force_refresh_hook', 'woocommerce_review_order_after_order_total' ) === current_filter()
 			) {
 				$this->display_dynamic_message( array(
@@ -317,7 +320,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 				)
 			);
 			if ( false === $func ) {
-				echo $output;
+				echo $output; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			}
 		}
 
@@ -384,7 +387,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * get_notices.
 		 *
-		 * @version 4.5.6
+		 * @version 4.7.4
 		 * @since   3.2.0
 		 *
 		 * @param   null  $args
@@ -392,22 +395,18 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		 * @return mixed
 		 */
 		function get_notices( $args = null ) {
-			$args                       = wp_parse_args( $args, array(
+			$args                         = wp_parse_args( $args, array(
 				'area'                       => 'cart',
 				'get_only_first_flat_notice' => false,
 				'limits'                     => false,
 				'types'                      => false,
-				'from_rest_api'              => false,
-				'order'                      => null,
 			) );
-			$area                       = $args['area'];
-			$limits                     = $args['limits'];
-			$types                      = $args['types'];
-			$from_rest_api              = $args['from_rest_api'];
-			$order                      = $args['order'];
-			$get_only_first_flat_notice = $args['get_only_first_flat_notice'];
-			$result                     = array();
-			$category_total             = array();
+			$area                         = $args['area'];
+			$limits                       = $args['limits'];
+			$types                        = $args['types'];
+			$get_only_first_flat_notice   = $args['get_only_first_flat_notice'];
+			$result                       = array();
+			$category_total               = array();
 			$alg_wc_oma_msg_force_display = 'yes' === get_option( 'alg_wc_oma_msg_force_display', 'no' );
 			// Check amounts
 			foreach ( alg_wc_oma()->core->get_enabled_amount_limits( $limits ) as $min_or_max ) {
@@ -419,18 +418,10 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 							 ( 'yes' === $display_on_empty_cart )
 						 )
 					) {
-						if ( ! $from_rest_api ) {
-							$total = alg_wc_oma()->core->amounts->get_cart_total( array(
-								'type'       => $amount_type,
-								'limit_type' => $min_or_max
-							) );
-						} else {
-							$total = alg_wc_oma()->core->amounts->get_cart_total_rest_api( array(
-								'type'       => $amount_type,
-								'limit_type' => $min_or_max,
-								'order'      => $order
-							) );
-						}
+						$total = alg_wc_oma()->core->amounts->get_cart_total( array(
+							'type'       => $amount_type,
+							'limit_type' => $min_or_max
+						) );
 
 						if ( ! $alg_wc_oma_msg_force_display ) {
 							$result[ $min_or_max ][ $amount_type ][''] = ( ! alg_wc_oma()->core->check_min_max_amount( $min_or_max, $amount_type, $amount_data['amount'], $total ) ?
@@ -444,9 +435,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 			}
 
 			// Filter
-			if ( ! ( $from_rest_api && $order !== null ) ) {
-				$result = apply_filters( 'alg_wc_oma_after_get_notices', $result, $area, $limits, $types );
-			}
+			$result = apply_filters( 'alg_wc_oma_after_get_notices', $result, $area, $limits, $types );
 
 			// "Require all"
 			$result = $raw_result = alg_wc_oma()->core->process_require_all_option( $result );
@@ -583,15 +572,27 @@ if ( ! class_exists( 'Alg_WC_OMA_Messages' ) ) :
 		/**
 		 * get_default_message.
 		 *
-		 * @version 4.0.8
+		 * @version 4.7.4
 		 * @since   3.0.0
 		 *
 		 * @todo    add more sources: `user`, `user_role`, `membership`?
 		 */
 		function get_default_message( $min_or_max, $scope = '', $source = '', $amount_type = '' ) {
+			if ( 'min' === $min_or_max ) {
+				/* translators: %s: "minimum" */
+				$min_or_max_text = __( 'minimum', 'order-minimum-amount-for-woocommerce' );
+			} else {
+				/* translators: %s: "maximum" */
+				$min_or_max_text = __( 'maximum', 'order-minimum-amount-for-woocommerce' );
+			}
+			$default_message = sprintf(
+			/* translators: %s: "minimum" or "maximum" */
+				__( 'You must have an order with a %s of %%amount%% to place your order, your current order total is %%total%%.', 'order-minimum-amount-for-woocommerce' ),
+				$min_or_max_text
+			);
+
 			return apply_filters( 'alg_wc_oma_get_default_message',
-				sprintf( __( 'You must have an order with a %s of %%amount%% to place your order, your current order total is %%total%%.', 'order-minimum-amount-for-woocommerce' ),
-					( 'min' === $min_or_max ? __( 'minimum', 'order-minimum-amount-for-woocommerce' ) : __( 'maximum', 'order-minimum-amount-for-woocommerce' ) ) ),
+				$default_message,
 				$min_or_max,
 				$scope,
 				$source,

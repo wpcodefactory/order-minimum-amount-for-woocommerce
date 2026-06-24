@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Core Class.
  *
- * @version 4.7.2
+ * @version 4.7.4
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -49,7 +49,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 		/**
 		 * add_hooks.
 		 *
-		 * @version 4.7.2
+		 * @version 4.7.4
 		 * @since   1.0.0
 		 */
 		function add_hooks() {
@@ -61,10 +61,6 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 				add_action( 'woocommerce_after_checkout_validation', array( $this, 'check_checkout_notices' ), 10, 2 );
 				add_action( 'woocommerce_review_order_after_shipping', array( $this, 'checkout_process_notices' ), 10 );
 				add_action( 'woocommerce_before_checkout_form', array( $this, 'checkout_process_notices' ) );
-				if ( 'yes' === get_option( 'alg_wc_oma_block_store_api', 'no' ) ) {
-					add_action( 'woocommerce_store_api_checkout_order_processed', array( $this, 'checkout_process_notices' ) );
-					add_filter( 'woocommerce_rest_pre_insert_shop_order_object', array( $this, 'checkout_process_notices_rest_api' ), 10, 3 );
-				}
 			}
 			// Checkout: Block page
 			add_action( 'wp', array( $this, 'block_checkout' ), PHP_INT_MAX );
@@ -91,10 +87,6 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 					add_action( 'wp_footer', array( $this, 'hide_variation_add_to_cart_single' ), PHP_INT_MAX );
 				}
 			}
-			// Login requirement.
-			add_filter( 'alg_wc_oma_get_notices', array( $this, 'wipe_notices_if_login_requirement_is_enabled' ), 10 );
-			add_filter( 'wp', array( $this, 'display_login_requirement_notice' ), 10, 4 );
-
 			// Disable "Proceed to checkout" button on cart page.
 			add_filter( 'woocommerce_update_cart_action_cart_updated', array( $this, 'set_cookie_on_cart_updated' ) );
 			add_action( 'wp', array( $this, 'set_cookie_on_cart' ) );
@@ -111,7 +103,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 		/**
 		 * display_cart_block_notices_as_errors.
 		 *
-		 * @version 4.7.2
+		 * @version 4.7.4
 		 * @since   4.7.2
 		 *
 		 * @param $cart_errors
@@ -126,7 +118,6 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 				! empty( $notices = $this->messages->get_notices( array(
 					'area'                       => 'cart',
 					'get_only_first_flat_notice' => 'no' === get_option( 'alg_wc_oma_display_multiple_msg', 'yes' ),
-					'from_rest_api'              => false,
 				) )['flat_notices'] )
 			) {
 				foreach ( $notices as $k => $notice ) {
@@ -195,14 +186,14 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 		/**
 		 * Set cookie if there is any notices in cart page.
 		 *
-		 * @version 4.2.4
+		 * @version 4.7.4
 		 * @since   4.1.2
 		 */
 		function set_cookie_on_cart() {
-			if (
-				is_cart() ||
-				( isset( $_REQUEST['wc-ajax'] ) && 'get_refreshed_fragments' === $_REQUEST['wc-ajax'] )
-			) {
+		if (
+			is_cart() ||
+			( isset( $_REQUEST['wc-ajax'] ) && 'get_refreshed_fragments' === $_REQUEST['wc-ajax'] ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		) {
 				$this->set_cookie_if_has_notices();
 			}
 		}
@@ -287,46 +278,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 			<?php
 		}
 
-		/**
-		 * display_login_requirement_notice.
-		 *
-		 * @version 4.0.9
-		 * @since   4.0.9
-		 */
-		function display_login_requirement_notice() {
-			if (
-				'yes' === get_option( 'alg_wc_oma_login_requirement_enabled', 'no' ) &&
-				! is_user_logged_in() &&
-				! empty( $conditions = apply_filters( 'alg_wc_oma_login_requirement_display_conditions', array( 'is_cart', 'is_checkout' ) ) ) &&
-				in_array( true, array_map( function ( $condition ) {
-					return function_exists( $condition ) && call_user_func( $condition );
-				}, $conditions ) )
-			) {
-				$notice_content = get_option( 'alg_wc_oma_login_requirement_notice_msg', __( 'Please login to access the min/max requirements for your order.', 'order-minimum-amount-for-woocommerce' ) );
-				$notice_type    = get_option( 'alg_wc_oma_login_requirement_notice_type', 'error' );
-				wc_add_notice( $notice_content, $notice_type );
-			}
-		}
 
-		/**
-		 * wipe_notices_if_login_requirement_is_enabled.
-		 *
-		 * @version 4.1.1
-		 * @since   4.0.9
-		 *
-		 * @param $info
-		 *
-		 * @return array
-		 */
-		function wipe_notices_if_login_requirement_is_enabled( $info ) {
-			if (
-				'yes' === get_option( 'alg_wc_oma_login_requirement_enabled', 'no' ) &&
-				! is_user_logged_in()
-			) {
-				$info['flat_notices'] = array();
-			}
-			return $info;
-		}
 
 		/**
 		 * add_shipping_script.
@@ -741,33 +693,6 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 		}
 
 		/**
-		 * checkout_process_notices_rest_api.
-		 *
-		 * @version 4.3.2
-		 * @since   4.3.2
-		 *
-		 * @param $order
-		 * @param $request
-		 * @param $creating
-		 *
-		 * @return mixed|WP_Error
-		 */
-		function checkout_process_notices_rest_api( $order, $request, $creating ) {
-			
-			if ( ! empty( $notice = $this->messages->get_notices( array(
-				'area'                       => 'cart',
-				'get_only_first_flat_notice' => true,
-				'from_rest_api' 			 => true,
-				'order' 					 => $order
-			) )['flat_notices'] ) ) {
-				/*return new WP_Error( 'alg_wc_oma_error', $notice[0], array( 'status' => 400 ) );*/
-				throw new WC_REST_Exception( 'alg_wc_oma_error', $notice[0], 400 );
-			}
-
-			return $order;
-		}
-
-		/**
 		 * block_checkout.
 		 *
 		 * @version 4.3.2
@@ -900,15 +825,15 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 		/**
 		 * get_all_user_roles.
 		 *
-		 * @version 4.3.5
+		 * @version 4.7.4
 		 * @since   1.0.0
 		 */
 		function get_all_user_roles( $do_rearrange = false ) {
 			global $wp_roles;
 			$get_user_roles_method = get_option( 'alg_wc_oma_get_user_roles_method', 'editable_roles' );
 			$roles                 = ( isset( $wp_roles ) && is_object( $wp_roles ) ? $wp_roles->roles : array() );
-			if ( 'editable_roles' === $get_user_roles_method ) {
-				$roles = apply_filters( 'editable_roles', $roles );
+		if ( 'editable_roles' === $get_user_roles_method ) {
+			$roles = apply_filters( 'editable_roles', $roles ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 			}
 			$roles = wp_list_pluck( $roles, 'name' );
 			$roles = array_merge( array( 'guest' => __( 'Guest', 'order-minimum-amount-for-woocommerce' ) ), $roles );
@@ -936,17 +861,23 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 		/**
 		 * get_title.
 		 *
-		 * @version 4.0.0
+		 * @version 4.7.4
 		 * @since   3.0.0
 		 */
 		function get_title( $min_or_max, $amount_type, $desc = array(), $do_strip_tags = false ) {
-			$title = sprintf( ( 'min' === $min_or_max ? __( 'Min %s', 'order-minimum-amount-for-woocommerce' ) : __( 'Max %s', 'order-minimum-amount-for-woocommerce' ) ),
-				$this->amounts->get_title( $amount_type ) );
+		if ( 'min' === $min_or_max ) {
+			/* translators: %s: amount type title (e.g., "sum", "quantity") */
+			$format = __( 'Min %s', 'order-minimum-amount-for-woocommerce' );
+		} else {
+			/* translators: %s: amount type title (e.g., "sum", "quantity") */
+			$format = __( 'Max %s', 'order-minimum-amount-for-woocommerce' );
+		}
+		$title = sprintf( $format, $this->amounts->get_title( $amount_type ) );
 			$desc  = array_filter( $desc );
 			if ( ! empty( $desc ) ) {
 				$title .= ' [' . implode( '] [', $desc ) . ']';
 			}
-			return ( $do_strip_tags ? strip_tags( $title ) : $title );
+		return ( $do_strip_tags ? wp_strip_all_tags( $title ) : $title );
 		}
 
 		/**
@@ -996,12 +927,15 @@ if ( ! class_exists( 'Alg_WC_OMA_Core' ) ) :
 		/**
 		 * get_amounts_desc.
 		 *
-		 * @version 4.0.0
+		 * @version 4.7.4
 		 * @since   3.1.0
 		 */
 		function get_amounts_desc() {
-			return sprintf( __( 'Amount is <strong>ignored</strong> if set to zero (%s), i.e. next level (e.g. "General") amount will be applied.', 'order-minimum-amount-for-woocommerce' ), '<code>0</code>' ) . ' ' .
-			       sprintf( __( '<strong>No amount</strong> (i.e. no limit) will be applied if set to a negative value (e.g. %s).', 'order-minimum-amount-for-woocommerce' ), '<code>-1</code>' );
+		/* translators: %s: <code>0</code> */
+		$ignored_text = __( 'Amount is <strong>ignored</strong> if set to zero (%s), i.e. next level (e.g. "General") amount will be applied.', 'order-minimum-amount-for-woocommerce' );
+		/* translators: %s: <code>-1</code> */
+		$no_limit_text = __( '<strong>No amount</strong> (i.e. no limit) will be applied if set to a negative value (e.g. %s).', 'order-minimum-amount-for-woocommerce' );
+		return sprintf( $ignored_text, '<code>0</code>' ) . ' ' . sprintf( $no_limit_text, '<code>-1</code>' );
 		}
 
 		/**

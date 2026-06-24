@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Messages Section Settings.
  *
- * @version 4.7.0
+ * @version 4.7.4
  * @since   1.2.0
  *
  * @author  WPFactory
@@ -146,7 +146,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Messages' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 4.7.0
+		 * @version 4.7.4
 		 * @since   1.2.0
 		 *
 		 * @todo    add optional "Message on requirements met"
@@ -193,7 +193,9 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Messages' ) ) :
 			$dynamic_settings      = array();
 			$dynamic_settings_info = alg_wc_oma()->core->messages->get_messages_info();
 			foreach ( $dynamic_settings_info as $area => $area_settings ) {
-				$title            = $area_settings['title'];
+				$title = $area_settings['title'];
+				/* translators: %s: area title (e.g. "Cart", "Checkout") */
+				$notice_title = sprintf( __( '%s notices', 'order-minimum-amount-for-woocommerce' ), $title );
 				$dynamic_settings = array_merge( $dynamic_settings, array(
 					array(
 						'title' => $title,
@@ -201,7 +203,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Messages' ) ) :
 						'id'    => "alg_wc_oma_message_content_{$area}_options",
 					),
 					array(
-						'title'   => sprintf( __( '%s notices', 'order-minimum-amount-for-woocommerce' ), $title ),
+						'title'   => $notice_title,
 						'desc'    => '<strong>' . __( 'Enable', 'order-minimum-amount-for-woocommerce' ) . '</strong>',
 						'id'      => "alg_wc_oma_{$area}_notice_enabled",
 						'default' => 'no',
@@ -210,12 +212,11 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Messages' ) ) :
 					$this->get_notice_type_setting( $area, $area_settings ),
 					array(
 						'title'   => __( 'Positions', 'order-minimum-amount-for-woocommerce' ),
-						//'id'      => "alg_wc_oma_message_positions_{$setting_key}",
 						'id'      => "alg_wc_oma_{$area}_area_message_positions",
 						'default' => alg_wc_oma()->core->messages->get_message_default_positions( $area ),
 						'type'    => 'multiselect',
 						'class'   => 'chosen_select',
-						'options' => $area_settings['positions']
+						'options' => $area_settings['positions'],
 					),
 				) );
 
@@ -250,6 +251,16 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Messages' ) ) :
 				) );
 			}
 
+			/* translators: %s: comma-separated list of placeholder codes */
+			$format_amounts_tip = sprintf( __( 'Affects %s placeholders.', 'order-minimum-amount-for-woocommerce' ),
+				'<code>' . implode( '</code>, <code>', array( '%amount%', '%total%', '%diff%' ) ) . '</code>' );
+
+			/* translators: %1$s: option name, %2$s: settings page link */
+			$remove_notices_tip = sprintf( __( 'This is useful if you have checked "%1$s" option in %2$s and there are cross-sells products available on the cart page.', 'order-minimum-amount-for-woocommerce' ),
+				__( 'Enable AJAX add to cart buttons on archives', 'order-minimum-amount-for-woocommerce' ),
+				'<a target="_blank" href="' . admin_url( 'admin.php?page=wc-settings&tab=products' ) . '">' .
+				__( 'WooCommerce > Settings > Products', 'order-minimum-amount-for-woocommerce' ) . '</a>' );
+
 			$advanced_settings = array(
 				array(
 					'title' => __( 'Advanced Options', 'order-minimum-amount-for-woocommerce' ),
@@ -259,8 +270,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Messages' ) ) :
 				array(
 					'title'    => __( 'Format amounts', 'order-minimum-amount-for-woocommerce' ),
 					'desc'     => __( 'Enable', 'order-minimum-amount-for-woocommerce' ),
-					'desc_tip' => sprintf( __( 'Affects %s placeholders.', 'order-minimum-amount-for-woocommerce' ),
-						'<code>' . implode( '</code>, <code>', array( '%amount%', '%total%', '%diff%' ) ) . '</code>' ),
+					'desc_tip' => $format_amounts_tip,
 					'type'     => 'checkbox',
 					'id'       => 'alg_wc_oma_message_format_types_enabled',
 					'default'  => 'yes',
@@ -277,11 +287,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Messages' ) ) :
 				array(
 					'title'    => __( 'Remove old notices', 'order-minimum-amount-for-woocommerce' ),
 					'desc_tip' => __( 'Will remove old WooCommerce notices on AJAX add to cart.', 'order-minimum-amount-for-woocommerce' ) . ' ' .
-					              sprintf( __( 'This is useful if you have checked "%s" option in %s and there are cross-sells products available on the cart page.', 'order-minimum-amount-for-woocommerce' ),
-						              __( 'Enable AJAX add to cart buttons on archives', 'order-minimum-amount-for-woocommerce' ),
-						              '<a target="_blank" href="' . admin_url( 'admin.php?page=wc-settings&tab=products' ) . '">' .
-						              __( 'WooCommerce > Settings > Products', 'order-minimum-amount-for-woocommerce' ) .
-						              '</a>' ),
+					              $remove_notices_tip,
 					'desc'     => __( 'Remove', 'order-minimum-amount-for-woocommerce' ),
 					'type'     => 'checkbox',
 					'id'       => 'alg_wc_oma_remove_notices_on_added_to_cart',
@@ -296,17 +302,20 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Messages' ) ) :
 			$notes        = array();
 			$placeholders = array( '%amount%', '%total%', '%diff%', '%amount_raw%', '%total_raw%', '%diff_raw%' );
 			$placeholders = 'yes' === get_option( 'alg_wc_oma_add_fee_for_each_limit', 'no' ) ? array_merge( $placeholders, array( '%fee_amount%' ) ) : $placeholders;
+			/* translators: %s: comma-separated list of placeholder codes */
 			$notes[]      = sprintf( __( 'Available placeholders: %s', 'order-minimum-amount-for-woocommerce' ),
 				'<div style="padding: 0px 0px 15px;">' .
 				'<code>' . implode( '</code>, <code>', $placeholders ) . '</code>' .
 				'</div>' );
 
 			if ( array() != apply_filters( 'alg_wc_oma_enabled_scopes', array() ) ) {
+				/* translators: %s: comma-separated list of placeholder codes */
 				$notes[] = sprintf( __( 'For "Per product" you can also use these additional placeholders: %s', 'order-minimum-amount-for-woocommerce' ),
 					'<div style="padding: 0 0 15px;">' .
 					'<code>' . implode( '</code>, <code>', array( '%product_title%' ) ) . '</code>' .
 					'</div>' );
 
+				/* translators: %s: comma-separated list of placeholder codes */
 				$notes[] = sprintf( __( 'For "Per product category" and "Per product tag" messages you can also use these additional placeholders: %s', 'order-minimum-amount-for-woocommerce' ),
 					'<div style="padding: 0 0 15px;">' .
 					'<code>' . implode( '</code>, <code>', array( '%term_title%', '%term_link%', '%term_title_with_link%' ) ) . '</code>' .
@@ -314,6 +323,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Messages' ) ) :
 			}
 
 			if ( 'yes' === get_option( 'alg_wc_oma_by_shipping_enabled', 'no' ) && 'yes' === get_option( 'alg_wc_oma_by_shipping_messages_enabled', 'no' ) ) {
+				/* translators: %s: comma-separated list of placeholder codes */
 				$notes[] = sprintf( __( 'For "Shipping" messages you can also use these additional placeholders: %s', 'order-minimum-amount-for-woocommerce' ),
 					'<div style="padding: 0 0 15px;">' .
 					'<code>' . implode( '</code>, <code>', array( '%shipping_method%', '%shipping_zone%', '%shipping_zone_locations%' ) ) . '</code>' .
@@ -321,6 +331,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Messages' ) ) :
 			}
 
 			if ( 'yes' === get_option( 'alg_wc_oma_by_gateway_enabled', 'no' ) && 'yes' === get_option( 'alg_wc_oma_by_gateway_messages_enabled', 'no' ) ) {
+				/* translators: %s: comma-separated list of placeholder codes */
 				$notes[] = sprintf( __( 'For "Payment Gateways" messages you can also use this additional placeholder: %s', 'order-minimum-amount-for-woocommerce' ),
 					'<div style="padding: 0 0 15px;">' .
 					'<code>' . implode( '</code>, <code>', array( '%payment_gateway%' ) ) . '</code>' .
@@ -331,6 +342,7 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Messages' ) ) :
 
 			$notes[] = __( 'You can use HTML in the messages.', 'order-minimum-amount-for-woocommerce' );
 
+			/* translators: %s: example shortcode usage */
 			$notes[] = sprintf( __( 'You can also use shortcodes in the messages, for example, for WPML/Polylang translations: %s', 'order-minimum-amount-for-woocommerce' ),
 				'<br><pre style="background-color: #E0E0E0; padding: 15px; overflow:auto ;margin-bottom:0">' .
 				'[alg_wc_oma_translate lang="DE"]Text for DE[/alg_wc_oma_translate]' .

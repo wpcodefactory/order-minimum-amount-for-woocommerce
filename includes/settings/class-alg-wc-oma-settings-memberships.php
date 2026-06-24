@@ -40,8 +40,9 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Memberships' ) ) :
 				array(
 					'title' => __( 'Memberships', 'order-minimum-amount-for-woocommerce' ),
 					'type'  => 'title',
-					'desc'  => __( 'Optional amounts per membership.', 'order-minimum-amount-for-woocommerce' ) . ' ' .
-					           sprintf( __( 'Compatible with %s, %s and %s plugins.', 'order-minimum-amount-for-woocommerce' ),
+			'desc'  => __( 'Optional amounts per membership.', 'order-minimum-amount-for-woocommerce' ) . ' ' .
+				/* translators: %1$s, %2$s, %3$s: plugin names with links */
+				sprintf( __( 'Compatible with %1$s, %2$s and %3$s plugins.', 'order-minimum-amount-for-woocommerce' ),
 						           '<a href="https://woocommerce.com/products/woocommerce-memberships/" target="_blank">' .
 						           __( 'WooCommerce Memberships', 'order-minimum-amount-for-woocommerce' ) . '</a>',
 						           '<a href="https://memberpress.com/" target="_blank">' .

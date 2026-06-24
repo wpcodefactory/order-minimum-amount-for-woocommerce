@@ -2,7 +2,7 @@
 /**
  * Order Minimum Amount for WooCommerce - Section Settings
  *
- * @version 4.6.6
+ * @version 4.7.4
  * @since   1.0.0
  *
  * @author  WPFactory
@@ -142,15 +142,18 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Section' ) ) :
 			$current_values = get_option( $option_id, array() );
 			if ( ! empty( $current_values ) ) {
 				switch ( $id ) {
-					case 'product':
-						$title = __( 'Product #%s', 'order-minimum-amount-for-woocommerce' );
-						break;
-					case 'product_cat':
-						$title = __( 'Product category #%s', 'order-minimum-amount-for-woocommerce' );
-						break;
-					case 'product_tag':
-						$title = __( 'Product tag #%s', 'order-minimum-amount-for-woocommerce' );
-						break;
+				case 'product':
+					/* translators: %s: product ID */
+					$title = __( 'Product #%s', 'order-minimum-amount-for-woocommerce' );
+					break;
+				case 'product_cat':
+					/* translators: %s: product category ID */
+					$title = __( 'Product category #%s', 'order-minimum-amount-for-woocommerce' );
+					break;
+				case 'product_tag':
+					/* translators: %s: product tag ID */
+					$title = __( 'Product tag #%s', 'order-minimum-amount-for-woocommerce' );
+					break;
 				}
 				foreach ( $current_values as $current_value ) {
 					if ( ! isset( $data[ $current_value ] ) ) {
@@ -233,9 +236,10 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Section' ) ) :
 			return array(
 				array(
 					'title' => __( 'Advanced: Priority Options', 'order-minimum-amount-for-woocommerce' ),
-					'desc'  => __( 'This section sets the order in which min/max amounts are applied.', 'order-minimum-amount-for-woocommerce' ) . ' ' .
-					           sprintf( __( 'For example, by default "Shipping" section amounts (priority %s) are applied first, and only then "User Roles" section amounts (priority %s) are applied.', 'order-minimum-amount-for-woocommerce' ),
-						           '<code>30</code>', '<code>100</code>' ) . ' ' .
+			'desc'  => __( 'This section sets the order in which min/max amounts are applied.', 'order-minimum-amount-for-woocommerce' ) . ' ' .
+				/* translators: %1$s: Shipping priority value, %2$s: User Roles priority value */
+			           sprintf( __( 'For example, by default "Shipping" section amounts (priority %1$s) are applied first, and only then "User Roles" section amounts (priority %2$s) are applied.', 'order-minimum-amount-for-woocommerce' ),
+				           '<code>30</code>', '<code>100</code>' ) . ' ' .
 					           __( 'You can change this here.', 'order-minimum-amount-for-woocommerce' ) . ' ' .
 					           __( 'Sections with lower "Priority" numbers are applied first.', 'order-minimum-amount-for-woocommerce' ),
 					'type'  => 'title',
@@ -257,13 +261,15 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Section' ) ) :
 		/**
 		 * custom_admin_inline_styles.
 		 *
-		 * @version 4.6.6
+		 * @version 4.7.4
 		 * @since   4.6.6
 		 *
 		 * @return void
 		 */
 		function custom_admin_inline_styles() {
-			if ( isset( $_GET['page'] ) && $_GET['page'] === 'wc-settings' && isset( $_GET['tab'] ) && $_GET['tab'] === 'alg_wc_oma' ) {
+			$page = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_SPECIAL_CHARS );
+			$tab  = filter_input( INPUT_GET, 'tab',  FILTER_SANITIZE_SPECIAL_CHARS );
+			if ( 'wc-settings' === $page && 'alg_wc_oma' === $tab ) {
 				?>
 				<style>
                     .alg-wc-oma-section-notes {

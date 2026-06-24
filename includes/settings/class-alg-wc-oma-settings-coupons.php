@@ -106,7 +106,12 @@ if ( ! class_exists( 'Alg_WC_OMA_Settings_Coupons' ) ) :
 				array(
 					'title'    => __( 'Exclude all', 'order-minimum-amount-for-woocommerce' ),
 					'desc'     => __( 'Do not check min/max amounts if any coupons have been applied', 'order-minimum-amount-for-woocommerce' ),
-					'desc_tip' => sprintf( __( 'The %s option will overwrite this option.', 'order-minimum-amount-for-woocommerce' ), __( 'Require', 'order-minimum-amount-for-woocommerce' ) ),
+				/* translators: %s: option name */
+			/* translators: %s: option name */
+			'desc_tip' => sprintf(
+				__( 'The %s option will overwrite this option.', 'order-minimum-amount-for-woocommerce' ),
+					__( 'Require', 'order-minimum-amount-for-woocommerce' )
+				),
 					'id'       => 'alg_wc_oma_coupons_exclude_all',
 					'default'  => 'no',
 					'type'     => 'checkbox',
