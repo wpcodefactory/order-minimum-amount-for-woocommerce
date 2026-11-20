@@ -101,22 +101,22 @@
         },
         {
             "name": "phpcsstandards/phpcsextra",
-            "version": "1.5.0",
-            "version_normalized": "1.5.0.0",
+            "version": "1.5.1",
+            "version_normalized": "1.5.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHPCSExtra.git",
-                "reference": "b598aa890815b8df16363271b659d73280129101"
+                "reference": "39467533fdb742446d68c1d10ac33d625ee0311c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSExtra/zipball/b598aa890815b8df16363271b659d73280129101",
-                "reference": "b598aa890815b8df16363271b659d73280129101",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSExtra/zipball/39467533fdb742446d68c1d10ac33d625ee0311c",
+                "reference": "39467533fdb742446d68c1d10ac33d625ee0311c",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.4",
-                "phpcsstandards/phpcsutils": "^1.2.0",
+                "phpcsstandards/phpcsutils": "^1.2.3",
                 "squizlabs/php_codesniffer": "^3.13.5 || ^4.0.1"
             },
             "require-dev": {
@@ -126,7 +126,7 @@
                 "phpcsstandards/phpcsdevtools": "^1.2.1",
                 "phpunit/phpunit": "^4.5 || ^5.0 || ^6.0 || ^7.0 || ^8.0 || ^9.3.4"
             },
-            "time": "2025-11-12T23:06:57+00:00",
+            "time": "2026-07-27T11:13:17+00:00",
             "type": "phpcodesniffer-standard",
             "extra": {
                 "branch-alias": {
@@ -186,17 +186,17 @@
         },
         {
             "name": "phpcsstandards/phpcsutils",
-            "version": "1.2.2",
-            "version_normalized": "1.2.2.0",
+            "version": "1.2.3",
+            "version_normalized": "1.2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHPCSUtils.git",
-                "reference": "c216317e96c8b3f5932808f9b0f1f7a14e3bbf55"
+                "reference": "5f35d9408c54d7b529501f3c688b6eae562aea1f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSUtils/zipball/c216317e96c8b3f5932808f9b0f1f7a14e3bbf55",
-                "reference": "c216317e96c8b3f5932808f9b0f1f7a14e3bbf55",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSUtils/zipball/5f35d9408c54d7b529501f3c688b6eae562aea1f",
+                "reference": "5f35d9408c54d7b529501f3c688b6eae562aea1f",
                 "shasum": ""
             },
             "require": {
@@ -211,7 +211,7 @@
                 "phpcsstandards/phpcsdevcs": "^1.2.0",
                 "yoast/phpunit-polyfills": "^1.1.0 || ^2.0.0 || ^3.0.0"
             },
-            "time": "2025-12-08T14:27:58+00:00",
+            "time": "2026-07-27T10:28:41+00:00",
             "type": "phpcodesniffer-standard",
             "extra": {
                 "branch-alias": {
@@ -282,17 +282,17 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "3.13.5",
-            "version_normalized": "3.13.5.0",
+            "version": "3.13.6",
+            "version_normalized": "3.13.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHP_CodeSniffer.git",
-                "reference": "0ca86845ce43291e8f5692c7356fccf3bcf02bf4"
+                "reference": "4c378e1a528ea066890fc2397cbdd2f94eb2fc91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/0ca86845ce43291e8f5692c7356fccf3bcf02bf4",
-                "reference": "0ca86845ce43291e8f5692c7356fccf3bcf02bf4",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/4c378e1a528ea066890fc2397cbdd2f94eb2fc91",
+                "reference": "4c378e1a528ea066890fc2397cbdd2f94eb2fc91",
                 "shasum": ""
             },
             "require": {
@@ -304,7 +304,7 @@
             "require-dev": {
                 "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0 || ^7.0 || ^8.0 || ^9.3.4"
             },
-            "time": "2025-11-04T16:30:35+00:00",
+            "time": "2026-08-06T00:17:32+00:00",
             "bin": [
                 "bin/phpcbf",
                 "bin/phpcs"
@@ -364,17 +364,17 @@
         },
         {
             "name": "wp-coding-standards/wpcs",
-            "version": "3.3.0",
-            "version_normalized": "3.3.0.0",
+            "version": "3.4.1",
+            "version_normalized": "3.4.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WordPress/WordPress-Coding-Standards.git",
-                "reference": "7795ec6fa05663d716a549d0b44e47ffc8b0d4a6"
+                "reference": "ec2ff942335f33683a5957a85d138753876a05cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WordPress/WordPress-Coding-Standards/zipball/7795ec6fa05663d716a549d0b44e47ffc8b0d4a6",
-                "reference": "7795ec6fa05663d716a549d0b44e47ffc8b0d4a6",
+                "url": "https://api.github.com/repos/WordPress/WordPress-Coding-Standards/zipball/ec2ff942335f33683a5957a85d138753876a05cf",
+                "reference": "ec2ff942335f33683a5957a85d138753876a05cf",
                 "shasum": ""
             },
             "require": {
@@ -383,9 +383,9 @@
                 "ext-tokenizer": "*",
                 "ext-xmlreader": "*",
                 "php": ">=7.2",
-                "phpcsstandards/phpcsextra": "^1.5.0",
-                "phpcsstandards/phpcsutils": "^1.1.0",
-                "squizlabs/php_codesniffer": "^3.13.4"
+                "phpcsstandards/phpcsextra": "^1.5.1",
+                "phpcsstandards/phpcsutils": "^1.2.3",
+                "squizlabs/php_codesniffer": "^3.13.5"
             },
             "require-dev": {
                 "php-parallel-lint/php-console-highlighter": "^1.0.0",
@@ -398,7 +398,7 @@
                 "ext-iconv": "For improved results",
                 "ext-mbstring": "For improved results"
             },
-            "time": "2025-11-25T12:08:04+00:00",
+            "time": "2026-07-27T11:53:23+00:00",
             "type": "phpcodesniffer-standard",
             "installation-source": "dist",
             "notification-url": "https://packagist.org/downloads/",
@@ -433,23 +433,23 @@
         },
         {
             "name": "wpfactory/wpfactory-admin-menu",
-            "version": "v1.1.1",
-            "version_normalized": "1.1.1.0",
+            "version": "v1.1.4",
+            "version_normalized": "1.1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wpcodefactory/wpfactory-admin-menu.git",
-                "reference": "97d51f09e96c7c5fdb314b6828f5a3ecc1301371"
+                "reference": "52aa90349253dce5a91837e004e62576f8684059"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wpcodefactory/wpfactory-admin-menu/zipball/97d51f09e96c7c5fdb314b6828f5a3ecc1301371",
-                "reference": "97d51f09e96c7c5fdb314b6828f5a3ecc1301371",
+                "url": "https://api.github.com/repos/wpcodefactory/wpfactory-admin-menu/zipball/52aa90349253dce5a91837e004e62576f8684059",
+                "reference": "52aa90349253dce5a91837e004e62576f8684059",
                 "shasum": ""
             },
             "require-dev": {
                 "wp-cli/wp-cli-bundle": "*"
             },
-            "time": "2026-05-20T16:27:36+00:00",
+            "time": "2026-10-14T20:54:53+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -477,33 +477,34 @@
                 ]
             },
             "support": {
-                "source": "https://github.com/wpcodefactory/wpfactory-admin-menu/tree/v1.1.1",
+                "source": "https://github.com/wpcodefactory/wpfactory-admin-menu/tree/v1.1.4",
                 "issues": "https://github.com/wpcodefactory/wpfactory-admin-menu/issues"
             },
             "install-path": "../wpfactory/wpfactory-admin-menu"
         },
         {
             "name": "wpfactory/wpfactory-cross-selling",
-            "version": "v1.1.2",
-            "version_normalized": "1.1.2.0",
+            "version": "v1.1.7",
+            "version_normalized": "1.1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wpcodefactory/wpfactory-cross-selling.git",
-                "reference": "1a45063ff0171e944cbcc00f9ce8c518e6b13a2a"
+                "reference": "0fb1b6ddca7956b1608275dc8ff5e2e7f7bbd495"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wpcodefactory/wpfactory-cross-selling/zipball/1a45063ff0171e944cbcc00f9ce8c518e6b13a2a",
-                "reference": "1a45063ff0171e944cbcc00f9ce8c518e6b13a2a",
+                "url": "https://api.github.com/repos/wpcodefactory/wpfactory-cross-selling/zipball/0fb1b6ddca7956b1608275dc8ff5e2e7f7bbd495",
+                "reference": "0fb1b6ddca7956b1608275dc8ff5e2e7f7bbd495",
                 "shasum": ""
             },
             "require": {
                 "wpfactory/wpfactory-admin-menu": "*"
             },
             "require-dev": {
+                "composer/composer": "^2.10.3",
                 "wp-cli/wp-cli-bundle": "*"
             },
-            "time": "2026-05-29T20:22:20+00:00",
+            "time": "2026-10-06T18:59:26+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -531,27 +532,27 @@
                 ]
             },
             "support": {
-                "source": "https://github.com/wpcodefactory/wpfactory-cross-selling/tree/v1.1.2",
+                "source": "https://github.com/wpcodefactory/wpfactory-cross-selling/tree/v1.1.7",
                 "issues": "https://github.com/wpcodefactory/wpfactory-cross-selling/issues"
             },
             "install-path": "../wpfactory/wpfactory-cross-selling"
         },
         {
             "name": "wpfactory/wpfactory-promoting-notice",
-            "version": "v1.0.6",
-            "version_normalized": "1.0.6.0",
+            "version": "v1.0.7",
+            "version_normalized": "1.0.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wpcodefactory/wpfactory-promoting-notice.git",
-                "reference": "9b0dc91c32662ce9040b36a4b40827454e806856"
+                "reference": "c4e47db91f086daa24026383d730cab534f3eaa7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wpcodefactory/wpfactory-promoting-notice/zipball/9b0dc91c32662ce9040b36a4b40827454e806856",
-                "reference": "9b0dc91c32662ce9040b36a4b40827454e806856",
+                "url": "https://api.github.com/repos/wpcodefactory/wpfactory-promoting-notice/zipball/c4e47db91f086daa24026383d730cab534f3eaa7",
+                "reference": "c4e47db91f086daa24026383d730cab534f3eaa7",
                 "shasum": ""
             },
-            "time": "2023-03-09T14:03:49+00:00",
+            "time": "2026-07-15T20:45:17+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -563,7 +564,7 @@
                 ]
             },
             "support": {
-                "source": "https://github.com/wpcodefactory/wpfactory-promoting-notice/tree/v1.0.6",
+                "source": "https://github.com/wpcodefactory/wpfactory-promoting-notice/tree/v1.0.7",
                 "issues": "https://github.com/wpcodefactory/wpfactory-promoting-notice/issues"
             },
             "install-path": "../wpfactory/wpfactory-promoting-notice"

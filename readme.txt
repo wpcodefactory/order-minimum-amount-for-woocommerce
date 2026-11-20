@@ -2,8 +2,8 @@
 Contributors: wpcodefactory, omardabbas, karzin, anbinder, kousikmukherjeeli
 Tags: woocommerce, order minimum amount, order maximum amount
 Requires at least: 6.1
-Tested up to: 7.0
-Stable tag: 4.7.4
+Tested up to: 7.1
+Stable tag: 4.7.5
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -359,6 +359,14 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 1. Frontend example â€“ Cart notice.
 
 == Changelog ==
+
+= 4.7.5 - 20/11/2026 =
+* WC tested up to: 11.3.
+* Tested up to: 7.1.
+* Dev - Upgraded wpfactory/wpfactory-admin-menu (v1.1.1 => v1.1.4).
+* Dev - Upgraded wpfactory/wpfactory-cross-selling (v1.1.2 => v1.1.7).
+* Dev - Upgraded wpfactory/wpfactory-promoting-notice (v1.0.6 => v1.0.7).
+* Dev - Upgraded wpfactory/wpfactory-key-manager (v1.0.8 => v1.1.1).
 
 = 4.7.4 - 24/06/2026 =
 * Fix - Fixed I18n issues on functions.
